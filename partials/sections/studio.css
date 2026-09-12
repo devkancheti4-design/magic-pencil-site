@@ -1,0 +1,351 @@
+/* ==========================================================================
+   THE STUDIO — a mock drawing window that draws itself, and the case for
+   taking your time. Scoped to .studio__*; shared kit classes reused as-is.
+   Tokens only: every colour, radius, shadow and duration comes from tokens.css.
+   ========================================================================== */
+
+.studio { position: relative; }
+
+/* The shared <symbol> lives here; it must never take up layout. */
+.studio__defs {
+  position: absolute;
+  width: 0; height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.studio__grid {
+  display: grid;
+  gap: clamp(40px, 6vw, 72px);
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .studio__grid {
+    grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
+    grid-template-areas: "stage copy";
+  }
+  .studio__stage { grid-area: stage; }
+  .studio__copy  { grid-area: copy; }
+}
+
+/* ------------------------------------------------------------- copy ----- */
+.studio__copy { display: grid; gap: var(--s-5); justify-items: start; }
+.studio__title { font-size: var(--t-2xl); max-width: 16ch; }
+.studio__lead { color: var(--text-muted); font-size: var(--t-md); max-width: 46ch; }
+
+.studio__points { display: grid; gap: var(--s-5); }
+.studio__point {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--s-4);
+  align-items: start;
+}
+
+.studio__point-ico {
+  display: grid; place-items: center;
+  width: 48px; height: 48px;
+  background: var(--surface);
+  border: 2.5px solid var(--ink-900);
+  border-radius: var(--r-hand);
+  box-shadow: var(--sh-1);
+  transform: rotate(-2.5deg);
+}
+.studio__point:nth-child(even) .studio__point-ico {
+  transform: rotate(2.5deg);
+  border-radius: var(--r-hand-2);
+}
+.studio__point-ico svg { width: 26px; height: 26px; }
+
+.studio__point-txt h3 { font-size: var(--t-md); margin-bottom: 2px; }
+.studio__point-txt p { color: var(--text-muted); font-size: var(--t-sm); max-width: 42ch; }
+
+/* The masterpiece note */
+.studio__master {
+  display: grid;
+  gap: var(--s-4);
+  background: var(--paper-2);
+  transform: rotate(-.5deg);
+}
+/* Side by side only where the column is genuinely wide enough: the copy
+   column narrows again between 900px and 1080px when the grid splits. */
+@media (min-width: 600px) and (max-width: 899.98px) {
+  .studio__master { grid-template-columns: minmax(0, 168px) minmax(0, 1fr); align-items: center; }
+}
+@media (min-width: 1080px) {
+  .studio__master { grid-template-columns: minmax(0, 168px) minmax(0, 1fr); align-items: center; }
+}
+.studio__master-art svg { width: 100%; height: auto; }
+.studio__master-txt h3 { font-size: var(--t-md); margin-bottom: 4px; }
+.studio__master-txt p { font-size: var(--t-sm); color: var(--text); }
+.studio__chips { margin-top: var(--s-3); gap: var(--s-2); }
+
+.studio__cta { display: grid; gap: var(--s-3); justify-items: start; }
+.studio__hint {
+  font-family: var(--font-hand);
+  font-size: var(--t-md);
+  line-height: 1.2;
+  color: var(--text-muted);
+}
+
+/* ------------------------------------------------------- the window ----- */
+.studio__stage { position: relative; }
+/* two blank sheets left on the desk underneath — inset far enough that the
+   rotation can never reach past the stage box at any width */
+.studio__stage::before,
+.studio__stage::after {
+  content: "";
+  position: absolute;
+  inset: 6% 7% 8%;
+  z-index: -1;
+  background: var(--paper-2);
+  border: 2px solid var(--line-strong);
+  border-radius: var(--r-hand-2);
+}
+.studio__stage::before { transform: rotate(2.2deg); }
+.studio__stage::after  { transform: rotate(-2.6deg); }
+
+.studio__window {
+  position: relative;
+  display: grid;
+  gap: var(--s-3);
+  padding: clamp(14px, 1.8vw, 20px);
+  background: var(--surface);
+  border: 2.5px solid var(--ink-900);
+  border-radius: var(--r-hand);
+  box-shadow: var(--sh-3);
+  transform: rotate(-.7deg);
+}
+
+/* title bar */
+.studio__bar {
+  display: flex; align-items: center; flex-wrap: wrap; gap: var(--s-3);
+  padding-bottom: var(--s-2);
+  border-bottom: 2px dashed var(--line);
+}
+.studio__brand {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--font-hand); font-size: var(--t-md); font-weight: 700;
+  color: var(--text-strong); line-height: 1;
+}
+.studio__brand svg { width: 20px; height: 20px; }
+
+.studio__field {
+  flex: 1 1 130px; min-width: 0;
+  display: inline-flex; align-items: baseline; gap: 7px;
+  padding: 2px 10px 3px;
+  border-bottom: 2px solid var(--line-strong);
+  border-radius: var(--r-sm) var(--r-sm) 0 0;
+  background: var(--paper-1);
+  overflow: hidden;
+}
+.studio__field-lbl {
+  font-size: var(--t-xs); font-weight: 800; letter-spacing: var(--tr-wide);
+  text-transform: uppercase; color: var(--text-muted); flex: none;
+}
+.studio__field-val {
+  font-family: var(--font-hand); font-size: var(--t-md); color: var(--text-strong);
+  white-space: nowrap; overflow: hidden; line-height: 1.2;
+}
+.studio__caret {
+  width: 2px; height: 1.05em; flex: none;
+  background: var(--accent-warm);
+  opacity: 0;
+  transform: translateY(.12em);
+}
+.studio__window.is-typing .studio__caret {
+  animation: studio-caret var(--d-flap) steps(1, end) infinite;
+}
+@keyframes studio-caret { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+
+.studio__pill {
+  flex: none;
+  padding: 5px 13px;
+  font-size: var(--t-xs); font-weight: 800;
+  color: var(--text-strong);
+  background: var(--surface);
+  border: 2px solid var(--ink-900);
+  border-radius: var(--r-pill);
+  transition: background-color var(--d-base) var(--e-out),
+              border-color var(--d-base) var(--e-out),
+              transform var(--d-base) var(--e-bounce);
+}
+/* Theme-safe emphasis: never ink-on-crayon, which inverts badly at night. */
+.studio__pill.is-hot {
+  background: var(--paper-2);
+  border-color: var(--accent-warm);
+  transform: rotate(-3deg) scale(1.06);
+}
+
+/* toolbar */
+.studio__tools { display: flex; flex-wrap: wrap; gap: 6px; }
+.studio__tool {
+  display: grid; justify-items: center; gap: 1px;
+  min-width: 50px;
+  padding: 5px 7px 4px;
+  background: var(--paper-1);
+  border: 2px solid var(--line-strong);
+  border-radius: var(--r-md);
+  transition: background-color var(--d-base) var(--e-out),
+              border-color var(--d-base) var(--e-out),
+              box-shadow var(--d-base) var(--e-out),
+              transform var(--d-base) var(--e-bounce);
+}
+.studio__tool-ico svg { width: 22px; height: 22px; }
+.studio__tool-nm {
+  font-size: var(--t-xs); font-weight: 800; letter-spacing: .04em;
+  color: var(--text-muted); line-height: 1.35;
+}
+.studio__tool.is-on {
+  background: var(--surface);
+  border-color: var(--accent-warm);
+  box-shadow: var(--sh-1);
+  transform: translateY(-3px) rotate(-3deg);
+}
+.studio__tool.is-on .studio__tool-nm { color: var(--text-strong); }
+
+/* the sheet */
+.studio__paper {
+  position: relative;
+  overflow: hidden;
+  background: var(--paper-0);
+  border: 2px solid var(--ink-900);
+  border-radius: var(--r-md);
+}
+.studio__paper::before {
+  content: "";
+  position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--crayon-sky) 26%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--crayon-sky) 26%, transparent) 1px, transparent 1px);
+  background-size: 22px 22px;
+  opacity: .55;
+}
+.studio__canvas {
+  position: relative;
+  display: block;
+  width: 100%; height: auto;
+  aspect-ratio: 320 / 220;
+  --c-body: var(--crayon-flame);
+  --c-wing: var(--crayon-amber);
+  --c-horn: var(--crayon-sun);
+}
+
+.studio__cap {
+  display: flex; align-items: flex-start; gap: 9px;
+  min-height: 2.4em;          /* two lines: the caption must not jog the layout */
+  font-family: var(--font-hand);
+  font-size: var(--t-md);
+  line-height: 1.2;
+  color: var(--text-strong);
+}
+.studio__cap::before {
+  content: "";
+  width: 10px; height: 10px; flex: none;
+  margin-top: .35em;
+  background: var(--accent-warm);
+  border-radius: 40% 60% 55% 45% / 55% 45% 60% 40%;
+}
+
+/* the drawing itself */
+.studio__ln {
+  fill: none;
+  stroke: var(--ink-900);
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.studio__ln--thin { stroke-width: 1.8; }
+.studio__dot { fill: var(--ink-900); stroke: none; }
+.studio__fill--wing { fill: var(--c-wing); opacity: .86; }
+.studio__fill--body { fill: var(--c-body); }
+.studio__fill--horn { fill: var(--c-horn); }
+
+.studio__axis {
+  fill: none;
+  stroke: var(--crayon-sky);
+  stroke-width: 1.6;
+  opacity: 0;
+}
+.studio__stray {
+  fill: none;
+  stroke: var(--ink-300);
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  opacity: 0;
+}
+.studio__splash { fill: none; stroke: var(--c-body); stroke-width: 2.4; opacity: 0; }
+.studio__cursor { opacity: 0; }
+.studio__cursor-ln {
+  fill: none;
+  stroke: var(--ink-900);
+  stroke-width: 1.8;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.studio__stamps [data-stamp] { opacity: 0; }
+.studio__mini-ln {
+  fill: none;
+  stroke: var(--ink-900);
+  stroke-width: 3.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* shelf */
+.studio__shelf {
+  display: flex; align-items: center; gap: var(--s-3); flex-wrap: wrap;
+  padding-top: var(--s-3);
+  border-top: 2px dashed var(--line);
+}
+.studio__shelf-lbl {
+  font-family: var(--font-hand); font-size: var(--t-md); color: var(--text-strong); line-height: 1;
+}
+.studio__shelf-note {
+  font-size: var(--t-xs); color: var(--text-muted); margin-left: auto;
+}
+.studio__slots { display: flex; gap: 8px; }
+.studio__slot {
+  width: 46px; height: 46px;
+  display: grid; place-items: center;
+  padding: 3px;
+  background: var(--paper-1);
+  border: 2px dashed var(--line-strong);
+  border-radius: var(--r-sm);
+  --c-body: var(--crayon-green);
+  --c-wing: var(--crayon-grass);
+  --c-horn: var(--crayon-sun);
+}
+.studio__slot svg {
+  width: 100%; height: 100%;
+  opacity: 0;
+  transform: scale(.35) rotate(-16deg);
+  transition: opacity var(--d-base) var(--e-out), transform var(--d-slow) var(--e-bounce);
+}
+.studio__slot.is-full {
+  background: var(--paper-0);
+  border-style: solid;
+  border-color: var(--ink-900);
+  box-shadow: var(--sh-1);
+}
+.studio__slot.is-full svg { opacity: 1; transform: none; }
+
+/* --------------------------------------------------- reduced motion ----- */
+/* Nothing loops. The markup alone is the finished still: a fully outlined,
+   coloured, mirrored dragon named "fire dragon", the caption "Saved to your
+   library.", and one filled slot on the shelf. Only the transient props of
+   the loop (cursors, splash, stray stroke, mirror guide, stamps) are hidden.
+   This is also exactly the no-JS state. */
+@media (prefers-reduced-motion: reduce) {
+  .studio__window { transform: none; }
+  .studio__stage::before, .studio__stage::after { display: none; }
+  .studio__window.is-typing .studio__caret { animation: none; opacity: 0; }
+  .studio__cursor,
+  .studio__splash,
+  .studio__stray,
+  .studio__axis,
+  .studio__stamps [data-stamp] { opacity: 0 !important; }
+  .studio__art, .studio__mirror { opacity: 1 !important; }
+  .studio__ln, .studio__fill--body, .studio__fill--horn, .studio__dot { opacity: 1 !important; }
+  .studio__fill--wing { opacity: .86 !important; }
+}

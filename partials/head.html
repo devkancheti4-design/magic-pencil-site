@@ -1,0 +1,37 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Magic Pencil: Kingdoms of Paper — draw it, name it, it comes alive</title>
+<meta name="description" content="A browser game about a magic pencil. Draw anything inside your kingdom, name it, and it comes alive and marches on the next castle. Six kingdoms, unlimited ink, and rather a lot of dragons.">
+<meta name="theme-color" content="#fdf6e6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#21262c" media="(prefers-color-scheme: dark)">
+<meta name="color-scheme" content="light dark">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Magic Pencil: Kingdoms of Paper">
+<meta property="og:title" content="Magic Pencil: Kingdoms of Paper">
+<meta property="og:description" content="Draw it. Name it. It comes alive. A browser game about a magic pencil, six paper kingdoms and a great many dragons.">
+<meta property="og:image" content="assets/img/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/favicon.svg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap">
+
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/shell.css">
+<link rel="stylesheet" href="assets/css/sections.css">
+
+<script>
+  /* Mark the runtime present and apply the saved lamp before first paint. */
+  (function () {
+    document.documentElement.classList.add('js');
+    try {
+      var t = localStorage.getItem('mp-theme');
+      if (t === 'day' || t === 'night') document.documentElement.setAttribute('data-theme', t);
+    } catch (e) {}
+  })();
+</script>

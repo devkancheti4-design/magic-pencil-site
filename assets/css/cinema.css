@@ -1,0 +1,122 @@
+/* ==========================================================================
+   Paper Cinema — the gallery: one live world, many cameras
+   Depends on: tokens.css, base.css, shell.css
+   ========================================================================== */
+
+.cinema { padding-top: calc(var(--nav-h) + clamp(28px, 5vw, 64px)); }
+.cinema .section-head h1 { font-size: var(--t-2xl); }
+
+.cinema__viewer { display: grid; gap: clamp(16px, 2vw, 26px); }
+
+/* ------------------------------------------------------------ live view -- */
+.cinema__stagewrap { position: relative; padding: 10px; background: var(--paper-0); overflow: hidden; }
+#stage {
+  display: block; width: 100%; height: auto;
+  border-radius: var(--r-md);
+  border: 2px solid var(--ink-900);
+  background: var(--paper-1);
+}
+
+/* the little broadcast tally in the corner */
+.cinema__tally {
+  position: absolute; top: 20px; left: 20px;
+  display: flex; align-items: center; gap: 10px;
+  padding: 7px 14px;
+  background: color-mix(in srgb, var(--ink-900) 78%, transparent);
+  color: var(--paper-0);
+  border-radius: var(--r-pill);
+  font-size: var(--t-xs); font-weight: 800;
+  letter-spacing: .04em;
+  pointer-events: none;
+}
+.cinema__rec {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--crayon-ember);
+  animation: tally 1.8s var(--e-inout) infinite;
+}
+@keyframes tally { 0%,100% { opacity: 1; } 50% { opacity: .25; } }
+.cinema__clock { font-family: var(--font-mono); font-weight: 600; opacity: .8; }
+
+/* ------------------------------------------------------- camera strip --- */
+.cinema__h { font-size: var(--t-lg); }
+.cinema__h--strip { margin-top: var(--s-4); }
+.cinema__lead { font-size: var(--t-sm); color: var(--text-muted); max-width: 70ch; }
+.cinema__lead kbd {
+  font-family: var(--font-mono); font-size: .85em; font-weight: 700;
+  padding: 2px 7px; border-radius: var(--r-sm);
+  background: var(--paper-2); border: 2px solid var(--ink-900);
+}
+
+.camstrip {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
+  gap: var(--s-3);
+}
+.camstrip__cam {
+  display: block; padding: 0; text-align: left;
+  background: var(--paper-0);
+  border: 2.5px solid var(--ink-900);
+  border-radius: var(--r-md);
+  box-shadow: 3px 3px 0 var(--ink-900);
+  overflow: hidden;
+  transition: transform var(--d-fast) var(--e-bounce), box-shadow var(--d-fast) var(--e-out);
+}
+.camstrip__cam:hover { transform: translate(-2px,-2px); box-shadow: 5px 5px 0 var(--ink-900); }
+.camstrip__cam.is-live {
+  box-shadow: 3px 3px 0 var(--ink-900), 0 0 0 4px var(--crayon-ember);
+}
+.camstrip__canvas {
+  display: block; width: 100%; height: auto; aspect-ratio: 16 / 9;
+  border-bottom: 2.5px solid var(--ink-900);
+  background: var(--paper-2);
+}
+.camstrip__label {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 11px;
+  font-size: var(--t-xs); font-weight: 700; color: var(--text-strong);
+}
+.camstrip__label b {
+  display: grid; place-items: center;
+  width: 20px; height: 20px; flex: none;
+  font-family: var(--font-mono); font-size: 11px;
+  background: var(--paper-2); border: 2px solid var(--ink-900); border-radius: var(--r-sm);
+}
+.camstrip__cam.is-live .camstrip__label b { background: var(--crayon-ember); color: var(--paper-0); }
+
+.cinema__ann {
+  font-family: var(--font-hand); font-size: var(--t-md);
+  color: var(--text-strong); min-height: 1.6em;
+}
+
+.cinema__transport { display: flex; flex-wrap: wrap; gap: var(--s-3); }
+
+/* --------------------------------------------------------------- rigs --- */
+.cinema__rigs {
+  margin-top: var(--s-5);
+  padding: clamp(20px, 2.5vw, 34px);
+  background: var(--surface);
+  border: 2.5px solid var(--ink-900);
+  border-radius: var(--r-hand);
+  box-shadow: var(--sh-2);
+}
+.cinema__riglist { display: grid; gap: var(--s-3); margin: var(--s-4) 0; }
+.cinema__riglist > div {
+  display: grid; grid-template-columns: 118px 1fr; gap: var(--s-4);
+  align-items: baseline;
+  padding-bottom: var(--s-3);
+  border-bottom: 2px dashed var(--line);
+}
+.cinema__riglist dt {
+  font-family: var(--font-hand); font-size: var(--t-md); font-weight: 700;
+  color: var(--crayon-green);
+}
+.cinema__riglist dd { margin: 0; font-size: var(--t-sm); color: var(--text-muted); }
+.cinema__riglist em { font-style: normal; font-weight: 700; color: var(--text-strong); }
+@media (max-width: 560px) {
+  .cinema__riglist > div { grid-template-columns: 1fr; gap: 2px; }
+}
+.cinema__note { font-size: var(--t-xs); color: var(--text-muted); max-width: 72ch; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cinema__rec { animation: none; }
+}

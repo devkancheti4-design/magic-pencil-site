@@ -1,0 +1,362 @@
+/* ==========================================================================
+   CLOSING CALL (#play) — the last sheet on the desk, taped down and torn,
+   with dragons drifting past behind it.
+   Depends on: tokens.css, base.css
+   ========================================================================== */
+
+.cta {
+  position: relative;
+  isolation: isolate;
+
+  /* Section-scoped motion values. Anything that maps onto a global token is
+     derived from it; only the ambient drift times (which have no token —
+     nothing in tokens.css is measured in tens of seconds) are literal, and
+     those live per-dragon in the markup. */
+  --cta-nudge:     calc(var(--d-slow) * 7.5);   /* idle button nudge  */
+  --cta-lit-mini:  calc(var(--d-flap) * 1.2);   /* excited wobble     */
+  --cta-lit-slow:  calc(var(--d-flap) * 2);
+  --cta-lift-x:    clamp(3px, 0.9vw, 7px);      /* paper drop-shadow  */
+  --cta-lift-y:    clamp(4px, 1.1vw, 9px);
+}
+
+/* ---------------------------------------------------------------- sky ---- */
+.cta__sky {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;            /* the only thing standing between 130vw of
+                                  dragon and a horizontal scrollbar */
+  pointer-events: none;
+  z-index: var(--z-sky);
+}
+
+/* One last warm pool of lamplight on the desk. Lives inside the clipped sky
+   so it can be generous without ever widening the page. */
+.cta__sky::before {
+  content: "";
+  position: absolute;
+  left: 50%; top: 48%;
+  width: min(1180px, 130%);
+  aspect-ratio: 16 / 10;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(ellipse at center,
+    color-mix(in srgb, var(--crayon-sun) 26%, transparent) 0%,
+    color-mix(in srgb, var(--crayon-sun) 9%, transparent) 44%,
+    transparent 70%);
+}
+
+.cta__shell { position: relative; z-index: var(--z-world); }
+
+/* ------------------------------------------------------------ dragons ---- */
+.cta__dragon {
+  position: absolute;
+  left: 0;
+  top: var(--top, 20%);
+  width: var(--w, 160px);
+  opacity: var(--fade, .24);
+  /* --py comes from [data-parallax], --dx/--dy from [data-drift] */
+  transform: translate3d(var(--dx, 0px), calc(var(--py, 0px) + var(--dy, 0px)), 0);
+}
+
+.cta__dragon-fly {
+  animation: cta-cross var(--cross, 60s) linear infinite;
+  animation-delay: var(--cross-delay, 0s);
+  animation-direction: var(--cross-dir, normal);
+  will-change: transform;
+}
+
+.cta__dragon-svg { width: 100%; height: auto; overflow: visible; }
+.cta__dragon--flip .cta__dragon-svg { transform: scaleX(-1); }
+
+/* Background dragons are faint pencil guide-lines, not hard ink. */
+.cta__dragon .stroke { stroke: var(--line-strong); stroke-width: var(--sw, 1.5); }
+.cta__fill { fill: var(--tint, var(--crayon-sky)); fill-opacity: .34; }
+.cta__fill--hot { fill: var(--fire-edge); fill-opacity: .6; }
+.cta__eye { fill: var(--ink-900); }
+.cta__dragon .cta__eye { fill: var(--line-strong); }
+
+@keyframes cta-cross {
+  0%   { transform: translate3d(-30vw, 0, 0); }
+  24%  { transform: translate3d(6vw, -18px, 0); }
+  51%  { transform: translate3d(44vw, 9px, 0); }
+  76%  { transform: translate3d(85vw, -14px, 0); }
+  100% { transform: translate3d(130vw, 0, 0); }
+}
+
+/* -------------------------------------------------------------- wings ---- */
+.cta__wing {
+  transform-box: fill-box;
+  transform-origin: var(--wing-o, 100% 100%);
+  animation: cta-flap calc(var(--d-flap) * var(--flap-scale, 1)) var(--e-inout) infinite;
+  animation-delay: var(--flap-delay, 0ms);
+}
+.cta__wing--far { --wing-o: 0% 100%; opacity: .68; animation-delay: calc(var(--flap-delay, 0ms) + 70ms); }
+.cta__wing--l   { --wing-o: 100% 58%; animation-name: cta-flap-wide; }
+.cta__wing--r   { --wing-o: 0% 58%;   animation-name: cta-flap-wide; }
+
+@keyframes cta-flap {
+  0%, 100% { transform: rotate(-8deg) scaleY(1); }
+  50%      { transform: rotate(11deg) scaleY(.76); }
+}
+@keyframes cta-flap-wide {
+  0%, 100% { transform: scaleX(1) scaleY(1); }
+  50%      { transform: scaleX(.62) scaleY(1.08); }
+}
+
+/* --------------------------------------------------------- the sheet ----- */
+.cta__mount {
+  position: relative;
+  max-width: 960px;            /* narrower than --maxw so the dragons keep
+                                  a flight path on wide screens */
+  margin-inline: auto;
+}
+
+.cta__sheet {
+  position: relative;
+  transform: rotate(var(--sheet-rot, -1.1deg));
+}
+
+/* The paper itself is its own layer so the drop-shadow can follow the tear
+   without re-rasterising the animated illustration on top of it. */
+.cta__paper {
+  position: absolute;
+  inset: 0;
+  background: var(--surface);
+  border: 3px solid var(--ink-900);
+  border-bottom: 0;
+  border-radius: var(--r-hand);
+  border-bottom-left-radius: var(--r-sm);
+  border-bottom-right-radius: var(--r-sm);
+  pointer-events: none;
+  filter:
+    drop-shadow(var(--cta-lift-x) var(--cta-lift-y) 0 var(--paper-3))
+    drop-shadow(0 22px 26px color-mix(in srgb, var(--ink-900) 20%, transparent));
+}
+
+/* .taped gives us the strip across the top; this one pins the corner.
+   Geometry is deliberately tucked in: a 78x22 strip rotated 45deg around a
+   centre at left:25px reaches only ~10px past the mount, which clears the
+   narrowest gutter this rule is ever live at (641px -> 28.8px). */
+.cta__tape {
+  position: absolute;
+  top: -14px; left: -14px;
+  width: 78px; height: 22px;
+  transform: rotate(-45deg);
+  background: color-mix(in srgb, var(--crayon-sky) 46%, transparent);
+  border: 1px solid color-mix(in srgb, var(--ink-900) 10%, transparent);
+}
+
+/* ---- the torn lower edge ---- */
+.cta__tear {
+  position: absolute;
+  left: -3px;                       /* cover the 3px paper border */
+  top: 100%;
+  width: calc(100% + 6px);
+  height: clamp(15px, 3.4vw, 40px);
+  margin-top: -2px;
+  overflow: visible;
+}
+.cta__tear-fill { fill: var(--surface); }
+/* The pale fibre lip you get when paper is torn rather than cut.
+   Opacity is carried on stroke-opacity, NOT opacity: this path is a .wash,
+   and `[data-draw].is-in .wash { opacity: 1 }` would otherwise win. */
+.cta__tear-lip {
+  fill: none;
+  stroke: var(--paper-3);
+  stroke-opacity: .65;
+  stroke-width: 6;
+  stroke-linejoin: round;
+}
+
+/* -------------------------------------------------------- the content ---- */
+.cta__inner {
+  position: relative;
+  z-index: var(--z-content);
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  padding:
+    clamp(38px, 5.4vw, 82px)
+    clamp(16px, 5vw, 76px)
+    clamp(52px, 6.4vw, 96px);
+}
+
+.cta__eyebrow { transform: rotate(-2.2deg); }
+
+.cta__pencil {
+  width: clamp(180px, 30vw, 320px);
+  height: auto;
+  margin-block: clamp(6px, 1.6vw, 20px) clamp(2px, .8vw, 10px);
+  overflow: visible;
+  --wash-delay: 900ms;          /* default for the pencil-body washes */
+}
+.cta__pencil-live,
+.cta__mini {
+  transform-box: fill-box;
+  transform-origin: 50% 88%;
+}
+.cta__mini { transform-origin: 14% 72%; }
+.cta__mini .stroke { stroke-width: 2.6; }
+.cta__mini .stroke--thin { stroke-width: 1.9; }
+.cta__trail { stroke: var(--ink-500); stroke-width: 2.4; }
+.cta__spark { stroke: var(--crayon-amber); }
+
+/* Crayon fills — classes rather than fill="var(…)" presentation attributes,
+   which are inconsistently resolved. */
+.cta__w-barrel  { fill: var(--crayon-sun);   fill-opacity: .9; }
+.cta__w-wood    { fill: var(--paper-2); }
+.cta__w-tip     { fill: var(--ink-700);      fill-opacity: .85; }
+.cta__w-ferrule { fill: var(--crayon-slate); fill-opacity: .55; }
+.cta__w-eraser  { fill: var(--crayon-berry); fill-opacity: .6; }
+.cta__w-body    { fill: var(--crayon-grass); fill-opacity: .9; }
+.cta__w-wing    { fill: var(--crayon-green); fill-opacity: .45; }
+.cta__w-wing--near { fill-opacity: .8; }
+.cta__flame-edge { fill: var(--fire-edge); }
+.cta__flame-core { fill: var(--fire-core); }
+
+/* The flame only appears when someone reaches for the button. */
+.cta__flame {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: 0% 60%;
+  transform: scale(.3);
+  transition: opacity var(--d-base) var(--e-out), transform var(--d-base) var(--e-bounce);
+}
+.cta.is-lit .cta__flame { opacity: .95; transform: scale(1); }
+.cta.is-lit .cta__mini { animation-duration: var(--cta-lit-mini); }
+.cta.is-lit .cta__pencil-live { animation-duration: var(--cta-lit-slow); }
+
+.cta__title {
+  font-size: var(--t-3xl);
+  line-height: var(--lh-tight);
+  margin-top: clamp(4px, 1vw, 12px);
+}
+.cta__title .underlined { --scribble: 1; }
+
+.cta__copy {
+  margin-top: clamp(16px, 2vw, 26px);
+  max-width: 40ch;
+  font-size: var(--t-md);
+  text-wrap: balance;
+  color: var(--text-muted);
+}
+.cta__copy em { font-style: normal; font-weight: 800; color: var(--text-strong); }
+.cta__copy--second { margin-top: clamp(8px, 1vw, 14px); }
+
+.cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(12px, 2.2vw, 30px);
+  margin-top: clamp(26px, 3.6vw, 48px);
+  max-width: 100%;
+}
+
+.cta__go-wrap {
+  display: inline-flex;
+  max-width: 100%;
+  animation: cta-nudge var(--cta-nudge) var(--e-inout) infinite;
+}
+.cta__go-wrap:hover,
+.cta__go-wrap:focus-within { animation-play-state: paused; }
+
+.cta__go {
+  max-width: 100%;
+  font-size: var(--t-md);
+  padding: clamp(17px, 2.2vw, 24px) clamp(22px, 4vw, 56px);
+  box-shadow: 6px 6px 0 var(--ink-900);
+}
+/* .btn sets white-space:nowrap; let the label itself wrap if a translation
+   or a very narrow sheet demands it, rather than bursting the paper. */
+.cta__go-label { white-space: normal; }
+
+@keyframes cta-nudge {
+  0%, 74%, 100% { transform: translate(0, 0) rotate(0deg); }
+  82%           { transform: translate(-2px, -5px) rotate(-1.4deg); }
+  91%           { transform: translate(0, -1px) rotate(.7deg); }
+}
+
+.cta__ico {
+  width: 1.15em; height: 1.15em; flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.cta__ghost {
+  position: relative;
+  font-size: var(--t-base);
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 44px;
+  padding: 10px 8px;
+  font-weight: 800;
+  color: var(--text-muted);
+  transition: color var(--d-fast) var(--e-out);
+}
+.cta__ghost::after {
+  content: "";
+  position: absolute;
+  left: 8px; right: 8px; bottom: 7px;
+  height: .26em;
+  background: color-mix(in srgb, var(--line-strong) 60%, transparent);
+  border-radius: 60% 40% 55% 45% / 100% 100% 60% 60%;   /* matches .underlined */
+  transform: scaleX(1) scaleY(.7);
+  transform-origin: left center;
+  transition: transform var(--d-base) var(--e-bounce), background-color var(--d-base) var(--e-out);
+}
+.cta__ghost:hover, .cta__ghost:focus-visible { color: var(--text-strong); }
+.cta__ghost:hover::after, .cta__ghost:focus-visible::after {
+  transform: scaleX(1) scaleY(1.25);
+  background: var(--crayon-sun);
+}
+.cta__ico--up { transition: transform var(--d-base) var(--e-bounce); }
+.cta__ghost:hover .cta__ico--up,
+.cta__ghost:focus-visible .cta__ico--up { transform: translate(-4px, -3px) rotate(-10deg); }
+
+.cta__fine {
+  margin-top: clamp(18px, 2.2vw, 28px);
+  font-size: var(--t-xs);        /* floor is 0.75rem = 12px */
+  font-weight: 700;
+  letter-spacing: .02em;
+  color: var(--text-muted);
+}
+
+/* ------------------------------------------------------------ smaller ---- */
+@media (max-width: 640px) {
+  .cta { --sheet-rot: -.6deg; }
+  .cta__tape { display: none; }
+  .cta__title { font-size: var(--t-2xl); }
+  .cta__go-wrap, .cta__go { width: 100%; }
+  .cta__go { font-size: var(--t-base); padding: 16px clamp(14px, 5vw, 30px); }
+  .cta__actions { flex-direction: column; gap: var(--s-3); }
+}
+
+/* ------------------------------------------- stop when nobody is looking -- */
+/* Default is running, so the section still breathes with JS switched off. */
+.cta.is-observed:not(.is-live) .cta__dragon-fly,
+.cta.is-observed:not(.is-live) .cta__wing,
+.cta.is-observed:not(.is-live) .alive,
+.cta.is-observed:not(.is-live) .cta__go-wrap {
+  animation-play-state: paused;
+}
+
+/* ------------------------------------------------------ reduced motion ---- */
+/* base.css collapses every animation to .001ms and holds it at its 100%
+   keyframe — for cta-cross that is translate3d(130vw), i.e. the dragons would
+   vanish. These `animation: none` rules are what keep the still picture. */
+@media (prefers-reduced-motion: reduce) {
+  .cta__dragon-fly,
+  .cta__wing,
+  .cta__go-wrap,
+  .cta .alive {
+    animation: none !important;
+    transform: none !important;
+  }
+  /* Park the drifters where they stay on screen, still and legible. */
+  .cta__dragon { transform: none !important; left: var(--rest, 2%); }
+  .cta__flame { transform: none !important; }
+}

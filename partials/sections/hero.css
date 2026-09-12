@@ -1,0 +1,333 @@
+/* ==========================================================================
+   HERO — the page draws itself, then a dragon flies over it.
+   Depends on: tokens.css, base.css (load AFTER base.css).
+   Every colour / radius / shadow / duration comes from a token.
+   ========================================================================== */
+
+.hero {
+  /* All hero-local custom properties carry the section key. */
+  --hero-sw: 3;                              /* landscape pen width, viewBox units */
+  --hero-bark:     color-mix(in srgb, var(--crayon-amber) 50%, var(--ink-700));
+  --hero-far-hill: color-mix(in srgb, var(--crayon-royal) 32%, var(--paper-1));
+  --hero-fly: calc(var(--d-flap) * 30);      /* one pass = thirty wingbeats */
+
+  position: relative;
+  z-index: var(--z-content);
+  display: grid;
+  align-content: center;
+  min-height: 92vh;
+  min-height: 92svh;
+  overflow: clip;
+  isolation: isolate;
+  padding-block:
+    calc(var(--nav-h) + clamp(30px, 6vh, 88px))
+    clamp(104px, 15vh, 168px);
+}
+
+/* ---------------------------------------------------------------- sky ---- */
+.hero__sky {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    radial-gradient(circle at 50% 50%,
+      color-mix(in srgb, var(--crayon-sky) 24%, transparent) 1.7px, transparent 1.8px),
+    var(--wash-sky);
+  background-size: 46px 46px, 100% 100%;
+}
+
+/* ------------------------------------------------------------- scene ----- */
+.hero__scene { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+
+.hero__layer {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  transform: translate3d(var(--dx, 0px), calc(var(--dy, 0px) + var(--py, 0px)), 0);
+}
+.hero__layer > svg { width: 100%; height: auto; overflow: visible; }
+
+/* The dash animation measures paths in user units, so these strokes must scale
+   with the drawing (the kit default is non-scaling, which would desync it:
+   --len from getTotalLength() is in user units, a non-scaling dash is in px).
+   The pen weight is then compensated per breakpoint with --hero-sw. */
+.hero__scene .stroke { vector-effect: none; stroke-width: var(--hero-sw); }
+.hero__scene .stroke--thin { stroke-width: calc(var(--hero-sw) * .68); }
+
+.hero__pennant { transform-box: fill-box; transform-origin: 0% 50%; }
+
+/* --------------------------------------------------------------- veil ---- */
+/* Keeps the headline crisp without hiding the drawing underneath it. */
+.hero__veil {
+  position: absolute; inset: 0; z-index: 3; pointer-events: none;
+  background:
+    radial-gradient(96% 62% at 25% 44%,
+      color-mix(in srgb, var(--bg) 90%, transparent) 0%,
+      color-mix(in srgb, var(--bg) 62%, transparent) 42%,
+      transparent 72%);
+}
+
+/* ======================================================== the dragon ===== */
+.hero__lane {
+  position: absolute; left: 0; right: 0; z-index: 2;
+  top: clamp(58px, 12%, 146px);
+  height: 0;
+  pointer-events: none;
+}
+.hero__dragon {
+  width: clamp(186px, 21vw, 310px);
+  animation: hero-fly var(--hero-fly) linear infinite;
+}
+.hero__dragon-arc { animation: hero-arc var(--hero-fly) var(--e-inout) infinite; }
+.hero__dragon-squash {
+  position: relative;
+  opacity: .92;
+  transform-origin: 52% 62%;
+  animation: hero-squash var(--d-flap) var(--e-inout) infinite;
+}
+.hero__dragon-svg { width: 100%; height: auto; overflow: visible; }
+.hero__dragon-svg .stroke { stroke-width: 3.4; }
+.hero__dragon-svg .stroke--thin { stroke-width: 2.4; }
+.hero__dragon-wash { opacity: .95; }
+
+@keyframes hero-fly {
+  from { transform: translate3d(-28vw, 0, 0); }
+  to   { transform: translate3d(122vw, 0, 0); }
+}
+@keyframes hero-arc {
+  0%   { transform: translate3d(0, 26px, 0) rotate(6deg); }
+  18%  { transform: translate3d(0, -14px, 0) rotate(-3.5deg); }
+  38%  { transform: translate3d(0, 10px, 0) rotate(2.5deg); }
+  58%  { transform: translate3d(0, -22px, 0) rotate(-5deg); }
+  78%  { transform: translate3d(0, 6px, 0) rotate(3deg); }
+  100% { transform: translate3d(0, 26px, 0) rotate(6deg); }
+}
+/* squash on the downbeat, stretch on the upbeat */
+@keyframes hero-squash {
+  0%, 100% { transform: scale(1.045, .94); }
+  46%      { transform: scale(.955, 1.07); }
+}
+
+/* wings beat around the shoulder, not around the whole animal */
+.hero__wing { transform-box: view-box; }
+.hero__wing--near {
+  transform-origin: 150px 96px;
+  animation: hero-wing var(--d-flap) var(--e-inout) infinite;
+}
+.hero__wing--far {
+  transform-origin: 154px 103px;
+  opacity: .72;
+  animation: hero-wing var(--d-flap) var(--e-inout) infinite;
+  animation-delay: calc(var(--d-flap) * -.12);
+}
+@keyframes hero-wing {
+  0%, 100% { transform: rotate(-33deg) scale(1, .94); }
+  46%      { transform: rotate(19deg) scale(.9, 1.06); }
+}
+
+/* ------------------------------------------------------------- breath ---- */
+/* Fires once every third pass: 3 x --hero-fly, bursting as it crosses mid-screen. */
+.hero__flame {
+  position: absolute;
+  left: 92%; top: 12%;
+  width: 52%; aspect-ratio: 100 / 40;
+  transform-origin: 0 50%;
+  opacity: 0;
+  animation: hero-breathe calc(var(--hero-fly) * 3) linear infinite;
+}
+.hero__flame-fill {
+  position: absolute; inset: 0; display: block;
+  clip-path: url(#mp-hero-flame);
+  background-image:
+    radial-gradient(60% 120% at 4% 52%, var(--fire-core) 0%, transparent 46%),
+    var(--wash-fire);
+}
+.hero__flame-line { position: absolute; inset: 0; overflow: visible; }
+.hero__flame-line .stroke { stroke-width: 2.6; }
+
+@keyframes hero-breathe {
+  0%, 47.4%  { opacity: 0; transform: scale(.18, .5) translateX(-8px); }
+  48.4%      { opacity: 1; transform: scale(1.04, 1.02) translateX(0); }
+  49.6%      { opacity: .96; transform: scale(.9, .94) translateX(4px); }
+  50.6%      { opacity: 1; transform: scale(1.1, 1.06) translateX(6px); }
+  52.2%      { opacity: 0; transform: scale(1.35, 1.2) translateX(18px); }
+  100%       { opacity: 0; transform: scale(.18, .5) translateX(-8px); }
+}
+
+.hero__defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+/* Stop every loop the moment the hero leaves the screen. */
+.hero.is-paused .hero__dragon,
+.hero.is-paused .hero__dragon-arc,
+.hero.is-paused .hero__dragon-squash,
+.hero.is-paused .hero__wing,
+.hero.is-paused .hero__flame,
+.hero.is-paused .hero__pennant,
+.hero.is-paused .hero__cue-pencil,
+.hero.is-paused .hero__cue-line .stroke { animation-play-state: paused; }
+
+/* ========================================================== the words ==== */
+.hero__shell { position: relative; z-index: var(--z-content); width: 100%; }
+.hero__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: start;
+  gap: clamp(14px, 2vh, 26px);
+  max-width: 58rem;
+}
+
+.hero__title {
+  font-size: var(--t-hero);
+  line-height: var(--lh-tight);
+  margin-block: clamp(2px, .8vh, 10px);
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
+.hero__title span {
+  display: inline-block;
+  max-width: 100%;
+  transform-origin: left center;
+  animation: hero-line var(--d-slow) var(--e-bounce) both;
+  animation-delay: calc(var(--d-slow) * .9 + var(--i, 0) * var(--d-fast));
+}
+.hero__title em { font-style: normal; }
+@keyframes hero-line {
+  from { opacity: 0; transform: translate3d(0, 24px, 0) rotate(0deg); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0) rotate(var(--rot, 0deg)); }
+}
+/* the crayon scribble under "alive" is drawn last, like an afterthought */
+.hero__title .underlined::after {
+  bottom: .1em; height: .17em;
+  transform-origin: left center;
+  animation: hero-scribble var(--d-slow) var(--e-out) calc(var(--d-draw) * .84) both;
+}
+@keyframes hero-scribble {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+.hero__lede {
+  font-size: var(--t-md);
+  color: var(--text-muted);
+  max-width: 46ch;
+}
+/* the two magic words, written in the pencil face */
+.hero__lede em {
+  font-family: var(--font-hand);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.18em;
+  color: var(--text-strong);
+}
+
+.hero__cta { gap: var(--s-4); }
+.hero__cta .btn svg .stroke { stroke: currentColor; }
+
+.hero__facts {
+  display: flex; flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-3) var(--s-5);
+  margin-top: var(--s-1);
+}
+.hero__facts li { display: inline-flex; align-items: center; gap: 8px; }
+.hero__facts svg { width: 21px; height: 21px; flex: none; }
+.hero__facts svg .stroke { stroke: var(--accent-warm); }
+.hero__facts b {
+  font-family: var(--font-hand);
+  font-weight: 700;
+  font-size: var(--t-md);
+  line-height: 1;
+  color: var(--text-strong);
+  white-space: nowrap;
+}
+
+/* ========================================================= scroll cue ==== */
+.hero__cue {
+  position: absolute; left: 50%; bottom: clamp(20px, 4vh, 44px);
+  z-index: 4;
+  display: grid; justify-items: center; gap: 4px;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+.hero__cue-pencil {
+  width: 26px; height: 52px;
+  transform-origin: 50% 0;
+  animation: hero-bob calc(var(--d-flap) * 2.4) var(--e-inout) infinite;
+}
+.hero__cue-line { width: 4px; height: 30px; opacity: .6; }
+.hero__cue-line .stroke, .hero__cue-pencil .stroke { stroke-width: 2; }
+.hero__cue-line .stroke { animation: hero-ants calc(var(--d-slow) * 2.4) linear infinite; }
+@keyframes hero-bob {
+  0%, 100% { transform: translateY(0) rotate(-4deg); }
+  50%      { transform: translateY(9px) rotate(3deg); }
+}
+@keyframes hero-ants { to { stroke-dashoffset: -11; } }
+
+/* ========================================================= responsive ==== */
+/* The scene is width-driven (height = width / viewBox aspect). Above 1000px
+   the frame is 1600x900, so the sheet is 56.25vw tall: give the hero at least
+   that much height or the sun gets cropped off the top on short windows. */
+@media (min-width: 1000px) {
+  .hero { min-height: max(92svh, 57vw); }
+}
+
+/* Below 1000px the words sit centred over the castle, so the page has to
+   reserve the drawing's real height underneath them. The JS re-frames the
+   shared viewBox at the same two breakpoints — change one, change all three. */
+@media (max-width: 999px) {
+  .hero {
+    --hero-sw: 4.2;
+    padding-bottom: max(clamp(104px, 15vh, 168px), min(44vw, 42vh));
+  }
+  .hero__inner { justify-items: center; text-align: center; margin-inline: auto; }
+  .hero__lede { max-width: 36ch; }
+  .hero__cta, .hero__facts { justify-content: center; }
+  .hero__veil { background: radial-gradient(108% 58% at 50% 40%,
+      color-mix(in srgb, var(--bg) 90%, transparent) 0%,
+      color-mix(in srgb, var(--bg) 62%, transparent) 46%, transparent 78%); }
+  .hero__title span { transform-origin: center; }
+}
+@media (max-width: 619px) {
+  .hero {
+    --hero-sw: 5;
+    padding-top: calc(var(--nav-h) + clamp(18px, 3.5vh, 52px));
+    padding-bottom: max(clamp(104px, 15vh, 168px), min(60vw, 46vh));
+  }
+  .hero__detail { display: none; }            /* the scene simplifies */
+  .hero__dragon { width: clamp(150px, 46vw, 215px); }
+  .hero__dragon-squash { opacity: .82; }
+  .hero__lane { top: clamp(108px, 16%, 160px); }
+  .hero__facts { gap: var(--s-2) var(--s-4); }
+  .hero__facts b { font-size: var(--t-base); }
+}
+@media (max-width: 440px) {
+  .hero { --hero-sw: 7; }
+  .hero__cta { width: 100%; flex-direction: column; align-items: stretch; }
+  .hero__cta .btn { width: 100%; }
+  .hero__facts { flex-direction: column; align-items: center; gap: var(--s-2); }
+}
+@media (min-width: 1000px) and (max-width: 1279px) { .hero { --hero-sw: 3.8; } }
+@media (min-width: 1500px) { .hero { --hero-sw: 2.7; } }
+
+/* ==================================================== reduced motion ===== */
+/* Nothing loops. The finished picture stays: the landscape is drawn and
+   coloured (base.css), and the dragon is parked mid-sky, wings up, breathing
+   a still flame — a storybook plate, not an empty box. */
+@media (prefers-reduced-motion: reduce) {
+  .hero__dragon {
+    animation: none !important;
+    /* never wider than the viewport: 100% here is the dragon's own width */
+    transform: translate3d(min(46vw, calc(100vw - 100% - 96px)), 0, 0);
+  }
+  .hero__dragon-arc { animation: none !important; transform: rotate(-3deg); }
+  .hero__dragon-squash,
+  .hero__pennant,
+  .hero__cue-line .stroke { animation: none !important; transform: none; }
+  .hero__wing--near { animation: none !important; transform: rotate(-20deg); }
+  .hero__wing--far  { animation: none !important; transform: rotate(-28deg); }
+  .hero__cue-pencil { animation: none !important; transform: rotate(-4deg); }
+  .hero__flame {
+    animation: none !important;
+    opacity: 1;
+    transform: scale(1, 1) translateX(0);
+  }
+  .hero__title span { animation: none !important; opacity: 1; transform: rotate(var(--rot, 0deg)); }
+  .hero__title .underlined::after { animation: none !important; transform: scaleX(1); }
+  .hero__layer { transform: none; }
+}

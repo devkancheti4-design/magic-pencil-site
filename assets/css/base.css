@@ -1,0 +1,268 @@
+/* ==========================================================================
+   Reset, paper texture and the shared hand-drawn component kit
+   Depends on: tokens.css
+   ========================================================================== */
+
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+
+html {
+  overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-h) + 24px);
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: var(--t-base);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100svh;
+  overflow-x: clip;
+  position: relative;
+}
+
+/* ---- The page IS a sheet of paper: fibre grain + faint ruled grid ---- */
+body::before {
+  content: "";
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--crayon-sky) 22%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--crayon-sky) 22%, transparent) 1px, transparent 1px);
+  background-size: 34px 34px;
+  opacity: .5;
+}
+body::after {
+  content: "";
+  position: fixed; inset: 0; z-index: 1; pointer-events: none;
+  opacity: .32; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='4'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23p)'/%3E%3C/svg%3E");
+}
+:root[data-theme="night"] body::after { mix-blend-mode: screen; opacity: .14; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="day"]) body::after { mix-blend-mode: screen; opacity: .14; }
+}
+
+img, svg, video, canvas { display: block; max-width: 100%; }
+img, video { height: auto; }
+input, button, textarea, select { font: inherit; color: inherit; }
+button { background: none; border: 0; cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+ul, ol { list-style: none; padding: 0; }
+:where(h1,h2,h3,h4) {
+  font-family: var(--font-hand);
+  font-weight: 700;
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tr-tight);
+  color: var(--text-strong);
+  text-wrap: balance;
+}
+p { text-wrap: pretty; }
+
+::selection { background: var(--crayon-sun); color: var(--ink-900); }
+
+:focus-visible {
+  outline: 3px dashed var(--crayon-flame);
+  outline-offset: 3px;
+  border-radius: var(--r-sm);
+}
+:focus:not(:focus-visible) { outline: none; }
+
+/* ==========================================================================
+   Layout
+   ========================================================================== */
+.shell { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: var(--gutter); }
+.shell--wide { max-width: 1440px; }
+.shell--narrow { max-width: 760px; }
+
+.section { position: relative; padding-block: var(--section-y); z-index: var(--z-content); }
+.section--tight { padding-block: clamp(48px, 6vw, 96px); }
+
+.cluster { display: flex; flex-wrap: wrap; gap: var(--s-3); align-items: center; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0;
+}
+.skip-link {
+  position: absolute; top: 10px; left: 10px; z-index: 999;
+  padding: 10px 18px; border-radius: var(--r-hand);
+  background: var(--surface); color: var(--text-strong);
+  border: 2px solid var(--ink-900); box-shadow: var(--sh-2);
+  font-weight: 800; font-size: var(--t-sm);
+  transform: translateY(-180%);
+  transition: transform var(--d-base) var(--e-bounce);
+}
+.skip-link:focus-visible { transform: translateY(0); }
+
+/* ==========================================================================
+   Section headers
+   ========================================================================== */
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  width: fit-content; max-width: 100%;
+  font-family: var(--font-body);
+  font-size: var(--t-xs); font-weight: 800;
+  letter-spacing: var(--tr-wide); text-transform: uppercase;
+  color: var(--ink-500);
+  padding: 7px 16px;
+  border: 2px solid var(--line-strong);
+  border-radius: var(--r-hand);
+  background: var(--surface);
+  transform: rotate(-1.4deg);
+}
+.eyebrow::before {
+  content: ""; width: 9px; height: 9px; flex: none;
+  background: var(--accent-warm);
+  border-radius: 40% 60% 55% 45% / 55% 45% 60% 40%;
+}
+
+.section-head { display: grid; gap: var(--s-4); max-width: 760px; margin-bottom: clamp(40px, 5vw, 76px); }
+.section-head--center { margin-inline: auto; text-align: center; justify-items: center; }
+.section-head h2 { font-size: var(--t-2xl); }
+.section-head p { color: var(--text-muted); font-size: var(--t-md); max-width: 58ch; }
+
+/* A word with a crayon scribble under it */
+.underlined { position: relative; white-space: nowrap; }
+.underlined::after {
+  content: ""; position: absolute; left: -2%; right: -2%; bottom: -.08em; height: .26em;
+  background: var(--crayon-sun);
+  border-radius: 60% 40% 55% 45% / 100% 100% 60% 60%;
+  z-index: -1;
+  transform: scaleX(var(--scribble, 1));
+  transform-origin: left center;
+}
+
+/* ==========================================================================
+   Buttons — cut from card and stuck on with a shadow
+   ========================================================================== */
+.btn {
+  position: relative;
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 14px 28px;
+  font-family: var(--font-body);
+  font-size: var(--t-sm); font-weight: 800;
+  color: var(--ink-900);
+  background: var(--surface);
+  border: 2.5px solid var(--ink-900);
+  border-radius: var(--r-hand);
+  box-shadow: 4px 4px 0 var(--ink-900);
+  transition: transform var(--d-fast) var(--e-out), box-shadow var(--d-fast) var(--e-out),
+              background-color var(--d-fast) var(--e-out);
+  white-space: nowrap;
+}
+.btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--ink-900); }
+.btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink-900); }
+.btn svg { width: 1.15em; height: 1.15em; flex: none; }
+
+.btn--go { background: var(--crayon-green); color: #08240f; }
+.btn--fire { background: var(--crayon-flame); color: #2a0d00; }
+.btn--sun { background: var(--crayon-sun); color: #2e2000; }
+.btn--lg { padding: 18px 38px; font-size: var(--t-base); border-width: 3px; box-shadow: 5px 5px 0 var(--ink-900); }
+.btn--lg:hover { box-shadow: 8px 8px 0 var(--ink-900); }
+.btn--sm { padding: 9px 18px; font-size: var(--t-xs); box-shadow: 3px 3px 0 var(--ink-900); }
+
+/* ==========================================================================
+   Cards — sheets torn from a sketchbook
+   ========================================================================== */
+.card {
+  position: relative;
+  background: var(--surface);
+  border: 2.5px solid var(--ink-900);
+  border-radius: var(--r-hand);
+  box-shadow: var(--sh-2);
+  transition: transform var(--d-base) var(--e-bounce), box-shadow var(--d-base) var(--e-out);
+}
+.card--pad { padding: clamp(20px, 2.5vw, 34px); }
+.card:nth-child(even) { border-radius: var(--r-hand-2); }
+.card--lift:hover { transform: translateY(-6px) rotate(-.8deg); box-shadow: var(--sh-3); }
+
+/* Sticky-taped to the page */
+.taped::before {
+  content: ""; position: absolute; top: -12px; left: 50%; width: 88px; height: 26px;
+  transform: translateX(-50%) rotate(-3deg);
+  background: color-mix(in srgb, var(--crayon-sun) 55%, transparent);
+  border: 1px solid color-mix(in srgb, var(--ink-900) 12%, transparent);
+  pointer-events: none;
+}
+
+.chip {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 6px 14px;
+  font-size: var(--t-xs); font-weight: 800;
+  color: var(--ink-900);
+  background: var(--paper-2);
+  border: 2px solid var(--ink-900);
+  border-radius: var(--r-pill);
+  transition: transform var(--d-fast) var(--e-bounce), background-color var(--d-fast) var(--e-out);
+}
+.chip.is-on { background: var(--crayon-sun); }
+.chip:hover { transform: translateY(-2px) rotate(-2deg); }
+
+/* ==========================================================================
+   Hand-drawn SVG helpers
+   ========================================================================== */
+/* Every illustrated stroke uses this: the line literally draws itself. */
+.stroke {
+  fill: none;
+  stroke: var(--ink-900);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+.stroke--thin { stroke-width: 2; }
+.stroke--fat  { stroke-width: 4.5; }
+
+[data-draw] .stroke, .stroke[data-draw] {
+  stroke-dasharray: var(--len, 1200);
+  stroke-dashoffset: var(--len, 1200);
+}
+[data-draw].is-in .stroke, .stroke[data-draw].is-in {
+  animation: draw-on var(--d-draw) var(--e-out) forwards;
+  animation-delay: var(--draw-delay, 0ms);
+}
+@keyframes draw-on { to { stroke-dashoffset: 0; } }
+
+/* Crayon fill that washes in after the outline */
+.wash { opacity: 0; transition: opacity var(--d-slow) var(--e-out) var(--wash-delay, 600ms); }
+[data-draw].is-in .wash { opacity: 1; }
+
+/* The gentle wobble of a drawing that is alive */
+@keyframes alive {
+  0%, 100% { transform: rotate(-.7deg) translateY(0); }
+  50%      { transform: rotate(.7deg) translateY(-3px); }
+}
+.alive { animation: alive 3.2s var(--e-inout) infinite; transform-origin: 50% 90%; }
+.alive--slow { animation-duration: 5s; }
+.alive--fast { animation-duration: 1.9s; }
+
+/* ==========================================================================
+   Scroll reveal
+   ========================================================================== */
+:where(:root.js) [data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, var(--rv-y, 26px), 0) rotate(var(--rv-r, 0deg));
+  transition: opacity var(--d-slow) var(--e-out), transform var(--d-slow) var(--e-bounce);
+  transition-delay: var(--rv-delay, 0ms);
+}
+[data-reveal].is-in { opacity: 1; transform: none; }
+[data-reveal="pop"]  { --rv-y: 10px; --rv-r: -3deg; }
+[data-reveal="left"] { --rv-y: 0px; transform: translate3d(-34px,0,0); }
+[data-reveal="right"]{ --rv-y: 0px; transform: translate3d(34px,0,0); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+  [data-reveal] { opacity: 1 !important; transform: none !important; }
+  [data-draw] .stroke, .stroke[data-draw] { stroke-dashoffset: 0 !important; }
+  .wash { opacity: 1 !important; }
+}

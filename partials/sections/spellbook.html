@@ -1,0 +1,606 @@
+<section id="spellbook" class="section spellbook" aria-labelledby="spellbook-title">
+  <div class="shell">
+
+    <header class="section-head section-head--center" data-reveal>
+      <span class="eyebrow">The spellbook</span>
+      <h2 id="spellbook-title">A name is a <span class="underlined">wish</span></h2>
+      <p>Draw anything you like — the shape decides how strong it is. Then write a name on it.
+         The name decides what it <em>does</em>. Here is what the pencil is listening for.</p>
+      <svg class="spellbook__flourish" viewBox="0 0 220 26" preserveAspectRatio="xMidYMid meet" data-draw aria-hidden="true">
+        <path class="stroke stroke--thin" d="M6 18C34 10 62 22 90 15C118 8 146 20 174 14C188 11 200 12 214 16"/>
+        <path class="stroke stroke--thin" style="--draw-delay:520ms" d="M108 3C109 7 110 9 112 11C109 12 107 13 105 16C104 12 103 9 100 7C103 6 106 5 108 3Z"/>
+      </svg>
+    </header>
+
+    <div class="spellbook__reveal" data-reveal="pop">
+      <div class="spellbook__spread">
+
+        <span class="spellbook__sheet spellbook__sheet--a" aria-hidden="true"></span>
+        <span class="spellbook__sheet spellbook__sheet--b" aria-hidden="true"></span>
+
+        <!-- A small dragon has made itself the bookmark. -->
+        <svg class="spellbook__ribbon alive alive--slow" viewBox="0 0 100 120" preserveAspectRatio="xMidYMin meet" data-draw role="img">
+          <title>A small dragon perched on the book like a bookmark, its tail hanging down the spine</title>
+          <path class="wash" fill="var(--crayon-amber)" d="M40 34C34 24 28 14 22 6C17 13 16 19 22 24C17 29 21 33 31 34Z"/>
+          <path class="wash" fill="var(--crayon-ember)" d="M26 44C26 35 34 29 44 29C54 29 62 35 62 44C62 53 54 59 44 59C34 59 26 53 26 44Z"/>
+          <path class="wash" fill="var(--crayon-ember)" d="M58 34C62 28 70 28 76 33C79 35 80 38 80 40C76 43 68 44 62 42C58 40 57 37 58 34Z"/>
+          <path class="wash" fill="var(--crayon-flame)" d="M80 37C86 33 93 36 92 41C91 47 83 48 80 43C78 41 78 39 80 37Z"/>
+          <path class="stroke stroke--thin" d="M28 50C20 60 16 78 20 96"/>
+          <path class="stroke stroke--thin" d="M35 56C29 66 26 80 28 96"/>
+          <path class="stroke stroke--thin" d="M20 96C15 100 16 108 22 109C27 107 29 101 28 96"/>
+          <path class="stroke stroke--thin" d="M26 44C26 35 34 29 44 29C54 29 62 35 62 44C62 53 54 59 44 59C34 59 26 53 26 44Z"/>
+          <path class="stroke stroke--thin" d="M36 58C35 63 33 66 30 69"/>
+          <path class="stroke stroke--thin" d="M52 58C53 63 55 66 58 69"/>
+          <path class="stroke stroke--thin" d="M58 34C62 28 70 28 76 33C79 35 80 38 80 40C76 43 68 44 62 42C58 40 57 37 58 34Z"/>
+          <path class="stroke stroke--thin" d="M80 40C75 43 68 44 63 43"/>
+          <path class="stroke stroke--thin" d="M67 35C68 35 69 36 69 37C69 38 68 39 67 39C66 39 65 38 65 37C65 36 66 35 67 35Z"/>
+          <path class="stroke stroke--thin" d="M60 31C57 24 53 20 48 17C52 23 55 27 57 32"/>
+          <path class="stroke stroke--thin" d="M40 34C34 24 28 14 22 6C17 13 16 19 22 24C17 29 21 33 31 34Z"/>
+          <path class="stroke stroke--thin" d="M22 7C22 16 22 21 22 24"/>
+          <path class="stroke stroke--thin" d="M80 37C86 33 93 36 92 41C91 47 83 48 80 43"/>
+        </svg>
+
+        <div class="spellbook__book">
+
+          <!-- ============================ LEFT PAGE ============================ -->
+          <div class="spellbook__page spellbook__page--index">
+            <div class="spellbook__ptop">
+              <h3 class="spellbook__ptitle">Words the pencil knows</h3>
+              <span class="spellbook__folio" aria-hidden="true">i</span>
+            </div>
+
+            <div class="spellbook__find">
+              <label class="sr-only" for="spellbook-q">Try a naming word</label>
+              <div class="spellbook__search">
+                <svg viewBox="0 0 24 24" class="spellbook__search-icon" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                  <path class="stroke stroke--thin" d="M4 20C5 16 5 15 6 14C9 10 13 6 17 3C19 2 21 4 20 6C17 10 13 14 10 17C9 18 8 19 4 20Z"/>
+                  <path class="stroke stroke--thin" d="M15 5C17 6 18 7 19 9"/>
+                </svg>
+                <input class="spellbook__input" id="spellbook-q" type="search" autocomplete="off" spellcheck="false"
+                       placeholder="try a word…" aria-describedby="spellbook-hint">
+                <button class="spellbook__clear" type="button" hidden>
+                  <span class="sr-only">Clear the search</span>
+                  <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                    <path class="stroke stroke--thin" d="M6 6C10 10 14 14 18 18"/>
+                    <path class="stroke stroke--thin" d="M18 6C14 10 10 14 6 18"/>
+                  </svg>
+                </button>
+              </div>
+              <p id="spellbook-hint" class="sr-only">Type to filter the list. Press the down arrow key to step through the words; the page on the right shows what the chosen word does.</p>
+              <p class="spellbook__count" aria-hidden="true"><b data-sb-count>10</b> of <b data-sb-total>10</b> words</p>
+            </div>
+
+            <ul class="spellbook__list" role="list">
+
+              <li class="spellbook__row" data-word="archer"
+                  data-alt="bow arrow arrows ranged shoot shooter"
+                  data-tip="Spikes are damage, so give it sharp zig-zag corners. Tall and thin is plenty — it never has to get close.">
+                <button class="spellbook__entry" type="button" aria-current="true">
+                  <svg class="spellbook__glyph" viewBox="0 0 32 32" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                    <path class="stroke" d="M13 4C21 10 21 22 13 28"/>
+                    <path class="stroke" d="M13 4C9 11 9 21 13 28"/>
+                    <path class="stroke" d="M6 16C14 15 22 15 29 16"/>
+                    <path class="stroke" d="M24 11C26 13 27 15 30 16C27 17 26 19 24 21"/>
+                  </svg>
+                  <span>
+                    <span class="spellbook__term">archer</span>
+                    <span class="spellbook__gloss">Shoots at the enemy from far away.</span>
+                  </span>
+                </button>
+              </li>
+
+              <li class="spellbook__row" data-word="knight"
+                  data-alt="sword soldier armour armor melee close"
+                  data-tip="Close the outline all the way round and colour it in. A closed loop is armour.">
+                <button class="spellbook__entry" type="button" aria-current="false">
+                  <svg class="spellbook__glyph" viewBox="0 0 32 32" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                    <path class="stroke" d="M8 21C8 11 13 5 16 5C20 5 25 11 25 21C20 24 12 24 8 21Z"/>
+                    <path class="stroke" d="M9 16C14 15 19 15 24 16"/>
+                    <path class="stroke" d="M16 5C18 1 23 0 27 2"/>
+                    <path class="stroke" d="M11 24C11 27 11 29 11 30"/>
+                    <path class="stroke" d="M22 24C22 27 22 29 22 30"/>
+                  </svg>
+                  <span>
+                    <span class="spellbook__term">knight</span>
+                    <span class="spellbook__gloss">Marches on the next castle and fights up close.</span>
+                  </span>
+                </button>
+              </li>
+
+              <li class="spellbook__row" data-word="horse"
+                  data-alt="fast quick speed gallop pony runner legs"
+                  data-tip="Legs are the whole trick. More legs, faster runner — draw four, or six if you are feeling silly.">
+                <button class="spellbook__entry" type="button" aria-current="false">
+                  <svg class="spellbook__glyph" viewBox="0 0 32 32" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                    <path class="stroke" d="M4 25C4 17 10 13 18 13C20 8 24 5 27 4C28 8 27 12 24 15C24 20 22 24 20 27"/>
+                    <path class="stroke" d="M11 15C10 20 9 24 8 28"/>
+                    <path class="stroke" d="M15 15C15 20 15 24 15 28"/>
+                    <path class="stroke" d="M4 19C1 21 0 25 1 28"/>
+                  </svg>
+                  <span>
+                    <span class="spellbook__term">horse</span>
+                    <span class="spellbook__gloss">Runs — the quick way across the paper.</span>
+                  </span>
+                </button>
+              </li>
+
+              <li class="spellbook__row" data-word="wall"
+                  data-alt="block barrier defend fence stop"
+                  data-tip="Bigger is tougher, and a wall never has to move. Spend every inch of paper on size.">
+                <button class="spellbook__entry" type="button" aria-current="false">
+                  <svg class="spellbook__glyph" viewBox="0 0 32 32" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                    <path class="stroke" d="M4 26C3 20 3 14 4 9C12 7 21 7 28 9C29 14 29 20 28 26C20 28 12 28 4 26Z"/>
+                    <path class="stroke" d="M4 17C12 16 20 16 28 17"/>
+                    <path class="stroke" d="M16 9C16 13 16 15 16 17"/>
+                    <path class="stroke" d="M10 17C10 21 10 24 10 27"/>
+                    <path class="stroke" d="M22 17C22 21 22 24 22 27"/>
+                  </svg>
+                  <span>
+                    <span class="spellbook__term">wall</span>
+                    <span class="spellbook__gloss">Blocks the way. It stays exactly where you put it.</span>
+                  </span>
+                </button>
+              </li>
+
+              <li class="spellbook__row" data-word="tower"
+                  data-alt="guard turret building watch defend"
+                  data-tip="More detail, bigger masterpiece bonus. Fuss over every brick — it is worth it.">
+                <button class="spellbook__entry" type="button" aria-current="false">
+                  <svg class="spellbook__glyph" viewBox="0 0 32 32" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                    <path class="stroke" d="M9 28C9 20 9 13 9 7C14 6 19 6 23 7C23 13 23 20 23 28"/>
+                    <path class="stroke" d="M9 7C9 4 9 3 10 2C12 2 13 2 13 4C15 4 17 4 19 4C19 2 20 2 22 2C23 3 23 5 23 7"/>
+                    <path class="stroke" d="M16 13C16 17 16 19 16 21"/>
+                    <path class="stroke" d="M9 24C14 23 19 23 23 24"/>
+                  </svg>
+                  <span>
+                    <span class="spellbook__term">tower</span>
+                    <span class="spellbook__gloss">Stands guard over the ground around it.</span>
+                  </span>
+                </button>
+              </li>
+
+              <li class="spellbook__row" data-word="bomb"
+                  data-alt="explode boom blast fuse"
+                  data-tip="It only has to arrive once. Skip the muscle — draw legs and get it there fast.">
+                <button class="spellbook__entry" type="button" aria-current="false">
+                  <svg class="spellbook__glyph" viewBox="0 0 32 32" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                    <path class="stroke" d="M16 10C22 10 26 15 26 20C26 25 22 28 16 28C10 28 6 25 6 20C6 15 10 10 16 10Z"/>
+                    <path class="stroke" d="M17 10C19 5 23 3 27 3"/>
+                    <path class="stroke" d="M27 1C28 3 28 4 27 6"/>
+                    <path class="stroke" d="M24 2C26 3 26 3 27 4"/>
+                  </svg>
+                  <span>
+                    <span class="spellbook__term">bomb</span>
+                    <span class="spellbook__gloss">Rushes in and explodes.</span>
+                  </span>
+                </button>
+              </li>
+
+              <li class="spellbook__row" data-word="cake"
+                  data-alt="bait lure roach roaches food snack"
+                  data-tip="Any shape at all — roaches are not fussy. Put it somewhere awkward and watch them walk the long way round.">
+                <button class="spellbook__entry" type="button" aria-current="false">
+                  <svg class="spellbook__glyph" viewBox="0 0 32 32" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                    <path class="stroke" d="M5 27C5 22 5 19 6 17C14 15 22 15 27 17C28 19 28 23 27 27C20 29 12 29 5 27Z"/>
+                    <path class="stroke" d="M6 18C9 21 12 18 15 21C18 24 21 18 26 20"/>
+                    <path class="stroke" d="M16 15C16 12 16 11 16 9"/>
+                    <path class="stroke" d="M16 9C19 7 19 3 16 1C13 3 13 7 16 9Z"/>
+                  </svg>
+                  <span>
+                    <span class="spellbook__term">cake</span>
+                    <span class="spellbook__gloss">Bait. Roaches leave what they are doing and come to eat.</span>
+                  </span>
+                </button>
+              </li>
+
+              <li class="spellbook__row" data-word="doctor"
+                  data-alt="heal healer heals medic nurse mend"
+                  data-tip="A closed, coloured-in body is armour — and a healer only helps for as long as it lasts.">
+                <button class="spellbook__entry" type="button" aria-current="false">
+                  <svg class="spellbook__glyph" viewBox="0 0 32 32" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                    <path class="stroke" d="M16 28C10 23 3 18 3 12C3 7 9 4 16 10C23 4 29 7 29 12C29 18 22 23 16 28Z"/>
+                    <path class="stroke" d="M16 12C16 16 16 18 16 21"/>
+                    <path class="stroke" d="M11 16C14 15 19 15 22 16"/>
+                  </svg>
+                  <span>
+                    <span class="spellbook__term">doctor</span>
+                    <span class="spellbook__gloss">Heals the friends standing near it.</span>
+                  </span>
+                </button>
+              </li>
+
+              <li class="spellbook__row" data-word="army"
+                  data-alt="crowd soldiers troops many group march"
+                  data-tip="Bigger is tougher but heavier. Add legs underneath and you win the speed back.">
+                <button class="spellbook__entry" type="button" aria-current="false">
+                  <svg class="spellbook__glyph" viewBox="0 0 32 32" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                    <path class="stroke" d="M5 10C7 10 8 11 8 13C8 15 7 16 5 16C3 16 2 15 2 13C2 11 3 10 5 10Z"/>
+                    <path class="stroke" d="M5 16C5 21 5 25 5 29"/>
+                    <path class="stroke" d="M16 7C18 7 19 8 19 10C19 12 18 13 16 13C14 13 13 12 13 10C13 8 14 7 16 7Z"/>
+                    <path class="stroke" d="M16 13C16 19 16 24 16 29"/>
+                    <path class="stroke" d="M27 10C29 10 30 11 30 13C30 15 29 16 27 16C25 16 24 15 24 13C24 11 25 10 27 10Z"/>
+                    <path class="stroke" d="M27 16C27 21 27 25 27 29"/>
+                    <path class="stroke" d="M11 3C11 12 11 21 11 29"/>
+                  </svg>
+                  <span>
+                    <span class="spellbook__term">army</span>
+                    <span class="spellbook__gloss">A crowd of fighters instead of one.</span>
+                  </span>
+                </button>
+              </li>
+
+              <li class="spellbook__row" data-word="fire dragon"
+                  data-alt="dragon fly flying flight wings flame breath spikes"
+                  data-tip="A dragon wants all of it at once: big for toughness, spikes along the spine for damage, and a closed body coloured right in for armour.">
+                <button class="spellbook__entry" type="button" aria-current="false">
+                  <svg class="spellbook__glyph" viewBox="0 0 32 32" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                    <path class="stroke" d="M4 22C4 14 10 9 17 10C22 11 25 15 23 18C20 21 12 22 6 21"/>
+                    <path class="stroke" d="M12 10C10 6 8 3 5 2C7 6 8 8 9 11"/>
+                    <path class="stroke" d="M11 15C7 11 4 7 4 2C9 4 13 9 16 14"/>
+                    <path class="stroke" d="M23 17C27 14 31 16 30 20C29 24 24 25 22 21"/>
+                    <path class="stroke" d="M17 15C18 15 19 15 19 16C19 17 18 17 17 17C17 17 16 17 16 16C16 15 17 15 17 15Z"/>
+                  </svg>
+                  <span>
+                    <span class="spellbook__term">fire dragon</span>
+                    <span class="spellbook__gloss">Takes to the sky and breathes fire.</span>
+                  </span>
+                </button>
+              </li>
+
+              <li class="spellbook__row spellbook__empty" hidden>
+                <p>Nothing under that word in the book — but look across the fold.</p>
+              </li>
+            </ul>
+
+            <p class="spellbook__note">
+              <svg viewBox="0 0 20 20" preserveAspectRatio="xMidYMid meet" aria-hidden="true" class="spellbook__note-mark">
+                <path class="stroke stroke--thin" d="M10 3C10 8 10 12 10 17"/>
+                <path class="stroke stroke--thin" d="M3 6C7 9 13 11 17 14"/>
+                <path class="stroke stroke--thin" d="M17 6C13 9 7 11 3 14"/>
+              </svg>
+              <span><b>These are the words the game spells out.</b> Anything else you name still comes
+              alive — its shape does the talking.</span>
+            </p>
+          </div>
+
+          <!-- ============================== SPINE ============================== -->
+          <div class="spellbook__gutter" aria-hidden="true">
+            <svg class="spellbook__seam spellbook__seam--v" viewBox="0 0 28 480" preserveAspectRatio="none">
+              <path class="stroke stroke--thin" d="M14 6C10 122 18 240 13 358C11 400 14 440 14 474"/>
+              <path class="stroke stroke--thin" d="M8 40C12 41 17 41 21 40"/>
+              <path class="stroke stroke--thin" d="M8 120C12 121 17 121 21 120"/>
+              <path class="stroke stroke--thin" d="M8 200C12 201 17 201 21 200"/>
+              <path class="stroke stroke--thin" d="M8 280C12 281 17 281 21 280"/>
+              <path class="stroke stroke--thin" d="M8 360C12 361 17 361 21 360"/>
+              <path class="stroke stroke--thin" d="M8 440C12 441 17 441 21 440"/>
+            </svg>
+            <svg class="spellbook__seam spellbook__seam--h" viewBox="0 0 480 28" preserveAspectRatio="none">
+              <path class="stroke stroke--thin" d="M6 14C122 10 240 18 358 13C400 11 440 14 474 14"/>
+              <path class="stroke stroke--thin" d="M40 8C41 12 41 17 40 21"/>
+              <path class="stroke stroke--thin" d="M160 8C161 12 161 17 160 21"/>
+              <path class="stroke stroke--thin" d="M300 8C301 12 301 17 300 21"/>
+              <path class="stroke stroke--thin" d="M430 8C431 12 431 17 430 21"/>
+            </svg>
+          </div>
+
+          <!-- =========================== RIGHT PAGE =========================== -->
+          <div class="spellbook__page spellbook__page--plate">
+            <div class="spellbook__ptop spellbook__ptop--right">
+              <h3 class="sr-only">What the chosen word does</h3>
+              <span class="spellbook__folio" aria-hidden="true">ii</span>
+            </div>
+
+            <div class="spellbook__turn">
+
+              <div class="spellbook__stage">
+
+                <!-- archer -->
+                <figure class="spellbook__fig is-live" data-word="archer">
+                  <svg class="spellbook__art" viewBox="0 0 120 120" preserveAspectRatio="xMidYMid meet" role="img">
+                    <title>A hand-drawn archer loosing an arrow</title>
+                    <path class="wash" fill="var(--crayon-grass)" d="M10 98C42 92 80 94 110 98C112 104 111 110 108 112C74 114 42 114 12 112C8 110 8 102 10 98Z"/>
+                    <path class="wash" fill="var(--crayon-deep)" d="M44 40C51 42 53 58 51 77C46 81 40 81 36 77C35 58 37 42 44 40Z"/>
+                    <path class="wash" fill="var(--crayon-amber)" d="M83 16C95 34 95 62 83 80C89 62 89 34 83 16Z"/>
+                    <path class="stroke" d="M10 99C44 93 80 95 110 99"/>
+                    <path class="stroke" d="M33 28C33 21 38 16 44 16C51 16 55 21 55 28C55 35 50 40 44 40C38 40 33 35 33 28Z"/>
+                    <path class="stroke" d="M44 40C43 52 43 64 42 77"/>
+                    <path class="stroke" d="M44 50C58 49 74 49 90 48"/>
+                    <path class="stroke" d="M45 52C50 51 56 50 61 48"/>
+                    <path class="stroke" d="M42 77C38 86 34 93 30 99"/>
+                    <path class="stroke" d="M42 77C47 86 52 93 55 99"/>
+                    <path class="stroke" d="M83 16C95 34 95 62 83 80"/>
+                    <path class="stroke stroke--thin" d="M83 16C76 27 68 40 62 48C68 56 76 69 83 80"/>
+                    <path class="stroke" d="M58 48C72 47 86 47 100 46"/>
+                    <path class="stroke" d="M92 40C96 43 99 45 103 46C99 48 96 50 92 53"/>
+                    <path class="stroke stroke--thin" d="M36 44C33 52 31 60 30 68"/>
+                    <path class="stroke stroke--thin" d="M28 46C29 42 31 40 34 39"/>
+                  </svg>
+                </figure>
+
+                <!-- knight -->
+                <figure class="spellbook__fig" data-word="knight" aria-hidden="true">
+                  <svg class="spellbook__art" viewBox="0 0 120 120" preserveAspectRatio="xMidYMid meet" role="img">
+                    <title>A hand-drawn knight with a shield and a raised sword</title>
+                    <path class="wash" fill="var(--crayon-grass)" d="M10 98C42 92 80 94 110 98C112 104 111 110 108 112C74 114 42 114 12 112C8 110 8 102 10 98Z"/>
+                    <path class="wash" fill="var(--crayon-royal)" d="M42 44C48 42 54 42 58 44C60 56 60 68 59 80C52 83 47 83 41 80C40 68 40 56 42 44Z"/>
+                    <path class="wash" fill="var(--crayon-sky)" d="M14 54C22 50 32 52 34 56C34 68 26 78 22 82C18 78 12 68 12 58C12 56 13 55 14 54Z"/>
+                    <path class="wash" fill="var(--crayon-ember)" d="M50 18C53 10 59 4 68 3C63 10 60 14 58 19Z"/>
+                    <path class="stroke" d="M10 99C44 93 80 95 110 99"/>
+                    <path class="stroke" d="M36 34C36 24 42 18 50 18C58 18 64 24 64 34C64 40 58 44 50 44C42 44 36 40 36 34Z"/>
+                    <path class="stroke stroke--thin" d="M40 32C46 30 54 30 60 31"/>
+                    <path class="stroke" d="M50 18C53 10 59 4 68 3C63 10 60 14 58 19"/>
+                    <path class="stroke" d="M42 44C40 56 40 68 41 80"/>
+                    <path class="stroke" d="M58 44C60 56 60 68 59 80"/>
+                    <path class="stroke" d="M41 80C48 82 54 82 59 80"/>
+                    <path class="stroke" d="M45 80C44 90 43 96 42 101"/>
+                    <path class="stroke" d="M56 80C57 90 58 96 59 101"/>
+                    <path class="stroke" d="M60 50C70 46 78 40 84 32"/>
+                    <path class="stroke" d="M86 30C92 22 99 13 105 6"/>
+                    <path class="stroke" d="M79 29C83 33 88 31 91 27"/>
+                    <path class="stroke" d="M40 52C34 54 29 58 26 62"/>
+                    <path class="stroke" d="M14 54C22 50 32 52 34 56C34 68 26 78 22 82C18 78 12 68 12 58C12 56 13 55 14 54Z"/>
+                    <path class="stroke stroke--thin" d="M23 56C23 66 23 72 23 78"/>
+                    <path class="stroke stroke--thin" d="M15 63C20 62 28 62 32 63"/>
+                  </svg>
+                </figure>
+
+                <!-- horse -->
+                <figure class="spellbook__fig" data-word="horse" aria-hidden="true">
+                  <svg class="spellbook__art" viewBox="0 0 120 120" preserveAspectRatio="xMidYMid meet" role="img">
+                    <title>A hand-drawn horse at a gallop</title>
+                    <path class="wash" fill="var(--crayon-grass)" d="M10 98C42 92 80 94 110 98C112 104 111 110 108 112C74 114 42 114 12 112C8 110 8 102 10 98Z"/>
+                    <path class="wash" fill="var(--crayon-amber)" d="M28 62C28 52 40 47 56 47C70 47 80 51 82 60C84 70 76 78 58 78C40 78 28 72 28 62Z"/>
+                    <path class="wash" fill="var(--crayon-amber)" d="M74 50C80 40 86 32 92 26C97 22 103 24 103 30C103 36 99 41 94 46C90 50 86 53 83 56Z"/>
+                    <path class="stroke" d="M10 99C44 93 80 95 110 99"/>
+                    <path class="stroke" d="M28 62C28 52 40 47 56 47C70 47 80 51 82 60C84 70 76 78 58 78C40 78 28 72 28 62Z"/>
+                    <path class="stroke" d="M74 50C80 40 86 32 92 26C97 22 103 24 103 30C103 36 99 41 94 46C90 50 86 53 83 56"/>
+                    <path class="stroke stroke--thin" d="M95 24C96 18 98 15 101 14C101 18 100 22 99 25"/>
+                    <path class="stroke stroke--thin" d="M97 32C98 32 99 33 99 34C99 35 98 36 97 36C96 36 95 35 95 34C95 33 96 32 97 32Z"/>
+                    <path class="stroke stroke--thin" d="M99 29C102 28 104 29 104 31"/>
+                    <path class="stroke stroke--thin" d="M78 46C82 38 87 30 93 24"/>
+                    <path class="stroke stroke--thin" d="M82 40C85 38 88 37 90 37"/>
+                    <path class="stroke" d="M70 77C76 85 82 92 88 99"/>
+                    <path class="stroke" d="M78 74C80 83 82 91 83 100"/>
+                    <path class="stroke" d="M38 77C34 85 30 92 26 100"/>
+                    <path class="stroke" d="M46 78C46 86 46 93 45 100"/>
+                    <path class="stroke stroke--thin" d="M88 99C91 99 93 100 94 101"/>
+                    <path class="stroke stroke--thin" d="M26 100C23 100 21 101 20 102"/>
+                    <path class="stroke" d="M28 58C19 57 11 63 8 72C14 70 20 68 27 67"/>
+                  </svg>
+                </figure>
+
+                <!-- wall -->
+                <figure class="spellbook__fig" data-word="wall" aria-hidden="true">
+                  <svg class="spellbook__art" viewBox="0 0 120 120" preserveAspectRatio="xMidYMid meet" role="img">
+                    <title>A hand-drawn castle wall with battlements</title>
+                    <path class="wash" fill="var(--crayon-grass)" d="M10 98C42 92 80 94 110 98C112 104 111 110 108 112C74 114 42 114 12 112C8 110 8 102 10 98Z"/>
+                    <path class="wash" fill="var(--crayon-slate)" d="M14 96C13 78 13 60 14 48C20 46 27 46 33 47C34 52 34 57 33 61C39 62 45 62 51 61C51 56 51 51 52 46C58 45 65 45 71 46C71 51 71 56 71 61C77 62 83 62 89 61C89 56 89 51 90 47C96 46 102 46 107 48C108 62 108 80 107 96C76 99 45 99 14 96Z"/>
+                    <path class="stroke" d="M14 96C13 78 13 60 14 48C20 46 27 46 33 47C34 52 34 57 33 61C39 62 45 62 51 61C51 56 51 51 52 46C58 45 65 45 71 46C71 51 71 56 71 61C77 62 83 62 89 61C89 56 89 51 90 47C96 46 102 46 107 48C108 62 108 80 107 96C76 99 45 99 14 96Z"/>
+                    <path class="stroke stroke--thin" d="M16 72C45 70 76 70 105 72"/>
+                    <path class="stroke stroke--thin" d="M16 84C45 82 76 82 105 84"/>
+                    <path class="stroke stroke--thin" d="M40 72C40 78 40 81 40 84"/>
+                    <path class="stroke stroke--thin" d="M70 72C70 78 70 81 70 84"/>
+                    <path class="stroke stroke--thin" d="M28 84C28 90 28 93 28 97"/>
+                    <path class="stroke stroke--thin" d="M58 84C58 90 58 93 58 97"/>
+                    <path class="stroke stroke--thin" d="M88 84C88 90 88 93 88 97"/>
+                    <path class="stroke" d="M10 99C44 93 80 95 110 99"/>
+                  </svg>
+                </figure>
+
+                <!-- tower -->
+                <figure class="spellbook__fig" data-word="tower" aria-hidden="true">
+                  <svg class="spellbook__art" viewBox="0 0 120 120" preserveAspectRatio="xMidYMid meet" role="img">
+                    <title>A hand-drawn watchtower loosing an arrow</title>
+                    <path class="wash" fill="var(--crayon-grass)" d="M10 98C42 92 80 94 110 98C112 104 111 110 108 112C74 114 42 114 12 112C8 110 8 102 10 98Z"/>
+                    <path class="wash" fill="var(--crayon-slate)" d="M38 44C38 64 38 84 39 100C54 103 69 103 83 100C84 84 84 64 84 44Z"/>
+                    <path class="wash" fill="var(--crayon-slate)" d="M30 46C29 39 29 33 30 27C35 26 40 26 45 27C46 31 46 35 45 39C48 40 50 40 52 39C51 34 51 31 52 27C57 26 62 26 67 27C68 31 68 35 67 39C70 40 72 40 74 39C73 34 73 31 74 27C79 26 84 26 90 27C91 33 91 39 90 46C70 49 50 49 30 46Z"/>
+                    <path class="wash" fill="var(--crayon-flame)" d="M61 7C70 6 78 9 86 8C82 12 82 16 86 20C78 19 70 22 61 21Z"/>
+                    <path class="stroke" d="M38 44C38 64 38 84 39 100"/>
+                    <path class="stroke" d="M84 44C84 64 84 84 83 100"/>
+                    <path class="stroke" d="M39 100C54 103 69 103 83 100"/>
+                    <path class="stroke" d="M30 46C29 39 29 33 30 27C35 26 40 26 45 27C46 31 46 35 45 39C48 40 50 40 52 39C51 34 51 31 52 27C57 26 62 26 67 27C68 31 68 35 67 39C70 40 72 40 74 39C73 34 73 31 74 27C79 26 84 26 90 27C91 33 91 39 90 46C70 49 50 49 30 46Z"/>
+                    <path class="stroke stroke--thin" d="M39 64C54 62 69 62 83 64"/>
+                    <path class="stroke stroke--thin" d="M39 84C54 82 69 82 83 84"/>
+                    <path class="stroke stroke--thin" d="M48 64C48 70 48 76 48 84"/>
+                    <path class="stroke stroke--thin" d="M74 64C74 70 74 76 74 84"/>
+                    <path class="stroke stroke--thin" d="M58 55C58 63 58 69 58 75C60 76 63 76 64 75C64 69 64 63 64 55C62 54 60 54 58 55Z"/>
+                    <path class="stroke" d="M61 27C61 19 61 13 61 7"/>
+                    <path class="stroke" d="M61 7C70 6 78 9 86 8C82 12 82 16 86 20C78 19 70 22 61 21"/>
+                    <path class="stroke stroke--thin" d="M88 66C96 65 104 65 112 64"/>
+                    <path class="stroke stroke--thin" d="M104 59C107 61 110 63 113 64C110 65 107 67 104 69"/>
+                  </svg>
+                </figure>
+
+                <!-- bomb -->
+                <figure class="spellbook__fig" data-word="bomb" aria-hidden="true">
+                  <svg class="spellbook__art" viewBox="0 0 120 120" preserveAspectRatio="xMidYMid meet" role="img">
+                    <title>A hand-drawn bomb with a lit fuse</title>
+                    <path class="wash" fill="var(--crayon-grass)" d="M10 98C42 92 80 94 110 98C112 104 111 110 108 112C74 114 42 114 12 112C8 110 8 102 10 98Z"/>
+                    <path class="wash" fill="var(--crayon-slate)" d="M56 44C74 44 88 58 88 74C88 90 74 102 56 102C38 102 24 90 24 74C24 58 38 44 56 44Z"/>
+                    <path class="wash" fill="var(--crayon-sun)" d="M84 8C90 12 94 18 91 23C87 28 79 27 77 22C75 17 79 11 84 8Z"/>
+                    <path class="stroke" d="M10 99C44 93 80 95 110 99"/>
+                    <path class="stroke" d="M56 44C74 44 88 58 88 74C88 90 74 102 56 102C38 102 24 90 24 74C24 58 38 44 56 44Z"/>
+                    <path class="stroke stroke--thin" d="M38 62C42 56 48 52 54 51"/>
+                    <path class="stroke" d="M50 45C50 40 50 38 51 35C56 34 61 34 64 35C65 38 65 41 64 45"/>
+                    <path class="stroke" d="M60 35C64 26 72 20 80 18"/>
+                    <path class="stroke stroke--thin" d="M84 6C85 10 85 12 84 16"/>
+                    <path class="stroke stroke--thin" d="M74 10C78 12 81 14 84 16"/>
+                    <path class="stroke stroke--thin" d="M96 10C92 12 87 14 84 16"/>
+                    <path class="stroke stroke--thin" d="M77 24C80 22 82 20 84 17"/>
+                    <path class="stroke stroke--thin" d="M94 24C90 22 87 20 84 17"/>
+                  </svg>
+                </figure>
+
+                <!-- cake -->
+                <figure class="spellbook__fig" data-word="cake" aria-hidden="true">
+                  <svg class="spellbook__art" viewBox="0 0 120 120" preserveAspectRatio="xMidYMid meet" role="img">
+                    <title>A hand-drawn cake with a candle, and one roach hurrying towards it</title>
+                    <path class="wash" fill="var(--crayon-grass)" d="M10 98C42 92 80 94 110 98C112 104 111 110 108 112C74 114 42 114 12 112C8 110 8 102 10 98Z"/>
+                    <path class="wash" fill="var(--crayon-berry)" d="M22 74C46 70 74 70 98 74C99 84 99 92 98 99C74 103 46 103 22 99C21 92 21 82 22 74Z"/>
+                    <path class="wash" fill="var(--crayon-sun)" d="M32 54C50 50 70 50 88 54C89 62 89 68 88 74C70 78 50 78 32 74C31 66 31 60 32 54Z"/>
+                    <path class="wash" fill="var(--crayon-flame)" d="M58 36C62 32 62 26 58 21C54 26 54 32 58 36Z"/>
+                    <path class="wash" fill="var(--crayon-slate)" d="M96 92C104 90 111 92 111 97C111 102 104 104 96 102C92 100 92 94 96 92Z"/>
+                    <path class="stroke" d="M10 99C44 93 80 95 110 99"/>
+                    <path class="stroke" d="M22 74C46 70 74 70 98 74C99 84 99 92 98 99C74 103 46 103 22 99C21 92 21 82 22 74Z"/>
+                    <path class="stroke" d="M32 54C50 50 70 50 88 54C89 62 89 68 88 74"/>
+                    <path class="stroke" d="M32 54C31 60 31 68 32 74"/>
+                    <path class="stroke stroke--thin" d="M32 57C38 63 44 58 50 63C56 68 62 58 68 63C74 68 82 58 88 62"/>
+                    <path class="stroke" d="M58 52C58 46 58 42 58 37"/>
+                    <path class="stroke" d="M58 36C62 32 62 26 58 21C54 26 54 32 58 36Z"/>
+                    <path class="stroke stroke--thin" d="M96 92C104 90 111 92 111 97C111 102 104 104 96 102C92 100 92 94 96 92Z"/>
+                    <path class="stroke stroke--thin" d="M94 94C90 91 88 89 86 87"/>
+                    <path class="stroke stroke--thin" d="M94 100C90 100 88 101 85 102"/>
+                    <path class="stroke stroke--thin" d="M100 103C100 106 101 107 102 109"/>
+                    <path class="stroke stroke--thin" d="M107 102C108 105 109 107 110 108"/>
+                  </svg>
+                </figure>
+
+                <!-- doctor -->
+                <figure class="spellbook__fig" data-word="doctor" aria-hidden="true">
+                  <svg class="spellbook__art" viewBox="0 0 120 120" preserveAspectRatio="xMidYMid meet" role="img">
+                    <title>A hand-drawn doctor with a medicine bag, hearts rising</title>
+                    <path class="wash" fill="var(--crayon-grass)" d="M10 98C42 92 80 94 110 98C112 104 111 110 108 112C74 114 42 114 12 112C8 110 8 102 10 98Z"/>
+                    <path class="wash" fill="var(--crayon-sky)" d="M50 40C60 42 64 58 62 78C54 82 44 82 37 78C35 58 40 42 50 40Z"/>
+                    <path class="wash" fill="var(--crayon-ember)" d="M74 64C82 62 92 62 100 64C101 72 101 80 100 86C92 88 82 88 74 86C73 80 73 70 74 64Z"/>
+                    <path class="wash" fill="var(--crayon-berry)" d="M26 58C21 54 15 49 15 44C15 40 20 38 26 43C32 38 37 40 37 44C37 49 31 54 26 58Z"/>
+                    <path class="stroke" d="M10 99C44 93 80 95 110 99"/>
+                    <path class="stroke" d="M39 30C39 23 44 18 50 18C57 18 61 23 61 30C61 36 56 41 50 41C44 41 39 36 39 30Z"/>
+                    <path class="stroke stroke--thin" d="M40 24C44 19 56 19 60 24"/>
+                    <path class="stroke stroke--thin" d="M50 15C50 19 50 21 50 23"/>
+                    <path class="stroke stroke--thin" d="M45 19C48 18 52 18 55 19"/>
+                    <path class="stroke" d="M50 41C60 43 64 58 62 78C54 82 44 82 37 78C35 58 40 43 50 41Z"/>
+                    <path class="stroke" d="M42 50C34 54 28 58 24 63"/>
+                    <path class="stroke" d="M60 50C68 54 74 58 78 64"/>
+                    <path class="stroke" d="M45 80C44 90 43 96 42 101"/>
+                    <path class="stroke" d="M56 80C57 90 58 96 59 101"/>
+                    <path class="stroke" d="M74 64C82 62 92 62 100 64C101 72 101 80 100 86C92 88 82 88 74 86C73 80 73 70 74 64Z"/>
+                    <path class="stroke stroke--thin" d="M82 64C82 58 92 58 92 64"/>
+                    <path class="stroke stroke--thin" d="M87 69C87 74 87 78 87 83"/>
+                    <path class="stroke stroke--thin" d="M80 76C84 75 90 75 94 76"/>
+                    <path class="stroke stroke--thin" d="M26 58C21 54 15 49 15 44C15 40 20 38 26 43C32 38 37 40 37 44C37 49 31 54 26 58Z"/>
+                    <path class="stroke stroke--thin" d="M20 30C17 27 14 25 14 22C14 20 17 18 20 22C23 18 26 20 26 22C26 25 23 27 20 30Z"/>
+                  </svg>
+                </figure>
+
+                <!-- army -->
+                <figure class="spellbook__fig" data-word="army" aria-hidden="true">
+                  <svg class="spellbook__art" viewBox="0 0 120 120" preserveAspectRatio="xMidYMid meet" role="img">
+                    <title>A hand-drawn crowd of three little fighters marching with spears</title>
+                    <path class="wash" fill="var(--crayon-grass)" d="M10 98C42 92 80 94 110 98C112 104 111 110 108 112C74 114 42 114 12 112C8 110 8 102 10 98Z"/>
+                    <path class="wash" fill="var(--crayon-green)" d="M30 48C35 50 37 62 36 74C32 77 27 77 24 74C23 62 25 50 30 48Z"/>
+                    <path class="wash" fill="var(--crayon-deep)" d="M62 44C68 46 70 60 69 74C64 77 58 77 55 74C54 60 56 46 62 44Z"/>
+                    <path class="wash" fill="var(--crayon-royal)" d="M92 50C97 52 99 63 98 75C94 78 89 78 86 75C85 63 87 52 92 50Z"/>
+                    <path class="stroke" d="M10 99C44 93 80 95 110 99"/>
+                    <path class="stroke stroke--thin" d="M30 32C34 32 37 35 37 40C37 45 34 48 30 48C26 48 23 45 23 40C23 35 26 32 30 32Z"/>
+                    <path class="stroke stroke--thin" d="M30 48C29 58 29 66 29 74"/>
+                    <path class="stroke stroke--thin" d="M29 74C26 82 24 89 22 96"/>
+                    <path class="stroke stroke--thin" d="M29 74C33 82 35 89 36 96"/>
+                    <path class="stroke stroke--thin" d="M40 22C40 42 40 62 40 84"/>
+                    <path class="stroke stroke--thin" d="M40 22C43 26 43 30 40 33C37 30 37 26 40 22Z"/>
+                    <path class="stroke" d="M62 26C67 26 71 30 71 36C71 42 67 45 62 45C57 45 53 42 53 36C53 30 57 26 62 26Z"/>
+                    <path class="stroke" d="M62 45C61 57 61 66 61 76"/>
+                    <path class="stroke" d="M61 76C58 85 56 92 54 100"/>
+                    <path class="stroke" d="M61 76C65 85 68 92 70 100"/>
+                    <path class="stroke" d="M74 16C74 40 74 64 74 88"/>
+                    <path class="stroke" d="M74 16C78 21 78 26 74 31C70 26 70 21 74 16Z"/>
+                    <path class="stroke stroke--thin" d="M92 34C96 34 99 37 99 42C99 47 96 50 92 50C88 50 85 47 85 42C85 37 88 34 92 34Z"/>
+                    <path class="stroke stroke--thin" d="M92 50C91 60 91 68 91 76"/>
+                    <path class="stroke stroke--thin" d="M91 76C88 84 86 90 84 97"/>
+                    <path class="stroke stroke--thin" d="M91 76C95 84 97 90 98 97"/>
+                    <path class="stroke stroke--thin" d="M104 24C104 44 104 64 104 86"/>
+                    <path class="stroke stroke--thin" d="M104 24C107 28 107 32 104 35C101 32 101 28 104 24Z"/>
+                  </svg>
+                </figure>
+
+                <!-- fire dragon -->
+                <figure class="spellbook__fig" data-word="fire dragon" aria-hidden="true">
+                  <svg class="spellbook__art" viewBox="0 0 120 120" preserveAspectRatio="xMidYMid meet" role="img">
+                    <title>A hand-drawn fire dragon in flight, breathing a jet of flame</title>
+                    <path class="wash" fill="var(--crayon-royal)" d="M56 58C50 48 46 40 42 34C38 28 36 24 34 22C31 19 27 17 24 16C19 21 17 25 20 30C18 36 19 40 24 44C26 49 30 51 36 53C42 57 50 59 56 58Z"/>
+                    <path class="stroke stroke--thin" d="M56 58C50 48 46 40 42 34C38 28 36 24 34 22C31 19 27 17 24 16C19 21 17 25 20 30C18 36 19 40 24 44C26 49 30 51 36 53C42 57 50 59 56 58Z"/>
+                    <path class="stroke stroke--thin" d="M34 22C31 26 23 27 20 30"/>
+                    <path class="wash" fill="var(--crayon-ember)" d="M84 27C78 20 71 15 63 12C68 19 74 24 79 29Z"/>
+                    <path class="stroke stroke--thin" d="M84 27C78 20 71 15 63 12C68 19 74 24 79 29Z"/>
+                    <path class="wash" fill="var(--crayon-ember)" d="M79 31C74 25 69 21 62 19C66 24 71 28 76 32Z"/>
+                    <path class="stroke stroke--thin" d="M79 31C74 25 69 21 62 19C66 24 71 28 76 32Z"/>
+                    <path class="wash" fill="var(--crayon-ember)" d="M40 84C42 92 39 100 34 105C30 108 25 106 26 102C29 95 32 89 35 83Z"/>
+                    <path class="stroke" d="M40 84C42 92 39 100 34 105C30 108 25 106 26 102C29 95 32 89 35 83Z"/>
+                    <path class="stroke stroke--thin" d="M26 104C24 106 23 108 24 109"/>
+                    <path class="wash" fill="var(--crayon-ember)" d="M62 76C67 84 66 94 61 101C57 105 51 104 51 100C52 92 54 84 56 77Z"/>
+                    <path class="stroke" d="M62 76C67 84 66 94 61 101C57 105 51 104 51 100C52 92 54 84 56 77Z"/>
+                    <path class="stroke stroke--thin" d="M51 101C49 103 48 105 49 106"/>
+                    <path class="wash" fill="var(--crayon-ember)" d="M6 102C14 94 24 86 34 77C40 67 50 60 62 57C68 49 72 41 78 34C82 26 92 25 98 31C102 34 105 38 105 42C104 46 100 49 95 49C88 50 82 49 78 46C74 52 70 60 66 68C64 78 58 86 48 90C38 94 30 94 24 92C18 98 12 101 6 102Z"/>
+                    <path class="stroke" d="M6 102C14 94 24 86 34 77C40 67 50 60 62 57C68 49 72 41 78 34C82 26 92 25 98 31C102 34 105 38 105 42C104 46 100 49 95 49C88 50 82 49 78 46C74 52 70 60 66 68C64 78 58 86 48 90C38 94 30 94 24 92C18 98 12 101 6 102Z"/>
+                    <path class="stroke stroke--thin" d="M40 84C48 88 58 86 64 78"/>
+                    <path class="stroke stroke--thin" d="M50 87C50 84 50 82 50 80"/>
+                    <path class="stroke stroke--thin" d="M88 32C90 32 92 34 92 36C92 38 90 39 88 39C86 39 85 38 85 36C85 34 86 32 88 32Z"/>
+                    <path class="stroke stroke--thin" d="M100 38C101 38 102 39 102 40C102 41 101 41 100 41C99 41 99 41 99 40C99 39 99 38 100 38Z"/>
+                    <path class="stroke stroke--thin" d="M104 44C97 47 88 48 80 46"/>
+                    <path class="stroke stroke--thin" d="M76 42C79 35 80 32 82 31C83 35 84 38 86 40"/>
+                    <path class="stroke stroke--thin" d="M68 51C71 44 72 41 74 40C75 44 76 47 78 49"/>
+                    <path class="stroke stroke--thin" d="M24 87C26 81 27 79 29 78C30 81 31 84 33 85"/>
+                    <path class="stroke stroke--thin" d="M12 97C14 91 15 89 17 88C18 91 19 93 21 95"/>
+                    <path class="wash" fill="var(--crayon-amber)" d="M52 60C46 50 42 42 38 34C32 24 26 18 22 14C18 11 12 8 8 6C2 13 1 20 6 26C4 33 5 39 12 44C14 51 18 54 26 56C34 60 44 62 52 60Z"/>
+                    <path class="stroke" d="M52 60C46 50 42 42 38 34C32 24 26 18 22 14C18 11 12 8 8 6C2 13 1 20 6 26C4 33 5 39 12 44C14 51 18 54 26 56C34 60 44 62 52 60Z"/>
+                    <path class="stroke stroke--thin" d="M22 14C16 18 10 22 6 26"/>
+                    <path class="stroke stroke--thin" d="M22 14C18 24 14 36 12 44"/>
+                    <path class="stroke stroke--thin" d="M22 14C24 30 25 44 26 56"/>
+                    <g class="spellbook__flame">
+                      <path class="wash" fill="var(--crayon-flame)" d="M104 37C110 31 118 34 118 42C118 50 110 55 102 51C99 47 100 40 104 37Z"/>
+                      <path class="wash" fill="var(--crayon-sun)" d="M105 40C110 36 113 39 113 43C113 48 108 50 104 48C102 45 103 42 105 40Z"/>
+                      <path class="wash" fill="var(--fire-core)" d="M106 42C109 40 111 41 111 44C111 46 108 47 106 46Z"/>
+                      <path class="stroke stroke--thin" d="M104 37C110 31 118 34 118 42C118 50 110 55 102 51"/>
+                      <path class="stroke stroke--thin" d="M116 31C117 33 117 35 116 37"/>
+                      <path class="stroke stroke--thin" d="M113 55C114 57 115 58 114 60"/>
+                    </g>
+                  </svg>
+                </figure>
+
+                <!-- the word the pencil doesn't know -->
+                <figure class="spellbook__fig" data-word="__unknown" aria-hidden="true">
+                  <svg class="spellbook__art" viewBox="0 0 120 120" preserveAspectRatio="xMidYMid meet" role="img">
+                    <title>A plain scribbled creature with two legs, walking, a question mark over its head</title>
+                    <path class="wash" fill="var(--crayon-grass)" d="M10 98C42 92 80 94 110 98C112 104 111 110 108 112C74 114 42 114 12 112C8 110 8 102 10 98Z"/>
+                    <path class="stroke" d="M10 99C44 93 80 95 110 99"/>
+                    <g class="spellbook__blob">
+                      <path class="wash" fill="var(--crayon-sky)" d="M38 52C48 42 68 42 79 52C89 62 86 78 74 83C60 89 42 86 35 76C29 66 31 58 38 52Z"/>
+                      <path class="stroke" d="M38 52C48 42 68 42 79 52C89 62 86 78 74 83C60 89 42 86 35 76C29 66 31 58 38 52Z"/>
+                      <path class="stroke stroke--thin" d="M50 62C52 62 53 64 53 66C53 68 52 69 50 69C48 69 47 68 47 66C47 64 48 62 50 62Z"/>
+                      <path class="stroke stroke--thin" d="M68 62C70 62 71 64 71 66C71 68 70 69 68 69C66 69 65 68 65 66C65 64 66 62 68 62Z"/>
+                      <path class="stroke stroke--thin" d="M52 76C57 73 63 73 68 76"/>
+                      <path class="stroke stroke--thin" d="M44 54C47 51 51 51 54 53"/>
+                      <path class="stroke stroke--thin" d="M65 53C68 51 72 51 75 54"/>
+                      <path class="stroke stroke--thin" d="M34 66C27 64 21 62 15 61"/>
+                      <path class="stroke stroke--thin" d="M84 64C91 63 97 62 103 61"/>
+                      <path class="stroke stroke--thin" d="M54 30C54 22 66 20 68 26C70 32 62 33 61 38"/>
+                      <path class="stroke stroke--thin" d="M60 43C61 43 62 44 62 45C62 46 61 47 60 47C59 47 58 46 58 45C58 44 59 43 60 43Z"/>
+                    </g>
+                    <path class="stroke spellbook__leg" d="M50 84C49 92 47 98 45 104"/>
+                    <path class="stroke spellbook__leg spellbook__leg--b" d="M68 84C69 92 70 98 72 104"/>
+                  </svg>
+                </figure>
+
+              </div>
+
+              <div class="spellbook__live" aria-live="polite" aria-atomic="true">
+                <p class="spellbook__kicker" data-sb-kicker>the pencil knows this one</p>
+                <p class="spellbook__word" data-sb-word>archer</p>
+                <svg class="spellbook__underline" viewBox="0 0 200 14" preserveAspectRatio="none" aria-hidden="true">
+                  <path class="stroke stroke--thin" d="M6 9C44 3 90 12 132 6C156 3 178 7 194 9"/>
+                </svg>
+                <p class="spellbook__effect" data-sb-effect>Shoots at the enemy from far away.</p>
+                <div class="spellbook__tip">
+                  <span class="spellbook__tip-label">shape tip</span>
+                  <p data-sb-tip>Spikes are damage, so give it sharp zig-zag corners. Tall and thin is plenty — it never has to get close.</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

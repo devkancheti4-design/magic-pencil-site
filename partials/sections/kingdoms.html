@@ -1,0 +1,344 @@
+<section id="kingdoms" class="section kingdoms">
+  <div class="shell shell--wide">
+
+    <div class="section-head" data-reveal>
+      <span class="eyebrow">Six kingdoms</span>
+      <h2>The roaches took <span class="underlined">five of them</span></h2>
+      <p>You start in Greenhaven — the only ground still the right colour. Draw a thing, name it, and it comes alive and marches east with you. Every castle you knock down hands the next kingdom back to your pencil.</p>
+    </div>
+
+    <div class="kingdoms__frame" data-reveal>
+      <div class="kingdoms__vp">
+        <div class="kingdoms__scroller" id="kingdoms-scroller" tabindex="0" role="group"
+             aria-label="Map of the six kingdoms, west to east. Scroll sideways to see them all.">
+          <div class="kingdoms__stage" data-draw>
+
+            <div class="kingdoms__mapwrap">
+              <svg class="kingdoms__map" viewBox="0 0 1560 560" preserveAspectRatio="xMidYMid meet"
+                   role="img" aria-labelledby="kingdoms-map-t kingdoms-map-d">
+                <title id="kingdoms-map-t">A hand-drawn strip of torn paper with six kingdoms along it</title>
+                <desc id="kingdoms-map-d">Greenhaven is drawn in green at the western end. Five roach-held kingdoms run east of it — Dogear Downs, Creasemarch, Smudgewood, Blotmire and The Roach Throne — each with its own castle and its own colour. A dashed track links them, a little column of drawn soldiers and a dragon walk along it, and a line of flags gets taller towards the east.</desc>
+
+                <!-- ============ the paper the whole world is drawn on ============ -->
+                <path class="kingdoms__shade" transform="translate(7 9)" d="M24 43.6 L50.1 44.9 L76.1 48.3 L102.2 48.9 L128.3 46.2 L154.3 43.2 L180.4 46.2 L206.5 47.5 L232.6 49.1 L258.6 43.4 L280 47.7 L284.7 49.6 L310.8 48.7 L336.8 43.3 L362.9 51.2 L389 51.1 L415 48.4 L441.1 50.6 L467.2 42.7 L493.2 46.8 L519.3 42.6 L530 43.6 L545.4 43.9 L571.4 41.8 L597.5 48.8 L623.6 47.9 L649.7 44.8 L675.7 45.4 L701.8 43.9 L727.9 44.8 L753.9 42.7 L780 46.9 L806.1 46.5 L832.1 44.9 L858.2 43.5 L884.3 39.9 L910.3 39 L936.4 39.3 L962.5 42.4 L988.6 40 L1014.6 43.7 L1030 39.8 L1040.7 44.7 L1066.8 43.8 L1092.8 36.8 L1118.9 44.3 L1145 41 L1171 45.5 L1197.1 40.9 L1223.2 38.5 L1249.2 43.5 L1275.3 45.1 L1280 43.2 L1301.4 41.7 L1327.4 47.4 L1353.5 46 L1379.6 41.1 L1405.7 42.5 L1431.7 41.7 L1457.8 46.9 L1483.9 43 L1509.9 46.5 L1536 45.9 L1536 101 L1538.8 158 L1532.2 215 L1539.7 272 L1533.4 329 L1538.5 386 L1536.1 443 L1538.7 498 L1509.9 505 L1483.9 502.1 L1457.8 502.9 L1431.7 495.6 L1405.7 498.7 L1379.6 501.1 L1353.5 495.9 L1327.4 502.4 L1301.4 499 L1280 501.7 L1275.3 498.3 L1249.2 497.6 L1223.2 499.2 L1197.1 499.7 L1171 493.5 L1145 494.7 L1118.9 497.1 L1092.8 489.7 L1066.8 494.6 L1040.7 495.3 L1030 494.9 L1014.6 499.2 L988.6 497 L962.5 489.3 L936.4 493 L910.3 493.2 L884.3 494.1 L858.2 499.7 L832.1 495.5 L806.1 491.8 L780 498.8 L753.9 497.3 L727.9 498.8 L701.8 500.3 L675.7 498.4 L649.7 495 L623.6 500.7 L597.5 500.3 L571.4 498.8 L545.4 502.6 L530 499.3 L519.3 495.8 L493.2 502.3 L467.2 502 L441.1 504.1 L415 498 L389 500.9 L362.9 497.6 L336.8 501.9 L310.8 504.7 L284.7 499.4 L280 498.9 L258.6 502.8 L232.6 500 L206.5 500.7 L180.4 500.3 L154.3 503.8 L128.3 502.9 L102.2 504.4 L76.1 504.7 L50.1 507.4 L24 507.1 L24.9 443 L24.5 386 L23.8 329 L20.9 272 L26.6 215 L21.9 158 L22.6 101 L26.4 43.6 Z"/>
+                <path class="kingdoms__parch" d="M24 43.6 L50.1 44.9 L76.1 48.3 L102.2 48.9 L128.3 46.2 L154.3 43.2 L180.4 46.2 L206.5 47.5 L232.6 49.1 L258.6 43.4 L280 47.7 L284.7 49.6 L310.8 48.7 L336.8 43.3 L362.9 51.2 L389 51.1 L415 48.4 L441.1 50.6 L467.2 42.7 L493.2 46.8 L519.3 42.6 L530 43.6 L545.4 43.9 L571.4 41.8 L597.5 48.8 L623.6 47.9 L649.7 44.8 L675.7 45.4 L701.8 43.9 L727.9 44.8 L753.9 42.7 L780 46.9 L806.1 46.5 L832.1 44.9 L858.2 43.5 L884.3 39.9 L910.3 39 L936.4 39.3 L962.5 42.4 L988.6 40 L1014.6 43.7 L1030 39.8 L1040.7 44.7 L1066.8 43.8 L1092.8 36.8 L1118.9 44.3 L1145 41 L1171 45.5 L1197.1 40.9 L1223.2 38.5 L1249.2 43.5 L1275.3 45.1 L1280 43.2 L1301.4 41.7 L1327.4 47.4 L1353.5 46 L1379.6 41.1 L1405.7 42.5 L1431.7 41.7 L1457.8 46.9 L1483.9 43 L1509.9 46.5 L1536 45.9 L1536 101 L1538.8 158 L1532.2 215 L1539.7 272 L1533.4 329 L1538.5 386 L1536.1 443 L1538.7 498 L1509.9 505 L1483.9 502.1 L1457.8 502.9 L1431.7 495.6 L1405.7 498.7 L1379.6 501.1 L1353.5 495.9 L1327.4 502.4 L1301.4 499 L1280 501.7 L1275.3 498.3 L1249.2 497.6 L1223.2 499.2 L1197.1 499.7 L1171 493.5 L1145 494.7 L1118.9 497.1 L1092.8 489.7 L1066.8 494.6 L1040.7 495.3 L1030 494.9 L1014.6 499.2 L988.6 497 L962.5 489.3 L936.4 493 L910.3 493.2 L884.3 494.1 L858.2 499.7 L832.1 495.5 L806.1 491.8 L780 498.8 L753.9 497.3 L727.9 498.8 L701.8 500.3 L675.7 498.4 L649.7 495 L623.6 500.7 L597.5 500.3 L571.4 498.8 L545.4 502.6 L530 499.3 L519.3 495.8 L493.2 502.3 L467.2 502 L441.1 504.1 L415 498 L389 500.9 L362.9 497.6 L336.8 501.9 L310.8 504.7 L284.7 499.4 L280 498.9 L258.6 502.8 L232.6 500 L206.5 500.7 L180.4 500.3 L154.3 503.8 L128.3 502.9 L102.2 504.4 L76.1 504.7 L50.1 507.4 L24 507.1 L24.9 443 L24.5 386 L23.8 329 L20.9 272 L26.6 215 L21.9 158 L22.6 101 L26.4 43.6 Z"/>
+
+                <!-- ============ terrain tints + hills (crayon, washed in) ======== -->
+                <g>
+                  <path class="kingdoms__terrain kingdoms__k1 wash" style="--wash-delay:420ms" d="M26.4 43.6 L50.1 44.9 L76.1 48.3 L102.2 48.9 L128.3 46.2 L154.3 43.2 L180.4 46.2 L206.5 47.5 L232.6 49.1 L258.6 43.4 L275.8 49.9 L274.5 72.5 L273.9 101 L272.4 129.5 L271.1 158 L271.5 186.5 L273 215 L274.1 243.5 L275.8 272 L279.5 300.5 L281.5 329 L284.9 357.5 L287.4 386 L289.1 414.5 L290.9 443 L290.4 471.5 L290.6 497.6 L284.7 499.4 L280 498.9 L258.6 502.8 L232.6 500 L206.5 500.7 L180.4 500.3 L154.3 503.8 L128.3 502.9 L102.2 504.4 L76.1 504.7 L50.1 507.4 L24 507.1 L21.2 507.1 L24.9 443 L24.5 386 L23.8 329 L20.9 272 L26.6 215 L21.9 158 L22.6 101 L26.4 43.6 Z"/>
+                  <path class="kingdoms__terrain kingdoms__k2 wash" style="--wash-delay:520ms" d="M275.8 49.9 L280 47.7 L284.7 49.6 L310.8 48.7 L336.8 43.3 L362.9 51.2 L389 51.1 L415 48.4 L441.1 50.6 L467.2 42.7 L493.2 46.8 L519.3 42.6 L530 43.6 L536.1 46.7 L534.2 72.5 L532.2 101 L529.7 129.5 L527.1 158 L525.6 186.5 L523.8 215 L523.3 243.5 L523.6 272 L525.3 300.5 L526.3 329 L528.3 357.5 L530.8 386 L532.8 414.5 L534.1 443 L534.7 471.5 L535.4 497.4 L530 499.3 L519.3 495.8 L493.2 502.3 L467.2 502 L441.1 504.1 L415 498 L389 500.9 L362.9 497.6 L336.8 501.9 L310.8 504.7 L290.6 497.6 L290.4 471.5 L290.9 443 L289.1 414.5 L287.4 386 L284.9 357.5 L281.5 329 L279.5 300.5 L275.8 272 L274.1 243.5 L273 215 L271.5 186.5 L271.1 158 L272.4 129.5 L273.9 101 L274.5 72.5 L275.8 49.9 Z"/>
+                  <path class="kingdoms__terrain kingdoms__k3 wash" style="--wash-delay:620ms" d="M536.1 46.7 L545.4 43.9 L571.4 41.8 L597.5 48.8 L623.6 47.9 L649.7 44.8 L675.7 45.4 L701.8 43.9 L727.9 44.8 L753.9 42.7 L780 46.9 L781.8 49.8 L783.2 72.5 L785.3 101 L786.1 129.5 L787.3 158 L788 186.5 L787.5 215 L787.2 243.5 L785.4 272 L782.9 300.5 L779.4 329 L777.6 357.5 L774.4 386 L772.1 414.5 L770.2 443 L769.2 471.5 L769.4 495.2 L753.9 497.3 L727.9 498.8 L701.8 500.3 L675.7 498.4 L649.7 495 L623.6 500.7 L597.5 500.3 L571.4 498.8 L545.4 502.6 L535.4 497.4 L534.7 471.5 L534.1 443 L532.8 414.5 L530.8 386 L528.3 357.5 L526.3 329 L525.3 300.5 L523.6 272 L523.3 243.5 L523.8 215 L525.6 186.5 L527.1 158 L529.7 129.5 L532.2 101 L534.2 72.5 L536.1 46.7 Z"/>
+                  <path class="kingdoms__terrain kingdoms__k4 wash" style="--wash-delay:720ms" d="M781.8 49.8 L806.1 46.5 L832.1 44.9 L858.2 43.5 L884.3 39.9 L910.3 39 L936.4 39.3 L962.5 42.4 L988.6 40 L1014.6 43.7 L1030 39.8 L1029.8 42.9 L1027.1 72.5 L1025.2 101 L1024.3 129.5 L1023.3 158 L1023.2 186.5 L1024.1 215 L1025.4 243.5 L1027.2 272 L1030.1 300.5 L1032.7 329 L1034.5 357.5 L1036 386 L1036.6 414.5 L1036.8 443 L1035.9 471.5 L1035.3 492.1 L1030 494.9 L1014.6 499.2 L988.6 497 L962.5 489.3 L936.4 493 L910.3 493.2 L884.3 494.1 L858.2 499.7 L832.1 495.5 L806.1 491.8 L780 498.8 L769.4 495.2 L769.2 471.5 L770.2 443 L772.1 414.5 L774.4 386 L777.6 357.5 L779.4 329 L782.9 300.5 L785.4 272 L787.2 243.5 L787.5 215 L788 186.5 L787.3 158 L786.1 129.5 L785.3 101 L783.2 72.5 L781.8 49.8 Z"/>
+                  <path class="kingdoms__terrain kingdoms__k5 wash" style="--wash-delay:820ms" d="M1029.8 42.9 L1030 39.8 L1040.7 44.7 L1066.8 43.8 L1092.8 36.8 L1118.9 44.3 L1145 41 L1171 45.5 L1197.1 40.9 L1223.2 38.5 L1249.2 43.5 L1267.7 47.6 L1269 72.5 L1269.8 101 L1272.8 129.5 L1275.4 158 L1278.2 186.5 L1281.8 215 L1283.7 243.5 L1286.5 272 L1287 300.5 L1287.7 329 L1287.7 357.5 L1286.9 386 L1284.7 414.5 L1284.1 443 L1282 471.5 L1281.2 498.5 L1280 501.7 L1275.3 498.3 L1249.2 497.6 L1223.2 499.2 L1197.1 499.7 L1171 493.5 L1145 494.7 L1118.9 497.1 L1092.8 489.7 L1066.8 494.6 L1040.7 495.3 L1035.3 492.1 L1035.9 471.5 L1036.8 443 L1036.6 414.5 L1036 386 L1034.5 357.5 L1032.7 329 L1030.1 300.5 L1027.2 272 L1025.4 243.5 L1024.1 215 L1023.2 186.5 L1023.3 158 L1024.3 129.5 L1025.2 101 L1027.1 72.5 L1029.8 42.9 Z"/>
+                  <path class="kingdoms__terrain kingdoms__k6 wash" style="--wash-delay:920ms" d="M1267.7 47.6 L1275.3 45.1 L1280 43.2 L1301.4 41.7 L1327.4 47.4 L1353.5 46 L1379.6 41.1 L1405.7 42.5 L1431.7 41.7 L1457.8 46.9 L1483.9 43 L1509.9 46.5 L1536 45.9 L1537 45.9 L1536 101 L1538.8 158 L1532.2 215 L1539.7 272 L1533.4 329 L1538.5 386 L1536.1 443 L1538.7 498 L1536 498 L1509.9 505 L1483.9 502.1 L1457.8 502.9 L1431.7 495.6 L1405.7 498.7 L1379.6 501.1 L1353.5 495.9 L1327.4 502.4 L1301.4 499 L1281.2 498.5 L1282 471.5 L1284.1 443 L1284.7 414.5 L1286.9 386 L1287.7 357.5 L1287.7 329 L1287 300.5 L1286.5 272 L1283.7 243.5 L1281.8 215 L1278.2 186.5 L1275.4 158 L1272.8 129.5 L1269.8 101 L1269 72.5 L1267.7 47.6 Z"/>
+
+                  <path class="kingdoms__hill kingdoms__k1 wash" style="--wash-delay:700ms" d="M33.7 308 C78.7 299.8 121.2 289.1 154.1 286.5 C185.1 287 227.7 301 270.3 308 Z"/>
+                  <path class="kingdoms__hill kingdoms__k2 wash" style="--wash-delay:760ms" d="M283 308 C329.4 296.6 373.3 284.9 400.4 283.6 C439.2 286.7 483.1 298.8 527 308 Z"/>
+                  <path class="kingdoms__hill kingdoms__k3 wash" style="--wash-delay:820ms" d="M529.5 308 C577.2 296.6 622.4 285.8 661 284.4 C690.1 285.8 735.3 300.1 780.5 308 Z"/>
+                  <path class="kingdoms__hill kingdoms__k4 wash" style="--wash-delay:880ms" d="M787.1 308 C831.9 300.9 874.4 288 897.4 286.5 C938 289.2 980.4 300 1022.9 308 Z"/>
+                  <path class="kingdoms__hill kingdoms__k5 wash" style="--wash-delay:940ms" d="M1034.5 308 C1080.3 298.2 1123.7 283.6 1152.9 284.1 C1188.7 284.2 1232.1 299.7 1275.5 308 Z"/>
+                  <path class="kingdoms__hill kingdoms__k6 wash" style="--wash-delay:1000ms" d="M1291.9 308 C1336 297.1 1377.8 284.3 1404.4 284.7 C1440.5 285.7 1482.3 299.5 1524.1 308 Z"/>
+                </g>
+
+                <!-- torn edge of the whole strip, drawn on scroll -->
+                <path class="stroke kingdoms__edge" style="--draw-delay:0ms" d="M24 43.6 L50.1 44.9 L76.1 48.3 L102.2 48.9 L128.3 46.2 L154.3 43.2 L180.4 46.2 L206.5 47.5 L232.6 49.1 L258.6 43.4 L280 47.7 L284.7 49.6 L310.8 48.7 L336.8 43.3 L362.9 51.2 L389 51.1 L415 48.4 L441.1 50.6 L467.2 42.7 L493.2 46.8 L519.3 42.6 L530 43.6 L545.4 43.9 L571.4 41.8 L597.5 48.8 L623.6 47.9 L649.7 44.8 L675.7 45.4 L701.8 43.9 L727.9 44.8 L753.9 42.7 L780 46.9 L806.1 46.5 L832.1 44.9 L858.2 43.5 L884.3 39.9 L910.3 39 L936.4 39.3 L962.5 42.4 L988.6 40 L1014.6 43.7 L1030 39.8 L1040.7 44.7 L1066.8 43.8 L1092.8 36.8 L1118.9 44.3 L1145 41 L1171 45.5 L1197.1 40.9 L1223.2 38.5 L1249.2 43.5 L1275.3 45.1 L1280 43.2 L1301.4 41.7 L1327.4 47.4 L1353.5 46 L1379.6 41.1 L1405.7 42.5 L1431.7 41.7 L1457.8 46.9 L1483.9 43 L1509.9 46.5 L1536 45.9 L1536 101 L1538.8 158 L1532.2 215 L1539.7 272 L1533.4 329 L1538.5 386 L1536.1 443 L1538.7 498 L1509.9 505 L1483.9 502.1 L1457.8 502.9 L1431.7 495.6 L1405.7 498.7 L1379.6 501.1 L1353.5 495.9 L1327.4 502.4 L1301.4 499 L1280 501.7 L1275.3 498.3 L1249.2 497.6 L1223.2 499.2 L1197.1 499.7 L1171 493.5 L1145 494.7 L1118.9 497.1 L1092.8 489.7 L1066.8 494.6 L1040.7 495.3 L1030 494.9 L1014.6 499.2 L988.6 497 L962.5 489.3 L936.4 493 L910.3 493.2 L884.3 494.1 L858.2 499.7 L832.1 495.5 L806.1 491.8 L780 498.8 L753.9 497.3 L727.9 498.8 L701.8 500.3 L675.7 498.4 L649.7 495 L623.6 500.7 L597.5 500.3 L571.4 498.8 L545.4 502.6 L530 499.3 L519.3 495.8 L493.2 502.3 L467.2 502 L441.1 504.1 L415 498 L389 500.9 L362.9 497.6 L336.8 501.9 L310.8 504.7 L284.7 499.4 L280 498.9 L258.6 502.8 L232.6 500 L206.5 500.7 L180.4 500.3 L154.3 503.8 L128.3 502.9 L102.2 504.4 L76.1 504.7 L50.1 507.4 L24 507.1 L24.9 443 L24.5 386 L23.8 329 L20.9 272 L26.6 215 L21.9 158 L22.6 101 L26.4 43.6 Z"/>
+
+                <!-- ============ the dividing borders — these draw themselves ===== -->
+                <g>
+                  <path class="stroke stroke--thin kingdoms__border" style="--draw-delay:520ms" d="M275.8 49.9 Q274.5 72.5 274.2 86.8 Q273.9 101 273.1 115.2 Q272.4 129.5 271.7 143.8 Q271.1 158 271.3 172.2 Q271.5 186.5 272.2 200.8 Q273 215 273.5 229.2 Q274.1 243.5 274.9 257.8 Q275.8 272 277.7 286.2 Q279.5 300.5 280.5 314.8 Q281.5 329 283.2 343.2 Q284.9 357.5 286.1 371.8 Q287.4 386 288.2 400.2 Q289.1 414.5 290 428.8 Q290.9 443 290.7 457.2 Q290.4 471.5 290.5 484.6 L290.6 497.6"/>
+                  <path class="stroke stroke--thin kingdoms__border" style="--draw-delay:640ms" d="M536.1 46.7 Q534.2 72.5 533.2 86.8 Q532.2 101 531 115.2 Q529.7 129.5 528.4 143.8 Q527.1 158 526.3 172.2 Q525.6 186.5 524.7 200.8 Q523.8 215 523.5 229.2 Q523.3 243.5 523.4 257.8 Q523.6 272 524.5 286.2 Q525.3 300.5 525.8 314.8 Q526.3 329 527.3 343.2 Q528.3 357.5 529.5 371.8 Q530.8 386 531.8 400.2 Q532.8 414.5 533.4 428.8 Q534.1 443 534.4 457.2 Q534.7 471.5 535.1 484.5 L535.4 497.4"/>
+                  <path class="stroke stroke--thin kingdoms__border" style="--draw-delay:760ms" d="M781.8 49.8 Q783.2 72.5 784.3 86.8 Q785.3 101 785.7 115.2 Q786.1 129.5 786.7 143.8 Q787.3 158 787.6 172.2 Q788 186.5 787.7 200.8 Q787.5 215 787.4 229.2 Q787.2 243.5 786.3 257.8 Q785.4 272 784.2 286.2 Q782.9 300.5 781.1 314.8 Q779.4 329 778.5 343.2 Q777.6 357.5 776 371.8 Q774.4 386 773.2 400.2 Q772.1 414.5 771.2 428.8 Q770.2 443 769.7 457.2 Q769.2 471.5 769.3 483.3 L769.4 495.2"/>
+                  <path class="stroke stroke--thin kingdoms__border" style="--draw-delay:880ms" d="M1029.8 42.9 Q1027.1 72.5 1026.2 86.8 Q1025.2 101 1024.8 115.2 Q1024.3 129.5 1023.8 143.8 Q1023.3 158 1023.3 172.2 Q1023.2 186.5 1023.6 200.8 Q1024.1 215 1024.7 229.2 Q1025.4 243.5 1026.3 257.8 Q1027.2 272 1028.7 286.2 Q1030.1 300.5 1031.4 314.8 Q1032.7 329 1033.6 343.2 Q1034.5 357.5 1035.3 371.8 Q1036 386 1036.3 400.2 Q1036.6 414.5 1036.7 428.8 Q1036.8 443 1036.4 457.2 Q1035.9 471.5 1035.6 481.8 L1035.3 492.1"/>
+                  <path class="stroke stroke--thin kingdoms__border" style="--draw-delay:1000ms" d="M1267.7 47.6 Q1269 72.5 1269.4 86.8 Q1269.8 101 1271.3 115.2 Q1272.8 129.5 1274.1 143.8 Q1275.4 158 1276.8 172.2 Q1278.2 186.5 1280 200.8 Q1281.8 215 1282.8 229.2 Q1283.7 243.5 1285.1 257.8 Q1286.5 272 1286.7 286.2 Q1287 300.5 1287.4 314.8 Q1287.7 329 1287.7 343.2 Q1287.7 357.5 1287.3 371.8 Q1286.9 386 1285.8 400.2 Q1284.7 414.5 1284.4 428.8 Q1284.1 443 1283 457.2 Q1282 471.5 1281.6 485 L1281.2 498.5"/>
+                </g>
+
+                <!-- ============ ground lines under each castle ================== -->
+                <g class="kingdoms__ground">
+                  <path class="stroke stroke--thin" style="--draw-delay:300ms" d="M66 304.7 Q90 307.5 102 307.7 Q114 307.8 126 305.6 Q138 303.3 150 304.1 Q162 304.9 174 305.4 Q186 305.9 198 306.4 Q210 307 222 306.8 L234 306.6"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:380ms" d="M319 306.8 Q343 307.3 355 305.4 Q367 303.5 379 303.3 Q391 303 403 304.8 Q415 306.5 427 307.7 Q439 308.8 451 308.1 Q463 307.3 475 306.3 L487 305.2"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:460ms" d="M569 308.9 Q593 306 605 304.7 Q617 303.4 629 303.8 Q641 304.3 653 306.3 Q665 308.4 677 308.8 Q689 309.2 701 307.1 Q713 304.9 725 304.8 L737 304.6"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:540ms" d="M819 305.2 Q843 304.8 855 304.8 Q867 304.8 879 305.7 Q891 306.6 903 307.8 Q915 309 927 307.6 Q939 306.1 951 305.3 Q963 304.6 975 304.9 L987 305.2"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:620ms" d="M1069 303.9 Q1093 302.8 1105 304.9 Q1117 307 1129 307.2 Q1141 307.4 1153 306.9 Q1165 306.5 1177 305 Q1189 303.4 1201 304.2 Q1213 304.9 1225 305.6 L1237 306.3"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:700ms" d="M1322 303.5 Q1346 306.7 1358 307.5 Q1370 308.4 1382 307.8 Q1394 307.2 1406 306.2 Q1418 305.2 1430 304.2 Q1442 303.1 1454 305.5 Q1466 307.9 1478 308.2 L1490 308.4"/>
+                </g>
+
+                <!-- ============ trees, roaches, blots ========================== -->
+                <g>
+                  <!-- Greenhaven: friendly trees -->
+                  <g transform="translate(74 306) scale(0.95)"><path class="kingdoms__leaf kingdoms__k1 wash" style="--wash-delay:900ms" d="M0 -10 Q-12 -12 -10 -22 Q-12 -32 0 -34 Q12 -32 10 -22 Q12 -12 0 -10 Z"/><path class="stroke stroke--thin" style="--draw-delay:900ms" d="M0 0 L0 -11"/><path class="stroke stroke--thin" style="--draw-delay:940ms" d="M0 -10 Q-12 -12 -10 -22 Q-12 -32 0 -34 Q12 -32 10 -22 Q12 -12 0 -10 Z"/></g>
+                  <g transform="translate(226 306) scale(0.72)"><path class="kingdoms__leaf kingdoms__k1 wash" style="--wash-delay:960ms" d="M0 -10 Q-12 -12 -10 -22 Q-12 -32 0 -34 Q12 -32 10 -22 Q12 -12 0 -10 Z"/><path class="stroke stroke--thin" style="--draw-delay:960ms" d="M0 0 L0 -11"/><path class="stroke stroke--thin" style="--draw-delay:1000ms" d="M0 -10 Q-12 -12 -10 -22 Q-12 -32 0 -34 Q12 -32 10 -22 Q12 -12 0 -10 Z"/></g>
+                  <!-- Dogear Downs: one bent tree + a roach -->
+                  <g transform="translate(332 306) scale(0.8)"><path class="kingdoms__leaf kingdoms__k2 wash" style="--wash-delay:1000ms" d="M0 -10 Q-12 -12 -10 -22 Q-12 -32 0 -34 Q12 -32 10 -22 Q12 -12 0 -10 Z"/><path class="stroke stroke--thin" style="--draw-delay:1000ms" d="M0 0 Q-2 -6 0 -11"/><path class="stroke stroke--thin" style="--draw-delay:1040ms" d="M0 -10 Q-12 -12 -10 -22 Q-12 -32 0 -34 Q12 -32 10 -22 Q12 -12 0 -10 Z"/></g>
+                  <g transform="translate(476 296) rotate(8) scale(0.62)"><g class="kingdoms__roach alive alive--fast"><path class="kingdoms__roach-body kingdoms__k2 wash" style="--wash-delay:1100ms" d="M-9 -3 Q-9 -10 0 -10 Q9 -10 9 -3 Q9 2 0 2 Q-9 2 -9 -3 Z"/><path class="stroke stroke--thin" style="--draw-delay:1100ms" d="M-9 -3 Q-9 -10 0 -10 Q9 -10 9 -3 Q9 2 0 2 Q-9 2 -9 -3 Z"/><path class="stroke stroke--thin" style="--draw-delay:1140ms" d="M-7 -8 L-12 -12 M-8 -4 L-14 -4 M-7 0 L-12 3 M7 -8 L12 -12 M8 -4 L14 -4 M7 0 L12 3 M-4 -10 Q-8 -16 -12 -18 M4 -10 Q8 -16 12 -18"/></g></g>
+                  <!-- Creasemarch: creases in the paper -->
+                  <g transform="translate(582 306) scale(0.7)"><path class="kingdoms__leaf kingdoms__k3 wash" style="--wash-delay:1060ms" d="M0 -10 Q-12 -12 -10 -22 Q-12 -32 0 -34 Q12 -32 10 -22 Q12 -12 0 -10 Z"/><path class="stroke stroke--thin" style="--draw-delay:1060ms" d="M0 0 L0 -11"/><path class="stroke stroke--thin" style="--draw-delay:1100ms" d="M0 -10 Q-12 -12 -10 -22 Q-12 -32 0 -34 Q12 -32 10 -22 Q12 -12 0 -10 Z"/></g>
+                  <g transform="translate(726 297) rotate(-10) scale(0.66)"><g class="kingdoms__roach alive alive--fast"><path class="kingdoms__roach-body kingdoms__k3 wash" style="--wash-delay:1140ms" d="M-9 -3 Q-9 -10 0 -10 Q9 -10 9 -3 Q9 2 0 2 Q-9 2 -9 -3 Z"/><path class="stroke stroke--thin" style="--draw-delay:1140ms" d="M-9 -3 Q-9 -10 0 -10 Q9 -10 9 -3 Q9 2 0 2 Q-9 2 -9 -3 Z"/><path class="stroke stroke--thin" style="--draw-delay:1180ms" d="M-7 -8 L-12 -12 M-8 -4 L-14 -4 M-7 0 L-12 3 M7 -8 L12 -12 M8 -4 L14 -4 M7 0 L12 3 M-4 -10 Q-8 -16 -12 -18 M4 -10 Q8 -16 12 -18"/></g></g>
+                  <!-- Smudgewood: dead trees -->
+                  <g transform="translate(832 306) scale(0.9)"><path class="stroke stroke--thin" style="--draw-delay:1120ms" d="M0 0 L0 -26 M0 -16 L-9 -24 M0 -20 L8 -27 M0 -10 L-7 -15"/></g>
+                  <g transform="translate(978 306) scale(0.7)"><path class="stroke stroke--thin" style="--draw-delay:1160ms" d="M0 0 L1 -26 M1 -16 L10 -24 M1 -20 L-7 -27"/></g>
+                  <g transform="translate(886 296) rotate(6) scale(0.7)"><g class="kingdoms__roach alive alive--fast"><path class="kingdoms__roach-body kingdoms__k4 wash" style="--wash-delay:1180ms" d="M-9 -3 Q-9 -10 0 -10 Q9 -10 9 -3 Q9 2 0 2 Q-9 2 -9 -3 Z"/><path class="stroke stroke--thin" style="--draw-delay:1180ms" d="M-9 -3 Q-9 -10 0 -10 Q9 -10 9 -3 Q9 2 0 2 Q-9 2 -9 -3 Z"/><path class="stroke stroke--thin" style="--draw-delay:1220ms" d="M-7 -8 L-12 -12 M-8 -4 L-14 -4 M-7 0 L-12 3 M7 -8 L12 -12 M8 -4 L14 -4 M7 0 L12 3 M-4 -10 Q-8 -16 -12 -18 M4 -10 Q8 -16 12 -18"/></g></g>
+                  <!-- Blotmire: ink puddles -->
+                  <g transform="translate(1082 300)"><path class="kingdoms__blot kingdoms__k5 wash" style="--wash-delay:1200ms" d="M-26 4 Q-32 -6 -18 -8 Q-8 -18 4 -10 Q22 -14 24 -2 Q30 6 12 7 Q-14 12 -26 4 Z"/><path class="stroke stroke--thin" style="--draw-delay:1200ms" d="M-26 4 Q-32 -6 -18 -8 Q-8 -18 4 -10 Q22 -14 24 -2 Q30 6 12 7 Q-14 12 -26 4 Z"/></g>
+                  <g transform="translate(1214 295) rotate(-6) scale(0.74)"><g class="kingdoms__roach alive alive--fast"><path class="kingdoms__roach-body kingdoms__k5 wash" style="--wash-delay:1240ms" d="M-9 -3 Q-9 -10 0 -10 Q9 -10 9 -3 Q9 2 0 2 Q-9 2 -9 -3 Z"/><path class="stroke stroke--thin" style="--draw-delay:1240ms" d="M-9 -3 Q-9 -10 0 -10 Q9 -10 9 -3 Q9 2 0 2 Q-9 2 -9 -3 Z"/><path class="stroke stroke--thin" style="--draw-delay:1280ms" d="M-7 -8 L-12 -12 M-8 -4 L-14 -4 M-7 0 L-12 3 M7 -8 L12 -12 M8 -4 L14 -4 M7 0 L12 3 M-4 -10 Q-8 -16 -12 -18 M4 -10 Q8 -16 12 -18"/></g></g>
+                  <!-- The Roach Throne: a lot of roaches -->
+                  <g transform="translate(1330 296) rotate(10) scale(0.72)"><g class="kingdoms__roach alive alive--fast"><path class="kingdoms__roach-body kingdoms__k6 wash" style="--wash-delay:1280ms" d="M-9 -3 Q-9 -10 0 -10 Q9 -10 9 -3 Q9 2 0 2 Q-9 2 -9 -3 Z"/><path class="stroke stroke--thin" style="--draw-delay:1280ms" d="M-9 -3 Q-9 -10 0 -10 Q9 -10 9 -3 Q9 2 0 2 Q-9 2 -9 -3 Z"/><path class="stroke stroke--thin" style="--draw-delay:1320ms" d="M-7 -8 L-12 -12 M-8 -4 L-14 -4 M-7 0 L-12 3 M7 -8 L12 -12 M8 -4 L14 -4 M7 0 L12 3 M-4 -10 Q-8 -16 -12 -18 M4 -10 Q8 -16 12 -18"/></g></g>
+                  <g transform="translate(1490 298) rotate(-12) scale(0.86)"><g class="kingdoms__roach alive"><path class="kingdoms__roach-body kingdoms__k6 wash" style="--wash-delay:1320ms" d="M-9 -3 Q-9 -10 0 -10 Q9 -10 9 -3 Q9 2 0 2 Q-9 2 -9 -3 Z"/><path class="stroke stroke--thin" style="--draw-delay:1320ms" d="M-9 -3 Q-9 -10 0 -10 Q9 -10 9 -3 Q9 2 0 2 Q-9 2 -9 -3 Z"/><path class="stroke stroke--thin" style="--draw-delay:1360ms" d="M-7 -8 L-12 -12 M-8 -4 L-14 -4 M-7 0 L-12 3 M7 -8 L12 -12 M8 -4 L14 -4 M7 0 L12 3 M-4 -10 Q-8 -16 -12 -18 M4 -10 Q8 -16 12 -18"/></g></g>
+                </g>
+
+                <!-- ============ six castles ==================================== -->
+                <!-- 1. GREENHAVEN — yours: cream walls, green roofs, like the real game -->
+                <g class="kingdoms__castle" data-k="1" transform="translate(83 185) scale(1.15)"><g class="kingdoms__castle-in">
+                  <path class="kingdoms__wall wash" style="--wash-delay:800ms" d="M12 100 L13 52 Q22 49 31 52 L32 100 Z M88 100 L89 52 Q98 49 107 52 L108 100 Z M34 100 L34 40 Q60 35 86 40 L86 100 Z"/>
+                  <path class="kingdoms__roof kingdoms__k1 wash" style="--wash-delay:860ms" d="M8 53 L22 33 L36 53 Z M84 53 L98 33 L112 53 Z M29 41 L60 16 L91 41 Z"/>
+                  <path class="stroke" style="--draw-delay:760ms" d="M12 100 L13 52 Q22 49 31 52 L32 100"/>
+                  <path class="stroke" style="--draw-delay:800ms" d="M88 100 L89 52 Q98 49 107 52 L108 100"/>
+                  <path class="stroke" style="--draw-delay:840ms" d="M34 100 L34 40 Q60 35 86 40 L86 100"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:900ms" d="M8 53 L22 33 L36 53 M84 53 L98 33 L112 53 M29 41 L60 16 L91 41"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:960ms" d="M52 100 L52 78 Q60 69 68 78 L68 100 M44 66 L44 56 L52 56 L52 66 Z M68 66 L68 56 L76 56 L76 66 Z"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:1000ms" d="M60 16 L60 2"/>
+                  <path class="kingdoms__flag kingdoms__k1 wash" style="--wash-delay:1040ms" d="M60 3 Q71 6 80 4 Q72 12 60 13 Z"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:1040ms" d="M60 3 Q71 6 80 4 Q72 12 60 13 Z"/>
+                </g></g>
+                <!-- 2. DOGEAR DOWNS -->
+                <g class="kingdoms__castle" data-k="2" transform="translate(341 196) scale(1.06)"><g class="kingdoms__castle-in">
+                  <path class="kingdoms__wall wash" style="--wash-delay:860ms" d="M16 98 L16 62 Q60 56 104 62 L104 98 Z M74 98 L75 40 Q88 37 101 40 L102 98 Z"/>
+                  <path class="kingdoms__roof kingdoms__k2 wash" style="--wash-delay:920ms" d="M70 41 L88 19 L106 41 Z"/>
+                  <path class="stroke" style="--draw-delay:860ms" d="M16 98 L16 62 Q60 56 104 62"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:900ms" d="M16 62 L16 52 L28 52 L28 62 M40 61 L40 51 L52 51 L52 61 M64 60 L64 50 L76 50 L76 60"/>
+                  <path class="stroke" style="--draw-delay:940ms" d="M74 98 L75 40 Q88 37 101 40 L102 98"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:980ms" d="M70 41 L88 19 L106 41 M88 19 L88 6"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:1020ms" d="M40 98 L40 78 Q52 70 64 78 L64 98 M84 60 L84 52 L92 52 L92 60 Z"/>
+                  <path class="kingdoms__flag kingdoms__k2 wash" style="--wash-delay:1060ms" d="M88 7 L104 11 L88 16 Z"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:1060ms" d="M88 7 L104 11 L88 16 Z"/>
+                </g></g>
+                <!-- 3. CREASEMARCH -->
+                <g class="kingdoms__castle" data-k="3" transform="translate(586 185) scale(1.15)"><g class="kingdoms__castle-in">
+                  <path class="kingdoms__wall wash" style="--wash-delay:920ms" d="M28 100 L28 44 Q60 39 92 44 L92 100 Z M8 100 L8 58 L30 58 L30 100 Z M112 100 L112 58 L90 58 L90 100 Z"/>
+                  <path class="kingdoms__roof kingdoms__k3 wash" style="--wash-delay:980ms" d="M3 59 L18 40 L33 59 Z M87 59 L102 40 L117 59 Z"/>
+                  <path class="stroke" style="--draw-delay:920ms" d="M28 100 L28 44 Q60 39 92 44 L92 100"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:960ms" d="M28 44 L28 33 L41 33 L41 43 L53 43 L53 32 L67 32 L67 42 L79 42 L79 32 L92 32 L92 44"/>
+                  <path class="stroke" style="--draw-delay:1000ms" d="M8 100 L8 58 L30 58 M112 100 L112 58 L90 58"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:1040ms" d="M3 59 L18 40 L33 59 M87 59 L102 40 L117 59 M18 40 L18 26 M102 40 L102 28"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:1080ms" d="M50 100 L50 74 Q60 64 70 74 L70 100 M60 74 L60 100 M44 60 L44 50 L52 50 L52 60 Z M68 60 L68 50 L76 50 L76 60 Z"/>
+                  <path class="kingdoms__flag kingdoms__k3 wash" style="--wash-delay:1120ms" d="M18 27 L32 31 L18 35 Z M102 29 L116 33 L102 37 Z"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:1120ms" d="M18 27 L32 31 L18 35 Z M102 29 L116 33 L102 37 Z"/>
+                </g></g>
+                <!-- 4. SMUDGEWOOD -->
+                <g class="kingdoms__castle" data-k="4" transform="translate(833 182) scale(1.2)"><g class="kingdoms__castle-in">
+                  <path class="kingdoms__smudge kingdoms__k4 wash" style="--wash-delay:960ms" d="M0 96 Q-6 60 12 40 Q24 2 60 8 Q100 0 110 42 Q126 64 118 96 Z"/>
+                  <path class="kingdoms__wall wash" style="--wash-delay:1000ms" d="M16 98 L18 34 Q30 30 42 34 L44 98 Z M76 98 L78 28 Q90 24 102 28 L104 98 Z M42 98 L42 62 Q60 58 78 62 L78 98 Z"/>
+                  <path class="kingdoms__roof kingdoms__k4 wash" style="--wash-delay:1060ms" d="M11 35 L30 9 L49 35 Z M71 29 L90 2 L109 29 Z"/>
+                  <path class="stroke" style="--draw-delay:1000ms" d="M16 98 L18 34 Q30 30 42 34 L44 98"/>
+                  <path class="stroke" style="--draw-delay:1040ms" d="M76 98 L78 28 Q90 24 102 28 L104 98"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:1080ms" d="M42 98 L42 62 Q60 58 78 62 L78 98"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:1120ms" d="M11 35 L30 9 L49 35 M71 29 L90 2 L109 29"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:1160ms" d="M52 98 L52 80 Q60 73 68 80 L68 98 M24 56 L24 46 L34 46 L34 56 Z M84 50 L84 40 L94 40 L94 50 Z"/>
+                </g></g>
+                <!-- 5. BLOTMIRE -->
+                <g class="kingdoms__castle" data-k="5" transform="translate(1082 178) scale(1.22)"><g class="kingdoms__castle-in">
+                  <path class="kingdoms__wall wash" style="--wash-delay:1040ms" d="M24 100 L30 46 Q60 38 90 48 L96 100 Z"/>
+                  <path class="kingdoms__roof kingdoms__k5 wash" style="--wash-delay:1100ms" d="M48 47 L62 4 L77 45 Z M24 47 L19 22 L36 44 Z M96 49 L105 26 L86 46 Z"/>
+                  <path class="stroke" style="--draw-delay:1040ms" d="M24 100 L30 46 Q60 38 90 48 L96 100"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:1090ms" d="M48 47 L62 4 L77 45"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:1130ms" d="M24 47 L19 22 L36 44 M96 49 L105 26 L86 46"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:1170ms" d="M52 100 L52 76 Q62 66 72 76 L72 100 M40 66 L40 56 L50 56 L50 66 Z M72 66 L72 57 L82 57 L82 67 Z"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:1210ms" d="M62 4 L62 -8 M34 100 q-3 8 1 12 M84 100 q3 8 -1 12"/>
+                  <path class="kingdoms__flag kingdoms__k5 wash" style="--wash-delay:1250ms" d="M62 -7 Q74 -4 84 -7 Q75 2 62 2 Z"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:1250ms" d="M62 -7 Q74 -4 84 -7 Q75 2 62 2 Z"/>
+                </g></g>
+                <!-- 6. THE ROACH THRONE -->
+                <g class="kingdoms__castle" data-k="6" transform="translate(1321 158) scale(1.45)"><g class="kingdoms__castle-in">
+                  <path class="kingdoms__wall wash" style="--wash-delay:1120ms" d="M6 98 L8 56 Q60 48 112 56 L114 98 Z M46 58 L48 20 Q60 14 72 20 L74 58 Z"/>
+                  <path class="kingdoms__roof kingdoms__k6 wash" style="--wash-delay:1180ms" d="M8 56 L8 44 L20 32 L32 44 L32 56 Z M46 56 L46 42 L60 26 L74 42 L74 56 Z M88 56 L88 44 L100 32 L112 44 L112 56 Z M48 21 L44 2 L56 15 L60 -2 L66 15 L76 2 L72 21 Z"/>
+                  <path class="stroke" style="--draw-delay:1120ms" d="M6 98 L8 56 Q60 48 112 56 L114 98"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:1170ms" d="M8 56 L8 44 L20 32 L32 44 L32 56 M88 56 L88 44 L100 32 L112 44 L112 56"/>
+                  <path class="stroke" style="--draw-delay:1210ms" d="M46 58 L48 20 Q60 14 72 20 L74 58"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:1250ms" d="M48 21 L44 2 L56 15 L60 -2 L66 15 L76 2 L72 21"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:1290ms" d="M46 98 L46 74 Q60 61 74 74 L74 98 M60 74 L60 98"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:1330ms" d="M54 44 Q54 38 60 38 Q66 38 66 44 Q66 49 60 49 Q54 49 54 44 Z M57 38 Q55 33 52 31 M63 38 Q65 33 68 31"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:1370ms" d="M20 86 L20 74 L30 74 L30 86 Z M90 86 L90 74 L100 74 L100 86 Z"/>
+                </g></g>
+
+                <!-- a dragon circling the last castle, breathing back down the road -->
+                <g transform="translate(1320 166) scale(-1.22 1.22)">
+                  <g class="kingdoms__bigdragon-in">
+                    <path class="kingdoms__scale kingdoms__k6 wash" style="--wash-delay:1400ms" d="M-16 0 Q-4 -10 12 -4 Q20 -1 25 -7 Q31 -12 35 -6 Q31 0 25 -1 Q18 6 4 8 Q-10 9 -16 0 Z"/>
+                    <path class="stroke stroke--thin" style="--draw-delay:1400ms" d="M-16 0 Q-4 -10 12 -4 Q20 -1 25 -7 Q31 -12 35 -6 Q31 0 25 -1 Q18 6 4 8 Q-10 9 -16 0 Z"/>
+                    <path class="stroke stroke--thin" style="--draw-delay:1440ms" d="M-16 0 Q-28 2 -34 -8 Q-27 -6 -24 -10 Q-22 -3 -16 0 M-2 8 L-3 15 M10 7 L11 14 M30 -8 l3 -1"/>
+                    <g class="kingdoms__wing"><path class="kingdoms__scale kingdoms__k6 wash" style="--wash-delay:1440ms" d="M0 -4 Q-6 -26 12 -22 Q8 -10 0 -4 Z"/><path class="stroke stroke--thin" style="--draw-delay:1480ms" d="M0 -4 Q-6 -26 12 -22 Q8 -10 0 -4 Z M4 -8 L8 -20"/></g>
+                    <path class="kingdoms__fire wash" style="--wash-delay:1520ms" d="M35 -6 Q44 -9 52 -6 Q44 -3 35 -2 Z"/>
+                  </g>
+                </g>
+
+                <!-- ============ the dashed track east + the marching column ===== -->
+                <path class="kingdoms__trail" id="kingdoms-march" d="M96 356.4 Q141.7 362.3 164.5 364.5 Q187.3 366.6 210.2 367.9 Q233 369.1 255.8 368.7 Q278.7 368.3 301.5 367.7 Q324.3 367.2 347.2 364.6 Q370 362.1 392.8 362 Q415.7 361.8 438.5 362 Q461.3 362.3 484.2 361.4 Q507 360.6 529.8 360.5 Q552.7 360.3 575.5 358 Q598.3 355.6 621.2 354.4 Q644 353.2 666.8 350.6 Q689.7 348 712.5 346.4 Q735.3 344.8 758.2 343.6 Q781 342.3 803.8 341.3 Q826.7 340.3 849.5 341.8 Q872.3 343.3 895.2 345.6 Q918 347.8 940.8 351.3 Q963.7 354.8 986.5 356.7 Q1009.3 358.6 1032.2 359 Q1055 359.5 1077.8 361.2 Q1100.7 362.9 1123.5 362.1 Q1146.3 361.2 1169.2 362.1 Q1192 363 1214.8 362.7 Q1237.7 362.3 1260.5 362.8 Q1283.3 363.3 1306.2 365.3 Q1329 367.4 1351.8 366.5 Q1374.7 365.6 1397.5 364.8 Q1420.3 364 1443.2 363.4 L1466 362.8"/>
+
+                <g class="kingdoms__army">
+                  <!-- A banner bearer, two spear carriers and a dragon overhead. The
+                       transform attributes are the no-JS resting places; the script
+                       walks them along the track from here. Heads are paths, not
+                       circles, so the runtime can measure and draw them. -->
+                  <g class="kingdoms__unit" data-off="0" data-bob="3" data-phase="0" transform="translate(326 367)">
+                    <path class="stroke stroke--thin kingdoms__leg kingdoms__leg--a" d="M0 -13 L-5 0"/><path class="stroke stroke--thin kingdoms__leg kingdoms__leg--b" d="M0 -13 L5 0"/>
+                    <path class="stroke stroke--thin" d="M0 -13 L0 -26 M-8 -22 Q0 -19 8 -24"/>
+                    <path class="stroke stroke--thin" d="M-4.6 -31 q0.1 -4.7 4.7 -4.6 q4.6 0.1 4.5 4.7 q-0.1 4.5 -4.6 4.5 q-4.6 0 -4.6 -4.6 Z"/>
+                    <path class="stroke stroke--thin" d="M8 -40 L8 -2"/>
+                    <path class="kingdoms__flag kingdoms__k1 wash" style="--wash-delay:1500ms" d="M8 -38 Q19 -35 28 -37 Q20 -30 8 -29 Z"/>
+                    <path class="stroke stroke--thin" d="M8 -38 Q19 -35 28 -37 Q20 -30 8 -29 Z"/>
+                  </g>
+                  <g class="kingdoms__unit" data-off="-42" data-bob="2.4" data-phase="1.9" transform="translate(284 368)">
+                    <path class="stroke stroke--thin kingdoms__leg kingdoms__leg--a" d="M0 -12 L-5 0"/><path class="stroke stroke--thin kingdoms__leg kingdoms__leg--b" d="M0 -12 L5 0"/>
+                    <path class="stroke stroke--thin" d="M0 -12 L0 -24 M-7 -20 Q0 -18 7 -22"/>
+                    <path class="stroke stroke--thin" d="M-4.2 -29 q0.1 -4.3 4.3 -4.2 q4.2 0.1 4.1 4.3 q-0.1 4.1 -4.2 4.1 q-4.2 0 -4.2 -4.2 Z"/>
+                    <path class="stroke stroke--thin" d="M7 -36 L7 -2"/>
+                  </g>
+                  <g class="kingdoms__unit" data-off="-80" data-bob="2.8" data-phase="3.6" transform="translate(246 368)">
+                    <path class="stroke stroke--thin kingdoms__leg kingdoms__leg--a" d="M0 -12 L-5 0"/><path class="stroke stroke--thin kingdoms__leg kingdoms__leg--b" d="M0 -12 L5 0"/>
+                    <path class="stroke stroke--thin" d="M0 -12 L0 -24 M-7 -21 Q0 -17 7 -21"/>
+                    <path class="stroke stroke--thin" d="M-4.2 -29 q0.1 -4.3 4.3 -4.2 q4.2 0.1 4.1 4.3 q-0.1 4.1 -4.2 4.1 q-4.2 0 -4.2 -4.2 Z"/>
+                    <path class="stroke stroke--thin" d="M-7 -34 L-7 -2"/>
+                  </g>
+                  <g class="kingdoms__unit" data-off="-128" data-bob="7" data-phase="0.8" transform="translate(198 367)"><g transform="scale(1.35)">
+                    <path class="kingdoms__scale kingdoms__k1 wash" style="--wash-delay:1560ms" d="M-14 -44 Q-2 -53 12 -47 Q19 -44 24 -49 Q30 -54 34 -48 Q30 -42 24 -43 Q17 -37 3 -35 Q-9 -35 -14 -44 Z"/>
+                    <path class="stroke stroke--thin" d="M-14 -44 Q-2 -53 12 -47 Q19 -44 24 -49 Q30 -54 34 -48 Q30 -42 24 -43 Q17 -37 3 -35 Q-9 -35 -14 -44 Z"/>
+                    <path class="stroke stroke--thin" d="M-14 -44 Q-26 -42 -32 -52 Q-25 -50 -22 -54 Q-20 -47 -14 -44 M-1 -35 L-2 -28 M11 -36 L12 -29 M29 -50 l3 -1"/>
+                    <g class="kingdoms__wing"><path class="kingdoms__scale kingdoms__k1 wash" style="--wash-delay:1600ms" d="M2 -48 Q-4 -70 14 -66 Q10 -54 2 -48 Z"/><path class="stroke stroke--thin" d="M2 -48 Q-4 -70 14 -66 Q10 -54 2 -48 Z M6 -52 L10 -64"/></g>
+                    <path class="kingdoms__fire wash" style="--wash-delay:1640ms" d="M34 -48 Q43 -51 51 -48 Q43 -45 34 -44 Z"/>
+                  </g></g>
+                </g>
+
+                <!-- ============ the flags — they get taller towards the east ==== -->
+                <g class="kingdoms__gauge">
+                  <path class="stroke stroke--thin kingdoms__gauge-base" style="--draw-delay:1200ms" d="M70 469 Q141 470.4 176.5 471.3 Q212 472.2 247.5 471.5 Q283 470.7 318.5 471.2 Q354 471.7 389.5 470.9 Q425 470.2 460.5 469.6 Q496 469 531.5 468.6 Q567 468.1 602.5 468.9 Q638 469.6 673.5 469.5 Q709 469.4 744.5 470.4 Q780 471.4 815.5 471.4 Q851 471.5 886.5 471.5 Q922 471.5 957.5 471.6 Q993 471.7 1028.5 470.2 Q1064 468.7 1099.5 468.8 Q1135 469 1170.5 469 Q1206 468.9 1241.5 468.4 Q1277 467.9 1312.5 469.6 Q1348 471.2 1383.5 471.2 Q1419 471.1 1454.5 471.5 L1490 471.9"/>
+                  <path class="kingdoms__gauge-guide wash" style="--wash-delay:1300ms" d="M152 454 Q405 444 530 439 Q655 434 780 428.5 Q905 423 1030 417.5 Q1155 412 1281.5 406 L1408 400"/>
+                  <g><path class="stroke stroke--thin" style="--draw-delay:1260ms" d="M152 470 L152 454"/><path class="kingdoms__flag kingdoms__k1 wash" style="--wash-delay:1300ms" d="M152 454 L174 459 L152 464 Z"/><path class="stroke stroke--thin" style="--draw-delay:1300ms" d="M152 454 L174 459 L152 464 Z"/></g>
+                  <g><path class="stroke stroke--thin" style="--draw-delay:1300ms" d="M405 470 L405 444"/><path class="kingdoms__flag kingdoms__k2 wash" style="--wash-delay:1340ms" d="M405 444 L427 449 L405 454 Z"/><path class="stroke stroke--thin" style="--draw-delay:1340ms" d="M405 444 L427 449 L405 454 Z"/></g>
+                  <g><path class="stroke stroke--thin" style="--draw-delay:1340ms" d="M655 470 L655 434"/><path class="kingdoms__flag kingdoms__k3 wash" style="--wash-delay:1380ms" d="M655 434 L677 439 L655 444 Z"/><path class="stroke stroke--thin" style="--draw-delay:1380ms" d="M655 434 L677 439 L655 444 Z"/></g>
+                  <g><path class="stroke stroke--thin" style="--draw-delay:1380ms" d="M905 470 L905 423"/><path class="kingdoms__flag kingdoms__k4 wash" style="--wash-delay:1420ms" d="M905 423 L927 428 L905 433 Z"/><path class="stroke stroke--thin" style="--draw-delay:1420ms" d="M905 423 L927 428 L905 433 Z"/></g>
+                  <g><path class="stroke stroke--thin" style="--draw-delay:1420ms" d="M1155 470 L1155 412"/><path class="kingdoms__flag kingdoms__k5 wash" style="--wash-delay:1460ms" d="M1155 412 L1177 417 L1155 422 Z"/><path class="stroke stroke--thin" style="--draw-delay:1460ms" d="M1155 412 L1177 417 L1155 422 Z"/></g>
+                  <g><path class="stroke stroke--thin" style="--draw-delay:1460ms" d="M1408 470 L1408 400"/><path class="kingdoms__flag kingdoms__k6 wash" style="--wash-delay:1500ms" d="M1408 400 L1430 405 L1408 410 Z"/><path class="stroke stroke--thin" style="--draw-delay:1500ms" d="M1408 400 L1430 405 L1408 410 Z"/></g>
+                  <text class="kingdoms__word kingdoms__word--sm" x="74" y="492">gentle going</text>
+                  <text class="kingdoms__word kingdoms__word--sm" x="1486" y="492" text-anchor="end">bring a dragon</text>
+                </g>
+
+                <!-- ============ words scribbled in the margin ================== -->
+                <text class="kingdoms__word" x="40" y="28" transform="rotate(-2 40 28)">you start here</text>
+                <path class="stroke stroke--thin kingdoms__scribble" style="--draw-delay:1400ms" d="M186 20 q34 4 16 26 q-4 6 -12 4 M190 44 l-6 4 l8 3"/>
+                <text class="kingdoms__word" x="1520" y="28" text-anchor="end" transform="rotate(2 1520 28)">east →</text>
+                <text class="kingdoms__word kingdoms__word--sm" x="700" y="392">the long march</text>
+              </svg>
+
+              <!-- ============ kingdom markers (real buttons over the map) ======
+                   Greenhaven is the game's own kingdom. The other five names and
+                   the roach pips are this site's own map flavour — no game
+                   statistic is being reported here. The aside under the map says
+                   so out loud. aria-expanded is added by the script, so with JS
+                   off the buttons make no claim they cannot keep. -->
+              <ul class="kingdoms__markers" role="list">
+                <li class="kingdoms__marker-slot kingdoms__k1" style="--kx:9.74%">
+                  <button type="button" class="kingdoms__marker" id="kingdoms-mk1" data-k="1"
+                          aria-controls="kingdoms-note1">
+                    <span class="kingdoms__marker-name">Greenhaven</span>
+                    <span class="kingdoms__pips" aria-hidden="true"><span class="kingdoms__pip kingdoms__pip--home"></span></span>
+                    <span class="sr-only">, yours — no roaches on this ground</span>
+                  </button>
+                </li>
+                <li class="kingdoms__marker-slot kingdoms__k2" style="--kx:25.96%">
+                  <button type="button" class="kingdoms__marker" id="kingdoms-mk2" data-k="2"
+                          aria-controls="kingdoms-note2">
+                    <span class="kingdoms__marker-name">Dogear Downs</span>
+                    <span class="kingdoms__pips" aria-hidden="true"><span class="kingdoms__pip is-on"></span><span class="kingdoms__pip"></span><span class="kingdoms__pip"></span><span class="kingdoms__pip"></span><span class="kingdoms__pip"></span></span>
+                    <span class="sr-only">, roach-held — one roach out of five on the map</span>
+                  </button>
+                </li>
+                <li class="kingdoms__marker-slot kingdoms__k3" style="--kx:41.99%">
+                  <button type="button" class="kingdoms__marker" id="kingdoms-mk3" data-k="3"
+                          aria-controls="kingdoms-note3">
+                    <span class="kingdoms__marker-name">Creasemarch</span>
+                    <span class="kingdoms__pips" aria-hidden="true"><span class="kingdoms__pip is-on"></span><span class="kingdoms__pip is-on"></span><span class="kingdoms__pip"></span><span class="kingdoms__pip"></span><span class="kingdoms__pip"></span></span>
+                    <span class="sr-only">, roach-held — two roaches out of five on the map</span>
+                  </button>
+                </li>
+                <li class="kingdoms__marker-slot kingdoms__k4" style="--kx:58.01%">
+                  <button type="button" class="kingdoms__marker" id="kingdoms-mk4" data-k="4"
+                          aria-controls="kingdoms-note4">
+                    <span class="kingdoms__marker-name">Smudgewood</span>
+                    <span class="kingdoms__pips" aria-hidden="true"><span class="kingdoms__pip is-on"></span><span class="kingdoms__pip is-on"></span><span class="kingdoms__pip is-on"></span><span class="kingdoms__pip"></span><span class="kingdoms__pip"></span></span>
+                    <span class="sr-only">, roach-held — three roaches out of five on the map</span>
+                  </button>
+                </li>
+                <li class="kingdoms__marker-slot kingdoms__k5" style="--kx:74.04%">
+                  <button type="button" class="kingdoms__marker" id="kingdoms-mk5" data-k="5"
+                          aria-controls="kingdoms-note5">
+                    <span class="kingdoms__marker-name">Blotmire</span>
+                    <span class="kingdoms__pips" aria-hidden="true"><span class="kingdoms__pip is-on"></span><span class="kingdoms__pip is-on"></span><span class="kingdoms__pip is-on"></span><span class="kingdoms__pip is-on"></span><span class="kingdoms__pip"></span></span>
+                    <span class="sr-only">, roach-held — four roaches out of five on the map</span>
+                  </button>
+                </li>
+                <li class="kingdoms__marker-slot kingdoms__k6" style="--kx:90.26%">
+                  <button type="button" class="kingdoms__marker" id="kingdoms-mk6" data-k="6"
+                          aria-controls="kingdoms-note6">
+                    <span class="kingdoms__marker-name">The Roach Throne</span>
+                    <span class="kingdoms__pips" aria-hidden="true"><span class="kingdoms__pip is-on"></span><span class="kingdoms__pip is-on"></span><span class="kingdoms__pip is-on"></span><span class="kingdoms__pip is-on"></span><span class="kingdoms__pip is-on"></span></span>
+                    <span class="sr-only">, roach-held — five roaches out of five on the map</span>
+                  </button>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="kingdoms__meta">
+        <p class="kingdoms__aside">Greenhaven is the game's. We made the other five names up while drawing the map.</p>
+        <p class="kingdoms__hint">
+          <svg viewBox="0 0 46 18" aria-hidden="true" focusable="false"><path d="M2 9 Q20 4 40 9 M32 3 L42 9 L32 15"/></svg>
+          The paper runs east — scroll the map
+        </p>
+      </div>
+
+      <!-- ============ the little card each marker opens ================= -->
+      <div class="kingdoms__notes" aria-live="polite">
+        <div class="card taped kingdoms__note kingdoms__k1 is-open" id="kingdoms-note1" role="group"
+             aria-labelledby="kingdoms-mk1" style="--nrot:-1.2deg">
+          <p class="kingdoms__rung"><span class="chip">home</span></p>
+          <h3>Greenhaven</h3>
+          <p>Your green ground. Draw a thing, give it a name, and it stands up, shakes off the pencil dust and follows you east.</p>
+        </div>
+        <div class="card taped kingdoms__note kingdoms__k2" id="kingdoms-note2" role="group"
+             aria-labelledby="kingdoms-mk2" style="--nrot:.9deg">
+          <p class="kingdoms__rung"><span class="chip">quiet</span></p>
+          <h3>Dogear Downs</h3>
+          <p>The corner of the page is folded over. The roaches hide in the crease and hope you walk past. Draw an archer and let it do the looking.</p>
+        </div>
+        <div class="card taped kingdoms__note kingdoms__k3" id="kingdoms-note3" role="group"
+             aria-labelledby="kingdoms-mk3" style="--nrot:-.8deg">
+          <p class="kingdoms__rung"><span class="chip">ridged</span></p>
+          <h3>Creasemarch</h3>
+          <p>Ridge after ridge of folded paper. More legs get over them faster than two — so draw a horse, and name it horse.</p>
+        </div>
+        <div class="card taped kingdoms__note kingdoms__k4" id="kingdoms-note4" role="group"
+             aria-labelledby="kingdoms-mk4" style="--nrot:1.1deg">
+          <p class="kingdoms__rung"><span class="chip">dark</span></p>
+          <h3>Smudgewood</h3>
+          <p>Someone dragged a wet thumb through the forest. The roaches like it dark and they brought friends. Bring an army.</p>
+        </div>
+        <div class="card taped kingdoms__note kingdoms__k5" id="kingdoms-note5" role="group"
+             aria-labelledby="kingdoms-mk5" style="--nrot:-1deg">
+          <p class="kingdoms__rung"><span class="chip">sticky</span></p>
+          <h3>Blotmire</h3>
+          <p>A knocked-over bottle of ink with legs in it. Closed loops come out as armour, so draw your knight in one unbroken line.</p>
+        </div>
+        <div class="card taped kingdoms__note kingdoms__k6" id="kingdoms-note6" role="group"
+             aria-labelledby="kingdoms-mk6" style="--nrot:.7deg">
+          <p class="kingdoms__rung"><span class="chip">last</span></p>
+          <h3>The Roach Throne</h3>
+          <p>The last castle on the paper. They drew it enormous to frighten you. Bigger is tougher — so draw something bigger, and call it a fire dragon.</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>

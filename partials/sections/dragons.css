@@ -1,0 +1,582 @@
+/* ==========================================================================
+   THE DRAGON ROOST  —  #dragons
+   Six drawings that all got the same two words written under them.
+   Depends on tokens.css + base.css. Colours, radii, shadows and timings come
+   from tokens; anything this section invents is declared once on .dragons.
+   ========================================================================== */
+
+.dragons {
+  position: relative;
+  overflow: clip;
+  isolation: isolate;
+
+  /* ---- crayon mixes for the bestiary (all derived from tokens) ---- */
+  --dg-cloud:        color-mix(in srgb, var(--paper-0) 82%, var(--crayon-sky));
+  --dg-far:          color-mix(in srgb, var(--crayon-slate) 36%, transparent);
+
+  --dg-fire-body:    color-mix(in srgb, var(--crayon-ember) 72%, var(--paper-0));
+  --dg-fire-belly:   color-mix(in srgb, var(--crayon-sun) 62%, var(--paper-0));
+  --dg-fire-wing:    color-mix(in srgb, var(--crayon-flame) 70%, var(--paper-0));
+  --dg-fire-wing2:   color-mix(in srgb, var(--crayon-amber) 48%, var(--paper-0));
+
+  --dg-paper-a:      color-mix(in srgb, var(--paper-3) 72%, var(--paper-0));
+  --dg-paper-b:      color-mix(in srgb, var(--paper-4) 58%, var(--paper-0));
+  --dg-paper-fin:    color-mix(in srgb, var(--crayon-sky) 46%, var(--paper-0));
+
+  --dg-ink-body:     color-mix(in srgb, var(--crayon-slate) 78%, var(--ink-900));
+  --dg-ink-belly:    color-mix(in srgb, var(--crayon-deep) 52%, var(--paper-0));
+  --dg-ink-spike:    color-mix(in srgb, var(--crayon-deep) 74%, var(--ink-900));
+  --dg-ink-wing:     color-mix(in srgb, var(--crayon-slate) 52%, var(--paper-0));
+
+  --dg-cloud-body:   color-mix(in srgb, var(--crayon-sky) 40%, var(--paper-0));
+  --dg-cloud-hi:     color-mix(in srgb, var(--paper-0) 84%, var(--crayon-sky));
+  --dg-cloud-fan:    color-mix(in srgb, var(--crayon-deep) 36%, var(--paper-0));
+
+  --dg-ember-body:   color-mix(in srgb, var(--crayon-amber) 72%, var(--paper-0));
+  --dg-ember-hi:     color-mix(in srgb, var(--crayon-sun) 70%, var(--paper-0));
+  --dg-ember-wing:   color-mix(in srgb, var(--crayon-flame) 62%, var(--paper-0));
+  --dg-egg:          color-mix(in srgb, var(--paper-0) 78%, var(--paper-3));
+
+  --dg-titan-body:   color-mix(in srgb, var(--crayon-green) 62%, var(--paper-0));
+  --dg-titan-wing:   color-mix(in srgb, var(--crayon-royal) 46%, var(--paper-0));
+
+  --dg-pencil-tip:   color-mix(in srgb, var(--ink-900) 70%, var(--paper-0));
+
+  /* A lit "on" surface that keeps contrast with --text-strong in BOTH themes.
+     (Straight --crayon-sun would put cream text on yellow at night.) */
+  --dg-lit:          color-mix(in srgb, var(--crayon-sun) 30%, var(--paper-0));
+
+  /* ---- timings this section invents (tokens cover the rest) ---- */
+  --dg-t-lungs:    4600ms;  /* an idle ribcage                   */
+  --dg-t-tail:     1800ms;  /* one sway                          */
+  --dg-t-breath:   1500ms;  /* one puff of fire / ink / mist      */
+  --dg-t-drip:     3400ms;  /* one bead of ink falling            */
+  --dg-t-awake:    1700ms;  /* the wobble, quickened              */
+  --dg-t-scribble: 1400ms;  /* the pencil on the empty card       */
+  --dg-t-drift:      26s;   /* clouds                            */
+  --dg-t-cross:      52s;   /* one small dragon, far away        */
+  --dg-t-wingoff:   70ms;   /* far wing trails the near one      */
+  --dg-t-puffstep: 150ms;   /* gap between puffs                 */
+  --dg-t-dripstep: 620ms;   /* gap between drips                 */
+}
+
+.dragons__shell { position: relative; z-index: var(--z-content); }
+
+/* ---------------------------------------------------------------- sky ---- */
+.dragons__sky {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: clamp(200px, 30vw, 380px);
+  z-index: var(--z-sky);
+  pointer-events: none;
+  opacity: .55;
+  transform: translate3d(0, var(--py, 0px), 0);
+  -webkit-mask-image: linear-gradient(180deg, var(--ink-900) 45%, transparent);
+          mask-image: linear-gradient(180deg, var(--ink-900) 45%, transparent);
+}
+.dragons__skyart { width: 100%; height: 100%; }
+.dragons__hair {
+  fill: none;
+  stroke: var(--line-strong);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+.dragons__cloud {
+  transform-box: view-box;
+  animation: dg-drift var(--dg-t-drift) var(--e-inout) infinite;
+}
+.dragons__cloud--b {
+  animation-duration: calc(var(--dg-t-drift) * 1.3);
+  animation-delay: calc(var(--dg-t-drift) * -0.31);
+}
+.dragons__cloud--c {
+  animation-duration: calc(var(--dg-t-drift) * 0.8);
+  animation-delay: calc(var(--dg-t-drift) * -0.54);
+}
+@keyframes dg-drift {
+  0%, 100% { transform: translateX(-12px); }
+  50%      { transform: translateX(14px); }
+}
+
+.dragons__flyer {
+  position: absolute;
+  top: 14%;
+  inset-inline-start: 0;
+  width: clamp(56px, 7vw, 96px);
+  animation: dg-cross var(--dg-t-cross) linear infinite;
+}
+.dragons__flyerart {
+  transform-box: view-box;
+  transform-origin: 54px 34px;
+  animation: dg-flyflap calc(var(--d-flap) * 1.45) var(--e-inout) infinite;
+}
+@keyframes dg-cross {
+  0%   { transform: translateX(-18vw) translateY(0); }
+  50%  { transform: translateX(52vw) translateY(-26px); }
+  100% { transform: translateX(122vw) translateY(6px); }
+}
+@keyframes dg-flyflap {
+  0%, 100% { transform: scaleY(1) rotate(-2deg); }
+  50%      { transform: scaleY(.55) rotate(3deg); }
+}
+
+/* -------------------------------------------------------------- intro ---- */
+.dragons__intro p em {
+  font-style: normal;
+  font-family: var(--font-hand);
+  font-size: 1.22em;
+  color: var(--text-strong);
+}
+.dragons__namebar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+}
+
+/* --------------------------------------------------------------- grid ---- */
+.dragons__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(18px, 2.4vw, 30px);
+}
+@media (max-width: 1000px) { .dragons__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px)  { .dragons__grid { grid-template-columns: minmax(0, 1fr); } }
+
+.dragons__item { display: flex; min-width: 0; }
+
+.dragons__card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  width: 100%;
+  min-width: 0;
+}
+.dragons__item:nth-child(even) .dragons__card { border-radius: var(--r-hand-2); }
+
+/* --------------------------------------------------------------- plate --- */
+.dragons__plate {
+  position: relative;
+  aspect-ratio: 300 / 210;
+  border: 2.5px solid var(--ink-900);
+  border-radius: var(--r-hand-2);
+  background: var(--wash-sky);
+  overflow: hidden;
+  margin-bottom: var(--s-2);
+}
+.dragons__item:nth-child(even) .dragons__plate { border-radius: var(--r-hand); }
+/* a scrap of ground under each dragon */
+.dragons__plate::after {
+  content: "";
+  position: absolute;
+  inset: auto -6% -14% -6%;
+  height: 32%;
+  background: var(--wash-grass);
+  border-radius: 50% 50% 0 0 / 34% 34% 0 0;
+  opacity: .5;
+}
+.dragons__svg { position: relative; z-index: 1; width: 100%; height: 100%; }
+
+/* Ink, not crayon */
+.dragons__eye   { fill: var(--ink-900); }
+.dragons__glint { fill: var(--paper-0); }
+.dragons .dragons__scribble { stroke: var(--sc, var(--crayon-royal)); }
+
+/* ==========================================================================
+   The living drawing — only groups that are actually animated get a
+   transform-box, so nothing else pays for a containing-block change.
+   ========================================================================== */
+.dragons__art,
+.dragons__wing,
+.dragons__tail,
+.dragons__body,
+.dragons__puff,
+.dragons__drip { transform-box: view-box; }
+
+.dragons__wing,
+.dragons__tail { transform-origin: var(--ox, 150px) var(--oy, 100px); }
+
+/* Idle: the shared .alive wobble plus a very slow ribcage. */
+.dragons__body {
+  transform-origin: 50% 76%;
+  animation: dg-lungs var(--dg-t-lungs) var(--e-inout) infinite;
+}
+@keyframes dg-lungs {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.028, 1.022); }
+}
+
+/* Awake: pointer hover, the explicit "wake it up" button (.is-awake), or —
+   on a coarse pointer, which has no hover at all — simply being in the
+   middle of the screen (.is-seen). */
+.dragons__card:is(:hover, .is-awake, .is-seen) .dragons__wing {
+  animation: dg-wing var(--d-flap) var(--e-inout) infinite;
+}
+.dragons__card:is(:hover, .is-awake, .is-seen) .dragons__wing--far {
+  animation-name: dg-wing-far;
+  animation-delay: var(--dg-t-wingoff);
+}
+.dragons__card:is(:hover, .is-awake, .is-seen) .dragons__tail {
+  animation: dg-tail var(--dg-t-tail) var(--e-inout) infinite;
+}
+.dragons__card:is(:hover, .is-awake, .is-seen) .dragons__art {
+  animation-duration: var(--dg-t-awake);
+}
+.dragons__card:is(:hover, .is-awake, .is-seen) .dragons__puff {
+  animation: dg-puff var(--dg-t-breath) var(--e-out) infinite;
+  animation-delay: calc(var(--i, 0) * var(--dg-t-puffstep));
+}
+
+@keyframes dg-wing {
+  0%, 100% { transform: rotate(-7deg) scaleY(1); }
+  42%      { transform: rotate(19deg) scaleY(.6); }
+  70%      { transform: rotate(-2deg) scaleY(.9); }
+}
+@keyframes dg-wing-far {
+  0%, 100% { transform: rotate(-5deg) scaleY(1); }
+  42%      { transform: rotate(15deg) scaleY(.66); }
+  70%      { transform: rotate(-1deg) scaleY(.92); }
+}
+@keyframes dg-tail {
+  0%, 100% { transform: rotate(-3.5deg); }
+  50%      { transform: rotate(4.5deg); }
+}
+
+/* The breath: each puff leaves the mouth and thins out. */
+.dragons__puff {
+  opacity: 0;
+  transform-origin: var(--mx, 40px) var(--my, 60px);
+  stroke: var(--ink-900);
+  stroke-width: 1.8;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+@keyframes dg-puff {
+  0%   { opacity: 0;   transform: translate(0, 0) scale(.3); }
+  18%  { opacity: 1;   transform: translate(calc(var(--bdx, -26px) * .22), calc(var(--bdy, 0px) * .22)) scale(.8); }
+  62%  { opacity: .92; transform: translate(calc(var(--bdx, -26px) * .7),  calc(var(--bdy, 0px) * .7))  scale(1.14); }
+  100% { opacity: 0;   transform: translate(var(--bdx, -26px), var(--bdy, 0px)) scale(1.42); }
+}
+
+/* The ink drake drips whether you are looking at it or not. */
+.dragons__drip {
+  opacity: 0;
+  transform-origin: 50% 0;
+  stroke: var(--ink-900);
+  stroke-width: 1.8;
+  vector-effect: non-scaling-stroke;
+  animation: dg-drip var(--dg-t-drip) var(--e-inout) infinite;
+  animation-delay: calc(var(--i, 0) * var(--dg-t-dripstep));
+}
+@keyframes dg-drip {
+  0%   { opacity: 0;  transform: translateY(0) scaleY(.4); }
+  22%  { opacity: 1;  transform: translateY(2px) scaleY(1); }
+  70%  { opacity: .9; transform: translateY(16px) scaleY(1.1); }
+  100% { opacity: 0;  transform: translateY(26px) scaleY(.7); }
+}
+
+/* ==========================================================================
+   Card text
+   ========================================================================== */
+.dragons__name {
+  font-size: var(--t-lg);
+  line-height: var(--lh-snug);
+}
+.dragons__rule {
+  align-self: start;
+  max-width: 100%;
+  margin-top: calc(var(--s-2) * -1);
+  padding: var(--s-1) var(--s-3);
+  font-family: var(--font-mono);
+  font-size: var(--t-xs);
+  line-height: var(--lh-snug);
+  color: var(--text-muted);
+  background: var(--paper-2);
+  border: 2px dashed var(--line);
+  border-radius: var(--r-hand);
+  overflow-wrap: anywhere;
+}
+.dragons__line {
+  font-size: var(--t-sm);
+  color: var(--text-muted);
+}
+
+.dragons__typedlabel {
+  font-size: var(--t-xs);
+  font-weight: 800;
+  letter-spacing: var(--tr-wide);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ------------------------------------------------------ the name, to copy - */
+.dragons__copy {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-height: 44px;
+  padding: var(--s-2) var(--s-4);
+  font-family: var(--font-mono);
+  font-size: var(--t-sm);
+  font-weight: 700;
+  color: var(--text-strong);
+  background: var(--paper-2);
+  border: 2px dashed var(--line-strong);
+  border-radius: var(--r-hand);
+  transition: transform var(--d-fast) var(--e-bounce),
+              background-color var(--d-fast) var(--e-out),
+              border-color var(--d-fast) var(--e-out);
+}
+.dragons__copy svg {
+  width: var(--s-4);
+  height: var(--s-4);
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: .55;
+}
+.dragons__copy:hover,
+.dragons__copy:focus-visible {
+  background: var(--paper-3);
+  border-color: var(--ink-900);
+  border-style: solid;
+  transform: rotate(-1.2deg);
+}
+.dragons__copy.is-copied {
+  background: var(--dg-lit);
+  border-style: solid;
+  border-color: var(--ink-900);
+}
+.dragons__copied {
+  display: none;
+  font-family: var(--font-hand);
+  font-size: var(--t-base);
+  line-height: 1;
+  color: var(--text-strong);
+}
+.dragons__copy.is-copied .dragons__copied { display: inline; }
+
+/* ------------------------------------------------ hand-sketched meters ---- */
+.dragons__stats {
+  display: grid;
+  gap: var(--s-2);
+  margin-top: auto;
+  padding-top: var(--s-3);
+  border-top: 2px dashed var(--line);
+}
+.dragons__stat {
+  display: grid;
+  grid-template-columns: 4.8em minmax(0, 1fr);
+  align-items: center;
+  gap: var(--s-2);
+  font-size: var(--t-xs);
+}
+.dragons__stat dt {
+  font-size: 1em;
+  font-weight: 800;
+  letter-spacing: var(--tr-wide);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.dragons__stat dd {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  margin: 0;
+  min-width: 0;
+}
+.dragons__stat dd b {
+  font-family: var(--font-hand);
+  font-size: var(--t-base);
+  font-weight: 700;
+  color: var(--text-strong);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dragons__meter {
+  position: relative;
+  flex: 0 0 clamp(52px, 22%, 84px);
+  height: var(--s-3);
+  border: 2px solid var(--ink-900);
+  border-radius: var(--r-hand);   /* over-large radii clamp into a wobbly pill */
+  background: var(--paper-2);
+  overflow: hidden;
+  transform: rotate(-.6deg);
+}
+.dragons__stat:nth-child(2) .dragons__meter { transform: rotate(.7deg); }
+.dragons__stat:nth-child(3) .dragons__meter { transform: rotate(-1deg); }
+.dragons__meter i {
+  position: absolute;
+  inset: 0;
+  display: block;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--d-slow) var(--e-bounce) var(--m-delay, 0ms);
+  background-color: var(--crayon-sun);
+  background-image: repeating-linear-gradient(
+    68deg,
+    color-mix(in srgb, var(--ink-900) 20%, transparent) 0 2px,
+    transparent 2px 6px
+  );
+}
+.dragons__stat:nth-child(1) { --m-delay: 220ms; }
+.dragons__stat:nth-child(2) { --m-delay: 380ms; }
+.dragons__stat:nth-child(3) { --m-delay: 540ms; }
+.dragons__stat:nth-child(1) .dragons__meter i { background-color: var(--crayon-grass); }
+.dragons__stat:nth-child(2) .dragons__meter i { background-color: var(--crayon-sky); }
+.dragons__stat:nth-child(3) .dragons__meter i { background-color: var(--crayon-flame); }
+.dragons__item.is-in .dragons__meter i { transform: scaleX(var(--v, .5)); }
+
+/* --------------------------------------------- the keyboard's own hover --- */
+.dragons__act { padding-top: var(--s-3); }
+.dragons__wake {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-height: 44px;
+  padding: var(--s-2) var(--s-4);
+  font-size: var(--t-xs);
+  font-weight: 800;
+  letter-spacing: var(--tr-wide);
+  text-transform: uppercase;
+  color: var(--text-strong);
+  background: var(--paper-2);
+  border: 2px dashed var(--line-strong);
+  border-radius: var(--r-hand);
+  transition: transform var(--d-fast) var(--e-bounce),
+              background-color var(--d-fast) var(--e-out),
+              border-color var(--d-fast) var(--e-out);
+}
+.dragons__wake svg {
+  width: var(--s-4);
+  height: var(--s-4);
+  flex: none;
+  fill: currentColor;
+  opacity: .5;
+}
+.dragons__wake:hover,
+.dragons__wake:focus-visible {
+  background: var(--paper-3);
+  border-color: var(--ink-900);
+  border-style: solid;
+  transform: rotate(-1.2deg);
+}
+.dragons__wake[aria-pressed="true"] {
+  background: var(--dg-lit);
+  border-style: solid;
+  border-color: var(--ink-900);
+}
+.dragons__wake[aria-pressed="true"] svg { opacity: 1; }
+
+/* ==========================================================================
+   The empty page at the end
+   ========================================================================== */
+.dragons__card--blank {
+  background: transparent;
+  border-style: dashed;
+  border-color: var(--line-strong);
+  box-shadow: none;
+  justify-content: flex-start;
+}
+.dragons__card--blank:hover,
+.dragons__card--blank:focus-within { border-color: var(--ink-900); }
+.dragons__plate--blank {
+  border-style: dashed;
+  border-color: var(--line-strong);
+  background: color-mix(in srgb, var(--paper-0) 60%, transparent);
+}
+.dragons__plate--blank::after { display: none; }
+.dragons__ghost {
+  fill: none;
+  stroke: var(--line-strong);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 7 7;
+  vector-effect: non-scaling-stroke;
+}
+.dragons__card--blank:hover .dragons__ghost,
+.dragons__card--blank:focus-within .dragons__ghost {
+  stroke: var(--accent-warm);
+  animation: dg-march var(--d-flap) linear infinite;
+}
+@keyframes dg-march { to { stroke-dashoffset: -28; } }
+
+.dragons__pencil { transform-box: view-box; transform-origin: 240px 30px; }
+.dragons__card--blank:hover .dragons__pencil,
+.dragons__card--blank:focus-within .dragons__pencil {
+  animation: dg-scribble var(--dg-t-scribble) var(--e-inout) infinite;
+}
+@keyframes dg-scribble {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25%      { transform: translate(-8px, 6px) rotate(-5deg); }
+  60%      { transform: translate(6px, -4px) rotate(4deg); }
+}
+.dragons__cta { margin-top: auto; padding-top: var(--s-3); }
+.dragons__ctabtn { min-height: 44px; }
+
+.dragons__foot {
+  margin-top: clamp(32px, 4vw, 56px);
+  margin-inline: auto;
+  max-width: 56ch;
+  text-align: center;
+  font-family: var(--font-hand);
+  font-size: var(--t-md);
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   Off screen: nothing loops. No JS: show the finished drawing.
+   ========================================================================== */
+.dragons.is-paused *,
+.dragons.is-paused *::before,
+.dragons.is-paused *::after { animation-play-state: paused !important; }
+
+:root:not(.js) .dragons .stroke { stroke-dashoffset: 0; }
+:root:not(.js) .dragons .wash { opacity: 1; }
+:root:not(.js) .dragons__meter i { transform: scaleX(var(--v, .5)); }
+/* Without JS the wake button cannot latch, and hover already does the job. */
+:root:not(.js) .dragons__act { display: none; }
+
+/* ==========================================================================
+   Reduced motion: a finished, coloured, fully drawn still. Nothing loops,
+   nothing is hidden — the flame sits at the mouth, the ink hangs on the belly,
+   the far-off dragon is parked in the sky.
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .dragons__art,
+  .dragons__body,
+  .dragons__wing,
+  .dragons__tail,
+  .dragons__cloud,
+  .dragons__flyerart,
+  .dragons__pencil,
+  .dragons__ghost,
+  .dragons__puff,
+  .dragons__drip {
+    animation: none !important;
+    transform: none !important;
+  }
+  .dragons__puff,
+  .dragons__drip { opacity: 1 !important; }
+  .dragons__flyer {
+    animation: none !important;
+    transform: none !important;
+    inset-inline-start: 16%;
+  }
+  /* A control whose only job is motion has nothing to offer here. */
+  .dragons__act { display: none; }
+  .dragons__meter i {
+    transition: none;
+    transform: scaleX(var(--v, .5));
+  }
+  .dragons__item.is-in .dragons__meter i { transform: scaleX(var(--v, .5)); }
+}
