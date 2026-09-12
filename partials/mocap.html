@@ -1,0 +1,76 @@
+<section id="mirror-page" class="section mocap">
+  <div class="shell">
+
+    <header class="section-head section-head--center">
+      <p class="eyebrow">Paper mirror · live</p>
+      <h1>Stand up. <span class="underlined">The drawing copies you.</span></h1>
+      <p>
+        Your webcam finds thirty-three points on your body, and we turn those into the
+        joint angles the paper figure runs on. It isn't tracing your picture — it's
+        measuring how you're bent and bending the drawing the same way.
+      </p>
+    </header>
+
+    <div class="mocap__stagewrap card">
+      <canvas id="mirror" role="img" aria-label="A paper figure copying your movements"></canvas>
+      <video id="feed" playsinline muted aria-hidden="true"></video>
+      <div class="mocap__tally"><span class="mocap__dot" aria-hidden="true"></span><span id="mirror-conf">camera off</span></div>
+    </div>
+
+    <p class="mocap__status" id="mirror-status" aria-live="polite">Press the button and allow the camera.</p>
+
+    <div class="mocap__controls">
+      <button id="mirror-start" class="btn btn--go btn--lg" type="button">Turn on the camera</button>
+      <button id="mirror-stop" class="btn" type="button" hidden>Stop the camera</button>
+      <label class="mocap__check">
+        <input type="checkbox" id="show-skeleton"> Show what the model sees
+      </label>
+    </div>
+
+    <div class="mocap__privacy card card--pad">
+      <h2 class="mocap__h">Where your video goes</h2>
+      <p>
+        Nowhere. The frames go from your camera into the pose model inside this tab and are
+        thrown away. There is no upload, no server, and no recording — the page has no way
+        to send a picture of you anywhere, and the camera stops the moment you switch tabs.
+        The only thing that ever exists past a frame is a short list of angles.
+      </p>
+    </div>
+
+    <div class="mocap__how card card--pad">
+      <h2 class="mocap__h">How it works, honestly</h2>
+      <ol class="mocap__steps">
+        <li>
+          <strong>Nothing here is trained.</strong> Pose estimation is a solved problem;
+          this uses Google's BlazePose, pretrained and free, running on your GPU in this tab.
+          Training one from scratch would cost thousands of GPU-hours to end up worse.
+        </li>
+        <li>
+          <strong>The model returns 33 landmarks</strong> per frame — shoulders, elbows,
+          wrists, hips, knees, ankles and the rest, as coordinates.
+        </li>
+        <li>
+          <strong>Retargeting is the actual work</strong>, and it is one line per limb:
+          <code>atan2(child.x − parent.x, child.y − parent.y)</code>. Knees and elbows are
+          measured <em>relative to</em> the thigh and upper arm, which is what makes them
+          behave like joints instead of free hinges.
+        </li>
+        <li>
+          <strong>Everything is scaled by torso length</strong>, so standing close to the
+          camera or far away drives the drawing exactly the same.
+        </li>
+        <li>
+          <strong>Smoothing, or it vibrates.</strong> Raw landmarks jitter a few pixels every
+          frame. Angles are eased toward their new value, taking the short way round so they
+          never spin the long way.
+        </li>
+        <li>
+          <strong>The same rig draws both.</strong> The battle's figures and this one share
+          one drawing function. The only difference is where the angles come from — invented
+          by a gait function there, measured off you here.
+        </li>
+      </ol>
+    </div>
+
+  </div>
+</section>

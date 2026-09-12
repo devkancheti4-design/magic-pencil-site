@@ -453,28 +453,7 @@
      the head is held level because that is what people do.
      ------------------------------------------------------------------------ */
 
-  /* A tapered bone, thick at the root and thinner at the tip. */
-  function bone(c, x1, y1, x2, y2, w1, w2) {
-    var dx = x2 - x1, dy = y2 - y1;
-    var L = Math.hypot(dx, dy) || 1;
-    var nx = -dy / L, ny = dx / L;
-    c.beginPath();
-    c.moveTo(x1 + nx * w1, y1 + ny * w1);
-    c.lineTo(x2 + nx * w2, y2 + ny * w2);
-    c.lineTo(x2 - nx * w2, y2 - ny * w2);
-    c.lineTo(x1 - nx * w1, y1 - ny * w1);
-    c.closePath();
-    c.fill();
-    c.stroke();
-  }
-  function joint(c, x, y, r) { c.beginPath(); c.arc(x, y, r, 0, 6.2832); c.fill(); c.stroke(); }
-
-  /* Angles are measured from straight-down, positive swinging forward. */
-  function limbPts(hx, hy, a1, l1, a2, l2) {
-    var kx = hx + Math.sin(a1) * l1, ky = hy + Math.cos(a1) * l1;
-    var fx = kx + Math.sin(a1 + a2) * l2, fy = ky + Math.cos(a1 + a2) * l2;
-    return [kx, ky, fx, fy];
-  }
+  var bone = PaperRig.bone, joint = PaperRig.joint, limbPts = PaperRig.limbPts;
 
   function drawHuman(c, m) {
     var isRun = m.behaviour === 'run';
@@ -529,44 +508,14 @@
     var armLp = limbPts(cx + shOffL, cy, armL + lean, UPPER, elbowL, FORE);
     var armRp = limbPts(cx + shOffR, cy, armR + lean, UPPER, elbowR, FORE);
 
-    var tunic = m.hero ? INK.sun : (m.team === 'home' ? INK.green : INK.ember);
-    var limb = m.hero ? INK.paper : INK.paper;      // bare arms and legs
-    c.strokeStyle = INK.line;
-    c.lineWidth = m.hero ? 3.2 : 2.6;
-    c.lineJoin = 'round';
-    c.fillStyle = limb;
-
-    /* far side first, dimmed, so the body has depth */
-    c.globalAlpha = .62;
-    bone(c, px + hipOffR, py, legR[0], legR[1], 7, 5);
-    bone(c, legR[0], legR[1], legR[2], legR[3], 5, 3.6);
-    bone(c, legR[2], legR[3], legR[2] + FOOT, legR[3] + 2, 3.6, 2.6);
-    bone(c, cx + shOffR, cy, armRp[0], armRp[1], 5.4, 4);
-    bone(c, armRp[0], armRp[1], armRp[2], armRp[3], 4, 2.8);
-    c.globalAlpha = 1;
-
-    /* torso — the tunic */
-    c.fillStyle = tunic;
-    bone(c, px, py, cx, cy, 9.5, 11);
-    c.fillStyle = limb;
-    /* near side */
-    bone(c, px + hipOffL, py, legL[0], legL[1], 7.5, 5.2);
-    bone(c, legL[0], legL[1], legL[2], legL[3], 5.2, 3.8);
-    bone(c, legL[2], legL[3], legL[2] + FOOT, legL[3] + 2, 3.8, 2.8);
-    joint(c, legL[0], legL[1], 3.2);
-
-    bone(c, cx + shOffL, cy, armLp[0], armLp[1], 5.6, 4.2);
-    bone(c, armLp[0], armLp[1], armLp[2], armLp[3], 4.2, 3);
-    joint(c, armLp[0], armLp[1], 2.8);
-
-    /* neck + head */
-    bone(c, cx, cy, nx2, ny2, 4.5, 4);
-    c.beginPath(); c.arc(hx2, hy2, HEADR, 0, 6.2832); c.fill(); c.stroke();
-    /* a scrap of hair so he has a front and a back */
-    c.beginPath();
-    c.moveTo(hx2 - HEADR * .9, hy2 - HEADR * .3);
-    c.quadraticCurveTo(hx2 - HEADR * .4, hy2 - HEADR * 1.5, hx2 + HEADR * .95, hy2 - HEADR * .45);
-    c.strokeStyle = INK.line; c.lineWidth = 2.4; c.stroke();
+    PaperRig.drawFigure(c, {
+      hipL: hipL, kneeL: kneeL, hipR: hipR, kneeR: kneeR,
+      armL: armL, elbowL: elbowL, armR: armR, elbowR: elbowR,
+      lean: lean, rise: rise + crouch,
+      hipTwist: hipTwist, shoulderTwist: shoulderTwist,
+      tunic: m.hero ? INK.sun : (m.team === 'home' ? INK.green : INK.ember),
+      limb: INK.paper, line: INK.line, lineWidth: m.hero ? 3.2 : 2.6
+    });
   }
 
   function drawArcher(c, m) {
