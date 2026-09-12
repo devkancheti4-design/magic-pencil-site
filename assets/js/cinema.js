@@ -67,37 +67,33 @@
     an: 0,
 
     dust: [],
-    nextVolley: 6,
+    hero: null,
 
     reset: function () {
       this.t = 0; this.units.length = 0; this.an = 0; this.dust.length = 0;
-      this.nextVolley = 6; this.nextId = 1;
+      this.nextId = 1;
 
-      // The hero. Named, so the cameras can find him.
-      this.add({ name: 'iries', team: 'home', x: 120, behaviour: 'run', speed: 210, hero: true });
+      /* Iries. The only one running — everything else holds its ground. */
+      this.hero = this.add({
+        name: 'iries', team: 'home', x: 60, behaviour: 'run', speed: 300, hero: true,
+        defend: null, defendT: 0, dodges: 0, deflects: 0
+      });
 
-      // Greenhaven's column, marching east.
-      for (var i = 0; i < 14; i++) {
+      /* The enemy line: archers standing on the far ridge. Every arrow in the
+         sky was loosed by one of these, from its bow, at Iries. */
+      for (var j = 0; j < 9; j++) {
         this.add({
-          name: 'greenhaven-' + i, team: 'home',
-          x: -60 - i * 78 - (i % 3) * 30,
-          behaviour: i % 5 === 0 ? 'run' : 'walk',
-          speed: 84 + (i % 4) * 12,
-          scale: 0.8 + (i % 3) * 0.1
+          name: 'archer-' + j, team: 'away',
+          x: W - 520 + j * 58 + (j % 2) * 22,
+          behaviour: 'archer', speed: 0,
+          scale: 0.92 + (j % 3) * 0.06,
+          cooldown: 1.2 + Math.random() * 3.4,
+          draw: 0
         });
       }
-      // The roaches holding the far side.
-      for (var j = 0; j < 16; j++) {
-        this.add({
-          name: 'roach-' + j, team: 'away',
-          x: W - 120 + (j % 4) * 70, y: 0,
-          behaviour: j % 4 === 0 ? 'archer' : 'walk',
-          speed: -62 - (j % 3) * 14,
-          scale: 0.78 + (j % 3) * 0.08
-        });
-      }
-      // One dragon, because there is always one dragon.
-      this.add({ name: 'dragon', team: 'home', x: -300, behaviour: 'fly', speed: 150, scale: 1.5 });
+
+      /* One dragon, high up and out of the way. */
+      this.add({ name: 'dragon', team: 'home', x: -300, behaviour: 'fly', speed: 120, scale: 1.4 });
     },
 
     add: function (o) {
@@ -117,18 +113,27 @@
       return null;
     },
 
-    volley: function (count, over) {
-      count = Math.min(count | 0, MAX_ARROWS - this.an);
-      for (var i = 0; i < count; i++) {
-        var k = this.an++;
-        this.ax[k] = Math.random() * W * 1.2 - W * 0.1;
-        this.ay[k] = -120 - Math.random() * 520;
-        this.avx[k] = (Math.random() - 0.62) * 130;
-        this.avy[k] = 260 + Math.random() * 220;
-        this.adelay[k] = Math.random() * over;
-        this.astate[k] = 0;
-        this.astuck[k] = 0;
-      }
+    /* One archer looses one arrow, from its bow, on a real ballistic arc that
+       lands on or near Iries. No arrow exists that nobody shot. */
+    loose: function (archer, target) {
+      if (this.an >= MAX_ARROWS) return;
+      var k = this.an++;
+      var bx = archer.x - 30 * archer.scale;      // the bow, not the feet
+      var by = GROUND - 74 * archer.scale;
+
+      /* Aim at where Iries will be, not where he is, then miss a bit. */
+      var flight = 1.5 + Math.random() * 0.7;
+      var tx = target.x + (target.speed || 0) * flight * (0.5 + Math.random() * 0.6)
+               + (Math.random() - 0.5) * 260;
+      var ty = GROUND - Math.random() * 40;
+
+      var g = 820;
+      this.ax[k] = bx; this.ay[k] = by;
+      this.avx[k] = (tx - bx) / flight;
+      this.avy[k] = (ty - by - 0.5 * g * flight * flight) / flight;
+      this.adelay[k] = 0;
+      this.astate[k] = 1;
+      this.astuck[k] = 0;
     },
 
     burst: function (x, y, n) {
@@ -140,34 +145,65 @@
 
     update: function (dt) {
       this.t += dt;
+      var hero = this.hero;
+      var g = 820;
 
-      /* Volleys keep coming — the battle does not wait for a viewer. */
-      this.nextVolley -= dt;
-      if (this.nextVolley <= 0) {
-        this.volley(260 + Math.floor(Math.random() * 340), 2.2);
-        this.nextVolley = 7 + Math.random() * 6;
+      /* --- the archers: draw, aim, loose ------------------------------- */
+      for (var a = 0; a < this.units.length; a++) {
+        var ar = this.units[a];
+        if (ar.behaviour !== 'archer') continue;
+        ar.cooldown -= dt;
+        ar.draw = clamp(1 - ar.cooldown / 0.9, 0, 1);      // bow drawn as it nears
+        if (ar.cooldown <= 0 && hero && hero.alive) {
+          this.loose(ar, hero);
+          ar.cooldown = 1.6 + Math.random() * 3.2;
+          ar.draw = 0;
+        }
       }
 
-      /* Arrows */
-      var g = 820;
+      /* --- arrows ------------------------------------------------------ */
       for (var i = 0; i < this.an; i++) {
         if (this.astate[i] === 2) { this.astuck[i] += dt; continue; }
-        if (this.astate[i] === 0) {
-          this.adelay[i] -= dt;
-          if (this.adelay[i] > 0) continue;
-          this.astate[i] = 1;
-        }
         this.avy[i] += g * dt;
         this.ax[i] += this.avx[i] * dt;
         this.ay[i] += this.avy[i] * dt;
+
+        /* --- Iries, and only Iries, defends himself ------------------- */
+        if (this.astate[i] === 1 && hero && hero.alive) {
+          var dx = this.ax[i] - hero.x;
+          var dy = this.ay[i] - (GROUND - 60);
+          var near = dx * dx + dy * dy;
+          if (near < 24000 && this.avx[i] * -Math.sign(dx || 1) > -9999) {
+            if (hero.defendT <= 0) {
+              /* Pick a real response to THIS arrow: high ones he ducks,
+                 low ones he leans past, the rest he knocks away. */
+              var incomingHigh = this.ay[i] < GROUND - 110;
+              hero.defend = incomingHigh ? 'duck' : (Math.random() < 0.55 ? 'deflect' : 'lean');
+              hero.defendT = 0.42;
+            }
+            if (hero.defend === 'deflect' && near < 9000) {
+              /* Knocked out of the air — it keeps its energy, changes its mind. */
+              var sp = Math.hypot(this.avx[i], this.avy[i]);
+              var ang = -2.3 + Math.random() * 0.8;
+              this.avx[i] = Math.cos(ang) * sp * 0.75;
+              this.avy[i] = Math.sin(ang) * sp * 0.75;
+              this.astate[i] = 3;
+              hero.deflects++;
+              this.burst(this.ax[i], this.ay[i], 4);
+            } else if (near < 5000) {
+              hero.dodges++;
+            }
+          }
+        }
+
         if (this.ay[i] >= GROUND) {
           this.ay[i] = GROUND;
           this.astate[i] = 2;
           this.burst(this.ax[i], GROUND, 1);
         }
       }
-      /* Spent arrows rot away after a few seconds, otherwise every volley
-         leaves a permanent black hedge across the field. */
+
+      /* spent arrows rot away so the field stays readable */
       if (this.an) {
         var keep = 0;
         for (var q = 0; q < this.an; q++) {
@@ -181,23 +217,32 @@
         this.an = keep;
       }
 
-      /* Dust */
+      /* --- dust -------------------------------------------------------- */
       for (var d = this.dust.length - 1; d >= 0; d--) {
         var p = this.dust[d];
         p.vy += 300 * dt; p.x += p.vx * dt; p.y += p.vy * dt; p.life -= dt * 1.4;
         if (p.life <= 0) this.dust.splice(d, 1);
       }
 
-      /* Units */
+      /* --- units ------------------------------------------------------- */
       for (var u = 0; u < this.units.length; u++) {
         var m = this.units[u];
         m.t += dt;
-        if (m.hitT > 0) m.hitT -= dt;
-        m.x += (m.speed || 0) * dt;
-        if (m.behaviour === 'archer') m.x = m.x;              // archers hold position
-        // wrap the march so the battle is continuous
-        if (m.speed > 0 && m.x > W + 200) m.x = -200 - Math.random() * 300;
-        if (m.speed < 0 && m.x < -200) m.x = W + 200 + Math.random() * 300;
+        if (m.defendT > 0) m.defendT -= dt;
+        else if (m.defend) m.defend = null;
+
+        if (m.behaviour === 'archer') continue;            // they stand their ground
+
+        /* Iries slows a little while he is dealing with an arrow — that is
+           what makes the defence read as effort rather than decoration. */
+        var sp2 = m.speed || 0;
+        if (m.hero && m.defendT > 0) sp2 *= 0.45;
+        m.x += sp2 * dt;
+
+        if (m.hero && m.x > W - 760) {        // reached the line: run it again
+          m.x = 60; m.dodges = 0; m.deflects = 0;
+        }
+        if (!m.hero && m.speed > 0 && m.x > W + 300) m.x = -320;
       }
     }
   };
@@ -211,14 +256,14 @@
        crane   — sweeps along a path on a loop
        arrow   — rides a falling arrow down. Chaos. Wonderful.                */
   var Cameras = [
-    { id: 'wide',   label: 'Wide',        rig: 'locked', x: W * 0.5, y: H * 0.44, zoom: 0.52, rot: 0 },
-    { id: 'iries',  label: 'On Iries',    rig: 'follow', target: 'iries', y: H * 0.58, zoom: 1.9, rot: 0 },
-    { id: 'low',    label: 'Low angle',   rig: 'tripod', x: W * 0.42, y: H * 0.72, zoom: 1.55, rot: -0.05, target: 'iries' },
+    { id: 'wide',   label: 'Wide',        rig: 'locked', x: W * 0.55, y: GROUND - 230, zoom: 0.55, rot: 0 },
+    { id: 'iries',  label: 'On Iries',    rig: 'follow', target: 'iries', y: GROUND - 95, zoom: 1.9, rot: 0 },
+    { id: 'low',    label: 'Low angle',   rig: 'tripod', x: W * 0.45, y: GROUND - 70, zoom: 1.5, rot: -0.05, target: 'iries' },
     { id: 'crane',  label: 'Crane',       rig: 'crane',  y: H * 0.34, zoom: 0.8, rot: 0 },
     { id: 'sky',    label: 'The sky',     rig: 'locked', x: W * 0.5, y: H * 0.16, zoom: 0.62, rot: 0 },
     { id: 'dragon', label: 'Dragon cam',  rig: 'follow', target: 'dragon', y: H * 0.40, zoom: 1.25, rot: .02 },
     { id: 'arrow',  label: 'Arrow cam',   rig: 'arrow',  zoom: 2.4, rot: 0 },
-    { id: 'front',  label: 'The front',   rig: 'tripod', x: W * 0.80, y: H * 0.66, zoom: 1.35, rot: .03, target: 'roach-0' }
+    { id: 'front',  label: 'The front',   rig: 'tripod', x: W * 0.74, y: GROUND - 110, zoom: 1.3, rot: .03, target: 'archer-4' }
   ];
 
   /* live solved state per camera, so pans are smooth across frames */
@@ -295,48 +340,87 @@
   }
 
   function drawUnit(c, m) {
-    var bob = 0, tilt = 0, sy = 1;
-    if (m.behaviour === 'run') { bob = Math.abs(Math.sin(m.t * 11)) * -16; tilt = 0.12 * m.face; }
-    else if (m.behaviour === 'walk') { bob = Math.abs(Math.sin(m.t * 5.5)) * -7; }
-    else if (m.behaviour === 'fly') { bob = Math.sin(m.t * 2.2) * -30 - 260; tilt = Math.sin(m.t * 2.2) * .12; }
-    else if (m.behaviour === 'archer') { bob = Math.sin(m.t * 2.6) * -3; }
-    if (m.hitT > 0) tilt += Math.sin(m.hitT * 40) * .3;
+    var bob = 0, tilt = 0, lean = 0, crouch = 0;
+
+    if (m.behaviour === 'run') {
+      /* A real run: the body rises and falls twice per stride, leans into the
+         direction of travel, and drops when he is working. */
+      bob = Math.abs(Math.sin(m.t * 9)) * -20;
+      lean = 0.16;
+      if (m.defend === 'duck')    { crouch = 34; lean = 0.30; }
+      if (m.defend === 'lean')    { tilt = -0.42 * m.face; }
+      if (m.defend === 'deflect') { tilt = 0.12 * m.face; }
+    } else if (m.behaviour === 'fly') {
+      bob = Math.sin(m.t * 2.2) * -30 - 300;
+      tilt = Math.sin(m.t * 2.2) * .12;
+    } else if (m.behaviour === 'archer') {
+      bob = Math.sin(m.t * 1.6) * -2;
+    }
 
     c.save();
-    c.translate(m.x, GROUND + m.y + bob);
-    c.rotate(tilt);
-    c.scale(m.face * m.scale, m.scale * sy);
+    c.translate(m.x, GROUND + m.y + bob + crouch);
+    c.rotate(tilt + lean * m.face);
+    c.scale(m.face * m.scale, m.scale);
 
     c.globalAlpha = .16; c.fillStyle = INK.line;
     c.beginPath(); c.ellipse(0, 6, 30, 7, 0, 0, 6.2832); c.fill();
     c.globalAlpha = 1;
 
+    if (m.behaviour === 'fly') { drawDragon(c, m.t, INK.green); c.restore(); return; }
+
     var col = m.team === 'home' ? INK.green : INK.ember;
-
-    if (m.behaviour === 'fly') { drawDragon(c, m.t, col); c.restore(); return; }
-
     c.strokeStyle = INK.line; c.lineWidth = m.hero ? 6 : 4.5;
     c.lineCap = 'round'; c.lineJoin = 'round';
-    var sw = Math.sin(m.t * (m.behaviour === 'run' ? 11 : 5.5));
-    c.beginPath(); c.arc(0, -96, 18, 0, 6.2832);
-    c.fillStyle = m.hero ? INK.sun : col; c.fill(); c.stroke();
-    c.beginPath(); c.moveTo(0, -78); c.lineTo(0, -32); c.stroke();
-    c.beginPath();
-    c.moveTo(0, -32); c.lineTo(-14 + sw * 18, 0);
-    c.moveTo(0, -32); c.lineTo(14 - sw * 18, 0);
-    c.stroke();
-    c.beginPath();
-    if (m.behaviour === 'archer') {                    // drawing a bow
-      c.moveTo(0, -68); c.lineTo(26, -74);
-      c.moveTo(0, -68); c.lineTo(-14, -56);
+
+    if (m.behaviour === 'archer') {
+      /* Standing, feet planted, drawing the bow. `draw` runs 0 -> 1 as the
+         shot nears, so you can see it being pulled before it is loosed. */
+      var d = m.draw || 0;
+      c.beginPath(); c.arc(0, -96, 17, 0, 6.2832); c.fillStyle = col; c.fill(); c.stroke();
+      c.beginPath(); c.moveTo(0, -79); c.lineTo(0, -32); c.stroke();
+      c.beginPath();                                   // planted stance
+      c.moveTo(0, -32); c.lineTo(-20, 0);
+      c.moveTo(0, -32); c.lineTo(18, 0);
       c.stroke();
-      c.strokeStyle = col; c.lineWidth = 3;
-      c.beginPath(); c.arc(30, -74, 20, -1.1, 1.1); c.stroke();
-    } else {
-      c.moveTo(0, -68); c.lineTo(-20 - sw * 14, -40);
-      c.moveTo(0, -68); c.lineTo(20 + sw * 14, -40);
+      c.beginPath();                                   // bow arm forward
+      c.moveTo(0, -70); c.lineTo(-34, -78);
+      c.moveTo(0, -70); c.lineTo(14 + d * 10, -62 + d * 6);   // string hand pulls back
       c.stroke();
+      c.strokeStyle = col; c.lineWidth = 3.4;          // the bow
+      c.beginPath(); c.arc(-40, -78, 26, -1.25, 1.25); c.stroke();
+      c.strokeStyle = INK.line; c.lineWidth = 1.6;     // the string, drawn back
+      c.beginPath();
+      c.moveTo(-40 + 26 * Math.cos(-1.25), -78 + 26 * Math.sin(-1.25));
+      c.lineTo(-40 + 14 * d, -78);
+      c.lineTo(-40 + 26 * Math.cos(1.25), -78 + 26 * Math.sin(1.25));
+      c.stroke();
+      c.restore(); return;
     }
+
+    /* Iries. Opposed arm/leg swing, and the arms change job when he defends. */
+    var sw = Math.sin(m.t * 9);
+    var knee = Math.cos(m.t * 9) * 10;
+    c.beginPath(); c.arc(0, -100, 18, 0, 6.2832);
+    c.fillStyle = m.hero ? INK.sun : col; c.fill(); c.stroke();
+    c.beginPath(); c.moveTo(0, -82); c.lineTo(0, -34); c.stroke();
+
+    c.beginPath();                                     // legs, bent at the knee
+    c.moveTo(0, -34); c.lineTo(-10 + sw * 20, -16 + knee); c.lineTo(-16 + sw * 26, 0);
+    c.moveTo(0, -34); c.lineTo(10 - sw * 20, -16 - knee); c.lineTo(16 - sw * 26, 0);
+    c.stroke();
+
+    c.beginPath();
+    if (m.defend === 'deflect') {                      // a swipe across the body
+      c.moveTo(0, -72); c.lineTo(40, -96);
+      c.moveTo(0, -72); c.lineTo(-16, -50);
+    } else if (m.defend === 'duck') {                  // head covered
+      c.moveTo(0, -72); c.lineTo(-14, -104);
+      c.moveTo(0, -72); c.lineTo(16, -104);
+    } else {                                           // pumping arms
+      c.moveTo(0, -72); c.lineTo(-18 - sw * 18, -44);
+      c.moveTo(0, -72); c.lineTo(18 + sw * 18, -44);
+    }
+    c.stroke();
     c.restore();
   }
 
