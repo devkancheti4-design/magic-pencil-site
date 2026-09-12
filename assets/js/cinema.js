@@ -329,98 +329,316 @@
     c.translate(-s.x * d - (W / 2) * (1 - d), -s.y * d - (H / 2) * (1 - d));
   }
 
+  /* ------------------------------------------------------------------------
+     The paper is alive. Wind runs across the sheet on its own clock; grass
+     leans with it, clouds drift and slowly change shape, the horizon breathes,
+     and a couple of soft creases sit on the page because it is a real sheet
+     that has been folded.
+     ------------------------------------------------------------------------ */
+  function wind(t, x) {
+    return Math.sin(t * 0.6 + x * 0.0016) * 0.6 + Math.sin(t * 1.7 + x * 0.004) * 0.4;
+  }
+
   function drawHills(c, seed, colour, yOff) {
+    var t = World.t;
     c.fillStyle = colour; c.strokeStyle = INK.line; c.lineWidth = 3;
     c.beginPath(); c.moveTo(-W, H * 3);
-    for (var x = -W; x <= W * 2; x += 90) {
+    for (var x = -W; x <= W * 2; x += 60) {
       var n = Math.sin(x * 0.0035 + seed) * 54 + Math.sin(x * 0.009 + seed * 2) * 24;
-      c.lineTo(x, GROUND + yOff + n);
+      /* the sheet breathes — a long, slow ripple down the page */
+      var ripple = Math.sin(t * 0.5 + x * 0.0011 + seed) * 5;
+      c.lineTo(x, GROUND + yOff + n + ripple);
     }
     c.lineTo(W * 2, H * 3); c.closePath(); c.fill(); c.stroke();
   }
 
-  function drawUnit(c, m) {
-    var bob = 0, tilt = 0, lean = 0, crouch = 0;
-
-    if (m.behaviour === 'run') {
-      /* A real run: the body rises and falls twice per stride, leans into the
-         direction of travel, and drops when he is working. */
-      bob = Math.abs(Math.sin(m.t * 9)) * -20;
-      lean = 0.16;
-      if (m.defend === 'duck')    { crouch = 34; lean = 0.30; }
-      if (m.defend === 'lean')    { tilt = -0.42 * m.face; }
-      if (m.defend === 'deflect') { tilt = 0.12 * m.face; }
-    } else if (m.behaviour === 'fly') {
-      bob = Math.sin(m.t * 2.2) * -30 - 300;
-      tilt = Math.sin(m.t * 2.2) * .12;
-    } else if (m.behaviour === 'archer') {
-      bob = Math.sin(m.t * 1.6) * -2;
+  /* Tufts of grass that lean with the wind, thicker near the camera. */
+  function drawGrass(c, spacing, height, seed) {
+    var t = World.t;
+    c.strokeStyle = INK.line; c.lineWidth = 2.2; c.lineCap = 'round';
+    for (var x = -600; x < W + 600; x += spacing) {
+      var w = wind(t, x);
+      var h = height * (0.7 + ((Math.sin(x * 12.9 + seed) + 1) % 1) * 0.6);
+      var baseY = GROUND + Math.sin(t * 0.5 + x * 0.0011) * 5;
+      c.beginPath();
+      c.moveTo(x, baseY);
+      c.quadraticCurveTo(x + w * 6, baseY - h * 0.6, x + w * 16, baseY - h);
+      c.stroke();
+      c.beginPath();
+      c.moveTo(x + 7, baseY);
+      c.quadraticCurveTo(x + 7 + w * 5, baseY - h * 0.5, x + 7 + w * 12, baseY - h * 0.78);
+      c.stroke();
     }
+  }
+
+  /* Paper-cutout clouds. Each drifts at its own pace and swells very slowly,
+     so the sky is never twice the same. */
+  var CLOUDS = [];
+  for (var ci = 0; ci < 9; ci++) {
+    CLOUDS.push({
+      x: ci * 340 - 200,
+      y: 120 + (ci % 4) * 95,
+      s: 0.75 + (ci % 3) * 0.35,
+      v: 7 + (ci % 5) * 4,
+      ph: ci * 1.7
+    });
+  }
+  function drawClouds(c) {
+    var t = World.t;
+    c.lineWidth = 3; c.strokeStyle = INK.line; c.lineJoin = 'round';
+    for (var i = 0; i < CLOUDS.length; i++) {
+      var q = CLOUDS[i];
+      var x = ((q.x + t * q.v) % (W + 1200)) - 400;
+      var y = q.y + Math.sin(t * 0.25 + q.ph) * 9;
+      var s = q.s * (1 + Math.sin(t * 0.18 + q.ph) * 0.05);
+      c.save();
+      c.translate(x, y); c.scale(s, s);
+      c.fillStyle = INK.paper;
+      c.beginPath();
+      c.moveTo(-90, 18);
+      c.bezierCurveTo(-118, 18, -120, -14, -88, -20);
+      c.bezierCurveTo(-80, -50, -30, -56, -14, -32);
+      c.bezierCurveTo(6, -58, 62, -48, 62, -18);
+      c.bezierCurveTo(98, -16, 96, 18, 66, 18);
+      c.closePath();
+      c.fill(); c.stroke();
+      c.restore();
+    }
+  }
+
+  function drawSun(c) {
+    var t = World.t;
+    var r = 46 + Math.sin(t * 0.4) * 2.5;
+    c.save();
+    c.translate(W * 0.16, 150);
+    c.globalAlpha = .22; c.fillStyle = INK.sun;
+    c.beginPath(); c.arc(0, 0, r * 2.1, 0, 6.2832); c.fill();
+    c.globalAlpha = 1;
+    c.fillStyle = INK.sun; c.strokeStyle = INK.line; c.lineWidth = 3;
+    c.beginPath(); c.arc(0, 0, r, 0, 6.2832); c.fill(); c.stroke();
+    c.restore();
+  }
+
+  /* Fold creases. These live in SCREEN space, not world space — they are on
+     the sheet you are looking at, not in the world you are looking into. */
+  function drawCreases(c, vw, vh) {
+    var t = World.t;
+    var g = c.createLinearGradient(0, 0, vw, vh);
+    g.addColorStop(0, 'rgba(0,0,0,0)');
+    g.addColorStop(0.33, 'rgba(90,70,40,0.055)');
+    g.addColorStop(0.35, 'rgba(255,255,255,0.10)');
+    g.addColorStop(0.37, 'rgba(0,0,0,0)');
+    g.addColorStop(0.74, 'rgba(0,0,0,0)');
+    g.addColorStop(0.76, 'rgba(90,70,40,0.045)');
+    g.addColorStop(0.78, 'rgba(255,255,255,0.08)');
+    g.addColorStop(1, 'rgba(0,0,0,0)');
+    c.fillStyle = g;
+    c.fillRect(0, 0, vw, vh);
+
+    /* a very slow sheen crossing the page, like light moving over paper */
+    var k = (Math.sin(t * 0.09) + 1) / 2;
+    var sh = c.createLinearGradient(vw * (k - 0.45), 0, vw * (k + 0.35), vh);
+    sh.addColorStop(0, 'rgba(255,255,255,0)');
+    sh.addColorStop(0.5, 'rgba(255,255,255,0.07)');
+    sh.addColorStop(1, 'rgba(255,255,255,0)');
+    c.fillStyle = sh;
+    c.fillRect(0, 0, vw, vh);
+  }
+
+  /* ------------------------------------------------------------------------
+     A human, not a stick. Forward kinematics over a real skeleton: pelvis,
+     spine, chest, neck, head, and limbs with two segments each. The gait is a
+     proper run cycle — the pelvis drops twice per stride, the shoulders
+     counter-rotate against the hips, the knees flex hardest through swing, and
+     the head is held level because that is what people do.
+     ------------------------------------------------------------------------ */
+
+  /* A tapered bone, thick at the root and thinner at the tip. */
+  function bone(c, x1, y1, x2, y2, w1, w2) {
+    var dx = x2 - x1, dy = y2 - y1;
+    var L = Math.hypot(dx, dy) || 1;
+    var nx = -dy / L, ny = dx / L;
+    c.beginPath();
+    c.moveTo(x1 + nx * w1, y1 + ny * w1);
+    c.lineTo(x2 + nx * w2, y2 + ny * w2);
+    c.lineTo(x2 - nx * w2, y2 - ny * w2);
+    c.lineTo(x1 - nx * w1, y1 - ny * w1);
+    c.closePath();
+    c.fill();
+    c.stroke();
+  }
+  function joint(c, x, y, r) { c.beginPath(); c.arc(x, y, r, 0, 6.2832); c.fill(); c.stroke(); }
+
+  /* Angles are measured from straight-down, positive swinging forward. */
+  function limbPts(hx, hy, a1, l1, a2, l2) {
+    var kx = hx + Math.sin(a1) * l1, ky = hy + Math.cos(a1) * l1;
+    var fx = kx + Math.sin(a1 + a2) * l2, fy = ky + Math.cos(a1 + a2) * l2;
+    return [kx, ky, fx, fy];
+  }
+
+  function drawHuman(c, m) {
+    var isRun = m.behaviour === 'run';
+    var cadence = isRun ? 8.6 : 4.4;
+    var p = m.t * cadence;
+
+    /* proportions, in units where the figure is ~104 tall */
+    var THIGH = 26, SHIN = 25, FOOT = 9;
+    var UPPER = 20, FORE = 19;
+    var SPINE = 30, NECK = 7, HEADR = 10.5;
+
+    /* --- gait ---------------------------------------------------------- */
+    var amp = isRun ? 0.72 : 0.42;
+    var hipL = Math.sin(p) * amp;
+    var hipR = Math.sin(p + Math.PI) * amp;
+    /* knee flexes hardest while the leg is swinging through */
+    var kneeL = 0.18 + Math.max(0, -Math.sin(p - 0.7)) * (isRun ? 1.5 : 0.9);
+    var kneeR = 0.18 + Math.max(0, -Math.sin(p + Math.PI - 0.7)) * (isRun ? 1.5 : 0.9);
+
+    /* the body rises and falls twice per stride */
+    var rise = -Math.abs(Math.sin(p)) * (isRun ? 9 : 4) - (isRun ? 4 : 0);
+    /* hips and shoulders twist against each other */
+    var hipTwist = Math.sin(p) * (isRun ? 0.13 : 0.07);
+    var shoulderTwist = -hipTwist * 1.5;
+
+    var lean = isRun ? 0.20 : 0.06;
+    var crouch = 0;
+
+    /* arms: opposite to the leg on the same side, elbow held bent */
+    var armL = -hipL * (isRun ? 0.95 : 0.7);
+    var armR = -hipR * (isRun ? 0.95 : 0.7);
+    var elbowL = isRun ? 1.35 : 0.55;
+    var elbowR = elbowL;
+
+    /* --- defence overrides --------------------------------------------- */
+    if (m.defend === 'duck')    { crouch = 16; lean = 0.42; armL = -1.9; armR = -1.5; elbowL = elbowR = 2.1; }
+    if (m.defend === 'lean')    { lean = -0.30; armL = 1.5; armR = -0.9; elbowL = 1.7; elbowR = 1.0; }
+    if (m.defend === 'deflect') { armL = -2.5; elbowL = 0.35; armR = 0.9; elbowR = 1.6; lean = 0.26; }
+
+    /* --- skeleton ------------------------------------------------------- */
+    var px = 0, py = -54 + rise + crouch;              // pelvis
+    var cx = px - Math.sin(lean) * SPINE, cy = py - Math.cos(lean) * SPINE;  // chest
+    var nx2 = cx - Math.sin(lean) * NECK, ny2 = cy - Math.cos(lean) * NECK;  // neck top
+    /* the head stays level even though the torso is pitched forward */
+    var hx2 = nx2 + Math.sin(lean) * 3, hy2 = ny2 - HEADR * 0.85;
+
+    var hipOffL = Math.cos(hipTwist) * 6, hipOffR = -Math.cos(hipTwist) * 6;
+    var shOffL = Math.cos(shoulderTwist) * 9, shOffR = -Math.cos(shoulderTwist) * 9;
+
+    var legL = limbPts(px + hipOffL, py, hipL + lean * .3, THIGH, kneeL, SHIN);
+    var legR = limbPts(px + hipOffR, py, hipR + lean * .3, THIGH, kneeR, SHIN);
+    var armLp = limbPts(cx + shOffL, cy, armL + lean, UPPER, elbowL, FORE);
+    var armRp = limbPts(cx + shOffR, cy, armR + lean, UPPER, elbowR, FORE);
+
+    var tunic = m.hero ? INK.sun : (m.team === 'home' ? INK.green : INK.ember);
+    var limb = m.hero ? INK.paper : INK.paper;      // bare arms and legs
+    c.strokeStyle = INK.line;
+    c.lineWidth = m.hero ? 3.2 : 2.6;
+    c.lineJoin = 'round';
+    c.fillStyle = limb;
+
+    /* far side first, dimmed, so the body has depth */
+    c.globalAlpha = .62;
+    bone(c, px + hipOffR, py, legR[0], legR[1], 7, 5);
+    bone(c, legR[0], legR[1], legR[2], legR[3], 5, 3.6);
+    bone(c, legR[2], legR[3], legR[2] + FOOT, legR[3] + 2, 3.6, 2.6);
+    bone(c, cx + shOffR, cy, armRp[0], armRp[1], 5.4, 4);
+    bone(c, armRp[0], armRp[1], armRp[2], armRp[3], 4, 2.8);
+    c.globalAlpha = 1;
+
+    /* torso — the tunic */
+    c.fillStyle = tunic;
+    bone(c, px, py, cx, cy, 9.5, 11);
+    c.fillStyle = limb;
+    /* near side */
+    bone(c, px + hipOffL, py, legL[0], legL[1], 7.5, 5.2);
+    bone(c, legL[0], legL[1], legL[2], legL[3], 5.2, 3.8);
+    bone(c, legL[2], legL[3], legL[2] + FOOT, legL[3] + 2, 3.8, 2.8);
+    joint(c, legL[0], legL[1], 3.2);
+
+    bone(c, cx + shOffL, cy, armLp[0], armLp[1], 5.6, 4.2);
+    bone(c, armLp[0], armLp[1], armLp[2], armLp[3], 4.2, 3);
+    joint(c, armLp[0], armLp[1], 2.8);
+
+    /* neck + head */
+    bone(c, cx, cy, nx2, ny2, 4.5, 4);
+    c.beginPath(); c.arc(hx2, hy2, HEADR, 0, 6.2832); c.fill(); c.stroke();
+    /* a scrap of hair so he has a front and a back */
+    c.beginPath();
+    c.moveTo(hx2 - HEADR * .9, hy2 - HEADR * .3);
+    c.quadraticCurveTo(hx2 - HEADR * .4, hy2 - HEADR * 1.5, hx2 + HEADR * .95, hy2 - HEADR * .45);
+    c.strokeStyle = INK.line; c.lineWidth = 2.4; c.stroke();
+  }
+
+  function drawArcher(c, m) {
+    var d = m.draw || 0;
+    var sway = Math.sin(m.t * 1.3) * 0.02;
+    var THIGH = 25, SHIN = 24, UPPER = 20, FORE = 19, SPINE = 29, NECK = 7, HEADR = 10;
+
+    var px = 0, py = -52;
+    var cx = px - Math.sin(sway) * SPINE, cy = py - Math.cos(sway) * SPINE;
+    var nx2 = cx, ny2 = cy - NECK;
+
+    /* a braced stance: front leg forward, back leg planted */
+    var legF = limbPts(px + 5, py, 0.34, THIGH, 0.16, SHIN);
+    var legB = limbPts(px - 5, py, -0.30, THIGH, 0.30, SHIN);
+    /* bow arm locked out, string arm drawing back as the shot nears */
+    var armBow = limbPts(cx - 8, cy, -1.42, UPPER, 0.10, FORE);
+    var armStr = limbPts(cx + 8, cy, -1.05 + d * 0.45, UPPER, 1.30 - d * 0.55, FORE);
+
+    c.strokeStyle = INK.line; c.lineWidth = 2.5; c.lineJoin = 'round';
+    c.fillStyle = INK.paper;
+
+    c.globalAlpha = .62;
+    bone(c, px - 5, py, legB[0], legB[1], 7, 5);
+    bone(c, legB[0], legB[1], legB[2], legB[3], 5, 3.6);
+    bone(c, legB[2], legB[3], legB[2] - 9, legB[3] + 2, 3.6, 2.6);
+    bone(c, cx + 8, cy, armStr[0], armStr[1], 5.2, 4);
+    bone(c, armStr[0], armStr[1], armStr[2], armStr[3], 4, 2.8);
+    c.globalAlpha = 1;
+
+    c.fillStyle = INK.ember;
+    bone(c, px, py, cx, cy, 9, 10.5);
+    c.fillStyle = INK.paper;
+    bone(c, px + 5, py, legF[0], legF[1], 7.2, 5);
+    bone(c, legF[0], legF[1], legF[2], legF[3], 5, 3.6);
+    bone(c, legF[2], legF[3], legF[2] + 9, legF[3] + 2, 3.6, 2.6);
+    bone(c, cx - 8, cy, armBow[0], armBow[1], 5.4, 4);
+    bone(c, armBow[0], armBow[1], armBow[2], armBow[3], 4, 2.8);
+    bone(c, cx, cy, nx2, ny2, 4.4, 4);
+    c.beginPath(); c.arc(nx2, ny2 - HEADR * .85, HEADR, 0, 6.2832); c.fill(); c.stroke();
+
+    /* the bow, held in the locked-out hand, string pulled by the other */
+    var bx = armBow[2], by = armBow[3];
+    c.strokeStyle = INK.line; c.lineWidth = 3;
+    c.beginPath(); c.arc(bx, by, 27, -1.3, 1.3); c.stroke();
+    var tipUx = bx + 27 * Math.cos(-1.3), tipUy = by + 27 * Math.sin(-1.3);
+    var tipDx = bx + 27 * Math.cos(1.3),  tipDy = by + 27 * Math.sin(1.3);
+    var nockX = bx + 6 + d * 17, nockY = by;
+    c.lineWidth = 1.5;
+    c.beginPath(); c.moveTo(tipUx, tipUy); c.lineTo(nockX, nockY); c.lineTo(tipDx, tipDy); c.stroke();
+    if (d > 0.25) {                                  // the arrow on the string
+      c.lineWidth = 2.2;
+      c.beginPath(); c.moveTo(nockX, nockY); c.lineTo(nockX - 34, nockY - 3); c.stroke();
+    }
+  }
+
+  function drawUnit(c, m) {
+    var bob = 0, tilt = 0;
+    if (m.behaviour === 'fly') { bob = Math.sin(m.t * 2.2) * -30 - 300; tilt = Math.sin(m.t * 2.2) * .12; }
 
     c.save();
-    c.translate(m.x, GROUND + m.y + bob + crouch);
-    c.rotate(tilt + lean * m.face);
+    c.translate(m.x, GROUND + m.y + bob);
+    c.rotate(tilt);
     c.scale(m.face * m.scale, m.scale);
 
     c.globalAlpha = .16; c.fillStyle = INK.line;
-    c.beginPath(); c.ellipse(0, 6, 30, 7, 0, 0, 6.2832); c.fill();
+    c.beginPath(); c.ellipse(0, 4, 26, 6, 0, 0, 6.2832); c.fill();
     c.globalAlpha = 1;
 
-    if (m.behaviour === 'fly') { drawDragon(c, m.t, INK.green); c.restore(); return; }
+    if (m.behaviour === 'fly') drawDragon(c, m.t, INK.green);
+    else if (m.behaviour === 'archer') drawArcher(c, m);
+    else drawHuman(c, m);
 
-    var col = m.team === 'home' ? INK.green : INK.ember;
-    c.strokeStyle = INK.line; c.lineWidth = m.hero ? 6 : 4.5;
-    c.lineCap = 'round'; c.lineJoin = 'round';
-
-    if (m.behaviour === 'archer') {
-      /* Standing, feet planted, drawing the bow. `draw` runs 0 -> 1 as the
-         shot nears, so you can see it being pulled before it is loosed. */
-      var d = m.draw || 0;
-      c.beginPath(); c.arc(0, -96, 17, 0, 6.2832); c.fillStyle = col; c.fill(); c.stroke();
-      c.beginPath(); c.moveTo(0, -79); c.lineTo(0, -32); c.stroke();
-      c.beginPath();                                   // planted stance
-      c.moveTo(0, -32); c.lineTo(-20, 0);
-      c.moveTo(0, -32); c.lineTo(18, 0);
-      c.stroke();
-      c.beginPath();                                   // bow arm forward
-      c.moveTo(0, -70); c.lineTo(-34, -78);
-      c.moveTo(0, -70); c.lineTo(14 + d * 10, -62 + d * 6);   // string hand pulls back
-      c.stroke();
-      c.strokeStyle = col; c.lineWidth = 3.4;          // the bow
-      c.beginPath(); c.arc(-40, -78, 26, -1.25, 1.25); c.stroke();
-      c.strokeStyle = INK.line; c.lineWidth = 1.6;     // the string, drawn back
-      c.beginPath();
-      c.moveTo(-40 + 26 * Math.cos(-1.25), -78 + 26 * Math.sin(-1.25));
-      c.lineTo(-40 + 14 * d, -78);
-      c.lineTo(-40 + 26 * Math.cos(1.25), -78 + 26 * Math.sin(1.25));
-      c.stroke();
-      c.restore(); return;
-    }
-
-    /* Iries. Opposed arm/leg swing, and the arms change job when he defends. */
-    var sw = Math.sin(m.t * 9);
-    var knee = Math.cos(m.t * 9) * 10;
-    c.beginPath(); c.arc(0, -100, 18, 0, 6.2832);
-    c.fillStyle = m.hero ? INK.sun : col; c.fill(); c.stroke();
-    c.beginPath(); c.moveTo(0, -82); c.lineTo(0, -34); c.stroke();
-
-    c.beginPath();                                     // legs, bent at the knee
-    c.moveTo(0, -34); c.lineTo(-10 + sw * 20, -16 + knee); c.lineTo(-16 + sw * 26, 0);
-    c.moveTo(0, -34); c.lineTo(10 - sw * 20, -16 - knee); c.lineTo(16 - sw * 26, 0);
-    c.stroke();
-
-    c.beginPath();
-    if (m.defend === 'deflect') {                      // a swipe across the body
-      c.moveTo(0, -72); c.lineTo(40, -96);
-      c.moveTo(0, -72); c.lineTo(-16, -50);
-    } else if (m.defend === 'duck') {                  // head covered
-      c.moveTo(0, -72); c.lineTo(-14, -104);
-      c.moveTo(0, -72); c.lineTo(16, -104);
-    } else {                                           // pumping arms
-      c.moveTo(0, -72); c.lineTo(-18 - sw * 18, -44);
-      c.moveTo(0, -72); c.lineTo(18 + sw * 18, -44);
-    }
-    c.stroke();
     c.restore();
   }
 
@@ -455,20 +673,24 @@
     c.fillStyle = '#cfe8fa';
     c.fillRect(0, 0, vw, vh);
 
-    c.save(); applyCam(c, s, vw, vh, 0.12);
+    /* sky wash — barely moves, so it reads as distance */
+    c.save(); applyCam(c, s, vw, vh, 0.10);
     var g = c.createLinearGradient(0, -H, 0, H);
-    g.addColorStop(0, '#f7d9b0'); g.addColorStop(1, '#cfe8fa');
+    g.addColorStop(0, '#f7d9b0'); g.addColorStop(0.55, '#dce9f7'); g.addColorStop(1, '#cfe8fa');
     c.fillStyle = g; c.fillRect(-W * 2, -H * 2, W * 5, H * 5);
+    drawSun(c);
     c.restore();
 
+    c.save(); applyCam(c, s, vw, vh, 0.18); drawClouds(c); c.restore();
+
     c.save(); applyCam(c, s, vw, vh, 0.38); drawHills(c, 1.2, INK.grass, 110); c.restore();
-    c.save(); applyCam(c, s, vw, vh, 0.64); drawHills(c, 3.7, INK.green, 50); c.restore();
+    c.save(); applyCam(c, s, vw, vh, 0.64); drawHills(c, 3.7, INK.green, 50); drawGrass(c, 90, 26, 3.1); c.restore();
 
     c.save();
     applyCam(c, s, vw, vh, 1);
     drawHills(c, 6.1, INK.green, 0);
 
-    // arrows
+    /* arrows */
     c.lineCap = 'round';
     for (var i = 0; i < World.an; i++) {
       if (World.astate[i] === 0) continue;
@@ -478,22 +700,35 @@
       var dx = Math.cos(a) * L, dy = Math.sin(a) * L;
       c.strokeStyle = INK.line; c.lineWidth = 2.6;
       c.beginPath(); c.moveTo(World.ax[i] - dx, World.ay[i] - dy); c.lineTo(World.ax[i], World.ay[i]); c.stroke();
+      if (World.astate[i] !== 2) {                       // fletching on live shafts
+        c.strokeStyle = INK.ember; c.lineWidth = 1.7;
+        c.beginPath();
+        c.moveTo(World.ax[i] - dx, World.ay[i] - dy);
+        c.lineTo(World.ax[i] - dx * 1.12 + dy * 0.17, World.ay[i] - dy * 1.12 - dx * 0.17);
+        c.moveTo(World.ax[i] - dx, World.ay[i] - dy);
+        c.lineTo(World.ax[i] - dx * 1.12 - dy * 0.17, World.ay[i] - dy * 1.12 + dx * 0.17);
+        c.stroke();
+      }
     }
     c.globalAlpha = 1;
 
-    // dust
+    /* dust */
     for (var d = 0; d < World.dust.length; d++) {
-      var p = World.dust[d];
-      c.globalAlpha = clamp(p.life, 0, 1) * .45; c.fillStyle = INK.faint;
-      c.beginPath(); c.arc(p.x, p.y, p.r, 0, 6.2832); c.fill();
+      var pp = World.dust[d];
+      c.globalAlpha = clamp(pp.life, 0, 1) * .45; c.fillStyle = INK.faint;
+      c.beginPath(); c.arc(pp.x, pp.y, pp.r, 0, 6.2832); c.fill();
     }
     c.globalAlpha = 1;
 
-    // units, far ones first
-    var list = World.units.slice().sort(function (a, b) { return a.scale - b.scale; });
-    for (var u = 0; u < list.length; u++) drawView.unit(c, list[u]);
-
+    var list = World.units.slice().sort(function (a2, b2) { return a2.scale - b2.scale; });
+    for (var u = 0; u < list.length; u++) drawUnit(c, list[u]);
     c.restore();
+
+    /* foreground grass, moving more than the camera */
+    c.save(); applyCam(c, s, vw, vh, 1.45); drawGrass(c, 120, 54, 7.7); c.restore();
+
+    /* and finally the sheet you are holding */
+    drawCreases(c, vw, vh);
   }
   drawView.unit = drawUnit;
 
