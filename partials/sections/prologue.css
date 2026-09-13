@@ -1,0 +1,389 @@
+/* ==========================================================================
+   THE PROLOGUE — a ruled leaf, a woodcut initial, and a fore-edge margin
+   full of second thoughts. Tokens only; day and candlelight both.
+   Local knobs are all prefixed --pr-, since other chapters share this page.
+   ========================================================================== */
+
+.prologue {
+  /* The ruling. Every line of type sits in a band this tall, and the rule is
+     drawn at --pr-rule-ink inside it (JS trims that to the real baseline). */
+  --pr-rule:     clamp(29px, 14px + 1.5vw, 34px);
+  --pr-rule-ink: calc(var(--pr-rule) * .72);
+  --pr-hair:     color-mix(in srgb, var(--line) 84%, transparent);
+
+  /* The written column and the fore-edge margin that holds the marginalia. */
+  --pr-margin: clamp(148px, 16vw, 226px);
+  --pr-gap:    clamp(14px, 2.2vw, 32px);
+  --pr-bleed:  clamp(8px, 1.4vw, 20px);
+
+  /* The woodcut initial, a whole number of ruled lines deep. */
+  --pr-drop-lines: 3;
+  --pr-drop-w:  calc(var(--pr-rule) * 2.85);
+  --pr-drop-fs: calc(var(--pr-rule) * var(--pr-drop-lines));
+
+  /* The illuminator's hand: vermilion rubric, gold, and the finest line
+     the block-cutter can hold. */
+  --pr-rubric:   var(--crayon-flame);
+  --pr-gold:     var(--crayon-sun);
+  --pr-hatch-a:  var(--crayon-flame);
+  --pr-hatch-b:  var(--crayon-ember);
+  --pr-hairline: 1;
+
+  /* Carved caps want air; small caps in the margin want a little. */
+  --pr-tr-title: .06em;
+  --pr-tr-small: .12em;
+}
+/* By candle the vermilion is lifted toward the ink so small marginal text
+   stays legible against the dark vellum, and the burnt madder inside the
+   initial — which the night palette does not redefine — gives way to gold. */
+:root[data-theme="night"] .prologue {
+  --pr-rubric:  color-mix(in srgb, var(--crayon-flame) 78%, var(--ink-900));
+  --pr-hatch-a: var(--pr-rubric);
+  --pr-hatch-b: color-mix(in srgb, var(--crayon-sun) 62%, var(--pr-rubric));
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="day"]) .prologue {
+    --pr-rubric:  color-mix(in srgb, var(--crayon-flame) 78%, var(--ink-900));
+    --pr-hatch-a: var(--pr-rubric);
+    --pr-hatch-b: color-mix(in srgb, var(--crayon-sun) 62%, var(--pr-rubric));
+  }
+}
+
+/* ------------------------------------------------------------- the leaf -- */
+.prologue__leaf {
+  position: relative;
+  z-index: 0;
+  max-width: 980px;
+  margin-inline: auto;
+  padding: clamp(18px, 3.6vw, 56px);
+  padding-left: clamp(26px, 5.4vw, 82px);
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  box-shadow: var(--sh-3);
+}
+/* a second leaf under this one, as they lie in a codex */
+.prologue__leaf::before {
+  content: "";
+  position: absolute; inset: 0; z-index: -1;
+  transform: translate(7px, 9px) rotate(.22deg);
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+}
+/* age: thumbed at the fore-edge, scorched at one corner */
+.prologue__leaf::after {
+  content: "";
+  position: absolute; inset: 0;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  background:
+    radial-gradient(120% 84% at 100% 0%, color-mix(in srgb, var(--paper-4) 40%, transparent), transparent 44%),
+    radial-gradient(86% 62% at 2% 100%, color-mix(in srgb, var(--paper-4) 24%, transparent), transparent 46%);
+}
+:root[data-theme="night"] .prologue__leaf::after { mix-blend-mode: screen; opacity: .22; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="day"]) .prologue__leaf::after { mix-blend-mode: screen; opacity: .22; }
+}
+
+/* the gutter, where the leaf is sewn in */
+.prologue__gutter {
+  position: absolute;
+  top: 0; bottom: 0; left: 0;
+  width: clamp(12px, 2.2vw, 30px);
+  pointer-events: none;
+  background: linear-gradient(to right, color-mix(in srgb, var(--paper-3) 74%, transparent), transparent);
+  border-right: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+}
+
+/* ----------------------------------------------------------- the header -- */
+.prologue__head {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: var(--s-2);
+  /* centred over the written column, not over the leaf */
+  padding-right: calc(var(--pr-margin) + var(--pr-gap));
+  margin-bottom: clamp(26px, 3vw, 46px);
+}
+.prologue__rubric {
+  font-family: var(--font-scribe);
+  font-size: var(--t-xs);
+  letter-spacing: var(--tr-wide);
+  text-transform: uppercase;
+  color: var(--pr-rubric);
+  line-height: 1.4;
+}
+.prologue__title {
+  font-family: var(--font-hand);
+  font-size: var(--t-xl);
+  letter-spacing: var(--pr-tr-title);
+  max-width: 22ch;
+}
+.prologue__byline {
+  font-family: var(--font-scribe);
+  font-size: var(--t-sm);
+  color: var(--text-muted);
+  max-width: 46ch;
+  line-height: 1.5;
+}
+.prologue__flourish { width: min(320px, 72%); height: auto; margin-top: var(--s-2); }
+.prologue__flourish .stroke { stroke: var(--pr-rubric); }
+
+/* ------------------------------------------ the text block and its ruling -- */
+.prologue__body {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--pr-margin);
+  column-gap: var(--pr-gap);
+  row-gap: 0;
+}
+/* the classic double bounding line at either side of the written column */
+.prologue__body::before,
+.prologue__body::after {
+  content: "";
+  position: absolute;
+  top: calc(var(--pr-rule) * -.5);
+  bottom: calc(var(--pr-rule) * -.5);
+  width: 5px;
+  border-inline: 1px solid var(--line);
+  pointer-events: none;
+}
+.prologue__body::before { left: 0; }
+.prologue__body::after  { right: calc(var(--pr-margin) + var(--pr-gap)); }
+
+.prologue__body p {
+  grid-column: 1;
+  padding-inline: var(--pr-bleed);
+  font-family: var(--font-body);
+  font-size: var(--t-base);
+  line-height: var(--pr-rule);        /* one line of type, one ruled band */
+  color: var(--text);
+  hyphens: auto;
+  overflow-wrap: break-word;
+  /* the ruling itself, laid down per paragraph so it can never drift */
+  background-image: repeating-linear-gradient(to bottom,
+    transparent 0,
+    transparent calc(var(--pr-rule-ink) - 1px),
+    var(--pr-hair) calc(var(--pr-rule-ink) - 1px),
+    var(--pr-hair) var(--pr-rule-ink),
+    transparent var(--pr-rule-ink),
+    transparent var(--pr-rule));
+}
+/* a rubricated paragraph mark instead of a blank line. It stays in the body
+   face on purpose: a second face inside a ruled line changes the first line
+   box and knocks the ruling out of step with the writing. */
+.prologue__body p:not(.prologue__lede)::before {
+  content: "\00B6";
+  color: var(--pr-rubric);
+  margin-right: .34em;
+}
+
+/* the hidden paragraph the runtime measures the real baseline on */
+.prologue__ruler {
+  position: absolute;
+  top: 0; left: 0;
+  width: 12ch;
+  visibility: hidden;
+  pointer-events: none;
+}
+.prologue__ruler-mark { display: inline-block; width: 0; height: 0; vertical-align: baseline; }
+
+/* a named thing, which is to say a wish. Body face, small caps: the same
+   metrics as the writing round it, so the ruling holds. */
+.prologue__name {
+  font-family: var(--font-body);
+  font-style: normal;
+  font-variant: small-caps;
+  line-height: inherit;
+  color: var(--pr-rubric);
+  letter-spacing: var(--tr-tight);
+  border-bottom: 1px dotted color-mix(in srgb, var(--pr-rubric) 60%, transparent);
+}
+/* a rubric set into the text */
+.prologue__rubricate {
+  font-family: var(--font-body);
+  font-variant: small-caps;
+  font-weight: 600;
+  line-height: inherit;
+  color: var(--pr-rubric);
+  letter-spacing: var(--tr-tight);
+}
+
+/* ---------------------------------------------------- the woodcut initial -- */
+.prologue__drop {
+  position: relative;
+  float: left;
+  width: var(--pr-drop-w);
+  /* a whole number of bands less a hair, so the next line runs clear */
+  height: calc(var(--pr-rule) * var(--pr-drop-lines) - 2px);
+  margin: 0 clamp(8px, 1.1vw, 16px) 0 0;
+}
+.prologue__drop-panel { position: absolute; inset: 0; }
+.prologue__drop-ground { fill: var(--paper-2); }
+.prologue__drop-hatch {
+  fill: none;
+  stroke: var(--ink-300);
+  stroke-width: var(--pr-hairline);
+  vector-effect: non-scaling-stroke;
+}
+.prologue__drop-frame { stroke: var(--pr-rubric); }
+.prologue__drop-stud { fill: var(--pr-gold); }
+
+.prologue__drop-letter {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-hand);
+  font-weight: 700;
+  font-size: var(--pr-drop-fs);
+  line-height: 1;
+  color: var(--pr-hatch-a);
+  padding-bottom: .06em;
+}
+/* hatched inside the letter, the way an illuminator would fill it */
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .prologue__drop-letter {
+    background-image: repeating-linear-gradient(48deg,
+      var(--pr-hatch-a) 0 5px,
+      var(--pr-hatch-b) 5px 7px);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+/* --------------------------------------------------------- the marginalia -- */
+.prologue__note {
+  grid-column: 2;
+  height: 0;              /* a note can never grow a row and break the ruling */
+  align-self: start;
+}
+.prologue__note-body {
+  position: relative;
+  top: calc(var(--pr-rule) * var(--pr-at, .6));
+  display: block;
+  /* the reveal transform is on the outer element, the tilt on this one:
+     [data-reveal].is-in { transform: none } would otherwise eat the tilt. */
+  transform: rotate(var(--pr-rot, -1.7deg));
+  transform-origin: 0 0;
+  font-family: var(--font-scribe);
+  font-size: var(--t-xs);
+  line-height: 1.52;
+  color: var(--pr-rubric);
+}
+.prologue__note-mark {
+  margin-right: .3em;
+  color: color-mix(in srgb, var(--pr-rubric) 78%, var(--ink-500));
+}
+.prologue__manicule {
+  display: inline-block;
+  width: 2.9em;
+  height: auto;
+  margin-right: .3em;
+  vertical-align: -.35em;
+}
+.prologue__manicule .stroke { stroke: var(--pr-rubric); }
+.prologue__manicule-hatch { stroke-width: var(--pr-hairline); }
+
+/* -------------------------------------------------------------- the plate -- */
+.prologue__fig {
+  grid-column: 1;
+  margin: calc(var(--pr-rule) * .75) 0;
+  padding-inline: var(--pr-bleed);
+}
+.prologue__plate {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 640 / 320;
+}
+.prologue__plate-frame { stroke: var(--ink-700); }
+.prologue__hatch { stroke: var(--ink-500); }
+.prologue__far .stroke { stroke: var(--ink-500); }
+
+.prologue__pig--ground { fill: color-mix(in srgb, var(--paper-3) 62%, transparent); }
+.prologue__pig--water  { fill: color-mix(in srgb, var(--crayon-sky) 32%, transparent); }
+.prologue__pig--barrel { fill: color-mix(in srgb, var(--crayon-sun) 72%, transparent); }
+.prologue__pig--wood   { fill: color-mix(in srgb, var(--paper-3) 88%, transparent); }
+.prologue__pig--lead   { fill: var(--ink-900); }
+
+.prologue__cap {
+  margin-top: var(--s-3);
+  max-width: 52ch;
+  margin-inline: auto;
+  text-align: center;
+  font-family: var(--font-scribe);
+  font-size: var(--t-xs);
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+.prologue__cap b { font-weight: 400; color: var(--pr-rubric); }
+
+/* --------------------------------------------------------------- the foot -- */
+.prologue__foot {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--s-4);
+  margin-top: clamp(24px, 3vw, 44px);
+  padding-top: var(--s-4);
+  border-top: 1px solid var(--line);
+}
+.prologue__folio,
+.prologue__catch {
+  font-family: var(--font-scribe);
+  font-size: var(--t-xs);
+  letter-spacing: var(--pr-tr-small);
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+.prologue__folio { color: var(--pr-rubric); }
+.prologue__catch { text-align: right; }
+.prologue__orn { width: 4.5em; max-width: 100%; height: auto; }
+.prologue__orn .stroke { stroke: var(--line-strong); }
+
+/* ------------------------------------------------------------------ small -- */
+@media (max-width: 880px) {
+  /* the fore-edge margin folds into the column: every note takes its place
+     in the text. The notes MUST leave column 2, or grid conjures an implicit
+     second track and crushes the writing. */
+  .prologue { --pr-margin: 0px; --pr-gap: 0px; }
+  .prologue__body { grid-template-columns: minmax(0, 1fr); }
+  .prologue__body::after { right: 0; }
+
+  .prologue__note { grid-column: 1; height: auto; margin-block: calc(var(--pr-rule) * .6); }
+  .prologue__note-body {
+    top: 0;
+    transform: none;
+    max-width: 52ch;
+    padding: var(--s-3) var(--s-4);
+    font-size: var(--t-sm);
+    background: color-mix(in srgb, var(--paper-2) 66%, transparent);
+    border-left: 2px solid var(--pr-rubric);
+    border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  }
+  .prologue__note-body::after {
+    content: "in the margin, by a later hand";
+    display: block;
+    margin-top: var(--s-1);
+    font-size: var(--t-xs);
+    letter-spacing: var(--pr-tr-small);
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .prologue__manicule { width: 2.4em; }
+}
+
+@media (max-width: 560px) {
+  .prologue { --pr-drop-w: calc(var(--pr-rule) * 2.2); --pr-bleed: clamp(6px, 1vw, 10px); }
+  .prologue__leaf::before { transform: translate(4px, 6px) rotate(.2deg); }
+  .prologue__catch { display: none; }
+  .prologue__foot { grid-template-columns: 1fr auto; }
+}
+
+@media (max-width: 400px) {
+  /* at this width three lines beside the initial leaves no room to set type */
+  .prologue { --pr-drop-lines: 2; --pr-drop-w: calc(var(--pr-rule) * 1.9); }
+}

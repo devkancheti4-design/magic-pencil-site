@@ -16,7 +16,7 @@ const P = (...p) => join(ROOT, ...p);
 const read = (p) => (existsSync(p) ? readFileSync(p, 'utf8') : '');
 
 /* Order is the page order AND the cascade order. */
-const ORDER = ['hero', 'dragons', 'kingdoms', 'spellbook', 'studio', 'cta'];
+const ORDER = ['hero', 'prologue', 'chronicle', 'armoury', 'dragons', 'spellbook', 'cta'];
 
 const section = (name) => {
   const p = P('partials', 'sections', `${name}.html`);
@@ -24,39 +24,51 @@ const section = (name) => {
   return read(p).trim();
 };
 
-/* ---- page 2: Paper Cinema ---------------------------------------------- */
-function subPage(opts) {
-  var head = read(P('partials', 'head.html'))
-    .replace(/<title>[\s\S]*?<\/title>/, '<title>' + opts.title + '</title>')
-    .replace(/(<meta name="description" content=")[^"]*(")/,
-      '$1' + opts.desc + '$2')
-    .replace('<link rel="stylesheet" href="assets/css/sections.css">',
-             '<link rel="stylesheet" href="assets/css/' + opts.css + '">');
-  var nav = read(P('partials', 'nav.html'))
-    .replace(/href="#(how|dragons|sandbox|kingdoms|spellbook|studio)"/g, 'href="index.html#$1"')
-    .replace(/href="#hero"/g, 'href="index.html"');
-  var footer = read(P('partials', 'footer.html'))
-    .replace(/href="#(how|dragons|sandbox|kingdoms|spellbook|studio|play)"/g, 'href="index.html#$1"')
-    .replace(/href="#hero"/g, 'href="index.html"')
-    .replace('<script src="assets/js/sections.js" defer></script>', opts.scripts);
-
-  return `<!doctype html>
-<html lang="en">
-<head>
-${head.trim()}
-</head>
-<body>
-${nav.trim()}
-
-<main id="main">
-${read(P('partials', opts.body)).trim()}
-</main>
-
-${footer.trim()}
-</body>
-</html>
-`;
+/* ---------------------------------------------------------------------------
+   Mark the narration beats. The Reader needs to know what to say and in what
+   order; rather than hand-tagging every paragraph in every chapter, we derive
+   it here: each heading becomes a beat and carries its own label, and every
+   substantial paragraph after it becomes a beat under that label.
+   Anything inside an SVG, a control, or marked data-no-narrate is skipped.
+   --------------------------------------------------------------------------- */
+function markNarration(doc) {
+  let label = '';
+  // headings first, so each one can claim the paragraphs that follow it
+  doc = doc.replace(/<(h[123])([^>]*)>([\s\S]*?)<\/\1>/g, (m, tag, attrs, inner) => {
+    if (/data-(narrate|no-narrate)/.test(attrs)) return m;
+    if (/sr-only|aria-hidden|visually-hidden/.test(attrs)) return m;
+    const plain = plainText(inner);
+    if (!plain) return m;
+    label = plain.length > 48 ? plain.slice(0, 48) + '…' : plain;
+    return `<${tag}${attrs} data-narrate data-narrate-label="${esc(label)}">${inner}</${tag}>`;
+  });
+  // then paragraphs, picking up the label of the heading above them
+  let current = '';
+  doc = doc.replace(/(<h[123][^>]*data-narrate-label="([^"]*)"[^>]*>)|(<p([^>]*)>([\s\S]*?)<\/p>)/g,
+    (m, h, hl, pWhole, pAttrs, pInner) => {
+      if (h) { current = hl; return m; }
+      if (/data-(narrate|no-narrate)/.test(pAttrs)) return m;
+      if (/sr-only|aria-hidden|visually-hidden/.test(pAttrs)) return m;
+      const plain = plainText(pInner);
+      if (plain.length < 60) return m;                 // captions and one-liners stay silent
+      return `<p${pAttrs} data-narrate data-narrate-label="${esc(current)}">${pInner}</p>`;
+    });
+  return doc;
 }
+/* Labels are spoken and displayed, so they must be real words — decode the
+   entities the markup uses for typesetting before escaping for the attribute. */
+function plainText(html) {
+  return html
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/&nbsp;|&#160;/g, ' ')
+    .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"').replace(/&#39;|&apos;/g, "'")
+    .replace(/&[a-z]+;|&#\d+;/gi, ' ')
+    .replace(/\s+/g, ' ')
+    .replace(/\s+([.,;:!?])/g, '$1')
+    .trim();
+}
+function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;'); }
 
 const html = `<!doctype html>
 <html lang="en">
@@ -74,28 +86,9 @@ ${read(P('partials', 'footer.html')).trim()}
 </body>
 </html>
 `;
-writeFileSync(P('index.html'), html, 'utf8');
-console.log(`  ✓ index.html  (${ORDER.length} sections, ${(html.length / 1024).toFixed(1)} kB)`);
 
-const SUBPAGES = [
-  {
-    file: 'cinema.html', body: 'cinema.html', css: 'cinema.css',
-    title: 'Paper Cinema — Magic Pencil: Kingdoms of Paper',
-    desc: 'A battle that is actually happening, watched from eight placed cameras. Runs entirely in your browser.',
-    scripts: '<script src="assets/js/rig.js" defer></script>\n<script src="assets/js/cinema.js" defer></script>',
-  },
-  {
-    file: 'mirror.html', body: 'mocap.html', css: 'mocap.css',
-    title: 'Paper Mirror — Magic Pencil: Kingdoms of Paper',
-    desc: 'Stand in front of your webcam and a paper drawing moves exactly as you do. Nothing is uploaded.',
-    scripts: '<script src="assets/js/rig.js" defer></script>\n<script type="module" src="assets/js/mocap.js"></script>',
-  },
-];
-for (const sp of SUBPAGES) {
-  const out = subPage(sp);
-  writeFileSync(P(sp.file), out, 'utf8');
-  console.log(`  \u2713 ${sp.file}  (${(out.length / 1024).toFixed(1)} kB)`);
-}
+writeFileSync(P('index.html'), markNarration(html), 'utf8');
+console.log(`  ✓ index.html  (${ORDER.length} sections, ${(html.length / 1024).toFixed(1)} kB)`);
 
 for (const [ext, out] of [['css', P('assets', 'css', 'sections.css')], ['js', P('assets', 'js', 'sections.js')]]) {
   const parts = [`/* GENERATED by build.mjs — edit partials/sections/<name>.${ext} instead. */\n`];
@@ -115,7 +108,6 @@ const DIST = P('dist');
 rmSync(DIST, { recursive: true, force: true });
 mkdirSync(DIST, { recursive: true });
 copyFileSync(P('index.html'), join(DIST, 'index.html'));
-for (const sp of SUBPAGES) copyFileSync(P(sp.file), join(DIST, sp.file));
 cpSync(P('assets'), join(DIST, 'assets'), { recursive: true });
 for (const f of ['robots.txt', '.nojekyll']) if (existsSync(P(f))) copyFileSync(P(f), join(DIST, f));
 console.log('  ✓ dist/  (deployable)\n\nServe with:  python3 -m http.server 4400');

@@ -1,0 +1,467 @@
+/* ==========================================================================
+   THE ARMOURY — a plate from an arms treatise.
+   Ruled cells, numbered figures, rubrics in tally marks.
+   Depends on tokens.css + base.css. Tokens only.
+   ========================================================================== */
+
+.armoury {
+  /* Movement lengths, derived from the motion tokens so the whole site
+     slows down or speeds up together. */
+  --arm-d-snap:  calc(var(--d-base) * 1.5);   /* a string released      */
+  --arm-d-jab:   calc(var(--d-slow) * 0.9);   /* a thrust and recover   */
+  --arm-d-blow:  calc(var(--d-slow) * 1.15);  /* a full blow            */
+  --arm-d-swing: calc(var(--d-slow) * 1.55);  /* a censer on its chains */
+}
+
+/* The opening, with a rubricated drop capital */
+.armoury__lead::first-letter {
+  float: left;
+  font-family: var(--font-hand);
+  font-weight: 700;
+  font-size: 3.4em;
+  line-height: 0.78;
+  color: var(--crayon-flame);
+  padding: 0.06em 0.12em 0 0;
+  margin-block-start: 0.06em;
+}
+
+/* --------------------------------------------------------------------------
+   Marginal note with a woodcut manicule
+   -------------------------------------------------------------------------- */
+.armoury__margin {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-3);
+  max-width: 46ch;
+  margin: 0 0 var(--s-6);
+  padding: var(--s-3) 0 var(--s-3) var(--s-4);
+  border-inline-start: 2px solid var(--accent);
+  color: var(--text-muted);
+  font-family: var(--font-scribe);
+  font-size: var(--t-sm);
+  line-height: 1.55;
+}
+.armoury__margin-text p + p { margin-block-start: var(--s-2); }
+@media (min-width: 1100px) {
+  .armoury__margin { margin-inline-start: auto; }
+}
+.armoury__manicule {
+  width: 2.8em;
+  height: auto;
+  flex: none;
+  margin-block-start: 0.25em;
+}
+.armoury__manicule .stroke { stroke: var(--accent); stroke-width: 2; }
+
+/* --------------------------------------------------------------------------
+   The ruled index along the top — filters, and the running count.
+   Without JS the plate is complete and the index would lie, so it is hidden.
+   -------------------------------------------------------------------------- */
+.armoury__index { display: none; }
+:root.js .armoury__index {
+  display: grid;
+  gap: var(--s-3);
+  margin-block-end: var(--s-5);
+  padding-block-end: var(--s-3);
+  border-block-end: 1px solid var(--line);
+}
+
+.armoury__tabs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0 var(--s-5);
+}
+
+.armoury__tab {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-2);
+  min-height: 44px;
+  padding-block: var(--s-2);
+  font-family: var(--font-scribe);
+  font-size: var(--t-sm);
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  text-align: start;
+}
+.armoury__tab:hover { color: var(--text-strong); }
+.armoury__tab-name { white-space: nowrap; }
+.armoury__tab-rule {
+  flex: 1 1 auto;
+  min-width: 14px;
+  align-self: center;
+  border-block-end: 1px dotted var(--line-strong);
+  transform: translateY(0.18em);
+}
+.armoury__tab-n {
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+}
+.armoury__tab[aria-pressed="true"] {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.32em;
+}
+.armoury__tab[aria-pressed="true"] .armoury__tab-n { color: var(--accent); }
+
+.armoury__count {
+  font-family: var(--font-scribe);
+  font-size: var(--t-xs);
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   The plate itself — square cut, not a rounded card
+   -------------------------------------------------------------------------- */
+.armoury__sheet {
+  background: var(--surface);
+  border: 2.5px solid var(--ink-900);
+  box-shadow: var(--sh-2);
+  overflow: hidden;
+}
+
+.armoury__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 244px), 1fr));
+}
+
+.armoury__fig {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  padding: clamp(16px, 1.9vw, 24px);
+  border-inline-end: 1px solid var(--line);
+  border-block-end: 1px solid var(--line);
+}
+.armoury__fig[hidden] { display: none; }
+
+/* The hover tint is an opacity change on a pseudo-element, so nothing but
+   opacity and transform is ever animated. */
+.armoury__fig::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--paper-2);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--d-base) var(--e-out);
+}
+.armoury__fig:is(:hover, :focus-visible)::before { opacity: .4; }
+.armoury__fig:focus-visible { outline: 3px dashed var(--crayon-flame); outline-offset: -5px; }
+
+.armoury__meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-3);
+  font-family: var(--font-scribe);
+}
+.armoury__no {
+  font-size: var(--t-md);
+  line-height: 1;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+}
+.armoury__kind {
+  font-size: var(--t-xs);
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+}
+
+/* The runtime measures each path with getTotalLength(), which is in USER units.
+   base.css sets vector-effect: non-scaling-stroke, which resolves the dash
+   pattern in SCREEN pixels instead — so any figure drawn larger than its
+   viewBox draws as broken dashes. Turning it off makes both agree, and a
+   woodcut wants its line weight to scale with the figure anyway.
+   Mitred joins give the cut, angular corners of a block print. */
+.armoury .stroke {
+  vector-effect: none;
+  stroke-linejoin: miter;
+  stroke-miterlimit: 4;
+}
+.armoury__blank-cut .stroke { stroke-width: 1.2; }
+
+/* The figure's ruled window */
+.armoury__frame {
+  position: relative;
+  width: 100%;
+  max-width: 280px;
+  margin-inline: auto;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--paper-2) 24%, transparent);
+}
+.armoury__fig:is(:hover, :focus-visible) .armoury__frame { border-color: var(--line-strong); }
+.armoury__cut { width: 100%; height: 100%; }
+.armoury__cut .stroke { stroke-width: 2.2; }
+.armoury__cut .stroke--thin { stroke-width: 1.4; }
+.armoury__cut .stroke--fat { stroke-width: 3.2; }
+.armoury__cut .armoury__hatch { stroke: var(--ink-500); stroke-width: 1; }
+.armoury__cut .armoury__ghost { stroke: var(--ink-300); stroke-width: 1; opacity: .75; }
+
+.armoury__name {
+  font-family: var(--font-hand);
+  font-size: var(--t-sm);
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  line-height: 1.3;
+  color: var(--text-strong);
+}
+.armoury__gloss {
+  font-size: var(--t-sm);
+  line-height: 1.55;
+  color: var(--text);
+}
+
+/* ---- Rubrics: hatched tally bars, ruled into five cells ---- */
+.armoury__rubrics {
+  display: grid;
+  gap: var(--s-1);
+  margin-block-start: auto;
+  padding-block-start: var(--s-3);
+  border-block-start: 1px solid var(--line);
+}
+.armoury__rubric {
+  display: grid;
+  grid-template-columns: 5.4em 1fr;
+  align-items: center;
+  gap: var(--s-2);
+  font-size: var(--t-xs);
+}
+.armoury__key {
+  font-family: var(--font-scribe);
+  letter-spacing: 0.14em;
+  color: var(--text-muted);
+}
+.armoury__bar {
+  position: relative;
+  display: block;
+  height: 1.1em;
+  border: 1px solid var(--line-strong);
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent 0 calc(20% - 1px),
+    var(--line-strong) calc(20% - 1px) 20%
+  );
+}
+.armoury__bar i {
+  display: block;
+  height: 100%;
+  width: calc(var(--v, 0) * 20%);
+  background-image: repeating-linear-gradient(
+    46deg,
+    var(--ink-700) 0 1.4px,
+    transparent 1.4px 4.6px
+  );
+}
+.armoury__fig:is(:hover, :focus-visible) .armoury__bar i {
+  background-image: repeating-linear-gradient(
+    46deg,
+    var(--accent) 0 1.4px,
+    transparent 1.4px 4.6px
+  );
+}
+
+/* --------------------------------------------------------------------------
+   The colophon: figure XV, which is blank
+   -------------------------------------------------------------------------- */
+.armoury__colophon {
+  display: grid;
+  gap: var(--s-5);
+  margin-block-start: clamp(40px, 5vw, 72px);
+  align-items: start;
+}
+@media (min-width: 720px) {
+  .armoury__colophon { grid-template-columns: minmax(180px, 240px) 1fr; gap: var(--s-7); }
+}
+.armoury__blank {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  padding: var(--s-3);
+}
+.armoury__blank-cut { width: 100%; height: auto; }
+.armoury__blank-cut .stroke { stroke: var(--line-strong); }
+.armoury__blank-cap {
+  display: block;
+  margin-block-start: var(--s-2);
+  font-family: var(--font-scribe);
+  font-size: var(--t-xs);
+  letter-spacing: 0.16em;
+  color: var(--text-muted);
+  text-align: center;
+}
+.armoury__last h3 { font-size: var(--t-lg); margin-block-end: var(--s-3); }
+.armoury__last p { max-width: 62ch; }
+.armoury__last p + p { margin-block-start: var(--s-3); }
+.armoury__signature {
+  margin-block-start: var(--s-4);
+  font-family: var(--font-scribe);
+  font-size: var(--t-sm);
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+
+.armoury__folio {
+  margin-block-start: clamp(32px, 4vw, 56px);
+  padding-block-start: var(--s-3);
+  border-block-start: 1px solid var(--line);
+  font-family: var(--font-scribe);
+  font-size: var(--t-xs);
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* ==========================================================================
+   The figures wake — one short movement on hover, the same on keyboard focus.
+   Nothing loops. Only transform and opacity move.
+   ========================================================================== */
+.armoury [data-anim] {
+  transform-box: fill-box;
+  transform-origin: var(--ox, 50%) var(--oy, 50%);
+}
+
+/* things that hold their new position while pointed at */
+.armoury [data-anim="caltrop"],
+.armoury [data-anim="tog-a"],
+.armoury [data-anim="tog-b"] {
+  transition: transform var(--d-base) var(--e-out);
+}
+.armoury [data-anim="net"] {
+  transform: scaleY(0.56);
+  transition: transform var(--d-slow) var(--e-out);
+}
+.armoury [data-anim="smoke"] {
+  opacity: .3;
+  transform: translateY(5px);
+  transition: opacity var(--d-slow) var(--e-out), transform var(--d-slow) var(--e-out);
+}
+.armoury [data-anim="slack"] { transition: opacity var(--d-base) var(--e-out); }
+.armoury [data-anim="taut"]  { opacity: 0; transition: opacity var(--d-base) var(--e-out); }
+
+.armoury__fig:is(:hover, :focus-visible) [data-anim="caltrop"] {
+  transform: translate(var(--tx, 0), var(--ty, 0)) rotate(var(--tr, 0deg));
+}
+.armoury__fig:is(:hover, :focus-visible) [data-anim="tog-a"] { transform: translateX(-4px); }
+.armoury__fig:is(:hover, :focus-visible) [data-anim="tog-b"] { transform: translateX(4px); }
+.armoury__fig:is(:hover, :focus-visible) [data-anim="net"]   { transform: scaleY(1); }
+.armoury__fig:is(:hover, :focus-visible) [data-anim="smoke"] { opacity: 1; transform: translateY(-6px); }
+.armoury__fig:is(:hover, :focus-visible) [data-anim="slack"] { opacity: 0; }
+.armoury__fig:is(:hover, :focus-visible) [data-anim="taut"]  { opacity: 1; }
+
+/* things that make one movement and return */
+.armoury__fig:is(:hover, :focus-visible) [data-anim="lance"]   { animation: armoury-couch   var(--arm-d-blow)  var(--e-out)   1; }
+.armoury__fig:is(:hover, :focus-visible) [data-anim="nib"]     { animation: armoury-turn    var(--arm-d-blow)  var(--e-inout) 1; }
+.armoury__fig:is(:hover, :focus-visible) [data-anim="maul"]    { animation: armoury-fall    var(--arm-d-blow)  var(--e-out)   1; }
+.armoury__fig:is(:hover, :focus-visible) [data-anim="censer"]  { animation: armoury-swing   var(--arm-d-swing) var(--e-inout) 1; }
+.armoury__fig:is(:hover, :focus-visible) [data-anim="fold"]    { animation: armoury-unfold  var(--arm-d-blow)  var(--e-out)   1; }
+.armoury__fig:is(:hover, :focus-visible) [data-anim="pike"]    { animation: armoury-thrust  var(--arm-d-jab)   var(--e-out)   1; }
+.armoury__fig:is(:hover, :focus-visible) [data-anim="bolt"]    { animation: armoury-loose   var(--arm-d-swing) var(--e-out)   1; }
+.armoury__fig:is(:hover, :focus-visible) [data-anim="string"]  { animation: armoury-snap    var(--arm-d-snap)  var(--e-out)   1; }
+.armoury__fig:is(:hover, :focus-visible) [data-anim="seal"]    { animation: armoury-press   var(--arm-d-blow)  var(--e-out)   1; }
+.armoury__fig:is(:hover, :focus-visible) [data-anim="bodkin"]  { animation: armoury-jab     var(--arm-d-jab)   var(--e-out)   1; }
+.armoury__fig:is(:hover, :focus-visible) [data-anim="shear-a"] { animation: armoury-shear-a var(--arm-d-blow)  var(--e-inout) 1; }
+.armoury__fig:is(:hover, :focus-visible) [data-anim="shear-b"] { animation: armoury-shear-b var(--arm-d-blow)  var(--e-inout) 1; }
+.armoury__fig:is(:hover, :focus-visible) [data-anim="shaft"]   { animation: armoury-hone    var(--arm-d-swing) var(--e-inout) 1; }
+.armoury__fig:is(:hover, :focus-visible) [data-anim="shaving"] { animation: armoury-shaving var(--arm-d-swing) var(--e-out)   1; }
+
+@keyframes armoury-couch {
+  0%   { transform: rotate(0deg); }
+  38%  { transform: rotate(-7deg); }
+  100% { transform: rotate(0deg); }
+}
+@keyframes armoury-turn {
+  0%   { transform: scaleX(1); }
+  46%  { transform: scaleX(0.16); }
+  100% { transform: scaleX(1); }
+}
+@keyframes armoury-fall {
+  0%   { transform: rotate(0deg); }
+  40%  { transform: rotate(-15deg); }
+  72%  { transform: rotate(4deg); }
+  100% { transform: rotate(0deg); }
+}
+@keyframes armoury-swing {
+  0%   { transform: rotate(0deg); }
+  30%  { transform: rotate(-6deg); }
+  66%  { transform: rotate(4deg); }
+  100% { transform: rotate(0deg); }
+}
+@keyframes armoury-unfold {
+  0%   { transform: rotate(-72deg); }
+  100% { transform: rotate(0deg); }
+}
+@keyframes armoury-thrust {
+  0%   { transform: translate(0, 0); }
+  42%  { transform: translate(2px, -8px); }
+  100% { transform: translate(0, 0); }
+}
+@keyframes armoury-loose {
+  0%   { transform: translateX(0); opacity: 1; }
+  52%  { transform: translateX(30px); opacity: 0; }
+  53%  { transform: translateX(0); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+@keyframes armoury-snap {
+  0%   { transform: translateX(0); }
+  30%  { transform: translateX(9px); }
+  60%  { transform: translateX(-2px); }
+  100% { transform: translateX(0); }
+}
+@keyframes armoury-press {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(0.93); }
+  100% { transform: scale(1); }
+}
+@keyframes armoury-jab {
+  0%   { transform: translateY(0); }
+  40%  { transform: translateY(7px); }
+  100% { transform: translateY(0); }
+}
+@keyframes armoury-shear-a {
+  0%   { transform: rotate(0deg); }
+  46%  { transform: rotate(17deg); }
+  100% { transform: rotate(0deg); }
+}
+@keyframes armoury-shear-b {
+  0%   { transform: rotate(0deg); }
+  46%  { transform: rotate(-17deg); }
+  100% { transform: rotate(0deg); }
+}
+@keyframes armoury-hone {
+  0%   { transform: rotate(0deg); }
+  30%  { transform: rotate(7deg); }
+  66%  { transform: rotate(-5deg); }
+  100% { transform: rotate(0deg); }
+}
+@keyframes armoury-shaving {
+  0%   { transform: translate(0, 0); opacity: .25; }
+  45%  { transform: translate(-4px, 7px); opacity: 1; }
+  100% { transform: translate(0, 0); opacity: .25; }
+}
+
+/* A manuscript is still. If motion is unwelcome, nothing moves at all, and
+   every figure is left fully inked — base.css forces the draw to its finished
+   state, and these rules settle each figure into its resting pose. */
+@media (prefers-reduced-motion: reduce) {
+  .armoury [data-anim],
+  .armoury__fig::before {
+    animation: none !important;
+    transition: none !important;
+  }
+  .armoury [data-anim="net"],
+  .armoury [data-anim="caltrop"],
+  .armoury [data-anim="tog-a"],
+  .armoury [data-anim="tog-b"],
+  .armoury [data-anim="smoke"] { transform: none !important; }
+  .armoury [data-anim="smoke"] { opacity: .6 !important; }
+  .armoury [data-anim="taut"]  { opacity: 0 !important; }
+  .armoury [data-anim="slack"] { opacity: 1 !important; }
+}

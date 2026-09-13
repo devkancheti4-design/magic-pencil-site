@@ -1,0 +1,592 @@
+/* ==========================================================================
+   THE CHRONICLE — the war of the six kingdoms
+   Depends on: tokens.css, base.css. Tokens only; day and candlelit night.
+   ========================================================================== */
+
+.chronicle {
+  /* the rubric rule, and the four weights of spilled ink the night lamp
+     has to hold back. Overridden once per theme, at the foot of this file. */
+  --chr-rule:      color-mix(in srgb, var(--crayon-flame) 34%, transparent);
+  --chr-mass:      var(--ink-900);
+  --chr-mass-op:   .86;   /* the mire, the blot-drake                     */
+  --chr-mass-mid:  .30;   /* the black hill                               */
+  --chr-mass-soft: .24;   /* the burnt corner, the fold face, the flaps   */
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--paper-2) 55%, transparent) 0%,
+      transparent 12%,
+      transparent 88%,
+      color-mix(in srgb, var(--paper-2) 55%, transparent) 100%);
+}
+
+/* ==========================================================================
+   THE MAP
+   ========================================================================== */
+.chronicle__mapfig {
+  position: relative;
+  margin: 0 0 clamp(56px, 7vw, 104px);
+}
+
+.chronicle__mapscroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  border: 2px solid var(--ink-900);
+  border-radius: var(--r-sm);
+  background: var(--surface);
+  box-shadow: var(--sh-1);
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) var(--paper-2);
+  overscroll-behavior-x: contain;
+}
+.chronicle__mapscroll::-webkit-scrollbar { height: 12px; }
+.chronicle__mapscroll::-webkit-scrollbar-track { background: var(--paper-2); }
+.chronicle__mapscroll::-webkit-scrollbar-thumb {
+  background: var(--line-strong);
+  border: 3px solid var(--paper-2);
+  border-radius: var(--r-sm);
+}
+.chronicle__mapwrap { min-width: 1040px; }
+.chronicle__map { width: 100%; height: auto; display: block; }
+
+/* --- map paint -----------------------------------------------------------
+   base.css drives .wash with `opacity`, and `[data-draw].is-in .wash` beats
+   a plain opacity on our own class. So every tinted shape sets its strength
+   with fill-opacity / stroke-opacity, which the wash fade cannot touch.
+   --chr-fade fades a shape again on top of that, for Smudgewood.
+   This block must stay ABOVE the paint classes that compose with it.
+   ------------------------------------------------------------------------- */
+.chronicle__fade-a { --chr-fade: .74; }
+.chronicle__fade-b { --chr-fade: .5;  }
+.chronicle__fade-c { --chr-fade: .3;  }
+.chronicle__fade-d { --chr-fade: .16; }
+.chronicle__fade-a, .chronicle__fade-b,
+.chronicle__fade-c, .chronicle__fade-d {
+  stroke-opacity: var(--chr-fade, 1);
+  fill-opacity: var(--chr-fade, 1);
+}
+
+.chronicle__leaf    { fill: var(--surface); }
+.chronicle__seafill { fill: var(--crayon-sky); fill-opacity: .16; }
+.chronicle__seaink  { fill: none; stroke: var(--crayon-sky); stroke-width: 1.4; vector-effect: non-scaling-stroke; stroke-opacity: .7; }
+.chronicle__land    { fill: var(--surface); }
+.chronicle__tint    { fill-opacity: .16; }
+.chronicle__t1 { fill: var(--crayon-green); }
+.chronicle__t2 { fill: var(--crayon-amber); }
+.chronicle__t3 { fill: var(--crayon-sky);   }
+.chronicle__t4 { fill: var(--crayon-slate); }
+.chronicle__t5 { fill: var(--crayon-royal); }
+.chronicle__t6 { fill: var(--crayon-ember); }
+
+.chronicle__coast  { stroke: var(--ink-900); }
+.chronicle__frame  { stroke: var(--ink-700); }
+.chronicle__border { stroke: var(--crayon-flame); }
+.chronicle__crease { stroke: var(--ink-900); }
+.chronicle__foe    { stroke: var(--crayon-ember); }
+.chronicle__hill   { fill: var(--ink-900); fill-opacity: var(--chr-mass-mid); }
+.chronicle__smudge { fill: var(--ink-500); fill-opacity: .28; }
+.chronicle__blot   { fill: var(--chr-mass); fill-opacity: var(--chr-mass-op); }
+.chronicle__burn   { fill: var(--ink-900); fill-opacity: var(--chr-mass-soft); }
+.chronicle__rose   { fill: var(--ink-900); }
+.chronicle__ring   { fill: none; stroke: var(--ink-700); stroke-width: 1.2; vector-effect: non-scaling-stroke; }
+.chronicle__eye    { fill: var(--ink-900); }
+.chronicle__banner { fill: var(--surface); fill-opacity: .92; }
+.chronicle__namebg { fill: var(--surface); fill-opacity: .82; }
+.chronicle__road   { fill: none; stroke: var(--crayon-amber); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+
+/* hatching and cross-hatching: the engraver's shade */
+.chronicle__hatch {
+  fill: none;
+  stroke: var(--ink-500);
+  stroke-width: 1;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+  stroke-opacity: calc(.7 * var(--chr-fade, 1));
+}
+/* half-erased line work */
+.chronicle__ghost {
+  fill: none;
+  stroke: var(--ink-500);
+  stroke-width: 1.6;
+  stroke-dasharray: 3 5;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+  stroke-opacity: calc(.9 * var(--chr-fade, 1));
+}
+
+/* --- lettering on the map ------------------------------------------------
+   Sizes are user units inside the viewBox. At the narrowest rendering the
+   map is 1040px for a 1640 viewBox (scale .63), so nothing here may fall
+   below ~19 units or it prints under 12px.
+   ------------------------------------------------------------------------- */
+.chronicle__place {
+  font-family: var(--font-scribe);
+  font-size: 26px;
+  letter-spacing: .06em;
+  fill: var(--ink-900);
+}
+.chronicle__mapnote,
+.chronicle__road-label,
+.chronicle__burnnote,
+.chronicle__mapsub {
+  font-family: var(--font-scribe);
+  font-size: 20px;
+  letter-spacing: .03em;
+  fill: var(--ink-500);
+}
+.chronicle__road-label { fill: var(--crayon-amber); }
+.chronicle__maptitle {
+  font-family: var(--font-hand);
+  font-weight: 700;
+  font-size: 28px;
+  letter-spacing: .08em;
+  fill: var(--crayon-flame);
+}
+.chronicle__compass,
+.chronicle__compass-n {
+  font-family: var(--font-scribe);
+  font-size: 21px;
+  fill: var(--ink-700);
+}
+.chronicle__compass-n { fill: var(--crayon-flame); font-size: 24px; }
+
+/* --- the sideways hint, shown only when the leaf really does overrun ----- */
+.chronicle__hint {
+  display: none;
+  align-items: center;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+  margin-top: var(--s-3);
+  font-family: var(--font-scribe);
+  font-size: var(--t-sm);
+  color: var(--text-muted);
+  letter-spacing: .03em;
+}
+.chronicle__mapfig.is-scrollable .chronicle__hint { display: flex; }
+.chronicle__hint-w { color: var(--crayon-flame); }
+.chronicle__hint-arrow {
+  width: 64px; height: 12px; flex: none;
+  fill: none;
+  stroke: var(--crayon-flame);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* a worn edge at the east while there is more leaf to see */
+.chronicle__mapfig::after {
+  content: "";
+  position: absolute;
+  top: 0; right: 0; width: clamp(28px, 5vw, 64px); bottom: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--d-base) var(--e-out);
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--paper-4) 60%, transparent));
+}
+.chronicle__mapfig.is-scrollable:not(.is-end)::after { opacity: .9; }
+
+.chronicle__mapcap {
+  margin-top: var(--s-4);
+  max-width: 62ch;
+  font-size: var(--t-sm);
+  line-height: 1.62;
+  color: var(--text-muted);
+  border-left: 2px solid var(--chr-rule);
+  padding-left: var(--s-4);
+}
+
+/* ==========================================================================
+   THE INDEX — a table of contents in the front of a book
+   ========================================================================== */
+.chronicle__index {
+  max-width: 860px;
+  margin: 0 auto clamp(64px, 8vw, 120px);
+  padding: clamp(24px, 3.4vw, 44px) clamp(20px, 3.4vw, 48px) clamp(20px, 3vw, 36px);
+  background: var(--surface);
+  border: 2px solid var(--ink-900);
+  border-radius: var(--r-sm);
+  box-shadow: var(--sh-1);
+  position: relative;
+}
+.chronicle__index::before {
+  content: "";
+  position: absolute;
+  inset: var(--s-2);
+  border: 1px solid var(--line);
+  pointer-events: none;
+}
+.chronicle__index-title {
+  font-size: var(--t-lg);
+  text-align: center;
+  letter-spacing: .07em;
+}
+.chronicle__index-say {
+  margin: var(--s-2) auto var(--s-5);
+  max-width: 50ch;
+  text-align: center;
+  font-size: var(--t-sm);
+  color: var(--text-muted);
+}
+
+.chronicle__toc { display: grid; }
+.chronicle__toc-item { border-top: 1px solid var(--line); }
+.chronicle__toc-item:last-child { border-bottom: 1px solid var(--line); }
+
+.chronicle__toc-link {
+  display: grid;
+  grid-template-columns: 3.2em minmax(0, 1fr) auto auto;
+  align-items: baseline;
+  gap: var(--s-3);
+  min-height: 52px;
+  padding: var(--s-3) var(--s-2);
+  transition: background-color var(--d-fast) var(--e-out);
+}
+.chronicle__toc-link:hover,
+.chronicle__toc-link:focus-visible { background: color-mix(in srgb, var(--crayon-sun) 16%, transparent); }
+.chronicle__toc-link[aria-current="location"] {
+  background: color-mix(in srgb, var(--crayon-sun) 24%, transparent);
+}
+.chronicle__toc-link[aria-current="location"] .chronicle__toc-num { color: var(--crayon-flame); }
+
+.chronicle__toc-num {
+  font-family: var(--font-hand);
+  font-weight: 700;
+  font-size: var(--t-md);
+  letter-spacing: .04em;
+  color: var(--text-muted);
+  text-align: right;
+}
+.chronicle__toc-name {
+  font-family: var(--font-hand);
+  font-size: var(--t-base);
+  letter-spacing: .05em;
+  color: var(--text-strong);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .2em .7em;
+}
+.chronicle__toc-gloss {
+  font-family: var(--font-scribe);
+  font-size: var(--t-xs);
+  letter-spacing: .04em;
+  color: var(--text-muted);
+}
+.chronicle__toc-lead {
+  display: none;
+  align-self: end;
+  min-width: 18px;
+  height: .9em;
+  border-bottom: 1px dotted var(--line-strong);
+  transform: translateY(-.25em);
+}
+.chronicle__toc-folio {
+  font-family: var(--font-scribe);
+  font-size: var(--t-xs);
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.chronicle__toc-mark {
+  width: 18px; height: 18px;
+  align-self: center;
+  fill: none;
+  stroke: var(--crayon-flame);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  opacity: 0;
+  transition: opacity var(--d-slow) var(--e-out);
+}
+.chronicle__toc-link.is-read .chronicle__toc-mark { opacity: 1; }
+.chronicle__toc-link.is-read .chronicle__toc-name { color: var(--text-muted); }
+
+.chronicle__tally {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  margin-top: var(--s-5);
+}
+.chronicle__tally-said {
+  font-family: var(--font-scribe);
+  font-size: var(--t-sm);
+  color: var(--text-muted);
+  letter-spacing: .03em;
+}
+.chronicle__clear {
+  min-height: 44px;
+  padding: var(--s-3) var(--s-4);
+  font-family: var(--font-scribe);
+  font-size: var(--t-xs);
+  letter-spacing: .1em;
+  color: var(--text-strong);
+  border: 1.5px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  background: var(--paper-1);
+  transition: background-color var(--d-fast) var(--e-out), border-color var(--d-fast) var(--e-out);
+}
+.chronicle__clear:hover,
+.chronicle__clear:focus-visible { background: var(--paper-2); border-color: var(--crayon-flame); }
+
+/* ==========================================================================
+   THE CHAPTERS
+   ========================================================================== */
+.chronicle__book {
+  max-width: 1080px;
+  margin-inline: auto;
+  display: grid;
+  gap: clamp(64px, 9vw, 140px);
+}
+
+.chronicle__chapter {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  position: relative;
+  scroll-margin-top: calc(var(--nav-h) + var(--s-6));
+}
+.chronicle__chapter:focus { outline: none; }
+.chronicle__chapter:focus-visible { outline: 3px dashed var(--crayon-flame); outline-offset: 14px; }
+
+/* the ruled margin of the page: two lines, as a ruled leaf has */
+.chronicle__body {
+  border-left: 1px solid var(--line);
+  padding-left: clamp(16px, 2.4vw, 34px);
+  position: relative;
+}
+.chronicle__body::before {
+  content: "";
+  position: absolute;
+  left: -5px; top: 0; bottom: 0;
+  width: 1px;
+  background: var(--line);
+}
+
+.chronicle__margin {
+  display: none;
+  position: relative;
+  text-align: right;
+  padding-top: .6em;
+}
+.chronicle__margin-folio {
+  font-family: var(--font-scribe);
+  font-size: var(--t-xs);
+  letter-spacing: .14em;
+  color: var(--text-muted);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  display: inline-block;
+  border-right: 1px solid var(--chr-rule);
+  padding-right: 6px;
+}
+
+/* --- chapter head -------------------------------------------------------- */
+.chronicle__head { margin-bottom: clamp(20px, 2.6vw, 34px); }
+.chronicle__head h3 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .2em .5em;
+  font-size: var(--t-xl);
+  letter-spacing: .06em;
+}
+.chronicle__numeral {
+  font-size: 1.5em;
+  line-height: .9;
+  color: var(--crayon-flame);
+  letter-spacing: .04em;
+}
+.chronicle__kingdom { color: var(--text-strong); }
+.chronicle__standing {
+  margin-top: var(--s-2);
+  font-family: var(--font-scribe);
+  font-size: var(--t-sm);
+  letter-spacing: .05em;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--line);
+  padding-bottom: var(--s-3);
+}
+
+/* --- the two columns of a leaf ------------------------------------------- */
+.chronicle__cols { display: grid; gap: clamp(24px, 3vw, 44px); align-items: start; }
+
+.chronicle__text > p { margin-bottom: var(--s-5); max-width: 66ch; }
+.chronicle__text > p:last-child { margin-bottom: 0; }
+/* the named wish, rubricated the way a scribe marks a word of power */
+.chronicle__text em {
+  font-family: var(--font-scribe);
+  font-style: normal;
+  letter-spacing: .04em;
+  color: var(--crayon-ember);
+}
+
+.chronicle__lead::first-letter {
+  float: left;
+  font-family: var(--font-hand);
+  font-weight: 700;
+  font-size: 3.5em;
+  line-height: .84;
+  color: var(--crayon-flame);
+  padding: .04em .1em 0 0;
+  margin: .06em .06em 0 0;
+}
+/* the gold-leaf initial that opens the book */
+.chronicle__lead--gold::first-letter {
+  color: var(--crayon-ember);
+  background: var(--crayon-sun);
+  border: 1px solid var(--ink-900);
+  padding: .06em .12em .04em .1em;
+  margin-right: .12em;
+}
+
+/* --- the woodcut --------------------------------------------------------- */
+.chronicle__cut {
+  margin: 0;
+  padding: clamp(12px, 1.6vw, 20px);
+  background: var(--surface);
+  border: 2px solid var(--ink-900);
+  border-radius: var(--r-sm);
+}
+.chronicle__cut-svg {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+}
+.chronicle__cut figcaption {
+  margin-top: var(--s-3);
+  font-size: var(--t-xs);
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* --- woodcut paint (fill-opacity, for the reason given above) ------------- */
+.chronicle__sky        { fill: var(--crayon-sky);   fill-opacity: calc(.16 * var(--chr-fade, 1)); }
+.chronicle__soil       { fill: var(--crayon-amber); fill-opacity: calc(.2  * var(--chr-fade, 1)); }
+.chronicle__plain      { fill: var(--crayon-amber); fill-opacity: calc(.16 * var(--chr-fade, 1)); }
+.chronicle__flap       { fill: var(--ink-900);      fill-opacity: calc(var(--chr-mass-soft) * var(--chr-fade, 1)); }
+.chronicle__keep       { fill: var(--paper-2); }
+.chronicle__turf       { fill: var(--crayon-grass); fill-opacity: calc(.28 * var(--chr-fade, 1)); }
+.chronicle__creaseface { fill: var(--ink-900);      fill-opacity: calc(var(--chr-mass-soft) * var(--chr-fade, 1)); }
+.chronicle__foe-fill   { fill: var(--crayon-ember); fill-opacity: calc(.2  * var(--chr-fade, 1)); }
+.chronicle__wingfill   { fill: var(--crayon-ember); fill-opacity: calc(.32 * var(--chr-fade, 1)); }
+.chronicle__bodyfill   { fill: var(--crayon-amber); fill-opacity: calc(.4  * var(--chr-fade, 1)); }
+.chronicle__fire       { fill: var(--fire-edge);    fill-opacity: .6;  }
+.chronicle__fire-core  { fill: var(--fire-core);    fill-opacity: .85; }
+.chronicle__mist       { fill: var(--ink-300);      fill-opacity: calc(.24 * var(--chr-fade, 1)); }
+.chronicle__treefill   { fill: var(--crayon-green); fill-opacity: calc(.38 * var(--chr-fade, 1)); }
+.chronicle__crumb      { fill: var(--ink-500);      fill-opacity: .55; }
+.chronicle__wingfill--ink { fill: var(--chr-mass);  fill-opacity: calc(var(--chr-mass-op) * .95); }
+.chronicle__drip       { fill: var(--chr-mass);     fill-opacity: calc(var(--chr-mass-op) * .9); }
+.chronicle__tower      { fill: var(--paper-2); }
+.chronicle__raft       { fill: var(--surface); }
+.chronicle__vault      { fill: var(--ink-900);      fill-opacity: .1; }
+.chronicle__chew       { fill: var(--paper-3); }
+.chronicle__pencilbody { fill: var(--crayon-sun); }
+
+/* --- the rubric, the marginal note, the foot ----------------------------- */
+.chronicle__rubric {
+  margin-top: clamp(24px, 3vw, 38px);
+  padding-top: var(--s-4);
+  border-top: 2px solid var(--chr-rule);
+  font-family: var(--font-scribe);
+  font-size: var(--t-md);
+  line-height: 1.5;
+  letter-spacing: .02em;
+  color: var(--crayon-ember);
+  max-width: 60ch;
+}
+.chronicle__pilcrow {
+  color: var(--crayon-flame);
+  margin-right: .4em;
+  font-size: 1.1em;
+}
+
+.chronicle__note {
+  display: block;
+  margin-top: var(--s-4);
+  font-size: var(--t-sm);
+  line-height: 1.6;
+  color: var(--text-muted);
+  max-width: 52ch;
+}
+.chronicle__note-mark {
+  font-family: var(--font-scribe);
+  font-size: var(--t-xs);
+  letter-spacing: .12em;
+  color: var(--crayon-flame);
+  margin-right: .6em;
+}
+
+.chronicle__foot {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-4);
+  margin-top: clamp(24px, 3vw, 40px);
+  padding-top: var(--s-3);
+  border-top: 1px solid var(--line);
+  font-family: var(--font-scribe);
+  font-size: var(--t-xs);
+  letter-spacing: .16em;
+  text-transform: lowercase;
+  color: var(--text-muted);
+}
+.chronicle__foot-folio { color: var(--crayon-flame); }
+
+.chronicle__colophon {
+  max-width: 56ch;
+  margin: clamp(64px, 8vw, 120px) auto 0;
+  text-align: center;
+  font-family: var(--font-scribe);
+  font-size: var(--t-md);
+  line-height: 1.6;
+  letter-spacing: .03em;
+  color: var(--text-muted);
+  padding-top: var(--s-6);
+  border-top: 2px solid var(--chr-rule);
+}
+
+/* ==========================================================================
+   Wider leaves
+   ========================================================================== */
+@media (min-width: 720px) {
+  .chronicle__toc-link { grid-template-columns: 3.6em auto minmax(24px, 1fr) auto auto; }
+  .chronicle__toc-lead { display: block; }
+}
+
+@media (min-width: 900px) {
+  .chronicle__cols { grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); }
+  .chronicle__chapter:nth-of-type(even) .chronicle__text { grid-column: 2; grid-row: 1; }
+  .chronicle__chapter:nth-of-type(even) .chronicle__cut  { grid-column: 1; grid-row: 1; }
+}
+
+/* the outer margin only exists once there is room to rule one */
+@media (min-width: 1080px) {
+  .chronicle__chapter {
+    grid-template-columns: clamp(72px, 8vw, 132px) minmax(0, 1fr);
+    gap: 0 clamp(16px, 2.5vw, 36px);
+  }
+  .chronicle__margin { display: block; }
+}
+
+/* the map fits the page on a wide screen; no scroller chrome needed */
+@media (min-width: 1160px) {
+  .chronicle__mapwrap { min-width: 0; }
+}
+
+/* ==========================================================================
+   By candle the ink turns to chalk, so the great masses of it — the mire,
+   the drake, the burnt corner — have to be held back or they shout.
+   ========================================================================== */
+:root[data-theme="night"] .chronicle {
+  --chr-mass: var(--ink-300);
+  --chr-mass-op: .5;
+  --chr-mass-mid: .22;
+  --chr-mass-soft: .14;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="day"]) .chronicle {
+    --chr-mass: var(--ink-300);
+    --chr-mass-op: .5;
+    --chr-mass-mid: .22;
+    --chr-mass-soft: .14;
+  }
+}

@@ -1,554 +1,771 @@
 <section id="dragons" class="section dragons" aria-labelledby="dragons-title">
 
-  <!-- ── decorative sky over the roost ─────────────────────────────────── -->
-  <div class="dragons__sky" aria-hidden="true" data-parallax="0.07">
-    <svg class="dragons__skyart" viewBox="0 0 1200 300" preserveAspectRatio="xMidYMin slice" aria-hidden="true" focusable="false">
-      <g class="dragons__cloud dragons__cloud--a">
-        <path fill="var(--dg-cloud)" d="M120 96c-14-26 6-52 34-46 8-22 42-26 54-6 20-12 46 2 46 24 20 2 30 22 20 36-6 8-18 10-28 8H140c-14 0-22-8-20-16z"/>
-        <path class="dragons__hair" d="M120 96c-14-26 6-52 34-46 8-22 42-26 54-6 20-12 46 2 46 24 20 2 30 22 20 36"/>
-      </g>
-      <g class="dragons__cloud dragons__cloud--b">
-        <path fill="var(--dg-cloud)" d="M700 64c-10-20 6-40 26-35 8-16 32-18 41-3 15-10 35 2 34 19 16 2 23 18 15 28-5 6-14 7-22 6H716c-11 0-17-7-16-15z"/>
-        <path class="dragons__hair" d="M700 64c-10-20 6-40 26-35 8-16 32-18 41-3 15-10 35 2 34 19 16 2 23 18 15 28"/>
-      </g>
-      <g class="dragons__cloud dragons__cloud--c">
-        <path fill="var(--dg-cloud)" d="M960 150c-8-16 5-31 21-27 6-13 25-15 32-3 12-8 28 2 27 15 13 2 19 14 12 23-4 5-11 6-17 5H973c-9 0-14-6-13-12z"/>
-      </g>
-    </svg>
-    <!-- a very small dragon, a long way off, crossing the page -->
-    <div class="dragons__flyer">
-      <svg viewBox="0 0 120 60" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
-        <g class="dragons__flyerart">
-          <path fill="var(--dg-far)" d="M20 34c10-4 24-5 34-2 8-12 24-20 40-20-8 8-12 16-12 22 8-2 14 0 18 4-8 2-14 6-18 12-6-6-16-8-26-6-8 2-14 4-20 8 2-6 0-12-6-14 4-2 8-4 10-4z"/>
-          <path fill="var(--dg-far)" d="M54 32c-10 4-20 10-28 18 12-4 22-6 32-6z"/>
-        </g>
-      </svg>
-    </div>
-  </div>
+  <!-- ======================================================================
+       The scribe's tally stamps. Cut once, printed eighteen times.
+       Ids are prefixed: other chapters put defs on this same page.
+       ====================================================================== -->
+  <svg class="dragons__sprite" aria-hidden="true" focusable="false"><defs>
+    <g id="dragons-u1"><path d="M6 4.6 4.7 21.5"/></g>
+    <g id="dragons-u2"><use href="#dragons-u1"/><path d="M15.1 3.9 16.1 21.8"/></g>
+    <g id="dragons-u3"><use href="#dragons-u2"/><path d="M24.2 4.3 23.1 21.3"/></g>
+    <g id="dragons-u4"><use href="#dragons-u3"/><path d="M32.9 3.6 33.7 21.9"/></g>
+    <g id="dragons-g5"><use href="#dragons-u4"/><path d="M1.5 21.1 38.8 4.4"/></g>
+  </defs></svg>
 
   <div class="shell dragons__shell">
 
-    <header class="section-head section-head--center dragons__intro" data-reveal>
-      <span class="eyebrow">Name it and it breathes</span>
-      <h2 id="dragons-title">Six dragons, <span class="underlined">one word</span></h2>
-      <p>
-        A dragon is a drawing whose name happens to be <em>fire dragon</em>. The name is the
-        wish — it flies, it breathes fire. The shape is everything else: bigger is tougher,
-        spikes do damage, more legs run faster, closed loops are armour. Same two words.
-        Six very different animals.
+    <!-- ============================== the head ========================== -->
+    <header class="section-head dragons__head" data-reveal>
+      <p class="eyebrow">Liber bestiarum &middot; of dragons</p>
+      <h2 id="dragons-title">The Dragons of the War</h2>
+      <p class="dragons__preamble">
+        Of the dragons there is more set down than of the men who drew them. A dragon is a drawing, and a
+        drawing may be copied, and these six leaves were copied a great many times before they came into
+        this book. Four of the six were drawn with his pencil. Two were drawn with theirs. Not all were
+        named <i>dragon</i> &mdash; the name given is what the thing does, and a wyrm was named <i>wyrm</i>
+        &mdash; but the field-scribes filed them together, and so does this book. The measurements are
+        theirs. The tally runs to ten and no further; ten is what a scribe writes down when a thing is
+        past counting.
       </p>
-      <p class="dragons__namebar">
-        <span class="dragons__typedlabel">type this under it</span>
-        <button class="dragons__copy" type="button" data-copy="fire dragon">
-          <span class="sr-only">Copy the name </span>fire dragon
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 20l3-1 11-11-2-2L5 17z"/><path d="M16 6l2 2"/></svg>
-          <span class="dragons__copied" aria-hidden="true">copied</span>
-        </button>
-      </p>
+      <p class="dragons__note">The plates stir when the eye rests on them, or when the reader asks.</p>
     </header>
 
-    <ul class="dragons__grid" data-stagger="90">
+    <ol class="dragons__leaves" role="list">
 
-      <!-- ══════════════ 1 · FIRE DRAGON ══════════════ -->
-      <li class="dragons__item" data-reveal="pop">
-        <article class="card card--pad card--lift dragons__card">
-          <div class="dragons__plate" data-draw>
-            <svg class="dragons__svg" viewBox="0 0 300 210" role="img" aria-labelledby="dragons-fig-1" preserveAspectRatio="xMidYMid meet" focusable="false">
-              <title id="dragons-fig-1">A broad dragon with big membrane wings, breathing a jet of flame.</title>
-              <g class="dragons__art alive alive--slow">
+      <!-- ================================================================
+           I · THE FIRE DRAKE
+           ================================================================ -->
+      <li class="dragons__leaf" data-reveal="left">
+        <article class="dragons__beast" aria-labelledby="dragons-n1">
 
-                <!-- far wing, behind everything -->
-                <g class="dragons__wing dragons__wing--far" style="--ox:146px;--oy:100px">
-                  <path class="wash" fill="var(--dg-fire-wing2)" d="M146 100c14-34 48-62 88-70-22 22-18 42-18 42-24 4-24 20-24 20-18 0-34 2-46 8z"/>
-                  <path class="stroke stroke--thin" style="--draw-delay:120ms" d="M146 100c14-34 48-62 88-70-22 22-18 42-18 42-24 4-24 20-24 20-18 0-34 2-46 8"/>
+          <figure class="dragons__plate" data-draw>
+            <span class="dragons__plateno" aria-hidden="true">plate i</span>
+            <svg class="dragons__art" viewBox="0 0 260 190" role="img" aria-labelledby="dragons-f1" focusable="false">
+              <title id="dragons-f1">Woodcut of a four-legged drake with wide fingered wings, a raised neck, a barbed tail and a jet of flame from its open jaws.</title>
+              <defs>
+                <clipPath id="dragons-clip1"><path d="M36 58 L58 52 C70 48 78 50 80 56 C96 68 112 82 126 96 C142 86 166 88 180 102 C188 110 190 118 186 126 C204 128 224 120 238 104 C246 94 252 78 250 62 L258 50 L254 68 L260 74 C252 92 240 110 222 124 C208 134 194 140 180 142 C160 148 134 146 120 134 C110 126 104 116 98 106 C90 100 82 92 74 82 C62 88 48 88 34 86 L58 78 L70 70 L52 64 Z"/></clipPath>
+              </defs>
+
+              <!-- the pigment goes down first, under every line -->
+              <g class="wash" style="--wash-delay:960ms">
+                <path fill="var(--crayon-amber)" fill-opacity=".4" d="M132 94 C148 70 166 44 186 26 L224 32 Q198 50 228 70 Q200 88 212 108 Q184 104 180 120 C166 112 148 102 132 94 Z"/>
+                <path fill="var(--crayon-amber)" fill-opacity=".26" d="M126 96 C122 74 114 52 104 34 L76 48 Q100 52 84 68 Q106 74 92 88 C104 92 116 94 126 96 Z"/>
+                <path fill="var(--crayon-ember)" fill-opacity=".5" d="M36 58 L58 52 C70 48 78 50 80 56 C96 68 112 82 126 96 C142 86 166 88 180 102 C188 110 190 118 186 126 C204 128 224 120 238 104 C246 94 252 78 250 62 L258 50 L254 68 L260 74 C252 92 240 110 222 124 C208 134 194 140 180 142 C160 148 134 146 120 134 C110 126 104 116 98 106 C90 100 82 92 74 82 C62 88 48 88 34 86 L58 78 L70 70 L52 64 Z"/>
+                <path fill="var(--crayon-ember)" fill-opacity=".5" d="M124 106 C111 122 106 136 108 152 L130 154 C127 138 130 122 140 107 Z"/>
+                <path fill="var(--crayon-ember)" fill-opacity=".5" d="M154 104 C174 100 188 112 186 130 C184 144 174 152 162 152 L150 142 C164 136 166 120 154 104 Z"/>
+                <path fill="var(--crayon-ember)" fill-opacity=".5" d="M170 143 C177 151 180 158 178 168 L198 170 C198 158 195 148 188 139 Z"/>
+              </g>
+
+              <g class="dragons__figure">
+
+                <!-- the far wing, folded, behind everything -->
+                <g class="dragons__part dragons__wing dragons__wing--far" style="--ox:126px;--oy:96px">
+                  <path class="stroke stroke--thin" style="--draw-delay:560ms" d="M126 96 C122 74 114 52 104 34 L76 48 Q100 52 84 68 Q106 74 92 88 C104 92 116 94 126 96 Z"/>
+                  <path class="stroke dragons__fine" style="--draw-delay:720ms" d="M124 92 L104 36"/>
+                  <path class="stroke dragons__fine" style="--draw-delay:740ms" d="M123 93 L88 70"/>
                 </g>
 
-                <!-- tail -->
-                <g class="dragons__tail" style="--ox:212px;--oy:118px">
-                  <path class="wash" fill="var(--dg-fire-body)" d="M210 114c32-2 58 8 70 24 8 10 16 8 18-2 0 18-20 22-32 8-12-14-32-20-58-18z"/>
-                  <path class="wash" fill="var(--dg-fire-wing)" d="M298 136c6-12 8-24 4-34-2 14-8 24-16 30z"/>
-                  <path class="stroke" style="--draw-delay:420ms" d="M210 114c32-2 58 8 70 24 8 10 16 8 18-2"/>
-                  <path class="stroke" style="--draw-delay:520ms" d="M298 136c0 18-20 22-32 8-12-14-32-20-58-18"/>
-                  <path class="stroke stroke--thin" style="--draw-delay:620ms" d="M298 136c6-12 8-24 4-34-2 14-8 24-16 30"/>
+                <!-- head, neck, body, tail: one block, cut in one go -->
+                <path class="stroke stroke--fat" style="--draw-delay:0ms" d="M36 58 L58 52 C70 48 78 50 80 56 C96 68 112 82 126 96 C142 86 166 88 180 102 C188 110 190 118 186 126 C204 128 224 120 238 104 C246 94 252 78 250 62 L258 50 L254 68 L260 74 C252 92 240 110 222 124 C208 134 194 140 180 142 C160 148 134 146 120 134 C110 126 104 116 98 106 C90 100 82 92 74 82 C62 88 48 88 34 86 L58 78 L70 70 L52 64 Z"/>
+
+                <!-- the limbs -->
+                <path class="stroke" style="--draw-delay:280ms" d="M124 106 C111 122 106 136 108 152 L130 154 C127 138 130 122 140 107"/>
+                <path class="stroke" style="--draw-delay:320ms" d="M154 104 C174 100 188 112 186 130 C184 144 174 152 162 152"/>
+                <path class="stroke" style="--draw-delay:360ms" d="M170 143 C177 151 180 158 178 168 L198 170 C198 158 195 148 188 139"/>
+                <path class="stroke" style="--draw-delay:420ms" d="M104 152 L100 164 L134 164 L130 153"/>
+                <path class="stroke" style="--draw-delay:440ms" d="M174 168 L170 180 L204 180 L200 169"/>
+                <path class="stroke stroke--thin" style="--draw-delay:470ms" d="M109 164 L109 170 M117 165 L117 171 M126 164 L126 170"/>
+                <path class="stroke stroke--thin" style="--draw-delay:490ms" d="M179 180 L179 186 M187 181 L187 187 M196 180 L196 186"/>
+
+                <!-- horns, frill, spines -->
+                <path class="stroke stroke--thin" style="--draw-delay:200ms" d="M75 52 L98 33 L86 55 Z"/>
+                <path class="stroke stroke--thin" style="--draw-delay:220ms" d="M63 52 L80 30 L74 53 Z"/>
+                <path class="stroke stroke--thin" style="--draw-delay:240ms" d="M80 62 C88 58 96 58 102 64"/>
+                <path class="stroke stroke--thin" style="--draw-delay:500ms" d="M130 92 L132 81 L139 92 M147 87 L151 76 L158 88 M166 90 L171 79 L177 92 M196 126 L200 115 L207 126 M216 120 L222 110 L227 121"/>
+
+                <!-- the maw -->
+                <path class="stroke stroke--thin" style="--draw-delay:540ms" d="M44 62 L47 67 M54 66 L56 71 M44 82 L46 77 M54 80 L56 75"/>
+                <path class="stroke dragons__fine" style="--draw-delay:560ms" d="M40 60 L44 61"/>
+
+                <!-- hatching: the light falls from the upper left -->
+                <g class="dragons__hatch" clip-path="url(#dragons-clip1)">
+                  <path class="stroke" style="--draw-delay:860ms" d="M44 90 L58 72"/>
+                  <path class="stroke" style="--draw-delay:875ms" d="M56 92 L70 74"/>
+                  <path class="stroke" style="--draw-delay:890ms" d="M84 104 L100 82"/>
+                  <path class="stroke" style="--draw-delay:905ms" d="M94 112 L110 90"/>
+                  <path class="stroke" style="--draw-delay:920ms" d="M100 150 L126 112"/>
+                  <path class="stroke" style="--draw-delay:935ms" d="M112 152 L138 114"/>
+                  <path class="stroke" style="--draw-delay:950ms" d="M124 154 L150 116"/>
+                  <path class="stroke" style="--draw-delay:965ms" d="M136 154 L162 116"/>
+                  <path class="stroke" style="--draw-delay:980ms" d="M148 154 L174 116"/>
+                  <path class="stroke" style="--draw-delay:995ms" d="M160 152 L186 114"/>
+                  <path class="stroke" style="--draw-delay:1010ms" d="M172 148 L196 112"/>
+                  <path class="stroke" style="--draw-delay:1025ms" d="M186 140 L208 108"/>
+                  <path class="stroke" style="--draw-delay:1040ms" d="M202 132 L224 100"/>
+                  <path class="stroke" style="--draw-delay:1055ms" d="M214 124 L236 92"/>
+                  <path class="stroke" style="--draw-delay:1070ms" d="M226 114 L246 84"/>
+                  <path class="stroke" style="--draw-delay:1085ms" d="M238 100 L254 74"/>
+                  <path class="stroke" style="--draw-delay:1110ms" d="M112 146 L130 126"/>
+                  <path class="stroke" style="--draw-delay:1125ms" d="M128 150 L146 130"/>
+                  <path class="stroke" style="--draw-delay:1140ms" d="M144 150 L162 130"/>
+                  <path class="stroke" style="--draw-delay:1155ms" d="M160 148 L178 128"/>
                 </g>
 
-                <!-- legs -->
-                <path class="wash" fill="var(--dg-fire-body)" d="M196 158c10 10 14 22 10 34h22c4-16-4-30-14-38z"/>
-                <path class="stroke" style="--draw-delay:380ms" d="M196 158c10 10 14 22 10 34h22c4-16-4-30-14-38"/>
-                <path class="wash" fill="var(--dg-fire-body)" d="M146 160c-8 10-12 22-8 34h-22c-4-16 4-30 14-38z"/>
-                <path class="stroke" style="--draw-delay:340ms" d="M146 160c-8 10-12 22-8 34h-22c-4-16 4-30 14-38"/>
-                <path class="stroke stroke--thin" style="--draw-delay:700ms" d="M116 194h22M206 192h22"/>
-
-                <!-- body -->
-                <g class="dragons__body">
-                  <path class="wash" fill="var(--dg-fire-body)" d="M170 96c-28 0-50 16-50 36s22 36 50 36 50-16 50-36-22-36-50-36z"/>
-                  <path class="wash" fill="var(--dg-fire-belly)" d="M170 124c-22 0-38 10-38 22s16 22 38 22 38-10 38-22-16-22-38-22z"/>
-                  <path class="stroke" style="--draw-delay:200ms" d="M170 96c-28 0-50 16-50 36s22 36 50 36 50-16 50-36-22-36-50-36z"/>
-                  <path class="stroke stroke--thin" style="--draw-delay:640ms" d="M132 140c4 16 20 28 38 28s34-10 38-26"/>
-                  <path class="stroke stroke--thin" style="--draw-delay:680ms" d="M144 116c6 6 14 6 20 0M170 112c6 6 14 6 20 0M194 120c6 6 14 6 20 0"/>
+                <!-- the near wing: arm, wrist, four fingers, membrane -->
+                <g class="dragons__part dragons__wing dragons__wing--near" style="--ox:132px;--oy:94px">
+                  <path class="stroke" style="--draw-delay:620ms" d="M132 94 C148 70 166 44 186 26 L224 32 Q198 50 228 70 Q200 88 212 108 Q184 104 180 120 C166 112 148 102 132 94 Z"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:800ms" d="M134 94 C150 72 168 46 186 26"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:820ms" d="M186 26 L224 32"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:840ms" d="M186 26 L228 70"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:860ms" d="M186 26 L212 108"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:880ms" d="M186 27 L180 120"/>
                 </g>
 
-                <!-- neck + head -->
-                <g>
-                  <path class="wash" fill="var(--dg-fire-body)" d="M106 56c8 18 20 36 36 48l16-16c-14-10-26-28-32-44z"/>
-                  <path class="wash" fill="var(--dg-fire-body)" d="M104 34c-16-6-34 0-42 12-6 10 0 22 12 26 14 4 30 0 36-10 4-8 2-24-6-28z"/>
-                  <path class="wash" fill="var(--dg-fire-wing)" d="M100 36c10-10 22-16 32-16-8 8-16 18-20 28z"/>
-                  <path class="wash" fill="var(--dg-fire-wing)" d="M108 48c10 2 18 8 22 16-8-4-16-4-22-2z"/>
-                  <path class="stroke" style="--draw-delay:240ms" d="M106 56c8 18 20 36 36 48"/>
-                  <path class="stroke" style="--draw-delay:280ms" d="M136 46c6 16 18 34 32 44"/>
-                  <path class="stroke" style="--draw-delay:320ms" d="M104 34c-16-6-34 0-42 12-6 10 0 22 12 26 14 4 30 0 36-10 4-8 2-24-6-28z"/>
-                  <path class="stroke stroke--thin" style="--draw-delay:460ms" d="M100 36c10-10 22-16 32-16-8 8-16 18-20 28M108 48c10 2 18 8 22 16"/>
-                  <path class="wash" fill="var(--dg-fire-body)" d="M62 60c10 8 26 10 38 4l-2 12c-14 4-28 0-38-8z"/>
-                  <path class="stroke stroke--thin" style="--draw-delay:600ms" d="M62 62c10 8 26 10 38 4l-2 12c-14 4-28 0-38-8z"/>
-                  <circle class="dragons__eye" cx="86" cy="42" r="3.4"/>
+                <!-- the breath -->
+                <g class="dragons__part dragons__breath" style="--ox:38px;--oy:74px">
+                  <g class="wash" style="--wash-delay:1340ms">
+                    <path fill="var(--fire-edge)" fill-opacity=".55" d="M38 74 C24 72 10 80 2 94 C11 93 18 97 19 103 C9 106 2 116 0 128 C13 116 27 111 38 113 C31 102 31 86 38 74 Z"/>
+                    <path fill="var(--fire-mid)" fill-opacity=".7" d="M37 78 C26 78 16 84 11 94 C18 94 23 97 24 102 C17 105 12 112 11 120 C20 111 30 107 38 108 C33 99 33 86 37 78 Z"/>
+                    <path fill="var(--fire-core)" fill-opacity=".85" d="M36 84 C29 84 22 88 19 95 C24 95 27 97 28 100 C23 103 20 107 19 112 C25 106 31 104 36 104 C33 98 33 89 36 84 Z"/>
+                  </g>
+                  <path class="stroke stroke--thin" style="--draw-delay:1300ms" d="M38 74 C24 72 10 80 2 94 C11 93 18 97 19 103 C9 106 2 116 0 128 C13 116 27 111 38 113 C31 102 31 86 38 74 Z"/>
+                  <path class="stroke dragons__fine" style="--draw-delay:1360ms" d="M37 78 C26 78 16 84 11 94 C18 94 23 97 24 102 C17 105 12 112 11 120 C20 111 30 107 38 108"/>
                 </g>
 
-                <!-- near wing -->
-                <g class="dragons__wing dragons__wing--near" style="--ox:152px;--oy:102px">
-                  <path class="wash" fill="var(--dg-fire-wing)" d="M152 102c16-40 58-72 110-80-28 26-24 52-24 52-32 2-32 22-32 22-26 0-38 6-54 6z"/>
-                  <path class="stroke" style="--draw-delay:160ms" d="M152 102c16-40 58-72 110-80"/>
-                  <path class="stroke" style="--draw-delay:300ms" d="M262 22c-28 26-24 52-24 52-32 2-32 22-32 22-26 0-38 6-54 6"/>
-                  <path class="stroke stroke--thin" style="--draw-delay:520ms" d="M152 102l86-28M152 102l54-6"/>
-                </g>
-
-                <!-- fire -->
-                <g class="dragons__breath" style="--mx:56px;--my:64px;--bdx:-34px;--bdy:2px">
-                  <path class="dragons__puff" style="--i:2" fill="var(--fire-edge)" d="M58 58c-20-14-44-8-50 12 12-6 24-4 30 4-4-12 4-18 20-16z"/>
-                  <path class="dragons__puff" style="--i:1" fill="var(--fire-mid)" d="M54 62c-12-8-24-6-30 4 10 0 18 4 22 10 0-8 4-14 8-14z"/>
-                  <path class="dragons__puff" style="--i:0" fill="var(--fire-core)" d="M50 68c-8-4-16 0-18 8 6-2 12 0 14 4 0-6 2-10 4-12z"/>
+                <!-- the eye, last, as the illuminator did it -->
+                <g class="wash" style="--wash-delay:1520ms">
+                  <circle class="dragons__eye" cx="59" cy="62" r="2.8"/>
                 </g>
               </g>
             </svg>
-          </div>
+          </figure>
 
-          <h3 class="dragons__name">Fire Dragon</h3>
-          <p class="dragons__rule">bigger = tougher</p>
-          <p class="dragons__line">Broad as a barn door, because somebody filled the whole page with it. It lands on a castle and the castle stops being a castle.</p>
-          <dl class="dragons__stats">
-            <div class="dragons__stat" style="--v:.88"><dt>Tough</dt><dd><span class="dragons__meter" aria-hidden="true"><i></i></span><b>barn-ish</b></dd></div>
-            <div class="dragons__stat" style="--v:.5"><dt>Fast</dt><dd><span class="dragons__meter" aria-hidden="true"><i></i></span><b>brisk</b></dd></div>
-            <div class="dragons__stat" style="--v:.62"><dt>Damage</dt><dd><span class="dragons__meter" aria-hidden="true"><i></i></span><b>ouch</b></dd></div>
-          </dl>
-          <p class="dragons__act">
-            <button class="dragons__wake" type="button" aria-pressed="false" aria-label="Wake it up — Fire Dragon">
-              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3l2.2 5.4L20 10l-5.8 1.6L12 17l-2.2-5.4L4 10l5.8-1.6z"/></svg>
-              <span>Wake it up</span>
-            </button>
-          </p>
+          <div class="dragons__text">
+            <p class="dragons__where">cap. iii &middot; at the crease</p>
+            <h3 class="dragons__name" id="dragons-n1">The Fire Drake</h3>
+            <p class="dragons__binomial">Draco ignifer communis</p>
+            <p class="dragons__account">
+              Iries drew the first of these at Creasemarch on the third day, standing on ground he had
+              taken that morning, and named it <i>dragon</i>. It burned the roach pontoons on both banks
+              before the ink was dry, and the fold-line held until evening. This plate is copied from his
+              own leaf, which is why the near wing is larger than the far one. He drew it in a hurry.
+            </p>
+            <dl class="dragons__rubrics">
+              <div class="dragons__rubric"><dt>Wingspan</dt><dd>
+                <span class="dragons__tally" aria-hidden="true"><svg viewBox="0 0 106 26" focusable="false"><use class="dragons__ghost" href="#dragons-g5"/><use class="dragons__ghost" href="#dragons-g5" x="54"/><use class="dragons__ink" href="#dragons-g5"/><use class="dragons__ink" href="#dragons-u4" x="54"/></svg></span>
+                <span class="dragons__measure">nine paces, tip to tip</span></dd></div>
+              <div class="dragons__rubric"><dt>Breath</dt><dd>
+                <span class="dragons__tally" aria-hidden="true"><svg viewBox="0 0 106 26" focusable="false"><use class="dragons__ghost" href="#dragons-g5"/><use class="dragons__ghost" href="#dragons-g5" x="54"/><use class="dragons__ink" href="#dragons-g5"/><use class="dragons__ink" href="#dragons-u4" x="54"/></svg></span>
+                <span class="dragons__measure">a barn's length of flame</span></dd></div>
+              <div class="dragons__rubric"><dt>Temper</dt><dd>
+                <span class="dragons__tally" aria-hidden="true"><svg viewBox="0 0 106 26" focusable="false"><use class="dragons__ghost" href="#dragons-g5"/><use class="dragons__ghost" href="#dragons-g5" x="54"/><use class="dragons__ink" href="#dragons-g5"/><use class="dragons__ink" href="#dragons-u2" x="54"/></svg></span>
+                <span class="dragons__measure">hot, and answers to its name</span></dd></div>
+            </dl>
+            <p class="dragons__ask">
+              <button type="button" class="dragons__stir">stir the plate<span class="sr-only">: the Fire Drake</span></button>
+            </p>
+          </div>
         </article>
       </li>
 
-      <!-- ══════════════ 2 · PAPER WYRM ══════════════ -->
-      <li class="dragons__item" data-reveal="pop">
-        <article class="card card--pad card--lift dragons__card">
-          <div class="dragons__plate" data-draw>
-            <svg class="dragons__svg" viewBox="0 0 300 210" role="img" aria-labelledby="dragons-fig-2" preserveAspectRatio="xMidYMid meet" focusable="false">
-              <title id="dragons-fig-2">A long legless dragon folded out of paper, puffing paper scraps.</title>
-              <g class="dragons__art alive">
+      <!-- ================================================================
+           II · THE PAPER WYRM
+           ================================================================ -->
+      <li class="dragons__leaf" data-reveal="right">
+        <article class="dragons__beast" aria-labelledby="dragons-n2">
 
-                <!-- folded back fins -->
-                <g>
-                  <path class="wash" fill="var(--dg-paper-fin)" d="M106 72l-8-24 26 14zM214 90l4-24 20 16zM286 128l14-10-6 24z"/>
-                  <path class="stroke stroke--thin" style="--draw-delay:520ms" d="M106 72l-8-24 26 14zM214 90l4-24 20 16zM286 128l14-10-6 24z"/>
-                </g>
+          <figure class="dragons__plate" data-draw>
+            <span class="dragons__plateno" aria-hidden="true">plate ii</span>
+            <svg class="dragons__art" viewBox="0 0 260 190" role="img" aria-labelledby="dragons-f2" focusable="false">
+              <title id="dragons-f2">Woodcut of a long legless wyrm with no wings, its body a strip of flat folded facets winding across the page.</title>
+              <defs>
+                <clipPath id="dragons-clip2"><path d="M44 48 L70 40 L96 46 L118 62 L136 84 L156 100 L180 104 L204 96 L226 102 L246 126 L236 148 L221 130 L202 122 L180 130 L158 126 L136 112 L120 92 L98 74 L72 66 L44 72 Z"/></clipPath>
+              </defs>
 
-                <!-- one long strip, folded -->
-                <g class="dragons__tail" style="--ox:50px;--oy:52px">
-                  <path class="wash" fill="var(--dg-paper-a)" d="M52 40l54 32 54-26 54 44 44-20 30 60-8 8-26-48-44 20-54-40-54 26-54-32z"/>
-                  <path class="wash" fill="var(--dg-paper-b)" d="M106 72l54-26 54 44-4 20-54-40-54 26z"/>
-                  <path class="stroke" style="--draw-delay:160ms" d="M52 40l54 32 54-26 54 44 44-20 30 60"/>
-                  <path class="stroke" style="--draw-delay:300ms" d="M280 138l-26-48-44 20-54-40-54 26-54-32"/>
-                  <path class="stroke stroke--thin" style="--draw-delay:560ms" d="M106 72l-4 24M160 46l-4 24M214 90l-4 20M258 70l-4 20"/>
-                </g>
+              <g class="wash" style="--wash-delay:940ms">
+                <path fill="var(--crayon-grass)" fill-opacity=".5" d="M44 48 L70 40 L96 46 L118 62 L136 84 L156 100 L180 104 L204 96 L226 102 L246 126 L236 148 L221 130 L202 122 L180 130 L158 126 L136 112 L120 92 L98 74 L72 66 L44 72 Z"/>
+                <path fill="var(--crayon-grass)" fill-opacity=".5" d="M44 48 L20 40 L6 54 L10 70 L44 72 L33 60 Z"/>
+                <path fill="var(--crayon-green)" fill-opacity=".45" d="M70 40 L98 74 L72 66 Z M118 62 L136 112 L120 92 Z M180 104 L202 122 L180 130 Z M226 102 L246 126 L236 148 Z"/>
+              </g>
 
-                <!-- origami head -->
-                <g>
-                  <path class="wash" fill="var(--dg-paper-b)" d="M52 40L48 64 18 70 6 50 30 32z"/>
-                  <path class="wash" fill="var(--dg-paper-a)" d="M30 32l22 8-4 24z"/>
-                  <path class="wash" fill="var(--dg-paper-fin)" d="M40 30l6-20 16 18z"/>
-                  <path class="stroke" style="--draw-delay:220ms" d="M52 40L48 64 18 70 6 50 30 32z"/>
-                  <path class="stroke stroke--thin" style="--draw-delay:600ms" d="M30 32l18 32M18 70l-6-12 26 2"/>
-                  <path class="stroke stroke--thin" style="--draw-delay:640ms" d="M40 30l6-20 16 18z"/>
-                  <path class="dragons__eye" d="M38 46l5 6-5 6-5-6z"/>
-                </g>
+              <g class="dragons__figure">
+                <g class="dragons__part dragons__coil">
 
-                <!-- puffed paper scraps -->
-                <g class="dragons__breath" style="--mx:10px;--my:58px;--bdx:-24px;--bdy:12px">
-                  <path class="dragons__puff" style="--i:0" fill="var(--dg-paper-b)" d="M8 50l10 6-10 6-8-6z"/>
-                  <path class="dragons__puff" style="--i:1" fill="var(--dg-paper-a)" d="M2 66l9 5-9 6-7-6z"/>
-                  <path class="dragons__puff" style="--i:2" fill="var(--dg-paper-fin)" d="M14 76l8 5-8 5-6-5z"/>
+                  <!-- the fold-fins along its back -->
+                  <path class="stroke stroke--thin" style="--draw-delay:440ms" d="M63 42 L74 24 L87 44"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:470ms" d="M111 57 L124 42 L133 67"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:500ms" d="M175 104 L186 88 L197 105"/>
+
+                  <!-- the body: one long strip, creased -->
+                  <path class="stroke stroke--fat" style="--draw-delay:0ms" d="M44 48 L70 40 L96 46 L118 62 L136 84 L156 100 L180 104 L204 96 L226 102 L246 126 L236 148 L221 130 L202 122 L180 130 L158 126 L136 112 L120 92 L98 74 L72 66 L44 72 Z"/>
+
+                  <!-- the head, folded blunt -->
+                  <path class="stroke stroke--fat" style="--draw-delay:180ms" d="M44 48 L20 40 L6 54 L10 70 L44 72"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:320ms" d="M20 40 L33 60 L10 70 M33 60 L44 48"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:350ms" d="M9 62 L32 64"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:380ms" d="M14 51 L26 49"/>
+
+                  <!-- every kink is a fold -->
+                  <path class="stroke stroke--thin" style="--draw-delay:560ms" d="M70 40 L72 66"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:578ms" d="M70 40 L98 74"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:596ms" d="M96 46 L98 74"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:614ms" d="M118 62 L120 92"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:632ms" d="M118 62 L136 112"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:650ms" d="M136 84 L136 112"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:668ms" d="M156 100 L158 126"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:686ms" d="M156 100 L180 130"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:704ms" d="M180 104 L180 130"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:722ms" d="M180 104 L202 122"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:740ms" d="M204 96 L202 122"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:758ms" d="M226 102 L221 130"/>
+
+                  <!-- hatching, along the shaded facets only -->
+                  <g class="dragons__hatch" clip-path="url(#dragons-clip2)">
+                    <path class="stroke" style="--draw-delay:880ms" d="M74 44 L78 70"/>
+                    <path class="stroke" style="--draw-delay:894ms" d="M80 45 L84 71"/>
+                    <path class="stroke" style="--draw-delay:908ms" d="M86 46 L90 72"/>
+                    <path class="stroke" style="--draw-delay:922ms" d="M122 66 L126 96"/>
+                    <path class="stroke" style="--draw-delay:936ms" d="M127 72 L131 102"/>
+                    <path class="stroke" style="--draw-delay:950ms" d="M131 78 L135 108"/>
+                    <path class="stroke" style="--draw-delay:964ms" d="M142 88 L144 116"/>
+                    <path class="stroke" style="--draw-delay:978ms" d="M148 92 L150 120"/>
+                    <path class="stroke" style="--draw-delay:992ms" d="M184 106 L186 132"/>
+                    <path class="stroke" style="--draw-delay:1006ms" d="M190 106 L192 130"/>
+                    <path class="stroke" style="--draw-delay:1020ms" d="M196 104 L198 128"/>
+                    <path class="stroke" style="--draw-delay:1034ms" d="M230 106 L228 134"/>
+                    <path class="stroke" style="--draw-delay:1048ms" d="M236 112 L233 140"/>
+                    <path class="stroke" style="--draw-delay:1062ms" d="M241 119 L238 146"/>
+                  </g>
+
+                  <!-- the tail fold, which flicks -->
+                  <g class="dragons__part dragons__flick" style="--ox:240px;--oy:130px">
+                    <path class="stroke stroke--thin" style="--draw-delay:800ms" d="M240 130 L258 122 L250 138 L260 148 L242 148"/>
+                  </g>
+
+                  <g class="wash" style="--wash-delay:1420ms">
+                    <circle class="dragons__eye" cx="21" cy="54" r="2.6"/>
+                  </g>
                 </g>
               </g>
             </svg>
-          </div>
+          </figure>
 
-          <h3 class="dragons__name">Paper Wyrm</h3>
-          <p class="dragons__rule">more legs = faster</p>
-          <p class="dragons__line">One long fold, end to end. Nobody drew it any legs at all, so it pours where it is going and gets there eventually.</p>
-          <dl class="dragons__stats">
-            <div class="dragons__stat" style="--v:.3"><dt>Tough</dt><dd><span class="dragons__meter" aria-hidden="true"><i></i></span><b>papery</b></dd></div>
-            <div class="dragons__stat" style="--v:.1"><dt>Fast</dt><dd><span class="dragons__meter" aria-hidden="true"><i></i></span><b>no legs</b></dd></div>
-            <div class="dragons__stat" style="--v:.35"><dt>Damage</dt><dd><span class="dragons__meter" aria-hidden="true"><i></i></span><b>papercut</b></dd></div>
-          </dl>
-          <p class="dragons__act">
-            <button class="dragons__wake" type="button" aria-pressed="false" aria-label="Wake it up — Paper Wyrm">
-              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3l2.2 5.4L20 10l-5.8 1.6L12 17l-2.2-5.4L4 10l5.8-1.6z"/></svg>
-              <span>Wake it up</span>
-            </button>
-          </p>
+          <div class="dragons__text">
+            <p class="dragons__where">cap. ii &middot; the turned corners</p>
+            <h3 class="dragons__name" id="dragons-n2">The Paper Wyrm</h3>
+            <p class="dragons__binomial">Serpens plicatilis</p>
+            <p class="dragons__account">
+              It has no legs and it does not fly. It runs along a fold the way rain runs along a gutter,
+              and Dogear Downs is nothing but folds. He let four into the Downs at dusk, on the eve of the
+              retaking; by morning every turned corner had been pressed flat and the roach garrisons under
+              them with it. He named it <i>wyrm</i>, and a wyrm is what it did.
+            </p>
+            <dl class="dragons__rubrics">
+              <div class="dragons__rubric"><dt>Wingspan</dt><dd>
+                <span class="dragons__tally" aria-hidden="true"><svg viewBox="0 0 106 26" focusable="false"><use class="dragons__ghost" href="#dragons-g5"/><use class="dragons__ghost" href="#dragons-g5" x="54"/></svg></span>
+                <span class="dragons__measure">none; it has no wings</span></dd></div>
+              <div class="dragons__rubric"><dt>Breath</dt><dd>
+                <span class="dragons__tally" aria-hidden="true"><svg viewBox="0 0 106 26" focusable="false"><use class="dragons__ghost" href="#dragons-g5"/><use class="dragons__ghost" href="#dragons-g5" x="54"/><use class="dragons__ink" href="#dragons-u2"/></svg></span>
+                <span class="dragons__measure">a cold seam, and no fire</span></dd></div>
+              <div class="dragons__rubric"><dt>Temper</dt><dd>
+                <span class="dragons__tally" aria-hidden="true"><svg viewBox="0 0 106 26" focusable="false"><use class="dragons__ghost" href="#dragons-g5"/><use class="dragons__ghost" href="#dragons-g5" x="54"/><use class="dragons__ink" href="#dragons-g5"/><use class="dragons__ink" href="#dragons-g5" x="54"/></svg></span>
+                <span class="dragons__measure">patient past reason</span></dd></div>
+            </dl>
+            <p class="dragons__ask">
+              <button type="button" class="dragons__stir">stir the plate<span class="sr-only">: the Paper Wyrm</span></button>
+            </p>
+          </div>
         </article>
       </li>
 
-      <!-- ══════════════ 3 · INK DRAKE ══════════════ -->
-      <li class="dragons__item" data-reveal="pop">
-        <article class="card card--pad card--lift dragons__card">
-          <div class="dragons__plate" data-draw>
-            <svg class="dragons__svg" viewBox="0 0 300 210" role="img" aria-labelledby="dragons-fig-3" preserveAspectRatio="xMidYMid meet" focusable="false">
-              <title id="dragons-fig-3">A squat heavy dragon with a spiked back, dripping wet ink.</title>
-              <g class="dragons__art alive alive--slow">
+      <!-- ================================================================
+           III · THE INK DRAKE
+           ================================================================ -->
+      <li class="dragons__leaf" data-reveal="left">
+        <article class="dragons__beast" aria-labelledby="dragons-n3">
 
-                <!-- stubby wing behind -->
-                <g class="dragons__wing dragons__wing--far" style="--ox:150px;--oy:96px">
-                  <path class="wash" fill="var(--dg-ink-wing)" d="M150 96c8-26 32-44 60-48-18 18-24 32-20 44-18 0-32 2-40 12z"/>
-                  <path class="stroke stroke--thin" style="--draw-delay:140ms" d="M150 96c8-26 32-44 60-48-18 18-24 32-20 44-18 0-32 2-40 12"/>
+          <figure class="dragons__plate" data-draw>
+            <span class="dragons__plateno" aria-hidden="true">plate iii</span>
+            <svg class="dragons__art" viewBox="0 0 260 190" role="img" aria-labelledby="dragons-f3" focusable="false">
+              <title id="dragons-f3">Woodcut of a squat heavy drake standing low on four thick legs, with an angular slab head, a hanging jaw, small folded wings, and ink running from it into a puddle.</title>
+              <defs>
+                <clipPath id="dragons-clip3">
+                  <path d="M22 74 L28 62 L54 54 L74 60 L86 52 L112 42 L150 34 L190 42 L212 62 L222 92 L240 98 L258 122 L246 144 L216 128 L186 152 L140 156 L108 142 L98 122 L96 104 L76 98 L22 90 Z"/><path d="M116 148 L110 178 L140 178 L142 146 Z"/><path d="M186 150 L182 180 L214 180 L212 146 Z"/>
+                </clipPath>
+              </defs>
+
+              <g class="wash" style="--wash-delay:960ms">
+                <path fill="var(--crayon-deep)" fill-opacity=".24" d="M92 184 C128 176 208 176 234 186 C208 192 116 192 92 184 Z"/>
+                <path fill="var(--crayon-royal)" fill-opacity=".42" d="M124 40 L134 14 L156 10 L150 38 Z"/>
+                <path fill="var(--crayon-royal)" fill-opacity=".42" d="M158 36 L172 10 L194 8 L188 34 Z"/>
+                <path fill="var(--crayon-deep)" fill-opacity=".3" d="M146 154 L144 174 L162 174 L162 152 Z"/>
+                <path fill="var(--crayon-deep)" fill-opacity=".3" d="M166 156 L166 176 L180 176 L182 154 Z"/>
+                <path fill="var(--crayon-deep)" fill-opacity=".52" d="M22 74 L28 62 L54 54 L74 60 L86 52 L112 42 L150 34 L190 42 L212 62 L222 92 L240 98 L258 122 L246 144 L216 128 L186 152 L140 156 L108 142 L98 122 L96 104 L76 98 L22 90 Z"/>
+                <path fill="var(--crayon-deep)" fill-opacity=".52" d="M76 98 L44 110 L18 103 L40 93 L74 91 Z"/>
+                <path fill="var(--crayon-deep)" fill-opacity=".52" d="M54 54 L58 34 L76 50 L74 60 Z"/>
+                <path fill="var(--crayon-deep)" fill-opacity=".52" d="M116 148 L110 178 L140 178 L142 146 Z"/>
+                <path fill="var(--crayon-deep)" fill-opacity=".52" d="M186 150 L182 180 L214 180 L212 146 Z"/>
+              </g>
+
+              <g class="dragons__figure">
+
+                <!-- wings, blocked in and folded; they were never much use -->
+                <path class="stroke stroke--thin" style="--draw-delay:440ms" d="M124 40 L134 14 L156 10 L150 38 Z"/>
+                <path class="stroke stroke--thin" style="--draw-delay:460ms" d="M136 16 L142 38"/>
+                <path class="stroke stroke--thin" style="--draw-delay:480ms" d="M158 36 L172 10 L194 8 L188 34 Z"/>
+                <path class="stroke stroke--thin" style="--draw-delay:500ms" d="M174 12 L180 34"/>
+
+                <!-- the far pair of legs -->
+                <path class="stroke stroke--thin" style="--draw-delay:300ms" d="M146 154 L144 174 L162 174 L162 152 Z"/>
+                <path class="stroke stroke--thin" style="--draw-delay:320ms" d="M166 156 L166 176 L180 176 L182 154 Z"/>
+
+                <!-- head, neck, barrel and blunt tail: one heavy block -->
+                <path class="stroke stroke--fat" style="--draw-delay:0ms" d="M22 74 L28 62 L54 54 L74 60 L86 52 L112 42 L150 34 L190 42 L212 62 L222 92 L240 98 L258 122 L246 144 L216 128 L186 152 L140 156 L108 142 L98 122 L96 104 L76 98 L22 90 Z"/>
+
+                <!-- the jaw, which hangs -->
+                <g class="dragons__part dragons__jaw" style="--ox:76px;--oy:98px">
+                  <path class="stroke" style="--draw-delay:220ms" d="M76 98 L44 110 L18 103 L40 93 L74 91 Z"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:560ms" d="M28 104 L30 98 M44 107 L46 100 M60 105 L62 98"/>
                 </g>
 
-                <!-- tail, short and clubbed -->
-                <g class="dragons__tail" style="--ox:216px;--oy:124px">
-                  <path class="wash" fill="var(--dg-ink-body)" d="M214 118c28-2 48 8 58 26 4 10-8 18-14 8-10-16-24-24-44-24z"/>
-                  <path class="stroke" style="--draw-delay:440ms" d="M214 118c28-2 48 8 58 26 4 10-8 18-14 8-10-16-24-24-44-24"/>
+                <!-- the facets of the block -->
+                <path class="stroke stroke--thin" style="--draw-delay:340ms" d="M80 56 L90 100"/>
+                <path class="stroke stroke--thin" style="--draw-delay:360ms" d="M110 43 L106 140"/>
+                <path class="stroke stroke--thin" style="--draw-delay:380ms" d="M212 62 L214 132"/>
+                <path class="stroke stroke--thin" style="--draw-delay:400ms" d="M54 54 L58 34 L76 50 L74 60 Z"/>
+                <path class="stroke stroke--thin" style="--draw-delay:420ms" d="M28 88 L30 94 M44 90 L46 96 M60 93 L62 99"/>
+
+                <!-- the near pair, thick as posts -->
+                <path class="stroke" style="--draw-delay:260ms" d="M116 148 L110 178 L140 178 L142 146 Z"/>
+                <path class="stroke" style="--draw-delay:280ms" d="M186 150 L182 180 L214 180 L212 146 Z"/>
+                <path class="stroke stroke--thin" style="--draw-delay:520ms" d="M113 179 L109 186 M125 179 L125 187 M138 179 L143 186 M185 181 L181 188 M197 181 L197 189 M211 181 L216 188"/>
+
+                <!-- cross-hatching: it is the darkest beast in the book -->
+                <g class="dragons__hatch dragons__hatch--dense" clip-path="url(#dragons-clip3)">
+                  <path class="stroke" style="--draw-delay:1040ms" d="M94 152 L122 108"/>
+                  <path class="stroke" style="--draw-delay:1054ms" d="M106 158 L134 114"/>
+                  <path class="stroke" style="--draw-delay:1068ms" d="M118 164 L146 120"/>
+                  <path class="stroke" style="--draw-delay:1082ms" d="M130 168 L158 124"/>
+                  <path class="stroke" style="--draw-delay:1096ms" d="M142 172 L170 128"/>
+                  <path class="stroke" style="--draw-delay:1110ms" d="M154 174 L182 130"/>
+                  <path class="stroke" style="--draw-delay:1124ms" d="M166 172 L194 128"/>
+                  <path class="stroke" style="--draw-delay:1138ms" d="M178 168 L206 124"/>
+                  <path class="stroke" style="--draw-delay:1152ms" d="M190 162 L218 118"/>
+                  <path class="stroke" style="--draw-delay:1166ms" d="M204 152 L228 114"/>
+                  <path class="stroke" style="--draw-delay:1180ms" d="M222 146 L244 112"/>
+                  <path class="stroke" style="--draw-delay:1200ms" d="M100 114 L136 160"/>
+                  <path class="stroke" style="--draw-delay:1214ms" d="M114 106 L150 152"/>
+                  <path class="stroke" style="--draw-delay:1228ms" d="M130 96 L166 142"/>
+                  <path class="stroke" style="--draw-delay:1242ms" d="M148 86 L184 132"/>
+                  <path class="stroke" style="--draw-delay:1256ms" d="M166 78 L202 124"/>
+                  <path class="stroke" style="--draw-delay:1270ms" d="M188 76 L218 114"/>
+                  <path class="stroke" style="--draw-delay:1284ms" d="M20 88 L40 68 M26 94 L48 72 M34 96 L56 74 M44 98 L64 78"/>
+                  <path class="stroke" style="--draw-delay:1298ms" d="M116 166 L132 146 M132 170 L148 150 M148 172 L164 152 M164 170 L180 150"/>
+                  <path class="stroke" style="--draw-delay:1312ms" d="M218 130 L238 112 M224 138 L244 118"/>
                 </g>
 
-                <!-- sawtooth back -->
-                <g>
-                  <path class="wash" fill="var(--dg-ink-spike)" d="M98 104l8-30 10 28 10-34 12 32 12-36 10 34 12-30 8 30z"/>
-                  <path class="stroke stroke--thin" style="--draw-delay:560ms" d="M98 104l8-30 10 28 10-34 12 32 12-36 10 34 12-30 8 30"/>
+                <!-- what runs off it -->
+                <path class="stroke stroke--thin" style="--draw-delay:1330ms" d="M30 110 C26 122 28 134 34 136 C40 134 42 122 38 109"/>
+                <path class="stroke stroke--thin" style="--draw-delay:1350ms" d="M154 156 C151 166 152 176 156 177 C160 176 162 166 159 155"/>
+                <path class="stroke stroke--thin" style="--draw-delay:1370ms" d="M236 148 C233 156 234 164 238 165 C242 164 244 156 241 147"/>
+
+                <g class="dragons__part dragons__drip dragons__drip--1">
+                  <g class="wash" style="--wash-delay:1560ms"><path fill="var(--crayon-deep)" fill-opacity=".55" d="M32 144 C28 149 29 156 34 156 C39 156 40 149 36 144 Z"/></g>
+                  <path class="stroke dragons__fine" style="--draw-delay:1420ms" d="M32 144 C28 149 29 156 34 156 C39 156 40 149 36 144 Z"/>
+                </g>
+                <g class="dragons__part dragons__drip dragons__drip--2">
+                  <g class="wash" style="--wash-delay:1580ms"><path fill="var(--crayon-deep)" fill-opacity=".55" d="M154 184 C151 188 152 193 156 193 C160 193 161 188 158 184 Z"/></g>
+                  <path class="stroke dragons__fine" style="--draw-delay:1440ms" d="M154 184 C151 188 152 193 156 193 C160 193 161 188 158 184 Z"/>
+                </g>
+                <g class="dragons__part dragons__drip dragons__drip--3">
+                  <g class="wash" style="--wash-delay:1600ms"><path fill="var(--crayon-deep)" fill-opacity=".55" d="M236 172 C233 176 234 181 238 181 C242 181 243 176 240 172 Z"/></g>
+                  <path class="stroke dragons__fine" style="--draw-delay:1460ms" d="M236 172 C233 176 234 181 238 181 C242 181 243 176 240 172 Z"/>
                 </g>
 
-                <!-- body -->
-                <g class="dragons__body">
-                  <path class="wash" fill="var(--dg-ink-body)" d="M102 100c-24 8-32 34-16 52 22 24 106 26 134 6 22-16 18-48-6-58-30-12-84-12-112 0z"/>
-                  <path class="wash" fill="var(--dg-ink-belly)" d="M90 142c20 22 104 24 126 2-8 22-108 24-126-2z"/>
-                  <path class="stroke" style="--draw-delay:200ms" d="M102 100c-24 8-32 34-16 52 22 24 106 26 134 6 22-16 18-48-6-58-30-12-84-12-112 0z"/>
-                  <path class="stroke stroke--thin" style="--draw-delay:640ms" d="M88 142c20 22 106 24 126 0"/>
-                </g>
+                <path class="stroke stroke--thin" style="--draw-delay:1480ms" d="M92 184 C128 176 208 176 234 186 C208 192 116 192 92 184 Z"/>
 
-                <!-- four stubby legs -->
-                <path class="wash" fill="var(--dg-ink-body)" d="M106 154l-8 30h28l-2-30zM140 160l-4 26h24l-2-26zM188 156l-2 28h26l-6-28z"/>
-                <path class="stroke" style="--draw-delay:400ms" d="M106 154l-8 30h28l-2-30M140 160l-4 26h24l-2-26M188 156l-2 28h26l-6-28"/>
-                <path class="stroke stroke--thin" style="--draw-delay:720ms" d="M98 184h26M136 186h24M186 184h26"/>
-
-                <!-- heavy head -->
-                <g>
-                  <path class="wash" fill="var(--dg-ink-body)" d="M100 108c-20-8-46-2-56 12-8 12 0 30 20 32 22 2 38-8 42-20 2-10 0-20-6-24z"/>
-                  <path class="wash" fill="var(--dg-ink-spike)" d="M88 104c4-16 12-26 24-28-8 12-10 20-10 30z"/>
-                  <path class="wash" fill="var(--dg-ink-belly)" d="M48 134c12 8 32 10 46 2l-2 12c-16 6-36 2-46-6z"/>
-                  <path class="stroke" style="--draw-delay:260ms" d="M100 108c-20-8-46-2-56 12-8 12 0 30 20 32 22 2 38-8 42-20 2-10 0-20-6-24z"/>
-                  <path class="stroke stroke--thin" style="--draw-delay:500ms" d="M88 104c4-16 12-26 24-28-8 12-10 20-10 30"/>
-                  <path class="stroke stroke--thin" style="--draw-delay:660ms" d="M48 134c12 8 32 10 46 2l-2 12c-16 6-36 2-46-6z"/>
-                  <circle class="dragons__eye" cx="74" cy="118" r="3.6"/>
-                  <circle class="dragons__glint" cx="76" cy="116" r="1.3"/>
-                </g>
-
-                <!-- it keeps dripping -->
-                <g>
-                  <path class="dragons__drip" style="--i:0" fill="var(--dg-ink-body)" d="M124 158c-4 10-4 18 0 20s6-10 0-20z"/>
-                  <path class="dragons__drip" style="--i:1" fill="var(--dg-ink-body)" d="M172 162c-4 12-4 20 0 22s6-12 0-22z"/>
-                  <path class="dragons__drip" style="--i:2" fill="var(--dg-ink-body)" d="M60 150c-4 10-4 18 0 20s6-10 0-20z"/>
-                </g>
-
-                <!-- a splat of ink -->
-                <g class="dragons__breath" style="--mx:44px;--my:136px;--bdx:-28px;--bdy:12px">
-                  <path class="dragons__puff" style="--i:0" fill="var(--dg-ink-body)" d="M42 132c-14-4-26 2-28 12 8-4 14-2 18 4 0-8 4-14 10-16z"/>
-                  <path class="dragons__puff" style="--i:1" fill="var(--dg-ink-belly)" d="M32 144c-10 0-18 6-18 14 6-4 12-4 16 0-2-6 0-12 2-14z"/>
-                  <circle class="dragons__puff" style="--i:2" fill="var(--dg-ink-body)" cx="12" cy="154" r="6"/>
+                <g class="wash" style="--wash-delay:1500ms">
+                  <circle class="dragons__eye" cx="40" cy="72" r="3"/>
                 </g>
               </g>
             </svg>
-          </div>
+          </figure>
 
-          <h3 class="dragons__name">Ink Drake</h3>
-          <p class="dragons__rule">spikes = damage</p>
-          <p class="dragons__line">Drawn with a very wet pen, and every spare second spent on the sawtooth down its back. It leaves a puddle wherever it stands.</p>
-          <dl class="dragons__stats">
-            <div class="dragons__stat" style="--v:.68"><dt>Tough</dt><dd><span class="dragons__meter" aria-hidden="true"><i></i></span><b>hefty</b></dd></div>
-            <div class="dragons__stat" style="--v:.4"><dt>Fast</dt><dd><span class="dragons__meter" aria-hidden="true"><i></i></span><b>plodding</b></dd></div>
-            <div class="dragons__stat" style="--v:.95"><dt>Damage</dt><dd><span class="dragons__meter" aria-hidden="true"><i></i></span><b>crunch</b></dd></div>
-          </dl>
-          <p class="dragons__act">
-            <button class="dragons__wake" type="button" aria-pressed="false" aria-label="Wake it up — Ink Drake">
-              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3l2.2 5.4L20 10l-5.8 1.6L12 17l-2.2-5.4L4 10l5.8-1.6z"/></svg>
-              <span>Wake it up</span>
-            </button>
-          </p>
+          <div class="dragons__text">
+            <p class="dragons__where">cap. v &middot; drawn by the roaches</p>
+            <h3 class="dragons__name" id="dragons-n3">The Ink Drake</h3>
+            <p class="dragons__binomial">Draco atramentarius</p>
+            <p class="dragons__account">
+              The roaches drew this one, and named it well. It does not burn; it floods. What it breathed
+              upon stayed breathed upon. Nineteen of his own drawings went into the spill at Blotmire and
+              none came out again. Iries ended it on the fourth morning with a sponge, drawn small and
+              named plainly. The scribe sets this down without comment.
+            </p>
+            <p class="dragons__gloss">A later hand has written beside this plate: <i>their nineteen names
+              are on the facing leaf, and I have counted them twice.</i></p>
+            <dl class="dragons__rubrics">
+              <div class="dragons__rubric"><dt>Wingspan</dt><dd>
+                <span class="dragons__tally" aria-hidden="true"><svg viewBox="0 0 106 26" focusable="false"><use class="dragons__ghost" href="#dragons-g5"/><use class="dragons__ghost" href="#dragons-g5" x="54"/><use class="dragons__ink" href="#dragons-u4"/></svg></span>
+                <span class="dragons__measure">four paces, and mostly for show</span></dd></div>
+              <div class="dragons__rubric"><dt>Breath</dt><dd>
+                <span class="dragons__tally" aria-hidden="true"><svg viewBox="0 0 106 26" focusable="false"><use class="dragons__ghost" href="#dragons-g5"/><use class="dragons__ghost" href="#dragons-g5" x="54"/><use class="dragons__ink" href="#dragons-g5"/><use class="dragons__ink" href="#dragons-u3" x="54"/></svg></span>
+                <span class="dragons__measure">a flood, not a flame</span></dd></div>
+              <div class="dragons__rubric"><dt>Temper</dt><dd>
+                <span class="dragons__tally" aria-hidden="true"><svg viewBox="0 0 106 26" focusable="false"><use class="dragons__ghost" href="#dragons-g5"/><use class="dragons__ghost" href="#dragons-g5" x="54"/><use class="dragons__ink" href="#dragons-g5"/><use class="dragons__ink" href="#dragons-u1" x="54"/></svg></span>
+                <span class="dragons__measure">obedient to the roach hand</span></dd></div>
+            </dl>
+            <p class="dragons__ask">
+              <button type="button" class="dragons__stir">stir the plate<span class="sr-only">: the Ink Drake</span></button>
+            </p>
+          </div>
         </article>
       </li>
 
-      <!-- ══════════════ 4 · CLOUD SERPENT ══════════════ -->
-      <li class="dragons__item" data-reveal="pop">
-        <article class="card card--pad card--lift dragons__card">
-          <div class="dragons__plate" data-draw>
-            <svg class="dragons__svg" viewBox="0 0 300 210" role="img" aria-labelledby="dragons-fig-4" preserveAspectRatio="xMidYMid meet" focusable="false">
-              <title id="dragons-fig-4">A long wispy feathered serpent drifting through the air, breathing mist.</title>
-              <g class="dragons__art alive alive--slow">
+      <!-- ================================================================
+           IV · THE CLOUD SERPENT
+           ================================================================ -->
+      <li class="dragons__leaf" data-reveal="right">
+        <article class="dragons__beast" aria-labelledby="dragons-n4">
 
-                <!-- the long drifting body -->
-                <g class="dragons__tail" style="--ox:44px;--oy:116px">
-                  <path class="wash" fill="var(--dg-cloud-body)" d="M40 103c16 0 20-26 36-26s20 25 36 25 20-27 36-27 20 25 36 25 20-24 36-24c12 0 22 14 32 20 10 5 18 9 24 15-6 6-14 9-24 4-10-8-20-20-32-16-16 5-20 28-36 28s-20-23-36-23-20 29-36 29-20-23-36-23c-16 0-20 26-36 26z"/>
-                  <path class="wash" fill="var(--dg-cloud-hi)" d="M62 96c8-12 24-14 34-4-14-4-26-2-34 4zM134 94c8-12 24-14 34-4-14-4-26-2-34 4zM206 94c8-12 22-12 30-2-12-4-22-2-30 2z"/>
-                  <path class="stroke" style="--draw-delay:180ms" d="M40 103c16 0 20-26 36-26s20 25 36 25 20-27 36-27 20 25 36 25 20-24 36-24c12 0 22 14 32 20 10 5 18 9 24 15"/>
-                  <path class="stroke" style="--draw-delay:340ms" d="M276 118c-6 6-14 9-24 4-10-8-20-20-32-16-16 5-20 28-36 28s-20-23-36-23-20 29-36 29-20-23-36-23c-16 0-20 26-36 26"/>
-                  <path class="stroke stroke--thin" style="--draw-delay:640ms" d="M94 110c8 8 22 8 30 0M166 108c8 8 22 8 30 0"/>
-                  <!-- tail plume -->
-                  <path class="wash" fill="var(--dg-cloud-fan)" d="M268 116c16-6 26-18 28-32 4 18-4 34-20 40zM272 122c16 2 28-4 34-16 0 18-14 28-30 26z"/>
-                  <path class="stroke stroke--thin" style="--draw-delay:700ms" d="M268 116c16-6 26-18 28-32 4 18-4 34-20 40M272 122c16 2 28-4 34-16 0 18-14 28-30 26"/>
-                </g>
+          <figure class="dragons__plate" data-draw>
+            <span class="dragons__plateno" aria-hidden="true">plate iv</span>
+            <svg class="dragons__art" viewBox="0 0 260 190" role="img" aria-labelledby="dragons-f4" focusable="false">
+              <title id="dragons-f4">Woodcut of a long feathered serpent drifting among cloud, with a plumed crest, a fringe of feathers the length of its back and a fanned tail.</title>
+              <defs>
+                <clipPath id="dragons-clip4"><path d="M14 44 C22 32 40 32 54 44 C82 52 100 76 118 84 C140 94 152 62 176 66 C200 70 212 104 234 118 L226 138 C206 124 196 94 174 88 C150 84 138 110 120 104 C104 98 88 80 58 72 C38 72 20 66 12 58 Z"/></clipPath>
+              </defs>
 
-                <!-- feather fans, the closest this one gets to wings -->
-                <g class="dragons__wing dragons__wing--far" style="--ox:104px;--oy:96px">
-                  <path class="wash" fill="var(--dg-cloud-fan)" d="M104 96c-16-10-24-32-18-50 2 20 10 34 22 42zM112 92c-6-22 2-44 18-56-8 18-10 36-6 52z"/>
-                  <path class="stroke stroke--thin" style="--draw-delay:140ms" d="M104 96c-16-10-24-32-18-50 2 20 10 34 22 42M112 92c-6-22 2-44 18-56-8 18-10 36-6 52"/>
-                </g>
-                <g class="dragons__wing dragons__wing--near" style="--ox:186px;--oy:94px">
-                  <path class="wash" fill="var(--dg-cloud-fan)" d="M186 94c-14-12-18-34-10-50 0 20 6 34 18 44zM194 90c-4-22 6-42 24-52-10 18-14 34-12 50z"/>
-                  <path class="stroke stroke--thin" style="--draw-delay:220ms" d="M186 94c-14-12-18-34-10-50 0 20 6 34 18 44M194 90c-4-22 6-42 24-52-10 18-14 34-12 50"/>
-                </g>
+              <g class="wash" style="--wash-delay:980ms">
+                <path fill="var(--crayon-sky)" fill-opacity=".22" d="M28 126 C16 126 12 116 22 112 C20 100 38 94 48 102 C56 90 80 92 84 104 C98 104 102 118 90 122 C72 128 48 128 28 126 Z"/>
+                <path fill="var(--crayon-sky)" fill-opacity=".22" d="M178 40 C168 40 164 32 172 28 C170 18 186 13 194 20 C201 10 221 12 224 22 C236 22 240 34 230 37 C214 42 194 42 178 40 Z"/>
+                <path fill="var(--crayon-sky)" fill-opacity=".5" d="M14 44 C22 32 40 32 54 44 C82 52 100 76 118 84 C140 94 152 62 176 66 C200 70 212 104 234 118 L226 138 C206 124 196 94 174 88 C150 84 138 110 120 104 C104 98 88 80 58 72 C38 72 20 66 12 58 Z"/>
+                <path fill="var(--crayon-green)" fill-opacity=".36" d="M230 120 L258 100 L250 118 L262 122 L248 136 L256 148 L238 148 L234 164 L226 138 Z"/>
+              </g>
 
-                <!-- crest tufts along the back -->
-                <path class="wash" fill="var(--dg-cloud-fan)" d="M74 78c-8-12-10-24-4-32 0 12 4 22 12 28zM146 76c-8-12-10-24-4-32 0 12 4 22 12 28zM218 78c-8-12-10-24-4-32 0 12 4 22 12 28z"/>
-                <path class="stroke stroke--thin" style="--draw-delay:660ms" d="M74 78c-8-12-10-24-4-32 0 12 4 22 12 28M146 76c-8-12-10-24-4-32 0 12 4 22 12 28M218 78c-8-12-10-24-4-32 0 12 4 22 12 28"/>
+              <g class="dragons__figure">
+                <g class="dragons__part dragons__drift">
 
-                <!-- slim head, long whiskers -->
-                <g>
-                  <path class="wash" fill="var(--dg-cloud-body)" d="M46 100c-10-14-32-16-42-4-8 10-6 28 8 32 16 4 30-4 36-14 2-6 2-10-2-14z"/>
-                  <path class="wash" fill="var(--dg-cloud-fan)" d="M44 86c0-14 6-24 16-28-6 10-8 20-6 30z"/>
-                  <path class="stroke" style="--draw-delay:260ms" d="M46 100c-10-14-32-16-42-4-8 10-6 28 8 32 16 4 30-4 36-14 2-6 2-10-2-14z"/>
-                  <path class="stroke stroke--thin" style="--draw-delay:500ms" d="M44 86c0-14 6-24 16-28-6 10-8 20-6 30"/>
-                  <path class="stroke stroke--thin" style="--draw-delay:720ms" d="M8 116c-10 10-12 26-6 38M16 124c-8 12-8 26 0 36"/>
-                  <path class="stroke stroke--thin" style="--draw-delay:760ms" d="M6 114c10 6 24 6 32 0"/>
-                  <circle class="dragons__eye" cx="26" cy="102" r="3"/>
-                </g>
+                  <!-- the crest -->
+                  <g class="dragons__part dragons__plume dragons__plume--1" style="--ox:44px;--oy:42px">
+                    <path class="stroke stroke--thin" style="--draw-delay:420ms" transform="translate(30,38) rotate(-74)" d="M0 0 C4 -9 13 -14 22 -12 C15 -4 8 1 0 0 Z"/>
+                    <path class="stroke stroke--thin" style="--draw-delay:440ms" transform="translate(40,34) rotate(-62)" d="M0 0 C4 -9 13 -14 22 -12 C15 -4 8 1 0 0 Z"/>
+                    <path class="stroke stroke--thin" style="--draw-delay:460ms" transform="translate(50,36) rotate(-44)" d="M0 0 C4 -9 13 -14 22 -12 C15 -4 8 1 0 0 Z"/>
+                  </g>
 
-                <!-- mist -->
-                <g class="dragons__breath" style="--mx:8px;--my:120px;--bdx:-24px;--bdy:16px">
-                  <path class="dragons__puff" style="--i:0" fill="var(--dg-cloud-hi)" d="M10 116c-12-2-22 6-20 16 6-6 12-8 18-4-2-6 0-10 2-12z"/>
-                  <path class="dragons__puff" style="--i:1" fill="var(--dg-cloud-body)" d="M4 132c-10 0-16 8-14 16 4-6 10-8 16-6-4-4-4-8-2-10z"/>
-                  <circle class="dragons__puff" style="--i:2" fill="var(--dg-cloud-hi)" cx="2" cy="152" r="7"/>
+                  <!-- the fringe the whole length of its back -->
+                  <g class="dragons__part dragons__plume dragons__plume--2" style="--ox:140px;--oy:80px">
+                    <path class="stroke stroke--thin" style="--draw-delay:520ms" transform="translate(62,49) rotate(-46)" d="M0 0 C4 -9 13 -14 22 -12 C15 -4 8 1 0 0 Z"/>
+                    <path class="stroke stroke--thin" style="--draw-delay:536ms" transform="translate(76,56) rotate(-44)" d="M0 0 C4 -9 13 -14 22 -12 C15 -4 8 1 0 0 Z"/>
+                    <path class="stroke stroke--thin" style="--draw-delay:552ms" transform="translate(90,66) rotate(-42)" d="M0 0 C4 -9 13 -14 22 -12 C15 -4 8 1 0 0 Z"/>
+                    <path class="stroke stroke--thin" style="--draw-delay:568ms" transform="translate(104,76) rotate(-38)" d="M0 0 C4 -9 13 -14 22 -12 C15 -4 8 1 0 0 Z"/>
+                    <path class="stroke stroke--thin" style="--draw-delay:584ms" transform="translate(120,86) rotate(-14)" d="M0 0 C4 -9 13 -14 22 -12 C15 -4 8 1 0 0 Z"/>
+                    <path class="stroke stroke--thin" style="--draw-delay:600ms" transform="translate(136,88) rotate(-2)" d="M0 0 C4 -9 13 -14 22 -12 C15 -4 8 1 0 0 Z"/>
+                    <path class="stroke stroke--thin" style="--draw-delay:616ms" transform="translate(150,78) rotate(-30)" d="M0 0 C4 -9 13 -14 22 -12 C15 -4 8 1 0 0 Z"/>
+                    <path class="stroke stroke--thin" style="--draw-delay:632ms" transform="translate(166,68) rotate(-10)" d="M0 0 C4 -9 13 -14 22 -12 C15 -4 8 1 0 0 Z"/>
+                    <path class="stroke stroke--thin" style="--draw-delay:648ms" transform="translate(182,70) rotate(14)" d="M0 0 C4 -9 13 -14 22 -12 C15 -4 8 1 0 0 Z"/>
+                    <path class="stroke stroke--thin" style="--draw-delay:664ms" transform="translate(196,84) rotate(24)" d="M0 0 C4 -9 13 -14 22 -12 C15 -4 8 1 0 0 Z"/>
+                    <path class="stroke stroke--thin" style="--draw-delay:680ms" transform="translate(210,98) rotate(30)" d="M0 0 C4 -9 13 -14 22 -12 C15 -4 8 1 0 0 Z"/>
+                    <path class="stroke stroke--thin" style="--draw-delay:696ms" transform="translate(222,110) rotate(34)" d="M0 0 C4 -9 13 -14 22 -12 C15 -4 8 1 0 0 Z"/>
+                  </g>
+
+                  <!-- the animal -->
+                  <path class="stroke stroke--fat" style="--draw-delay:0ms" d="M14 44 C22 32 40 32 54 44 C82 52 100 76 118 84 C140 94 152 62 176 66 C200 70 212 104 234 118 L226 138 C206 124 196 94 174 88 C150 84 138 110 120 104 C104 98 88 80 58 72 C38 72 20 66 12 58 Z"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:240ms" d="M13 55 C26 60 42 63 56 63"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:280ms" d="M56 46 C58 56 58 64 56 70"/>
+
+                  <!-- one small feathered fin, below -->
+                  <g class="dragons__part dragons__plume dragons__plume--3" style="--ox:100px;--oy:96px">
+                    <path class="stroke stroke--thin" style="--draw-delay:720ms" transform="translate(100,96) rotate(74)" d="M0 0 C4 -9 13 -14 22 -12 C15 -4 8 1 0 0 Z"/>
+                    <path class="stroke stroke--thin" style="--draw-delay:736ms" transform="translate(106,98) rotate(58)" d="M0 0 C4 -9 13 -14 22 -12 C15 -4 8 1 0 0 Z"/>
+                    <path class="stroke stroke--thin" style="--draw-delay:752ms" transform="translate(112,100) rotate(44)" d="M0 0 C4 -9 13 -14 22 -12 C15 -4 8 1 0 0 Z"/>
+                  </g>
+                  <g class="dragons__part dragons__plume dragons__plume--4" style="--ox:186px;--oy:92px">
+                    <path class="stroke stroke--thin" style="--draw-delay:768ms" transform="translate(186,92) rotate(78)" d="M0 0 C4 -9 13 -14 22 -12 C15 -4 8 1 0 0 Z"/>
+                    <path class="stroke stroke--thin" style="--draw-delay:784ms" transform="translate(193,97) rotate(64)" d="M0 0 C4 -9 13 -14 22 -12 C15 -4 8 1 0 0 Z"/>
+                  </g>
+
+                  <!-- hatching, light: it is a pale beast -->
+                  <g class="dragons__hatch" clip-path="url(#dragons-clip4)">
+                    <path class="stroke" style="--draw-delay:940ms" d="M60 78 L72 60"/>
+                    <path class="stroke" style="--draw-delay:954ms" d="M68 84 L80 66"/>
+                    <path class="stroke" style="--draw-delay:968ms" d="M78 90 L90 72"/>
+                    <path class="stroke" style="--draw-delay:982ms" d="M90 98 L102 80"/>
+                    <path class="stroke" style="--draw-delay:996ms" d="M102 104 L114 86"/>
+                    <path class="stroke" style="--draw-delay:1010ms" d="M126 110 L136 94"/>
+                    <path class="stroke" style="--draw-delay:1024ms" d="M140 108 L150 92"/>
+                    <path class="stroke" style="--draw-delay:1038ms" d="M182 96 L192 80"/>
+                    <path class="stroke" style="--draw-delay:1052ms" d="M194 108 L204 92"/>
+                    <path class="stroke" style="--draw-delay:1066ms" d="M206 120 L216 104"/>
+                    <path class="stroke" style="--draw-delay:1080ms" d="M218 132 L228 116"/>
+                    <path class="stroke" style="--draw-delay:1094ms" d="M22 66 L32 52 M34 70 L44 56"/>
+                  </g>
+
+                  <!-- the fanned tail -->
+                  <g class="dragons__part dragons__fan" style="--ox:230px;--oy:128px">
+                    <path class="stroke" style="--draw-delay:800ms" d="M230 120 L258 100 L250 118 L262 122 L248 136 L256 148 L238 148 L234 164 L226 138"/>
+                    <path class="stroke stroke--thin" style="--draw-delay:860ms" d="M230 128 L252 110 M230 129 L252 128 M229 131 L242 150"/>
+                  </g>
+
+                  <g class="wash" style="--wash-delay:1420ms">
+                    <circle class="dragons__eye" cx="30" cy="46" r="2.6"/>
+                  </g>
                 </g>
               </g>
             </svg>
-          </div>
+          </figure>
 
-          <h3 class="dragons__name">Cloud Serpent</h3>
-          <p class="dragons__rule">more detail = masterpiece bonus</p>
-          <p class="dragons__line">Every single feather got drawn in. All that fuss counts for something. It also has no legs, so it drifts, and drifting is not the same as fast.</p>
-          <dl class="dragons__stats">
-            <div class="dragons__stat" style="--v:.45"><dt>Tough</dt><dd><span class="dragons__meter" aria-hidden="true"><i></i></span><b>airy</b></dd></div>
-            <div class="dragons__stat" style="--v:.18"><dt>Fast</dt><dd><span class="dragons__meter" aria-hidden="true"><i></i></span><b>drifting</b></dd></div>
-            <div class="dragons__stat" style="--v:.22"><dt>Damage</dt><dd><span class="dragons__meter" aria-hidden="true"><i></i></span><b>a tickle</b></dd></div>
-          </dl>
-          <p class="dragons__act">
-            <button class="dragons__wake" type="button" aria-pressed="false" aria-label="Wake it up — Cloud Serpent">
-              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3l2.2 5.4L20 10l-5.8 1.6L12 17l-2.2-5.4L4 10l5.8-1.6z"/></svg>
-              <span>Wake it up</span>
-            </button>
-          </p>
+          <div class="dragons__text">
+            <p class="dragons__where">cap. iv &middot; over the erasure</p>
+            <h3 class="dragons__name" id="dragons-n4">The Cloud Serpent</h3>
+            <p class="dragons__binomial">Serpens nubifer</p>
+            <p class="dragons__account">
+              It is feathered, and it drifts rather than flies. It carries no fire and was never once set
+              against a living thing. These were drawn on held ground at Creasemarch and flown east over
+              Smudgewood, where nothing keeps its edge and a drawn creature may come apart in the air. They
+              kept their own outlines for eleven days, and carried the rest of his work out over the erasure.
+            </p>
+            <dl class="dragons__rubrics">
+              <div class="dragons__rubric"><dt>Wingspan</dt><dd>
+                <span class="dragons__tally" aria-hidden="true"><svg viewBox="0 0 106 26" focusable="false"><use class="dragons__ghost" href="#dragons-g5"/><use class="dragons__ghost" href="#dragons-g5" x="54"/><use class="dragons__ink" href="#dragons-g5"/><use class="dragons__ink" href="#dragons-u2" x="54"/></svg></span>
+                <span class="dragons__measure">seven paces of feather</span></dd></div>
+              <div class="dragons__rubric"><dt>Breath</dt><dd>
+                <span class="dragons__tally" aria-hidden="true"><svg viewBox="0 0 106 26" focusable="false"><use class="dragons__ghost" href="#dragons-g5"/><use class="dragons__ghost" href="#dragons-g5" x="54"/><use class="dragons__ink" href="#dragons-u2"/></svg></span>
+                <span class="dragons__measure">mist, and only mist</span></dd></div>
+              <div class="dragons__rubric"><dt>Temper</dt><dd>
+                <span class="dragons__tally" aria-hidden="true"><svg viewBox="0 0 106 26" focusable="false"><use class="dragons__ghost" href="#dragons-g5"/><use class="dragons__ghost" href="#dragons-g5" x="54"/><use class="dragons__ink" href="#dragons-u1"/></svg></span>
+                <span class="dragons__measure">mild; it will not strike</span></dd></div>
+            </dl>
+            <p class="dragons__ask">
+              <button type="button" class="dragons__stir">stir the plate<span class="sr-only">: the Cloud Serpent</span></button>
+            </p>
+          </div>
         </article>
       </li>
 
-      <!-- ══════════════ 5 · EMBER HATCHLING ══════════════ -->
-      <li class="dragons__item" data-reveal="pop">
-        <article class="card card--pad card--lift dragons__card">
-          <div class="dragons__plate" data-draw>
-            <svg class="dragons__svg" viewBox="0 0 300 210" role="img" aria-labelledby="dragons-fig-5" preserveAspectRatio="xMidYMid meet" focusable="false">
-              <title id="dragons-fig-5">A tiny round baby dragon sitting in a cracked eggshell, puffing sparks.</title>
-              <g class="dragons__art alive alive--fast">
+      <!-- ================================================================
+           V · THE EMBER HATCHLING
+           ================================================================ -->
+      <li class="dragons__leaf" data-reveal="left">
+        <article class="dragons__beast" aria-labelledby="dragons-n5">
 
-                <!-- stubby wings -->
-                <g class="dragons__wing dragons__wing--far" style="--ox:116px;--oy:132px">
-                  <path class="wash" fill="var(--dg-ember-wing)" d="M116 132c-14-4-26-14-32-28 6 6 12 8 18 8-6-6-10-14-10-22 6 14 14 22 28 26z"/>
-                  <path class="stroke stroke--thin" style="--draw-delay:300ms" d="M116 132c-14-4-26-14-32-28 6 6 12 8 18 8-6-6-10-14-10-22 6 14 14 22 28 26"/>
-                </g>
-                <g class="dragons__wing dragons__wing--near" style="--ox:180px;--oy:132px">
-                  <path class="wash" fill="var(--dg-ember-wing)" d="M180 132c14-4 26-14 32-28-6 6-12 8-18 8 6-6 10-14 10-22-6 14-14 22-28 26z"/>
-                  <path class="stroke stroke--thin" style="--draw-delay:340ms" d="M180 132c14-4 26-14 32-28-6 6-12 8-18 8 6-6 10-14 10-22-6 14-14 22-28 26"/>
+          <figure class="dragons__plate" data-draw>
+            <span class="dragons__plateno" aria-hidden="true">plate v &middot; to the same scale</span>
+            <svg class="dragons__art" viewBox="0 0 260 190" role="img" aria-labelledby="dragons-f5" focusable="false">
+              <title id="dragons-f5">Woodcut of a very small round dragon with an oversized head, tiny wings and a scorch mark beneath it. It is drawn to the same scale as the other plates and is the smallest beast in the book.</title>
+              <defs>
+                <clipPath id="dragons-clip5">
+                  <path d="M76 88 C76 68 92 54 112 56 C132 58 146 74 142 92 C138 108 120 118 102 112 C88 108 76 100 76 88 Z"/>
+                  <path d="M130 104 C148 98 166 108 168 124 C170 140 156 152 140 150 C124 148 118 136 120 122 C122 112 126 106 130 104 Z"/>
+                </clipPath>
+              </defs>
+
+              <g class="wash" style="--wash-delay:940ms">
+                <path fill="var(--crayon-sun)" fill-opacity=".5" d="M76 88 C76 68 92 54 112 56 C132 58 146 74 142 92 C138 108 120 118 102 112 C88 108 76 100 76 88 Z"/>
+                <path fill="var(--crayon-sun)" fill-opacity=".5" d="M130 104 C148 98 166 108 168 124 C170 140 156 152 140 150 C124 148 118 136 120 122 C122 112 126 106 130 104 Z"/>
+                <path fill="var(--crayon-amber)" fill-opacity=".45" d="M146 106 C148 88 158 76 172 74 C166 84 164 96 168 106 C158 102 150 103 146 106 Z"/>
+                <path fill="var(--crayon-sun)" fill-opacity=".5" d="M164 118 C186 116 204 128 210 146 C217 142 225 148 224 157 C223 167 212 172 205 165 C201 161 203 153 209 153 C205 141 188 132 166 134 Z"/>
+                <path fill="var(--crayon-sun)" fill-opacity=".5" d="M128 148 L124 162 L140 162 L140 146 Z M154 148 L154 162 L168 162 L166 146 Z"/>
+                <path fill="var(--crayon-flame)" fill-opacity=".42" d="M67 93 L49 83 L54 95 L31 89 L43 102 L25 106 L40 113 L28 126 L48 116 L51 128 L61 111 Z"/>
+                <path fill="var(--fire-core)" fill-opacity=".7" d="M63 98 L52 91 L55 100 L42 95 L49 105 L38 108 L48 113 L41 122 L52 114 L55 123 L60 110 Z"/>
+              </g>
+
+              <g class="dragons__figure">
+                <g class="dragons__part dragons__hop" style="--ox:146px;--oy:162px">
+
+                  <!-- the tail, blunt-clubbed -->
+                  <path class="stroke" style="--draw-delay:320ms" d="M164 118 C186 116 204 128 210 146 C217 142 225 148 224 157 C223 167 212 172 205 165 C201 161 203 153 209 153 C205 141 188 132 166 134 Z"/>
+
+                  <!-- wings, far too small to be any use -->
+                  <path class="stroke stroke--thin" style="--draw-delay:360ms" d="M160 104 C164 90 174 82 184 82 C178 90 176 98 179 107"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:380ms" d="M146 106 C148 88 158 76 172 74 C166 84 164 96 168 106 C158 102 150 103 146 106 Z"/>
+
+                  <!-- legs -->
+                  <path class="stroke" style="--draw-delay:260ms" d="M128 148 L124 162 L140 162 L140 146"/>
+                  <path class="stroke" style="--draw-delay:280ms" d="M154 148 L154 162 L168 162 L166 146"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:420ms" d="M125 163 L121 169 M132 164 L132 170 M139 163 L143 169 M155 163 L152 169 M161 164 L161 170 M167 163 L170 169"/>
+
+                  <!-- the round body -->
+                  <path class="stroke stroke--fat" style="--draw-delay:140ms" d="M130 104 C148 98 166 108 168 124 C170 140 156 152 140 150 C124 148 118 136 120 122 C122 112 126 106 130 104 Z"/>
+
+                  <!-- the head, which is most of it -->
+                  <path class="stroke stroke--fat" style="--draw-delay:0ms" d="M76 88 C76 68 92 54 112 56 C132 58 146 74 142 92 C138 108 120 118 102 112 C88 108 76 100 76 88 Z"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:200ms" d="M77 92 C69 91 63 95 63 101 C63 107 71 111 79 107"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:220ms" d="M102 56 L99 43 L111 52 M124 58 L131 46 L134 59"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:240ms" d="M66 100 L79 101"/>
+
+                  <g class="dragons__hatch" clip-path="url(#dragons-clip5)">
+                    <path class="stroke" style="--draw-delay:900ms" d="M102 120 L124 88"/>
+                    <path class="stroke" style="--draw-delay:916ms" d="M112 122 L134 90"/>
+                    <path class="stroke" style="--draw-delay:932ms" d="M122 122 L144 90"/>
+                    <path class="stroke" style="--draw-delay:948ms" d="M132 120 L152 92"/>
+                    <path class="stroke" style="--draw-delay:964ms" d="M134 152 L156 120"/>
+                    <path class="stroke" style="--draw-delay:980ms" d="M144 154 L166 122"/>
+                    <path class="stroke" style="--draw-delay:996ms" d="M154 152 L172 126"/>
+                  </g>
+
+                  <!-- one very small flame -->
+                  <g class="dragons__part dragons__spit" style="--ox:66px;--oy:104px">
+                    <path class="stroke stroke--thin" style="--draw-delay:1020ms" d="M67 93 L49 83 L54 95 L31 89 L43 102 L25 106 L40 113 L28 126 L48 116 L51 128 L61 111 Z"/>
+                    <path class="stroke dragons__fine" style="--draw-delay:1060ms" d="M63 98 L52 91 L55 100 L42 95 L49 105 L38 108 L48 113 L41 122 L52 114 L55 123 L60 110 Z"/>
+                  </g>
+
+                  <!-- the eye, which is the rest of it -->
+                  <path class="stroke stroke--thin" style="--draw-delay:1080ms" d="M91 74 A10 10 0 1 1 111 74 A10 10 0 1 1 91 74 Z"/>
+                  <g class="wash" style="--wash-delay:1400ms">
+                    <circle class="dragons__eye" cx="98" cy="77" r="4.2"/>
+                  </g>
                 </g>
 
-                <!-- tail -->
-                <g class="dragons__tail" style="--ox:176px;--oy:152px">
-                  <path class="wash" fill="var(--dg-ember-body)" d="M172 150c16-2 26 4 30 14-6-6-16-10-28-8z"/>
-                  <path class="wash" fill="var(--dg-ember-wing)" d="M202 164c8-2 14-8 14-16-2 8-6 14-14 16z"/>
-                  <path class="stroke stroke--thin" style="--draw-delay:420ms" d="M172 150c16-2 26 4 30 14M202 164c8-2 14-8 14-16"/>
-                </g>
-
-                <!-- little body -->
-                <g class="dragons__body">
-                  <path class="wash" fill="var(--dg-ember-body)" d="M138 128c-12 2-20 10-18 20 2 10 14 14 26 12 12-2 20-10 18-20-2-10-14-14-26-12z"/>
-                  <path class="stroke stroke--thin" style="--draw-delay:380ms" d="M138 128c-12 2-20 10-18 20 2 10 14 14 26 12 12-2 20-10 18-20-2-10-14-14-26-12z"/>
-                </g>
-
-                <!-- the oversized head -->
-                <g>
-                  <path class="wash" fill="var(--dg-ember-body)" d="M150 62c-22 0-38 14-38 32s16 32 38 32 38-14 38-32-16-32-38-32z"/>
-                  <path class="wash" fill="var(--dg-ember-hi)" d="M120 82c6-12 20-18 32-18-14 4-26 8-32 18z"/>
-                  <path class="wash" fill="var(--dg-ember-body)" d="M118 96c-10 0-18 6-18 12s8 12 18 12c8 0 14-6 14-12s-6-12-14-12z"/>
-                  <path class="wash" fill="var(--dg-ember-wing)" d="M126 66c-6-12-8-20-4-24 2 8 6 14 12 18zM172 66c6-12 8-20 4-24-2 8-6 14-12 18z"/>
-                  <path class="stroke" style="--draw-delay:160ms" d="M150 62c-22 0-38 14-38 32s16 32 38 32 38-14 38-32-16-32-38-32z"/>
-                  <path class="stroke stroke--thin" style="--draw-delay:220ms" d="M118 96c-10 0-18 6-18 12s8 12 18 12c8 0 14-6 14-12s-6-12-14-12z"/>
-                  <path class="stroke stroke--thin" style="--draw-delay:440ms" d="M126 66c-6-12-8-20-4-24 2 8 6 14 12 18M172 66c6-12 8-20 4-24-2 8-6 14-12 18"/>
-                  <path class="stroke stroke--thin" style="--draw-delay:600ms" d="M102 110c6 4 14 4 20 0"/>
-                  <circle class="dragons__eye" cx="140" cy="88" r="5"/>
-                  <circle class="dragons__eye" cx="166" cy="86" r="5"/>
-                  <circle class="dragons__glint" cx="142" cy="86" r="1.7"/>
-                  <circle class="dragons__glint" cx="168" cy="84" r="1.7"/>
-                </g>
-
-                <!-- the shell it just broke -->
-                <g>
-                  <path class="wash" fill="var(--dg-egg)" d="M112 158c0-10 10-16 26-16h30c16 0 26 6 26 16 0 18-12 30-30 30h-22c-18 0-30-12-30-30z"/>
-                  <path class="stroke" style="--draw-delay:520ms" d="M110 158l12-12 12 12 12-12 12 12 14-12 12 12 10-10"/>
-                  <path class="stroke" style="--draw-delay:640ms" d="M110 158c0 18 12 30 30 30h22c18 0 30-12 30-30"/>
-                  <path class="wash" fill="var(--dg-egg)" d="M206 178c-8 0-14 4-14 8h28c0-4-6-8-14-8z"/>
-                  <path class="stroke stroke--thin" style="--draw-delay:740ms" d="M206 178c-8 0-14 4-14 8h28c0-4-6-8-14-8z"/>
-                </g>
-
-                <!-- sparks -->
-                <g class="dragons__breath" style="--mx:96px;--my:108px;--bdx:-30px;--bdy:-26px">
-                  <path class="dragons__puff" style="--i:0" fill="var(--fire-mid)" d="M92 102l4 8 8 4-8 4-4 8-4-8-8-4 8-4z"/>
-                  <path class="dragons__puff" style="--i:1" fill="var(--fire-edge)" d="M76 92l3 6 6 3-6 3-3 6-3-6-6-3 6-3z"/>
-                  <path class="dragons__puff" style="--i:2" fill="var(--fire-core)" d="M84 118l3 6 6 3-6 3-3 6-3-6-6-3 6-3z"/>
+                <!-- what it left on the granary floor -->
+                <g class="dragons__hatchmark">
+                  <path class="stroke" style="--draw-delay:1140ms" d="M106 176 L124 170 M114 178 L132 172 M122 179 L140 173 M130 179 L148 173 M138 178 L156 172 M146 177 L164 171"/>
                 </g>
               </g>
             </svg>
-          </div>
+          </figure>
 
-          <h3 class="dragons__name">Ember Hatchling</h3>
-          <p class="dragons__rule">bigger = tougher</p>
-          <p class="dragons__line">Barely bigger than the shell it came out of, so it is not very tough at all. Nobody has told it. It puffs sparks and is extremely proud of the sparks.</p>
-          <dl class="dragons__stats">
-            <div class="dragons__stat" style="--v:.1"><dt>Tough</dt><dd><span class="dragons__meter" aria-hidden="true"><i></i></span><b>pocket</b></dd></div>
-            <div class="dragons__stat" style="--v:.6"><dt>Fast</dt><dd><span class="dragons__meter" aria-hidden="true"><i></i></span><b>zippy</b></dd></div>
-            <div class="dragons__stat" style="--v:.28"><dt>Damage</dt><dd><span class="dragons__meter" aria-hidden="true"><i></i></span><b>a nip</b></dd></div>
-          </dl>
-          <p class="dragons__act">
-            <button class="dragons__wake" type="button" aria-pressed="false" aria-label="Wake it up — Ember Hatchling">
-              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3l2.2 5.4L20 10l-5.8 1.6L12 17l-2.2-5.4L4 10l5.8-1.6z"/></svg>
-              <span>Wake it up</span>
-            </button>
-          </p>
+          <div class="dragons__text">
+            <p class="dragons__where">cap. v &middot; the granary</p>
+            <h3 class="dragons__name" id="dragons-n5">The Ember Hatchling</h3>
+            <p class="dragons__binomial">Draco minimus molestus</p>
+            <p class="dragons__account">
+              A dragon drawn small, or drawn in the dark, or drawn with the hand shaking. It cannot carry a
+              rider or break a gate; the shape is not there for it. It can get inside a granary. One did,
+              on the Blotmire causeway, and the roaches spent four days of that siege chasing it round the
+              sacks instead of holding the road. The plate is to the same scale as the others.
+            </p>
+            <dl class="dragons__rubrics">
+              <div class="dragons__rubric"><dt>Wingspan</dt><dd>
+                <span class="dragons__tally" aria-hidden="true"><svg viewBox="0 0 106 26" focusable="false"><use class="dragons__ghost" href="#dragons-g5"/><use class="dragons__ghost" href="#dragons-g5" x="54"/><use class="dragons__ink" href="#dragons-u1"/></svg></span>
+                <span class="dragons__measure">a handspan, at most</span></dd></div>
+              <div class="dragons__rubric"><dt>Breath</dt><dd>
+                <span class="dragons__tally" aria-hidden="true"><svg viewBox="0 0 106 26" focusable="false"><use class="dragons__ghost" href="#dragons-g5"/><use class="dragons__ghost" href="#dragons-g5" x="54"/><use class="dragons__ink" href="#dragons-u1"/></svg></span>
+                <span class="dragons__measure">a cupful; enough for straw</span></dd></div>
+              <div class="dragons__rubric"><dt>Temper</dt><dd>
+                <span class="dragons__tally" aria-hidden="true"><svg viewBox="0 0 106 26" focusable="false"><use class="dragons__ghost" href="#dragons-g5"/><use class="dragons__ghost" href="#dragons-g5" x="54"/><use class="dragons__ink" href="#dragons-g5"/><use class="dragons__ink" href="#dragons-g5" x="54"/></svg></span>
+                <span class="dragons__measure">past all bearing</span></dd></div>
+            </dl>
+            <p class="dragons__ask">
+              <button type="button" class="dragons__stir">stir the plate<span class="sr-only">: the Ember Hatchling</span></button>
+            </p>
+          </div>
         </article>
       </li>
 
-      <!-- ══════════════ 6 · CRAYON TITAN ══════════════ -->
-      <li class="dragons__item" data-reveal="pop">
-        <article class="card card--pad card--lift dragons__card">
-          <div class="dragons__plate" data-draw>
-            <svg class="dragons__svg" viewBox="0 0 300 210" role="img" aria-labelledby="dragons-fig-6" preserveAspectRatio="xMidYMid meet" focusable="false">
-              <title id="dragons-fig-6">An enormous blocky dragon scribbled in every crayon colour, too big for the page.</title>
-              <g class="dragons__art alive alive--slow">
+      <!-- ================================================================
+           VI · THE CRAYON TITAN
+           ================================================================ -->
+      <li class="dragons__leaf" data-reveal="right">
+        <article class="dragons__beast" aria-labelledby="dragons-n6">
 
-                <!-- tail, running off the edge of the paper -->
-                <g class="dragons__tail" style="--ox:232px;--oy:120px">
-                  <path class="wash" fill="var(--dg-titan-body)" d="M228 92l48-8 10-30 18 44-10 48-66 4z"/>
-                  <path class="stroke" style="--draw-delay:420ms" d="M228 92l48-8 10-30 18 44-10 48-66 4"/>
-                </g>
+          <figure class="dragons__plate" data-draw>
+            <span class="dragons__plateno" aria-hidden="true">plate vi &middot; the leaf is too small</span>
+            <svg class="dragons__art" viewBox="0 0 260 190" role="img" aria-labelledby="dragons-f6" focusable="false">
+              <title id="dragons-f6">Woodcut of an enormous blocky dragon filled with scribble, so large that its wing, tail and feet run off the edges of the plate.</title>
+              <defs>
+                <clipPath id="dragons-clip6">
+                  <path d="M96 120 L102 66 L212 56 L252 90 L256 152 L118 160 Z"/>
+                  <path d="M62 50 L106 68 L108 126 L60 94 Z"/>
+                  <path d="M124 152 L116 192 L152 192 L152 150 Z"/>
+                  <path d="M166 154 L164 192 L190 192 L192 152 Z"/>
+                  <path d="M222 150 L218 192 L252 192 L250 148 Z"/>
+                  <path d="M200 152 L198 186 L216 186 L216 150 Z"/>
+                  <path d="M248 96 L262 82 L262 162 L250 146 Z"/>
+                </clipPath>
+                <clipPath id="dragons-clip6w"><path d="M146 70 L170 -6 L226 -14 L236 34 L218 42 L228 62 L200 58 L204 76 Z"/></clipPath>
+              </defs>
 
-                <!-- a wing far too small for the body -->
-                <g class="dragons__wing dragons__wing--near" style="--ox:150px;--oy:72px">
-                  <path class="wash" fill="var(--dg-titan-wing)" d="M126 76l14-52 34 30 24-38 18 62z"/>
-                  <path class="stroke" style="--draw-delay:220ms" d="M126 76l14-52 34 30 24-38 18 62"/>
-                </g>
+              <g class="wash" style="--wash-delay:1020ms">
+                <path fill="var(--crayon-royal)" fill-opacity=".42" d="M146 70 L170 -6 L226 -14 L236 34 L218 42 L228 62 L200 58 L204 76 Z"/>
+                <path fill="var(--crayon-berry)" fill-opacity=".4" d="M124 152 L116 192 L152 192 L152 150 Z M222 150 L218 192 L252 192 L250 148 Z"/>
+                <path fill="var(--crayon-berry)" fill-opacity=".28" d="M166 154 L164 192 L190 192 L192 152 Z M200 152 L198 186 L216 186 L216 150 Z"/>
+                <path fill="var(--crayon-royal)" fill-opacity=".5" d="M62 50 L106 68 L108 126 L60 94 Z"/>
+                <path fill="var(--crayon-royal)" fill-opacity=".5" d="M96 120 L102 66 L212 56 L252 90 L256 152 L118 160 Z"/>
+                <path fill="var(--crayon-royal)" fill-opacity=".5" d="M20 44 L6 68 L20 90 L58 94 L74 68 L62 44 Z"/>
+                <path fill="var(--crayon-royal)" fill-opacity=".5" d="M248 96 L262 82 L262 162 L250 146 Z"/>
+              </g>
 
-                <!-- legs like posts -->
-                <path class="wash" fill="var(--dg-titan-body)" d="M94 154l2 60h42l-2-60zM194 152l-2 62h44l2-62z"/>
-                <path class="stroke" style="--draw-delay:520ms" d="M94 154l2 60M138 154l-2 60M194 152l-2 62M240 152l-2 62"/>
+              <g class="dragons__figure">
+                <g class="dragons__part dragons__step">
 
-                <!-- blocky body: one closed loop -->
-                <g class="dragons__body">
-                  <path class="wash" fill="var(--dg-titan-body)" d="M74 80l154-6 24 28 2 68-180 6z"/>
-                  <path class="stroke" style="--draw-delay:160ms" d="M74 80l154-6 24 28 2 68-180 6z"/>
-                  <path class="dragons__scribble stroke stroke--thin" style="--draw-delay:640ms;--sc:var(--crayon-royal)" d="M90 96l26 10-28 10 28 10-28 10M126 92l24 10-26 10 26 10-26 10"/>
-                  <path class="dragons__scribble stroke stroke--thin" style="--draw-delay:740ms;--sc:var(--crayon-sky)" d="M164 92l24 10-26 10 26 10-26 10M200 96l24 10-26 10 26 10"/>
-                  <path class="dragons__scribble stroke stroke--thin" style="--draw-delay:840ms;--sc:var(--crayon-berry)" d="M88 138l22 8-24 8 24 8M124 136l22 8-24 8 24 8M160 138l22 8-24 8 24 8"/>
-                </g>
+                  <!-- the blocked-in wing, which never once opened -->
+                  <path class="stroke" style="--draw-delay:440ms" d="M146 70 L170 -6 L226 -14 L236 34 L218 42 L228 62 L200 58 L204 76"/>
+                  <g class="dragons__scribble" clip-path="url(#dragons-clip6w)">
+                    <path class="stroke" style="--draw-delay:1260ms" d="M148 64 L234 50 L150 46 L232 32 L152 28 L230 14 L154 10 L228 -4 L160 -10"/>
+                  </g>
 
-                <!-- slab head with a blocky open jaw -->
-                <g>
-                  <path class="wash" fill="var(--dg-titan-body)" d="M76 86H26L12 114l32 4 32-2z"/>
-                  <path class="wash" fill="var(--dg-titan-body)" d="M44 126l-22 4 4 18h50l2-22z"/>
-                  <path class="wash" fill="var(--dg-titan-wing)" d="M40 86l-6-32 24 20zM66 86l4-34 22 22z"/>
-                  <path class="stroke" style="--draw-delay:260ms" d="M76 86H26L12 114l32 4 32-2"/>
-                  <path class="stroke" style="--draw-delay:360ms" d="M44 126l-22 4 4 18h50l2-22"/>
-                  <path class="stroke" style="--draw-delay:460ms" d="M40 86l-6-32 24 20M66 86l4-34 22 22"/>
-                  <path class="stroke stroke--thin" style="--draw-delay:700ms" d="M26 118l6 8 8-8 8 8M32 130l6 6 8-6"/>
-                  <path class="dragons__eye" d="M36 94h16v12H36z"/>
-                </g>
+                  <!-- far legs -->
+                  <path class="stroke stroke--thin" style="--draw-delay:300ms" d="M166 154 L164 192 M192 152 L190 192"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:320ms" d="M200 152 L198 186 M216 150 L216 186"/>
 
-                <!-- a broad blunt blast -->
-                <g class="dragons__breath" style="--mx:12px;--my:128px;--bdx:-22px;--bdy:4px">
-                  <path class="dragons__puff" style="--i:0" fill="var(--crayon-sun)" d="M14 114L-4 124l18 10-6-10z"/>
-                  <path class="dragons__puff" style="--i:1" fill="var(--crayon-flame)" d="M10 126l-16 14 20 6-8-10z"/>
-                  <path class="dragons__puff" style="--i:2" fill="var(--crayon-green)" d="M12 140l-12 16 20 2-10-10z"/>
+                  <!-- the neck slab, and the head, which is small for it -->
+                  <g class="dragons__part dragons__bow" style="--ox:106px;--oy:98px">
+                    <path class="stroke" style="--draw-delay:200ms" d="M62 50 L106 68 M60 94 L108 126"/>
+                    <path class="stroke stroke--fat" style="--draw-delay:140ms" d="M20 44 L6 68 L20 90 L58 94 L74 68 L62 44 Z"/>
+                    <path class="stroke stroke--thin" style="--draw-delay:340ms" d="M7 76 L56 80"/>
+                    <path class="stroke stroke--thin" style="--draw-delay:360ms" d="M42 44 L48 20 L68 36 L64 48"/>
+                    <path class="stroke stroke--thin" style="--draw-delay:380ms" d="M18 78 L20 70 M30 79 L32 71 M42 80 L44 72"/>
+                    <g class="wash" style="--wash-delay:1620ms">
+                      <circle class="dragons__eye" cx="30" cy="60" r="3"/>
+                    </g>
+                  </g>
+
+                  <!-- the slab -->
+                  <path class="stroke stroke--fat" style="--draw-delay:0ms" d="M96 120 L102 66 L212 56 L252 90 L256 152 L118 160 Z"/>
+
+                  <!-- the tail, which leaves the page -->
+                  <path class="stroke" style="--draw-delay:240ms" d="M248 96 L262 82 M250 146 L262 162"/>
+
+                  <!-- the near legs, blunt as posts -->
+                  <path class="stroke" style="--draw-delay:260ms" d="M124 152 L116 192 M152 150 L152 192"/>
+                  <path class="stroke" style="--draw-delay:280ms" d="M222 150 L218 192 M250 148 L252 192"/>
+
+                  <!-- what it is filled with -->
+                  <g class="dragons__scribble" clip-path="url(#dragons-clip6)">
+                    <path class="stroke" style="--draw-delay:900ms" d="M56 60 L258 58 L58 74 L258 70 L58 88 L258 82 L56 100 L258 94 L92 112 L258 106 L94 124 L258 118 L102 136 L258 130 L110 148 L258 142 L114 160 L256 154 L118 172 L254 166 L118 184 L254 178 L120 192"/>
+                    <path class="stroke stroke--thin" style="--draw-delay:1320ms" d="M100 166 L150 54 L126 178 L178 56 L154 186 L206 58 L182 190 L234 60 L210 190 L258 70"/>
+                  </g>
+
+                  <!-- the plates along its back -->
+                  <path class="stroke stroke--thin" style="--draw-delay:470ms" d="M110 64 L112 48 L126 62 M228 62 L238 50 L246 68"/>
                 </g>
               </g>
             </svg>
-          </div>
+          </figure>
 
-          <h3 class="dragons__name">Crayon Titan</h3>
-          <p class="dragons__rule">closed loops = armour</p>
-          <p class="dragons__line">Scribbled for eleven solid minutes. The body came out as one closed shape all the way round, which is the good kind of accident.</p>
-          <dl class="dragons__stats">
-            <div class="dragons__stat" style="--v:1"><dt>Tough</dt><dd><span class="dragons__meter" aria-hidden="true"><i></i></span><b>off-page</b></dd></div>
-            <div class="dragons__stat" style="--v:.12"><dt>Fast</dt><dd><span class="dragons__meter" aria-hidden="true"><i></i></span><b>geological</b></dd></div>
-            <div class="dragons__stat" style="--v:.66"><dt>Damage</dt><dd><span class="dragons__meter" aria-hidden="true"><i></i></span><b>final</b></dd></div>
-          </dl>
-          <p class="dragons__act">
-            <button class="dragons__wake" type="button" aria-pressed="false" aria-label="Wake it up — Crayon Titan">
-              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3l2.2 5.4L20 10l-5.8 1.6L12 17l-2.2-5.4L4 10l5.8-1.6z"/></svg>
-              <span>Wake it up</span>
-            </button>
-          </p>
+          <div class="dragons__text">
+            <p class="dragons__where">cap. vi &middot; at the throne</p>
+            <h3 class="dragons__name" id="dragons-n6">The Crayon Titan</h3>
+            <p class="dragons__binomial">Draco maximus scriptorius</p>
+            <p class="dragons__account">
+              The roaches drew it once, before their own throne, on the last day, and the drawing took four
+              hours. The shape decides the strength, and there had never been so much shape on one leaf. It
+              went through the gate-house without appearing to notice the gate-house. When Iries broke their
+              pencil it stopped where it stood, and it stands there yet; nothing since has been drawn large
+              enough to move it.
+            </p>
+            <p class="dragons__gloss">A later hand, and a shakier one: <i>it is still there. I have walked
+              round it. It took the better part of a morning.</i></p>
+            <dl class="dragons__rubrics">
+              <div class="dragons__rubric"><dt>Wingspan</dt><dd>
+                <span class="dragons__tally" aria-hidden="true"><svg viewBox="0 0 106 26" focusable="false"><use class="dragons__ghost" href="#dragons-g5"/><use class="dragons__ghost" href="#dragons-g5" x="54"/><use class="dragons__ink" href="#dragons-g5"/><use class="dragons__ink" href="#dragons-g5" x="54"/></svg></span>
+                <span class="dragons__measure">twenty paces, and never opened</span></dd></div>
+              <div class="dragons__rubric"><dt>Breath</dt><dd>
+                <span class="dragons__tally" aria-hidden="true"><svg viewBox="0 0 106 26" focusable="false"><use class="dragons__ghost" href="#dragons-g5"/><use class="dragons__ghost" href="#dragons-g5" x="54"/><use class="dragons__ink" href="#dragons-g5"/><use class="dragons__ink" href="#dragons-u1" x="54"/></svg></span>
+                <span class="dragons__measure">wax, and black smoke</span></dd></div>
+              <div class="dragons__rubric"><dt>Temper</dt><dd>
+                <span class="dragons__tally" aria-hidden="true"><svg viewBox="0 0 106 26" focusable="false"><use class="dragons__ghost" href="#dragons-g5"/><use class="dragons__ghost" href="#dragons-g5" x="54"/><use class="dragons__ink" href="#dragons-g5"/><use class="dragons__ink" href="#dragons-u4" x="54"/></svg></span>
+                <span class="dragons__measure">slow to begin, slower to stop</span></dd></div>
+            </dl>
+            <p class="dragons__ask">
+              <button type="button" class="dragons__stir">stir the plate<span class="sr-only">: the Crayon Titan</span></button>
+            </p>
+          </div>
         </article>
       </li>
 
-      <!-- ══════════════ 7 · DRAW YOUR OWN ══════════════ -->
-      <li class="dragons__item" data-reveal="pop">
-        <div class="card card--pad dragons__card dragons__card--blank">
-          <div class="dragons__plate dragons__plate--blank">
-            <svg class="dragons__svg" viewBox="0 0 300 210" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
-              <path class="dragons__ghost" d="M156 104c-26 0-46 14-46 32s20 32 46 32 46-14 46-32-20-32-46-32z"/>
-              <path class="dragons__ghost" d="M112 70c6 16 18 32 32 42"/>
-              <path class="dragons__ghost" d="M110 50c-14-6-30 0-36 10-6 10 0 20 10 24 12 4 26 0 32-8 4-8 2-22-6-26z"/>
-              <path class="dragons__ghost" d="M150 104c14-34 50-60 94-66-24 22-20 44-20 44-28 2-28 18-28 18-22 0-32 6-46 6"/>
-              <path class="dragons__ghost" d="M200 120c28-2 50 8 62 22"/>
-              <path class="dragons__ghost" d="M132 166c-6 10-8 20-4 30M182 164c6 10 8 20 4 30"/>
-              <g class="dragons__pencil">
-                <path fill="var(--crayon-sun)" d="M236 26l18 12-56 80-22 8 6-24z"/>
-                <path fill="var(--dg-pencil-tip)" d="M176 126l22-8-14-10z"/>
-                <path class="dragons__hair" d="M236 26l18 12-56 80-22 8 6-24zM182 110l16 10"/>
-              </g>
-            </svg>
-          </div>
+    </ol>
 
-          <h3 class="dragons__name">Your dragon</h3>
-          <p class="dragons__rule">whatever shape you like</p>
-          <p class="dragons__line">There is no seventh dragon yet. The Studio hands you a pen, a bucket fill, a crayon, a mirror, and an undo for the wings. Ink is unlimited and nobody is checking your spelling.</p>
-          <p class="dragons__cta">
-            <a class="btn btn--fire btn--sm dragons__ctabtn" href="https://devkancheti4-design.github.io/magic-pencil-kingdoms/">
-              Open the pencil
-              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="M12 6l6 6-6 6"/></svg>
-            </a>
-          </p>
-        </div>
-      </li>
-
-    </ul>
-
-    <p class="dragons__foot" data-reveal>
-      Six shapes, two words. Then it walks off toward the next castle — and there are six
-      kingdoms out there, with only Greenhaven yours to start with.
-    </p>
+    <p class="dragons__folio">folio xlvii recto &middot; of dragons and their kinds &middot; six plates</p>
   </div>
-
-  <p class="sr-only" aria-live="polite" data-dragons-live></p>
 </section>

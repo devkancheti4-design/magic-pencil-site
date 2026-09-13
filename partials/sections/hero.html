@@ -1,306 +1,301 @@
 <section id="hero" class="hero">
 
-  <!-- =========================== the sheet of sky ======================== -->
-  <div class="hero__sky" aria-hidden="true"></div>
+  <!-- ======================================================================
+       THE COVER OF THE BOOK
+       The leaf, the ruled frontispiece that draws itself, and the title.
+       No <defs>, no gradients, no filters, no ids: nothing here can collide
+       with another chapter's SVG on the same page.
+       ====================================================================== -->
 
-  <!-- ==================== the landscape, drawing itself ================== -->
-  <div class="hero__scene" data-draw aria-hidden="true">
+  <div class="hero__leaf">
 
-    <!-- sun -->
-    <div class="hero__layer hero__layer--sun" data-drift="1.05" data-parallax="0.10">
-      <svg data-vb viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
-        <g class="wash" style="--wash-delay:2750ms">
-          <circle cx="1418" cy="132" r="52" fill="var(--crayon-sun)" fill-opacity=".6"/>
+    <!-- ================= THE FRONTISPIECE (decorative) ================== -->
+    <div class="hero__plate" data-draw aria-hidden="true">
+
+      <!-- ---------- the ruling: three rules, laid one after another ------
+           CSS borders, not SVG. A ruled margin must be an exact hairline at
+           every aspect ratio; a non-uniformly scaled path cannot be. -->
+      <div class="hero__rule hero__rule--outer"></div>
+      <div class="hero__rule hero__rule--inner"></div>
+      <div class="hero__rule hero__rule--hair"></div>
+
+      <!-- ---------- corner knotwork, four corners, mirrored ------------- -->
+      <svg class="hero__knot hero__knot--tl" viewBox="0 0 120 120" focusable="false" style="--draw-delay:380ms;--wash-delay:1240ms">
+        <path class="wash hero__band" d="M8 66 A58 58 0 0 1 66 8 L66 22 A44 44 0 0 0 22 66 Z"/>
+        <path class="stroke stroke--thin" d="M8 66 A58 58 0 0 1 66 8 L66 22 A44 44 0 0 0 22 66 Z"/>
+        <g class="hero__knot-detail">
+          <path class="stroke stroke--thin" d="M5 49 A13 13 0 1 0 31 49 A13 13 0 1 0 5 49 Z"/>
+          <path class="stroke stroke--thin" d="M17 30 A13 13 0 1 0 43 30 A13 13 0 1 0 17 30 Z"/>
+          <path class="stroke stroke--thin" d="M36 18 A13 13 0 1 0 62 18 A13 13 0 1 0 36 18 Z"/>
+          <path class="stroke stroke--thin" d="M14 60 L24 66 M20 47 L31 52 M28 35 L38 41 M39 25 L45 35 M51 17 L55 27 M63 13 L65 24"/>
+          <path class="stroke stroke--thin" d="M70 12 C82 9 93 14 99 23 C92 25 83 22 77 17 M12 70 C9 82 14 93 23 99 C25 92 22 83 17 77"/>
         </g>
-        <!-- a path, not a <circle>: the runtime measures it with getTotalLength() -->
-        <path class="stroke" style="--draw-delay:2320ms" d="M1358,126 A54,54 0 1 1 1466,126 A54,54 0 1 1 1358,126 Z"/>
-        <path class="stroke stroke--thin hero__detail" style="--draw-delay:2460ms" d="M1480,141 Q1491,147 1504,146"/>
-        <path class="stroke stroke--thin hero__detail" style="--draw-delay:2505ms" d="M1450,185 Q1453,197 1463,205"/>
-        <path class="stroke stroke--thin hero__detail" style="--draw-delay:2550ms" d="M1397,194 Q1391,205 1392,218"/>
-        <path class="stroke stroke--thin hero__detail" style="--draw-delay:2595ms" d="M1353,164 Q1341,167 1333,177"/>
-        <path class="stroke stroke--thin hero__detail" style="--draw-delay:2640ms" d="M1344,111 Q1333,105 1320,106"/>
-        <path class="stroke stroke--thin hero__detail" style="--draw-delay:2685ms" d="M1374,67 Q1371,55 1361,47"/>
-        <path class="stroke stroke--thin hero__detail" style="--draw-delay:2730ms" d="M1427,58 Q1433,47 1432,34"/>
-        <path class="stroke stroke--thin hero__detail" style="--draw-delay:2775ms" d="M1471,88 Q1483,85 1491,75"/>
+        <path class="wash hero__gold" d="M16 3 L27 14 L17 29 L4 17 Z"/>
+        <path class="stroke stroke--thin hero__crack" d="M9 11 L21 22 M17 5 L14 26"/>
       </svg>
-    </div>
 
-    <!-- clouds -->
-    <div class="hero__layer hero__layer--clouds" data-drift="1.55" data-parallax="0.08">
-      <svg data-vb viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
-        <g class="wash" style="--wash-delay:2380ms" transform="translate(6,7)" fill="var(--paper-0)" fill-opacity=".94">
-          <path d="M400,182 C372,182 364,152 390,142 C384,106 430,84 458,106 C476,66 544,62 560,102 C590,78 634,94 632,126 C666,122 684,150 664,168 C676,176 668,188 650,186 C566,196 480,192 400,182 Z"/>
-          <path d="M976,150 C952,150 946,126 968,118 C964,90 1002,74 1024,92 C1038,60 1092,56 1104,88 C1130,70 1164,84 1160,110 C1186,110 1196,134 1178,144 C1120,158 1042,158 976,150 Z"/>
-          <path d="M1296,364 C1278,364 1274,346 1290,340 C1288,320 1316,310 1332,324 C1344,302 1382,300 1390,324 C1410,312 1434,324 1430,342 C1448,344 1452,360 1436,364 C1390,372 1340,370 1296,364 Z"/>
-          <path d="M104,288 C86,288 82,270 98,264 C96,244 124,234 140,248 C152,226 190,224 198,248 C218,236 242,248 238,266 C256,268 260,284 244,288 C198,296 148,294 104,288 Z"/>
+      <svg class="hero__knot hero__knot--tr" viewBox="0 0 120 120" focusable="false" style="--draw-delay:440ms;--wash-delay:1280ms">
+        <path class="wash hero__band" d="M8 66 A58 58 0 0 1 66 8 L66 22 A44 44 0 0 0 22 66 Z"/>
+        <path class="stroke stroke--thin" d="M8 66 A58 58 0 0 1 66 8 L66 22 A44 44 0 0 0 22 66 Z"/>
+        <g class="hero__knot-detail">
+          <path class="stroke stroke--thin" d="M5 49 A13 13 0 1 0 31 49 A13 13 0 1 0 5 49 Z"/>
+          <path class="stroke stroke--thin" d="M17 30 A13 13 0 1 0 43 30 A13 13 0 1 0 17 30 Z"/>
+          <path class="stroke stroke--thin" d="M36 18 A13 13 0 1 0 62 18 A13 13 0 1 0 36 18 Z"/>
+          <path class="stroke stroke--thin" d="M14 60 L24 66 M20 47 L31 52 M28 35 L38 41 M39 25 L45 35 M51 17 L55 27 M63 13 L65 24"/>
+          <path class="stroke stroke--thin" d="M70 12 C82 9 93 14 99 23 C92 25 83 22 77 17 M12 70 C9 82 14 93 23 99 C25 92 22 83 17 77"/>
         </g>
-        <path class="stroke" style="--draw-delay:1980ms" d="M400,182 C372,182 364,152 390,142 C384,106 430,84 458,106 C476,66 544,62 560,102 C590,78 634,94 632,126 C666,122 684,150 664,168 C676,176 668,188 650,186 C566,196 480,192 400,182 Z"/>
-        <path class="stroke" style="--draw-delay:2100ms" d="M976,150 C952,150 946,126 968,118 C964,90 1002,74 1024,92 C1038,60 1092,56 1104,88 C1130,70 1164,84 1160,110 C1186,110 1196,134 1178,144 C1120,158 1042,158 976,150 Z"/>
-        <path class="stroke stroke--thin hero__detail" style="--draw-delay:2210ms" d="M1296,364 C1278,364 1274,346 1290,340 C1288,320 1316,310 1332,324 C1344,302 1382,300 1390,324 C1410,312 1434,324 1430,342 C1448,344 1452,360 1436,364 C1390,372 1340,370 1296,364 Z"/>
-        <path class="stroke stroke--thin hero__detail" style="--draw-delay:2300ms" d="M104,288 C86,288 82,270 98,264 C96,244 124,234 140,248 C152,226 190,224 198,248 C218,236 242,248 238,266 C256,268 260,284 244,288 C198,296 148,294 104,288 Z"/>
+        <path class="wash hero__gold" d="M15 4 L28 13 L18 30 L3 18 Z"/>
+        <path class="stroke stroke--thin hero__crack" d="M8 13 L23 20 M19 6 L13 27"/>
       </svg>
-    </div>
 
-    <!-- the far range -->
-    <div class="hero__layer hero__layer--far" data-drift="0.6" data-parallax="0.05">
-      <svg data-vb viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
-        <g class="wash" style="--wash-delay:900ms">
-          <path d="M-80,742 C40,720 90,678 150,634 C190,606 218,614 246,644 C280,680 312,706 348,718 C392,702 430,648 486,598 C520,568 552,574 580,610 C618,658 660,702 706,720 C754,706 800,652 858,604 C890,578 922,584 948,618 C986,668 1034,708 1084,722 C1132,708 1180,658 1236,610 C1268,582 1300,588 1326,622 C1364,672 1418,710 1470,724 C1524,716 1600,694 1680,666 L1680,1300 L-80,1300 Z" fill="var(--hero-far-hill)" fill-opacity=".88"/>
+      <svg class="hero__knot hero__knot--bl" viewBox="0 0 120 120" focusable="false" style="--draw-delay:500ms;--wash-delay:1320ms">
+        <path class="wash hero__band" d="M8 66 A58 58 0 0 1 66 8 L66 22 A44 44 0 0 0 22 66 Z"/>
+        <path class="stroke stroke--thin" d="M8 66 A58 58 0 0 1 66 8 L66 22 A44 44 0 0 0 22 66 Z"/>
+        <g class="hero__knot-detail">
+          <path class="stroke stroke--thin" d="M5 49 A13 13 0 1 0 31 49 A13 13 0 1 0 5 49 Z"/>
+          <path class="stroke stroke--thin" d="M17 30 A13 13 0 1 0 43 30 A13 13 0 1 0 17 30 Z"/>
+          <path class="stroke stroke--thin" d="M36 18 A13 13 0 1 0 62 18 A13 13 0 1 0 36 18 Z"/>
+          <path class="stroke stroke--thin" d="M14 60 L24 66 M20 47 L31 52 M28 35 L38 41 M39 25 L45 35 M51 17 L55 27 M63 13 L65 24"/>
+          <path class="stroke stroke--thin" d="M70 12 C82 9 93 14 99 23 C92 25 83 22 77 17 M12 70 C9 82 14 93 23 99 C25 92 22 83 17 77"/>
         </g>
-        <path class="stroke stroke--thin" style="--draw-delay:0ms" d="M-80,742 C40,720 90,678 150,634 C190,606 218,614 246,644 C280,680 312,706 348,718 C392,702 430,648 486,598 C520,568 552,574 580,610 C618,658 660,702 706,720 C754,706 800,652 858,604 C890,578 922,584 948,618 C986,668 1034,708 1084,722 C1132,708 1180,658 1236,610 C1268,582 1300,588 1326,622 C1364,672 1418,710 1470,724 C1524,716 1600,694 1680,666"/>
+        <path class="wash hero__gold" d="M17 2 L29 15 L15 28 L5 16 Z"/>
+        <path class="stroke stroke--thin hero__crack" d="M10 10 L22 24 M20 7 L12 24"/>
       </svg>
-    </div>
 
-    <!-- hills, castle, trees -->
-    <div class="hero__layer hero__layer--near" data-drift="0.22" data-parallax="0.015">
-      <svg data-vb viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
+      <svg class="hero__knot hero__knot--br" viewBox="0 0 120 120" focusable="false" style="--draw-delay:560ms;--wash-delay:1360ms">
+        <path class="wash hero__band" d="M8 66 A58 58 0 0 1 66 8 L66 22 A44 44 0 0 0 22 66 Z"/>
+        <path class="stroke stroke--thin" d="M8 66 A58 58 0 0 1 66 8 L66 22 A44 44 0 0 0 22 66 Z"/>
+        <g class="hero__knot-detail">
+          <path class="stroke stroke--thin" d="M5 49 A13 13 0 1 0 31 49 A13 13 0 1 0 5 49 Z"/>
+          <path class="stroke stroke--thin" d="M17 30 A13 13 0 1 0 43 30 A13 13 0 1 0 17 30 Z"/>
+          <path class="stroke stroke--thin" d="M36 18 A13 13 0 1 0 62 18 A13 13 0 1 0 36 18 Z"/>
+          <path class="stroke stroke--thin" d="M14 60 L24 66 M20 47 L31 52 M28 35 L38 41 M39 25 L45 35 M51 17 L55 27 M63 13 L65 24"/>
+          <path class="stroke stroke--thin" d="M70 12 C82 9 93 14 99 23 C92 25 83 22 77 17 M12 70 C9 82 14 93 23 99 C25 92 22 83 17 77"/>
+        </g>
+        <path class="wash hero__gold" d="M16 4 L28 16 L16 27 L3 15 Z"/>
+        <path class="stroke stroke--thin hero__crack" d="M9 12 L22 21 M18 6 L14 25"/>
+      </svg>
 
-        <!-- the crayon goes down first, underneath every line -->
-        <g class="wash" style="--wash-delay:950ms">
-          <g transform="translate(0,58)">
-            <path d="M-80,824 C140,814 320,792 470,760 C600,734 700,712 810,700 C940,684 1080,650 1220,664 C1360,678 1520,706 1680,700 L1680,1300 L-80,1300 Z" fill="var(--crayon-grass)" fill-opacity=".92"/>
-          </g>
-        </g>
-        <g class="wash" style="--wash-delay:1560ms">
-          <g transform="translate(0,58)">
-            <path d="M1016,676 L1014,608 L1348,602 L1346,676 Z" fill="var(--paper-0)"/>
-            <path d="M1040,676 L1038,556 L1102,552 L1104,676 Z" fill="var(--paper-0)"/>
-            <path d="M1262,676 L1260,572 L1324,568 L1326,676 Z" fill="var(--paper-0)"/>
-            <path d="M1128,676 L1126,498 L1240,494 L1242,676 Z" fill="var(--paper-2)"/>
-            <path d="M1026,564 L1070,478 L1114,560 Z" fill="var(--crayon-green)" fill-opacity=".92"/>
-            <path d="M1248,578 L1292,492 L1338,576 Z" fill="var(--crayon-green)" fill-opacity=".92"/>
-            <path d="M1112,500 L1182,368 L1256,496 Z" fill="var(--crayon-green)" fill-opacity=".92"/>
-            <path d="M1156,676 L1156,662 C1156,642 1204,642 1204,662 L1204,676 Z" fill="var(--ink-500)" fill-opacity=".5"/>
-            <path d="M1150,570 L1168,568 L1168,600 L1150,600 Z" fill="var(--crayon-sun)" fill-opacity=".85"/>
-            <path d="M1202,570 L1220,568 L1220,600 L1202,600 Z" fill="var(--crayon-sun)" fill-opacity=".85"/>
-            <path d="M1064,596 L1080,594 L1080,618 L1064,618 Z" fill="var(--crayon-sun)" fill-opacity=".85"/>
-            <path d="M1286,610 L1302,608 L1302,632 L1286,632 Z" fill="var(--crayon-sun)" fill-opacity=".85"/>
-            <path d="M1184,302 C1206,306 1224,296 1246,302 C1232,312 1234,322 1246,332 C1224,338 1206,328 1184,334 Z" fill="var(--crayon-ember)" fill-opacity=".9"/>
-          </g>
-        </g>
-        <g class="wash" style="--wash-delay:1950ms">
-          <g transform="translate(0,58)">
-            <path d="M1413,703 L1415,642 L1429,642 L1431,703 Z" fill="var(--hero-bark)"/>
-            <path d="M1384,640 C1364,632 1370,603 1394,599 C1394,575 1429,565 1440,587 C1463,577 1478,600 1466,618 C1478,632 1465,647 1443,641 C1418,650 1397,648 1384,640 Z" fill="var(--crayon-green)" fill-opacity=".82"/>
-            <path d="M1494,707 L1495,666 L1504,666 L1505,707 Z" fill="var(--hero-bark)"/>
-            <path d="M1475,665 C1461,660 1465,641 1481,638 C1481,622 1504,616 1512,630 C1527,623 1537,639 1528,651 C1537,660 1528,670 1513,666 C1497,671 1483,670 1475,665 Z" fill="var(--crayon-green)" fill-opacity=".82"/>
-            <path d="M901,700 L903,650 L914,650 L915,700 Z" fill="var(--hero-bark)"/>
-            <path d="M877,648 C861,641 865,618 885,615 C886,594 914,587 923,605 C942,596 954,616 944,630 C954,641 943,654 925,649 C905,656 888,654 877,648 Z" fill="var(--crayon-green)" fill-opacity=".82"/>
-            <path d="M997,686 L998,651 L1006,651 L1007,686 Z" fill="var(--hero-bark)"/>
-            <path d="M980,650 C969,645 972,628 986,626 C986,612 1006,606 1013,619 C1026,613 1035,626 1028,637 C1035,645 1027,653 1014,650 C1000,655 988,654 980,650 Z" fill="var(--crayon-green)" fill-opacity=".82"/>
-          </g>
-        </g>
-        <g class="wash" style="--wash-delay:1180ms">
-          <path d="M-80,848 C120,792 300,778 470,794 C620,808 740,832 880,828 C1020,824 1160,792 1300,782 C1430,773 1560,784 1680,808 L1680,1300 L-80,1300 Z" fill="var(--crayon-green)" fill-opacity=".9"/>
-        </g>
-        <g class="wash" style="--wash-delay:2050ms">
-          <path d="M1547,820 L1549,749 L1564,749 L1567,820 Z" fill="var(--hero-bark)"/>
-          <path d="M1513,747 C1489,737 1496,704 1524,700 C1525,671 1564,660 1578,686 C1604,673 1622,701 1607,722 C1622,737 1606,755 1581,748 C1552,758 1528,756 1513,747 Z" fill="var(--crayon-green)" fill-opacity=".82"/>
-          <path d="M1284,859 L1286,812 L1296,812 L1298,859 Z" fill="var(--hero-bark)"/>
-          <path d="M1261,810 C1246,804 1250,782 1269,779 C1270,759 1296,752 1305,769 C1323,761 1335,779 1325,793 C1335,804 1324,816 1307,811 C1288,818 1272,816 1261,810 Z" fill="var(--crayon-green)" fill-opacity=".82"/>
-        </g>
+      <!-- ---------- the woodcut ------------------------------------------ -->
+      <div class="hero__scene">
+        <svg class="hero__woodcut" data-vb viewBox="0 20 1200 1010" preserveAspectRatio="xMidYMid slice" focusable="false">
 
-        <!-- ...then the pen goes over it -->
-        <g transform="translate(0,58)">
-          <path class="stroke" style="--draw-delay:280ms" d="M-80,824 C140,814 320,792 470,760 C600,734 700,712 810,700 C940,684 1080,650 1220,664 C1360,678 1520,706 1680,700"/>
-
-          <g class="hero__castle">
-            <path class="stroke" style="--draw-delay:760ms" d="M1014,678 L1012,628 M1350,678 L1348,620 M1014,678 L1348,678"/>
-            <path class="stroke" style="--draw-delay:860ms" d="M1012,628 L1012,602 L1042,601 L1042,626 L1070,626 L1070,601 L1100,600 L1100,625 L1128,625 L1128,600 L1158,599 L1158,624 L1186,624 L1186,599 L1216,598 L1216,623 L1244,623 L1244,598 L1274,597 L1274,622 L1302,622 L1302,597 L1332,596 L1332,621 L1348,621"/>
-            <path class="stroke" style="--draw-delay:980ms" d="M1036,678 L1034,556 L1104,552 L1106,678"/>
-            <path class="stroke" style="--draw-delay:1060ms" d="M1258,678 L1256,572 L1326,568 L1328,678"/>
-            <path class="stroke" style="--draw-delay:1140ms" d="M1124,678 L1122,496 L1242,492 L1244,678"/>
-            <path class="stroke" style="--draw-delay:1240ms" d="M1018,560 C1030,538 1050,502 1070,472 C1090,506 1110,540 1122,558 C1092,568 1048,570 1018,560 Z"/>
-            <path class="stroke" style="--draw-delay:1320ms" d="M1240,574 C1252,552 1272,516 1292,486 C1312,520 1332,554 1344,572 C1314,582 1270,584 1240,574 Z"/>
-            <path class="stroke" style="--draw-delay:1400ms" d="M1104,498 C1118,472 1150,416 1182,362 C1214,418 1246,470 1260,494 C1222,506 1142,508 1104,498 Z"/>
-            <path class="stroke stroke--thin" style="--draw-delay:1500ms" d="M1152,676 L1152,660 C1152,638 1208,638 1208,660 L1208,676"/>
-            <path class="stroke stroke--thin hero__detail" style="--draw-delay:1560ms" d="M1168,644 L1168,676 M1192,642 L1192,676"/>
-            <path class="stroke stroke--thin" style="--draw-delay:1600ms" d="M1146,568 C1146,556 1170,556 1170,568 L1170,602 L1146,602 Z M1198,568 C1198,556 1222,556 1222,568 L1222,602 L1198,602 Z"/>
-            <path class="stroke stroke--thin hero__detail" style="--draw-delay:1660ms" d="M1060,594 C1060,584 1082,584 1082,594 L1082,620 L1060,620 Z M1282,608 C1282,598 1304,598 1304,608 L1304,634 L1282,634 Z"/>
-            <path class="stroke stroke--thin" style="--draw-delay:1720ms" d="M1182,362 L1182,300"/>
-            <g class="hero__pennant alive alive--slow">
-              <path class="stroke stroke--thin" style="--draw-delay:1780ms" d="M1184,302 C1206,306 1224,296 1246,302 C1232,312 1234,322 1246,332 C1224,338 1206,328 1184,334 Z"/>
-            </g>
+          <!-- haze above the horizon -->
+          <g class="hero__far" style="--draw-delay:620ms">
+            <path class="stroke stroke--thin" d="M46 900 H318 M28 918 H352 M520 906 H818 M556 924 H864 M986 902 H1178 M1006 920 H1190"/>
           </g>
 
-          <path class="stroke" style="--draw-delay:1560ms" d="M1409,698 C1410,668 1408,650 1411,634 L1425,634 C1428,650 1426,668 1427,698"/>
-          <path class="stroke" style="--draw-delay:1650ms" d="M1378,632 C1357,623 1363,593 1388,589 C1389,563 1425,553 1437,576 C1461,565 1477,590 1464,609 C1477,623 1463,639 1440,633 C1414,642 1392,640 1378,632 Z"/>
-          <path class="stroke" style="--draw-delay:1650ms" d="M1491,703 C1492,684 1490,672 1492,661 L1502,661 C1504,672 1502,684 1503,703"/>
-          <path class="stroke" style="--draw-delay:1740ms" d="M1471,660 C1457,654 1461,634 1477,631 C1478,614 1502,608 1510,623 C1525,616 1536,632 1527,645 C1536,654 1527,664 1512,660 C1494,666 1480,665 1471,660 Z"/>
-          <path class="stroke" style="--draw-delay:1470ms" d="M898,696 C898,671 897,656 899,643 L911,643 C913,656 912,671 912,696"/>
-          <path class="stroke" style="--draw-delay:1560ms" d="M872,642 C855,634 860,610 880,606 C881,585 911,577 921,596 C940,587 953,607 943,623 C953,634 942,647 923,642 C902,650 884,648 872,642 Z"/>
-          <path class="stroke" style="--draw-delay:1400ms" d="M995,683 C995,666 994,655 996,646 L1004,646 C1006,655 1005,666 1005,683"/>
-          <path class="stroke" style="--draw-delay:1490ms" d="M977,645 C965,640 968,622 983,620 C983,605 1004,599 1011,612 C1025,606 1034,621 1027,632 C1034,640 1026,649 1013,645 C998,651 985,650 977,645 Z"/>
-        </g>
+          <!-- the low sun: gold leaf, laid by hand and cracked -->
+          <g style="--draw-delay:680ms;--wash-delay:1400ms">
+            <path class="wash hero__gold" d="M822 948 C820 910 852 874 898 872 C936 870 966 894 974 926 C978 938 977 944 976 948 Z"/>
+            <path class="stroke stroke--thin" d="M822 948 C820 910 852 874 898 872 C936 870 966 894 974 926 C978 938 977 944 976 948"/>
+            <path class="stroke stroke--thin hero__crack" d="M846 900 C870 918 886 944 892 948 M900 872 C904 900 918 924 944 934 M962 944 C942 940 920 932 906 920"/>
+            <path class="wash hero__flake" d="M874 890 C882 894 886 900 881 906 C874 910 866 905 867 897 Z"/>
+            <path class="stroke stroke--thin hero__far-line" d="M812 926 L788 918 M818 902 L796 888 M834 884 L818 864 M858 870 L848 848 M886 862 L882 838 M916 860 L922 836 M944 868 L956 848 M966 886 L984 874"/>
+          </g>
 
-        <path class="stroke" style="--draw-delay:460ms" d="M-80,848 C120,792 300,778 470,794 C620,808 740,832 880,828 C1020,824 1160,792 1300,782 C1430,773 1560,784 1680,808"/>
-        <path class="stroke" style="--draw-delay:1700ms" d="M1542,814 C1543,780 1540,759 1544,740 L1560,740 C1564,759 1561,780 1562,814"/>
-        <path class="stroke" style="--draw-delay:1790ms" d="M1506,738 C1481,727 1488,693 1517,688 C1518,658 1560,646 1574,673 C1602,660 1620,689 1605,711 C1620,727 1604,746 1578,739 C1547,749 1522,747 1506,738 Z"/>
-        <path class="stroke" style="--draw-delay:1740ms" d="M1281,856 C1282,832 1280,818 1283,806 L1293,806 C1296,818 1294,832 1295,856"/>
-        <path class="stroke" style="--draw-delay:1830ms" d="M1257,804 C1240,797 1245,774 1265,771 C1265,750 1293,742 1303,760 C1322,752 1334,771 1324,786 C1334,797 1323,810 1305,805 C1285,812 1268,810 1257,804 Z"/>
-        <path class="stroke stroke--thin" style="--draw-delay:1800ms" d="M250,800 C248,795 247,792 244,789 M253,800 C253,794 254,791 253,786 M256,800 C258,795 259,792 262,790"/>
-        <path class="stroke stroke--thin" style="--draw-delay:1840ms" d="M300,806 C298,801 297,798 294,795 M303,806 C303,800 304,797 303,792 M306,806 C308,801 309,798 312,796"/>
-        <path class="stroke stroke--thin" style="--draw-delay:1880ms" d="M520,812 C518,807 517,804 514,801 M523,812 C523,806 524,803 523,798 M526,812 C528,807 529,804 532,802"/>
-        <path class="stroke stroke--thin" style="--draw-delay:1920ms" d="M566,818 C564,813 563,810 560,807 M569,818 C569,812 570,809 569,804 M572,818 C574,813 575,810 578,808"/>
-        <path class="stroke stroke--thin" style="--draw-delay:1960ms" d="M900,844 C898,839 897,836 894,833 M903,844 C903,838 904,835 903,830 M906,844 C908,839 909,836 912,834"/>
-        <path class="stroke stroke--thin" style="--draw-delay:2000ms" d="M952,846 C950,841 949,838 946,835 M955,846 C955,840 956,837 955,832 M958,846 C960,841 961,838 964,836"/>
-        <path class="stroke stroke--thin" style="--draw-delay:2040ms" d="M1120,828 C1118,823 1117,820 1114,817 M1123,828 C1123,822 1124,819 1123,814 M1126,828 C1128,823 1129,820 1132,818"/>
-        <path class="stroke stroke--thin" style="--draw-delay:2080ms" d="M1168,826 C1166,821 1165,818 1162,815 M1171,826 C1171,820 1172,817 1171,812 M1174,826 C1176,821 1177,818 1180,816"/>
-        <path class="stroke stroke--thin" style="--draw-delay:2120ms" d="M1332,800 C1330,795 1329,792 1326,789 M1335,800 C1335,794 1336,791 1335,786 M1338,800 C1340,795 1341,792 1344,790"/>
-        <path class="stroke stroke--thin" style="--draw-delay:2160ms" d="M700,830 C698,825 697,822 694,819 M703,830 C703,824 704,821 703,816 M706,830 C708,825 709,822 712,820"/>
-        <path class="stroke stroke--thin" style="--draw-delay:2200ms" d="M740,834 C738,829 737,826 734,823 M743,834 C743,828 744,825 743,820 M746,834 C748,829 749,826 752,824"/>
-      </svg>
-    </div>
-  </div>
+          <!-- far hills -->
+          <g class="hero__far" style="--draw-delay:760ms">
+            <path class="stroke stroke--thin" d="M0 940 C120 900 240 884 360 892 C470 900 560 918 640 934 C720 916 800 900 890 898 C980 896 1080 912 1200 936"/>
+          </g>
 
-  <!-- ============================== the dragon =========================== -->
-  <div class="hero__lane" aria-hidden="true">
-    <div class="hero__dragon">
-      <div class="hero__dragon-arc">
-        <div class="hero__dragon-squash">
+          <!-- ---------------- the ground ------------------------------- -->
+          <g style="--draw-delay:840ms;--wash-delay:1500ms">
+            <path class="wash hero__earth" d="M0 1200 L0 958 C150 944 300 950 460 944 C620 938 780 950 930 944 C1060 938 1140 948 1200 942 L1200 1200 Z"/>
+            <path class="stroke" d="M0 958 C150 944 300 950 460 944 C620 938 780 950 930 944 C1060 938 1140 948 1200 942"/>
+            <path class="stroke stroke--thin hero__hatch" d="M30 986 L80 1032 M110 976 L164 1026 M196 990 L248 1038 M286 978 L338 1024 M372 992 L420 1038 M456 980 L508 1026 M548 994 L596 1040 M634 982 L684 1028 M722 992 L770 1038 M810 980 L858 1026 M898 992 L946 1038 M986 980 L1036 1026 M1074 992 L1122 1038"/>
+            <path class="stroke stroke--thin hero__hatch" d="M60 1100 L130 1060 M150 1120 L220 1080 M240 1102 L310 1062 M330 1122 L400 1082 M420 1104 L490 1064 M510 1124 L580 1084 M600 1106 L670 1066 M690 1126 L760 1086 M780 1108 L850 1068 M870 1128 L940 1088 M960 1110 L1030 1070 M1050 1130 L1120 1090"/>
+            <path class="stroke stroke--thin" d="M120 962 L112 946 L126 950 M300 956 L292 940 L306 944 M520 958 L512 942 L526 946 M1020 956 L1012 940 L1026 944"/>
+          </g>
 
-          <svg class="hero__dragon-svg" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
-            <!-- crayon under the line, same as everything else on this page -->
-            <g class="hero__dragon-wash">
-              <path d="M102,110 C76,116 48,124 30,118 C18,114 12,104 10,92 C14,106 18,118 28,128 C48,142 78,142 104,134 Z" fill="var(--crayon-ember)" fill-opacity=".88"/>
-              <path d="M10,92 C2,84 0,68 8,60 C18,70 22,86 18,98 C15,97 12,95 10,92 Z" fill="var(--crayon-flame)" fill-opacity=".9"/>
-              <path d="M150,146 C144,158 139,168 131,174 C139,180 153,178 159,168 C162,160 160,150 156,144 Z" fill="var(--crayon-ember)" fill-opacity=".88"/>
-              <path d="M118,142 C112,154 106,164 98,170 C106,176 118,174 124,164 C126,156 124,148 122,142 Z" fill="var(--crayon-ember)" fill-opacity=".88"/>
-              <path d="M182,94 C202,72 214,50 238,42 L242,64 C222,74 212,96 194,116 Z" fill="var(--crayon-ember)" fill-opacity=".88"/>
-              <path d="M238,42 C254,30 282,32 292,44 C300,54 294,68 278,72 C262,76 246,72 238,64 C232,56 232,48 238,42 Z" fill="var(--crayon-ember)" fill-opacity=".88"/>
-              <path d="M100,120 C98,98 120,84 150,84 C182,84 200,100 198,120 C196,142 176,154 150,154 C120,154 102,142 100,120 Z" fill="var(--crayon-ember)" fill-opacity=".88"/>
-              <path d="M110,130 C126,146 174,146 190,128 C190,147 172,157 150,157 C128,157 112,147 110,130 Z" fill="var(--crayon-sun)" fill-opacity=".82"/>
-            </g>
+          <!-- ---------------- the castle, burning ---------------------- -->
+          <g class="hero__castle" style="--draw-delay:1000ms;--wash-delay:1700ms">
+            <path class="stroke stroke--thin" d="M18 918 C110 880 208 862 300 866 C392 870 458 888 508 916"/>
 
-            <!-- the far wing, behind the body -->
-            <g class="hero__wing hero__wing--far">
-              <path d="M154,102.8 C131.6,75.6 96.4,40.4 61.2,27.6 C80.4,46.8 77.2,67.6 66,83.6 C78.8,90 86.8,102.8 98,112.4 C109.2,117.2 120.4,122 131.6,122 C142.8,118.8 150.8,112.4 154,102.8 Z" fill="var(--crayon-amber)" fill-opacity=".62"/>
-              <path class="stroke" d="M154,102.8 C131.6,75.6 96.4,40.4 61.2,27.6 C80.4,46.8 77.2,67.6 66,83.6 C78.8,90 86.8,102.8 98,112.4 C109.2,117.2 120.4,122 131.6,122 C142.8,118.8 150.8,112.4 154,102.8 Z"/>
-              <path class="stroke stroke--thin" d="M153.2,103.6 C123.6,96.4 90,90 66,83.6 M153.2,104.4 C133.2,106 114,107.6 98,112.4 M154,105.2 C146,110.8 138,117.2 131.6,122"/>
-            </g>
+            <!-- keep -->
+            <path class="wash hero__stone" d="M208 898 L208 636 L226 636 L226 652 L244 652 L244 636 L262 636 L262 652 L280 652 L280 636 L298 636 L298 652 L316 652 L316 636 L334 636 L334 898 Z"/>
+            <path class="stroke stroke--thin" d="M208 898 L208 636 L226 636 L226 652 L244 652 L244 636 L262 636 L262 652 L280 652 L280 636 L298 636 L298 652 L316 652 L316 636 L334 636 L334 898"/>
+            <path class="stroke stroke--thin" d="M208 760 L334 760 M208 830 L334 830"/>
+            <path class="wash hero__fire" d="M236 700 L256 700 L256 736 L236 736 Z M286 700 L306 700 L306 736 L286 736 Z M236 780 L256 780 L256 816 L236 816 Z M286 780 L306 780 L306 816 L286 816 Z"/>
+            <path class="stroke stroke--thin" d="M236 736 L236 700 L256 700 L256 736 M286 736 L286 700 L306 700 L306 736 M236 816 L236 780 L256 780 L256 816 M286 816 L286 780 L306 780 L306 816"/>
+            <path class="stroke stroke--thin" d="M256 898 L256 840 C256 820 286 820 286 840 L286 898"/>
+            <path class="stroke stroke--thin hero__hatch" d="M214 674 L224 686 M242 668 L252 680 M270 674 L280 686 M298 668 L308 680 M214 850 L224 862 M242 856 L252 868 M270 850 L280 862 M298 856 L308 868"/>
 
-            <g class="hero__dragon-ink">
-              <path class="stroke" d="M102,110 C76,116 48,124 30,118 C18,114 12,104 10,92 C14,106 18,118 28,128 C48,142 78,142 104,134 Z"/>
-              <path class="stroke" d="M10,92 C2,84 0,68 8,60 C18,70 22,86 18,98 C15,97 12,95 10,92 Z"/>
-              <path class="stroke stroke--thin" d="M78,115 L76,101 L90,110 Z M52,121 L48,107 L64,116 Z M32,117 L26,104 L42,113 Z"/>
-              <path class="stroke stroke--thin" d="M118,142 C112,154 106,164 98,170 C106,176 118,174 124,164 C126,156 124,148 122,142 Z"/>
-              <path class="stroke stroke--thin" d="M150,146 C144,158 139,168 131,174 C139,180 153,178 159,168 C162,160 160,150 156,144 Z"/>
-              <path class="stroke stroke--thin" d="M98,170 L90,173 M100,174 L94,179 M131,174 L123,177 M133,178 L127,183"/>
-              <path class="stroke" d="M100,120 C98,98 120,84 150,84 C182,84 200,100 198,120 C196,142 176,154 150,154 C120,154 102,142 100,120 Z"/>
-              <path class="stroke stroke--thin" d="M111,131 C127,147 173,147 189,129"/>
-              <path class="stroke" d="M182,94 C202,72 214,50 238,42"/>
-              <path class="stroke" d="M194,116 C212,98 222,76 242,64"/>
-              <path class="stroke" d="M238,42 C254,30 282,32 292,44 C300,54 294,68 278,72 C262,76 246,72 238,64 C232,56 232,48 238,42 Z"/>
-              <path class="stroke stroke--thin" d="M262,62 C272,64 284,60 290,52"/>
-              <path class="stroke stroke--thin" d="M252,32 C250,20 244,12 234,8 M270,32 C274,22 282,16 292,14"/>
-              <path class="stroke stroke--thin" d="M200,78 L196,64 L210,70 Z M216,58 L214,44 L226,52 Z M232,46 L232,32 L242,42 Z"/>
-              <circle cx="268" cy="50" r="4.4" fill="var(--ink-900)"/>
-              <path class="stroke stroke--thin" d="M287,47 C290,46 292,48 291,51"/>
-            </g>
+            <!-- left tower -->
+            <path class="wash hero__stone" d="M122 898 L122 712 L188 712 L188 898 Z M112 712 L155 644 L198 712 Z"/>
+            <path class="stroke stroke--thin" d="M122 898 L122 712 M188 898 L188 712 M112 712 L198 712 M112 712 L155 644 L198 712 M122 762 L188 762"/>
+            <path class="wash hero__fire" d="M146 816 L146 782 C146 772 164 772 164 782 L164 816 Z"/>
+            <path class="stroke stroke--thin" d="M146 816 L146 782 C146 772 164 772 164 782 L164 816"/>
 
-            <!-- the near wing, in front -->
-            <g class="hero__wing hero__wing--near">
-              <path d="M150,96 C122,62 78,18 34,2 C58,26 54,52 40,72 C56,80 66,96 80,108 C94,114 108,120 122,120 C136,116 146,108 150,96 Z" fill="var(--crayon-amber)" fill-opacity=".88"/>
-              <path class="stroke" d="M150,96 C122,62 78,18 34,2 C58,26 54,52 40,72 C56,80 66,96 80,108 C94,114 108,120 122,120 C136,116 146,108 150,96 Z"/>
-              <path class="stroke stroke--thin" d="M149,97 C112,88 70,80 40,72 M149,98 C124,100 100,102 80,108 M150,99 C140,106 130,114 122,120"/>
-            </g>
-          </svg>
+            <!-- right tower and the curtain wall -->
+            <path class="wash hero__stone" d="M350 898 L350 678 L364 678 L364 692 L378 692 L378 678 L392 678 L392 692 L406 692 L406 678 L414 678 L414 898 Z"/>
+            <path class="stroke stroke--thin" d="M350 898 L350 678 L364 678 L364 692 L378 692 L378 678 L392 678 L392 692 L406 692 L406 678 L414 678 L414 898"/>
+            <path class="wash hero__fire" d="M372 772 L372 740 C372 730 390 730 390 740 L390 772 Z"/>
+            <path class="stroke stroke--thin" d="M372 772 L372 740 C372 730 390 730 390 740 L390 772 M414 898 L470 898 M414 852 L414 840 L426 840 L426 852 L438 852 L438 840 L450 840 L450 852 L462 852 L462 840 L472 840 L472 898"/>
 
-          <!-- the breath: crayon fill, then the line on top -->
-          <div class="hero__flame">
-            <span class="hero__flame-fill"></span>
-            <svg class="hero__flame-line" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-              <path class="stroke stroke--thin" d="M0,20 C14,11 28,8 42,11 C44,4 48,0 52,1 C54,6 60,11 66,10 C70,4 76,1 80,3 C82,8 88,13 96,15 C100,20 96,26 88,30 C82,36 72,40 62,37 C52,34 42,37 32,33 C20,30 7,27 0,20 Z"/>
-            </svg>
-          </div>
-        </div>
+            <!-- flame -->
+            <path class="wash hero__fire" d="M230 636 C224 604 242 588 246 562 C256 588 266 596 272 574 C286 598 296 620 292 638 Z M300 638 C294 612 308 598 312 576 C322 598 330 612 326 638 Z M142 660 C136 636 148 620 152 600 C160 622 170 634 166 662 Z"/>
+            <path class="stroke stroke--thin hero__flame-line" d="M230 636 C224 604 242 588 246 562 C256 588 266 596 272 574 C286 598 296 620 292 638 M300 638 C294 612 308 598 312 576 C322 598 330 612 326 638 M142 660 C136 636 148 620 152 600 C160 622 170 634 166 662"/>
+            <path class="wash hero__fire-core" d="M244 634 C240 612 250 600 253 584 C260 602 266 612 264 636 Z"/>
+
+            <!-- smoke -->
+            <path class="stroke stroke--thin hero__smoke" d="M268 556 C300 524 284 490 314 462 C340 436 326 404 352 380 M296 566 C330 534 318 500 348 472 C374 448 362 420 386 396 M180 596 C206 568 194 540 218 516 C240 494 230 470 250 450"/>
+          </g>
+
+          <!-- ---------------- the dragon, stooping ---------------------- -->
+          <g class="hero__dragon" style="--draw-delay:1200ms;--wash-delay:1900ms">
+            <!-- far wing -->
+            <path class="wash hero__wing-far-fill" d="M928 248 C980 170 1054 106 1156 58 C1126 128 1090 190 1046 234 C1018 262 972 268 928 248 Z"/>
+            <path class="stroke stroke--thin hero__far-line" d="M928 248 C980 170 1054 106 1156 58 C1126 128 1090 190 1046 234 C1018 262 972 268 928 248 Z"/>
+            <path class="stroke stroke--thin hero__far-line" d="M932 248 C978 200 1042 142 1128 82 M932 248 C968 212 1012 178 1066 148"/>
+
+            <!-- body -->
+            <path class="wash hero__body-fill" d="M762 350 C806 328 852 302 902 270 C956 236 1016 212 1078 196 C1128 184 1170 172 1204 156 L1204 210 C1168 224 1122 236 1074 248 C1014 264 956 288 906 318 C856 348 810 370 770 384 Z"/>
+            <path class="stroke" d="M762 350 C806 328 852 302 902 270 C956 236 1016 212 1078 196 C1128 184 1170 172 1204 156"/>
+            <path class="stroke" d="M770 384 C810 370 856 348 906 318 C956 288 1014 264 1074 248 C1122 236 1168 224 1204 210"/>
+            <path class="stroke stroke--thin" d="M772 344 L782 324 L792 342 L806 320 L816 338 L832 314 L842 332 L860 308 L870 326 L890 300 L900 318 L922 292 L932 310 L956 284 L966 302 L992 276 L1000 294 L1028 268 L1036 286 L1064 260 L1072 278 L1100 252"/>
+            <path class="stroke stroke--thin" d="M790 380 L798 366 M812 372 L820 358 M836 362 L844 348 M858 350 L866 336 M882 338 L890 324 M906 324 L914 310 M932 312 L940 298 M958 300 L966 288 M986 290 L994 276 M1014 280 L1022 268 M1042 272 L1050 258 M1070 262 L1078 250"/>
+            <path class="stroke stroke--thin hero__hatch" d="M800 344 L812 356 M828 330 L840 342 M856 316 L868 328 M886 302 L898 314 M916 288 L928 300 M948 276 L960 288 M980 264 L992 276 M1014 252 L1026 264 M1048 242 L1060 254"/>
+
+            <!-- legs -->
+            <path class="stroke" d="M878 300 C872 330 862 356 848 376 C840 388 838 398 842 406"/>
+            <path class="stroke" d="M900 296 C894 326 884 352 870 372 C862 384 860 394 864 402"/>
+            <path class="stroke stroke--thin" d="M842 406 L826 418 M842 406 L840 424 M842 406 L856 420 M842 406 C850 412 858 412 864 402"/>
+            <path class="stroke stroke--thin" d="M1046 240 C1056 268 1056 292 1046 312 M1070 234 C1080 262 1080 288 1070 306 M1046 312 L1030 324 M1046 312 L1044 330 M1046 312 L1060 326"/>
+
+            <!-- near wing -->
+            <path class="wash hero__wing-fill" d="M902 264 C860 184 798 120 700 78 C726 150 754 210 788 254 C816 278 858 282 902 264 Z"/>
+            <path class="stroke" d="M902 264 C860 184 798 120 700 78 C726 150 754 210 788 254 C816 278 858 282 902 264 Z"/>
+            <path class="stroke stroke--thin" d="M898 262 C862 216 800 154 718 98 M898 262 C868 226 824 186 770 152 M898 262 C874 236 842 214 806 198"/>
+            <path class="stroke stroke--thin" d="M700 78 C690 66 686 56 690 46"/>
+
+            <!-- head -->
+            <path class="wash hero__body-fill" d="M766 348 C742 346 720 356 706 372 C694 386 692 400 702 408 C700 422 716 432 738 432 C758 432 772 422 772 406 C778 390 778 366 766 348 Z"/>
+            <path class="stroke" d="M766 348 C742 346 720 356 706 372 C694 386 692 400 702 408 C700 422 716 432 738 432 C758 432 772 422 772 406 C778 390 778 366 766 348 Z"/>
+            <path class="stroke stroke--thin" d="M702 408 C716 412 742 414 772 406"/>
+            <path class="stroke" d="M764 350 C776 330 794 318 816 314 M756 346 C760 326 756 310 744 298"/>
+            <path class="stroke stroke--thin" d="M772 360 C790 350 806 352 816 362 M706 384 C702 388 704 394 710 394 M736 432 C734 446 728 456 718 462"/>
+            <path class="wash hero__gold" d="M724 372 C733 366 744 371 744 380 C744 390 734 394 727 389 C719 384 718 376 724 372 Z"/>
+            <path class="stroke stroke--thin" d="M724 372 C733 366 744 371 744 380 C744 390 734 394 727 389 C719 384 718 376 724 372 Z"/>
+            <path class="stroke hero__pupil" d="M732 371 C736 377 736 384 733 390"/>
+            <path class="stroke stroke--thin" d="M706 404 L712 414 L718 404 M724 408 L730 418 L736 408 M746 410 L750 420 L756 410"/>
+          </g>
+
+          <!-- the breath, thrown at the castle -->
+          <g style="--draw-delay:1520ms;--wash-delay:2150ms">
+            <path class="wash hero__fire" d="M702 412 C678 426 652 438 624 444 C646 448 668 446 688 440 C672 452 654 458 636 462 C664 466 692 456 712 438 Z"/>
+            <path class="stroke stroke--thin hero__flame-line" d="M702 412 C678 426 652 438 624 444 C646 448 668 446 688 440 C672 452 654 458 636 462 C664 466 692 456 712 438"/>
+            <path class="wash hero__fire-core" d="M704 416 C688 426 670 434 652 440 C672 442 690 438 706 428 Z"/>
+          </g>
+
+          <!-- ---------------- the man Iries, alone --------------------- -->
+          <g class="hero__figure" style="--draw-delay:1360ms;--wash-delay:2050ms">
+            <path class="wash hero__shade" d="M560 996 C600 986 668 986 710 998 C668 1010 600 1010 560 996 Z"/>
+
+            <path class="wash hero__cloak-fill" d="M672 738 C714 762 744 810 758 864 C770 912 768 954 754 992 C730 980 706 972 684 968 C696 926 696 878 686 838 C680 812 674 784 666 760 Z"/>
+            <path class="stroke" d="M672 738 C714 762 744 810 758 864 C770 912 768 954 754 992 C730 980 706 972 684 968 C696 926 696 878 686 838 C680 812 674 784 666 760 Z"/>
+            <path class="stroke stroke--thin" d="M690 774 C704 830 706 892 696 946 M712 806 C728 856 732 906 722 950 M736 848 C746 890 748 928 742 966"/>
+
+            <path class="wash hero__cloth" d="M600 742 C598 768 604 800 610 832 C606 856 602 876 598 894 L684 896 C680 874 674 852 668 832 C674 800 678 768 676 742 C662 730 650 726 638 726 C624 726 612 730 600 742 Z"/>
+            <path class="stroke" d="M600 742 C598 768 604 800 610 832 L668 832 C674 800 678 768 676 742 C662 730 650 726 638 726 C624 726 612 730 600 742 Z"/>
+            <path class="stroke" d="M610 832 C606 856 602 876 598 894 L684 896 C680 874 674 852 668 832"/>
+            <path class="stroke stroke--thin" d="M626 836 L622 892 M644 836 L644 894 M660 836 L664 894"/>
+            <path class="stroke stroke--fat" d="M609 824 L671 826"/>
+            <path class="stroke stroke--thin" d="M634 817 L648 818 L647 832 L633 831 Z"/>
+
+            <path class="stroke" d="M614 894 C612 924 610 952 610 976 L634 976 C636 950 638 924 640 896"/>
+            <path class="stroke" d="M652 896 C654 924 658 950 662 976 L686 974 C682 950 676 922 672 894"/>
+            <path class="stroke" d="M610 976 L600 990 L640 990 L640 976 M662 976 L654 988 L694 988 L692 974"/>
+
+            <path class="wash hero__skin" d="M610 690 C610 672 622 660 637 660 C653 660 665 672 665 690 C665 708 653 720 637 720 C621 720 610 708 610 690 Z"/>
+            <path class="stroke" d="M610 690 C610 672 622 660 637 660 C653 660 665 672 665 690 C665 708 653 720 637 720 C621 720 610 708 610 690 Z"/>
+            <path class="wash hero__hair" d="M608 688 C605 664 619 650 638 650 C658 650 670 664 667 688 C660 674 649 666 637 666 C624 666 614 674 608 688 Z"/>
+            <path class="stroke stroke--thin" d="M608 688 C605 664 619 650 638 650 C658 650 670 664 667 688"/>
+            <path class="stroke stroke--thin" d="M622 688 L631 688 M645 688 L654 688 M628 704 C634 708 642 708 648 704"/>
+            <path class="stroke stroke--thin" d="M627 718 L627 729 M647 718 L647 729"/>
+
+            <path class="stroke" d="M600 742 C576 736 552 722 532 704"/>
+            <path class="stroke" d="M604 764 C582 758 560 746 542 728"/>
+            <path class="stroke" d="M532 704 C520 698 512 702 512 712 C512 724 522 732 534 730 C546 728 550 716 544 706"/>
+            <path class="stroke" d="M676 748 C688 776 692 806 690 834 C692 846 688 856 678 856 C668 856 664 848 668 838"/>
+            <path class="stroke stroke--thin" d="M662 752 C672 780 676 806 674 832"/>
+            <path class="stroke stroke--thin hero__hatch" d="M612 756 L620 770 M610 776 L618 790 M612 796 L620 810 M614 844 L622 858 M612 862 L620 876 M694 782 L704 796 M700 808 L710 822 M706 838 L716 852 M712 868 L722 882"/>
+          </g>
+
+          <!-- the pencil, held like a sword -->
+          <g style="--draw-delay:1600ms;--wash-delay:2200ms">
+            <path class="wash hero__wood" d="M560 728 L444 565 L430 576 L544 740 Z"/>
+            <path class="stroke" d="M560 728 L444 565 L430 576 L544 740 Z"/>
+            <path class="stroke stroke--thin" d="M552 734 L437 571"/>
+            <path class="wash hero__gold" d="M552 717 L543 704 L527 715 L536 728 Z"/>
+            <path class="stroke stroke--thin" d="M552 717 L543 704 L527 715 L536 728 Z"/>
+            <path class="stroke stroke--thin hero__crack" d="M547 712 L535 720"/>
+            <path class="stroke" d="M444 565 L416 541 L430 576"/>
+            <path class="wash hero__lead" d="M429 549 L416 541 L421 557 Z"/>
+            <path class="stroke stroke--thin" d="M409 533 L394 523 M414 527 L411 508 M424 534 L438 527"/>
+          </g>
+        </svg>
       </div>
     </div>
-  </div>
 
-  <svg class="hero__defs" aria-hidden="true" focusable="false">
-    <defs>
-      <!-- same outline as .hero__flame-line, normalised to the 0–1 bounding box -->
-      <clipPath id="mp-hero-flame" clipPathUnits="objectBoundingBox">
-        <path d="M0,0.5 C0.14,0.275 0.28,0.2 0.42,0.275 C0.44,0.1 0.48,0 0.52,0.025 C0.54,0.15 0.6,0.275 0.66,0.25 C0.7,0.1 0.76,0.025 0.8,0.075 C0.82,0.2 0.88,0.325 0.96,0.375 C1,0.5 0.96,0.65 0.88,0.75 C0.82,0.9 0.72,1 0.62,0.925 C0.52,0.85 0.42,0.925 0.32,0.825 C0.2,0.75 0.07,0.675 0,0.5 Z"/>
-      </clipPath>
-    </defs>
-  </svg>
+    <!-- foxing, water-staining and a scorched edge: on the leaf, under the
+         type, above the drawing. Pure gradient, no image. -->
+    <div class="hero__age" aria-hidden="true"></div>
 
-  <div class="hero__veil" aria-hidden="true"></div>
+    <!-- =========================== THE TITLE ============================ -->
+    <div class="hero__body">
 
-  <!-- ============================== the words ============================ -->
-  <div class="shell hero__shell">
-    <div class="hero__inner">
-      <p class="eyebrow" data-reveal="pop" style="--rv-delay:420ms">Free in your browser</p>
+      <p class="hero__rubric" data-reveal style="--rv-delay:120ms">Liber primus &middot; the war of the six kingdoms</p>
 
-      <h1 class="hero__title">
-        <span style="--rot:-1deg;  --i:0">Draw&nbsp;it.</span>
-        <span style="--rot:.7deg;  --i:1">Name&nbsp;it.</span>
-        <span style="--rot:-.4deg; --i:2">It comes <em class="underlined">alive</em>.</span>
+      <h1 class="hero__title" data-reveal style="--rv-delay:220ms">
+        <span class="hero__title-line">The Chronicle</span>
+        <span class="hero__title-of">
+          <span class="hero__flourish" aria-hidden="true"></span>
+          <span class="hero__title-word">of</span>
+          <span class="hero__flourish" aria-hidden="true"></span>
+        </span>
+        <span class="hero__title-line">Paper</span>
       </h1>
 
-      <p class="hero__lede" data-reveal style="--rv-delay:1180ms">
-        Draw a shape inside your kingdom and name it — the name is the wish.
-        Write <em>archer</em> and it shoots. Write <em>wall</em> and it blocks.
-        Then off it marches to the next castle.
-      </p>
+      <p class="hero__sub" data-reveal style="--rv-delay:340ms">Being a true account of the war for the six kingdoms, and of Iries, who took back the five that were lost.</p>
 
-      <div class="hero__cta cluster" data-reveal style="--rv-delay:1320ms">
-        <a class="btn btn--go btn--lg"
-           href="https://devkancheti4-design.github.io/magic-pencil-kingdoms/"
-           target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <path class="stroke stroke--thin" d="M15.6 2.9 21 8.3 8.6 20.7l-6.4 1 1-6.4z"/>
-            <path class="stroke stroke--thin" d="m13.2 5.3 5.4 5.4M3.2 15.3l5.4 5.4"/>
+      <p class="sr-only">Frontispiece: Iries stands alone on hatched ground, the pencil raised like a sword. The dragon he drew stoops overhead and throws fire. Behind him a castle burns.</p>
+
+      <p class="hero__note" data-reveal style="--rv-delay:420ms">Copied at Greenhaven from the burnt exemplar. Two leaves are lost before this one.</p>
+
+      <div class="hero__seals" data-reveal style="--rv-delay:500ms">
+        <a class="hero__seal hero__seal--primary" href="#prologue">
+          <svg class="hero__seal-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M12 2.6 C17 3 21.4 7.2 21.4 12 C21.4 17 17.2 21.4 12 21.4 C7 21.4 2.6 17.2 2.6 12 C2.6 7 6.8 3 12 2.6 Z" fill="currentColor" opacity=".3"/>
+            <path d="M12 2.6 C17 3 21.4 7.2 21.4 12 C21.4 17 17.2 21.4 12 21.4 C7 21.4 2.6 17.2 2.6 12 C2.6 7 6.8 3 12 2.6 Z" fill="none" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M8 8.4 L16 15.6 M16 8.4 L8 15.6 M12 6.6 L12 17.4" fill="none" stroke="currentColor" stroke-width="1.6"/>
           </svg>
-          Pick up the pencil<span class="sr-only"> (opens in a new tab)</span>
+          <span>Read the chronicle</span>
         </a>
-        <a class="btn btn--lg" href="#dragons">
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <path class="stroke stroke--thin" d="M2.4 13.6c3.2-.8 5.4-2.8 7.2-5.8 2 1 3.8 1 5.6 0 3 1.2 5.6 3 6.4 5.8-2 3-5.8 4.8-9.6 4.8s-7.6-1.8-9.6-4.8Z"/>
-            <path class="stroke stroke--thin" d="M9.6 7.8 8.4 3.4l3.2 3.2M15.2 7.8l1.2-4.4-3.2 3.2"/>
+        <a class="hero__seal" href="https://devkancheti4-design.github.io/magic-pencil-kingdoms/" target="_blank" rel="noopener">
+          <span>Take up the pencil</span>
+          <svg class="hero__seal-away" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+            <path d="M4 12 L12 4 M6 4 H12 V10" fill="none" stroke="currentColor" stroke-width="1.6"/>
           </svg>
-          See the dragons
+          <span class="sr-only">(opens in a new tab)</span>
         </a>
       </div>
 
-      <ul class="hero__facts" role="list" data-reveal style="--rv-delay:1440ms">
-        <li>
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <path class="stroke stroke--thin" d="M3 18 4.4 7l5.1 4.6L12 4.5l2.5 7.1L19.6 7 21 18Z"/>
-            <path class="stroke stroke--thin" d="M3.6 20.6h16.8"/>
+      <div class="hero__foot" data-reveal style="--rv-delay:600ms">
+        <span class="hero__folio">fol. 1 r.</span>
+        <a class="hero__cue" href="#prologue">
+          <svg class="hero__manicule" viewBox="0 0 64 66" aria-hidden="true" focusable="false">
+            <path d="M20 4 L46 4 C48 10 48 15 46 21 L20 21 C18 15 18 10 20 4 Z" fill="var(--surface)" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/>
+            <path d="M20 14 C28 17 38 17 46 14" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M23 21 C14 25 10 33 14 40 C17 46 24 48 31 47 L44 45 C51 44 55 38 54 31 C53 24 49 21 44 21 Z" fill="var(--surface)" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/>
+            <path d="M25 45 C22 51 21 57 23 61 C25 64 30 64 32 61 C34 57 33 51 31 46" fill="var(--surface)" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/>
+            <path d="M25 57 C27 59 30 59 31 57" fill="none" stroke="currentColor" stroke-width="1.4"/>
+            <path d="M36 44 C41 47 47 45 49 40 M38 38 C43 40 48 38 50 34 M37 31 C42 33 47 31 49 28" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M26 28 L32 34 M32 26 L38 32 M38 26 L44 32" fill="none" stroke="currentColor" stroke-width="1.1" opacity=".7"/>
           </svg>
-          <b><span data-count="6" data-count-dur="1100" aria-hidden="true">6</span><span class="sr-only">6</span> kingdoms</b>
-        </li>
-        <li>
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <path class="stroke stroke--thin" d="M12 2.6c4 5.4 6.6 8.6 6.6 11.6A6.6 6.6 0 0 1 12 21a6.6 6.6 0 0 1-6.6-6.8c0-3 2.6-6.2 6.6-11.6Z"/>
-            <path class="stroke stroke--thin" d="M8.7 14.6c0 1.9 1.4 3.4 3.2 3.6"/>
-          </svg>
-          <b>Unlimited ink</b>
-        </li>
-        <li>
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <path class="stroke stroke--thin" d="M10 5.6a2.2 2.2 0 1 1-4.4 0 2.2 2.2 0 0 1 4.4 0Z"/>
-            <path class="stroke stroke--thin" d="M7.8 9v4.8M3.6 20.4l4.2-6.6 3.6 2.8 2.4 4.2M7.8 11.2l5.4-1.8 3.8 2.6M17 4.2l3.4 2.8-2 2.6"/>
-          </svg>
-          <b>Your drawings, your army</b>
-        </li>
-      </ul>
+          <span>turn the leaf</span>
+        </a>
+      </div>
     </div>
-  </div>
-
-  <!-- ============================ the scroll cue ========================= -->
-  <div class="hero__cue" aria-hidden="true">
-    <svg class="hero__cue-pencil" viewBox="0 0 30 60" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
-      <path d="M9.5 6.5h12v30l-6 11-6-11z" fill="var(--crayon-sun)"/>
-      <path d="M11 43h8l-4 7z" fill="var(--ink-900)"/>
-      <path class="stroke stroke--thin" d="M9.5 6.5h12v30l-6 11-6-11z"/>
-      <path class="stroke stroke--thin" d="M9.5 6.6c0-3.4 12-3.4 12 0M9.7 36.4h11.6M11 43h8"/>
-    </svg>
-    <svg class="hero__cue-line" viewBox="0 0 4 34" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-      <path class="stroke stroke--thin" d="M2 0v34" stroke-dasharray="4 7"/>
-    </svg>
   </div>
 </section>

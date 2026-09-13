@@ -2,8 +2,10 @@
 
 /* ---------- hero ---------- */
 /* ==========================================================================
-   HERO — re-frames the landscape on small screens and parks every loop when
-   the section scrolls away. All the motion itself is CSS.
+   HERO — the cover of the book.
+   One job: re-frame the woodcut so it still reads on a narrow leaf.
+   Every line of the drawing is drawn by the shared runtime; the rest of the
+   cover is CSS. Nothing here loops, so nothing here needs pausing.
    Safe to load when the hero is absent from the page.
    ========================================================================== */
 (function () {
@@ -12,215 +14,147 @@
   function boot() {
     var root = document.getElementById('hero');
     if (!root || !root.classList.contains('hero')) return;
+    if (!window.matchMedia) return;
 
-    var MPx = window.MP || {};
-    var mq = window.matchMedia ? function (q) { return window.matchMedia(q); } : null;
-    var reduced = MPx.reduced || (mq ? mq('(prefers-reduced-motion: reduce)') : { matches: false });
+    /* The plate is cut from one 1200 x 1200 block. A wide leaf shows the
+       whole scene; a narrow one crops in on Iries and the pencil. The runtime
+       measures paths in user units, so re-framing after measureStrokes is
+       harmless, and every crop scales the block DOWN — never up — so the
+       dash lengths stay long enough to cover each path. */
+    var plate = root.querySelector('[data-vb]');
+    if (!plate) return;
 
-    /* -- the scene re-composes itself rather than shrinking to a smear ---- */
-    /* Only the two max-width queries need listeners: crossing 620px or 1000px
-       flips one of them, so every transition is covered exactly once. */
-    var svgs = Array.prototype.slice.call(root.querySelectorAll('[data-vb]'));
-    if (svgs.length && mq) {
-      var WIDE = '0 0 1600 900';
-      var VIEWS = [
-        { m: mq('(max-width: 619px)'), vb: '700 0 900 900' },
-        { m: mq('(max-width: 999px)'), vb: '380 0 1220 900' }
-      ];
-      var applied = null;
-      var frame = function () {
-        var vb = WIDE, i;
-        for (i = 0; i < VIEWS.length; i++) {
-          if (VIEWS[i].m.matches) { vb = VIEWS[i].vb; break; }
-        }
-        if (vb === applied) return;          /* don't touch the DOM for nothing */
-        applied = vb;
-        for (i = 0; i < svgs.length; i++) svgs[i].setAttribute('viewBox', vb);
-      };
-      for (var j = 0; j < VIEWS.length; j++) {
-        var mql = VIEWS[j].m;
-        if (mql.addEventListener) mql.addEventListener('change', frame);
-        else if (mql.addListener) mql.addListener(frame);
+    var WIDE = '0 20 1200 1010';
+    var VIEWS = [
+      { m: window.matchMedia('(max-width: 619px)'), vb: '372 150 604 1040' },
+      { m: window.matchMedia('(max-width: 999px)'), vb: '150 40 1000 1080' }
+    ];
+
+    var applied = null;
+    function frame() {
+      var vb = WIDE, i;
+      for (i = 0; i < VIEWS.length; i++) {
+        if (VIEWS[i].m.matches) { vb = VIEWS[i].vb; break; }
       }
-      frame();
+      if (vb === applied) return;          /* do not touch the DOM for nothing */
+      applied = vb;
+      plate.setAttribute('viewBox', vb);
     }
 
-    /* -- nothing loops once the hero is off-screen ------------------------ */
-    if (!reduced.matches && 'IntersectionObserver' in window) {
-      new IntersectionObserver(function (entries) {
-        var visible = false, i;
-        for (i = 0; i < entries.length; i++) {
-          if (entries[i].isIntersecting) visible = true;
-        }
-        root.classList.toggle('is-paused', !visible);
-      }, { threshold: 0 }).observe(root);
+    /* Crossing 620px or 1000px flips exactly one query, so listening to both
+       covers every transition once. */
+    for (var j = 0; j < VIEWS.length; j++) {
+      var q = VIEWS[j].m;
+      if (q.addEventListener) q.addEventListener('change', frame);
+      else if (q.addListener) q.addListener(frame);
     }
+    frame();
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
   else boot();
 })();
 
-/* ---------- dragons ---------- */
+/* ---------- prologue ---------- */
 /* ==========================================================================
-   THE DRAGON ROOST — #dragons
-   The wings, tails and fire are all CSS. This file does three things only:
-     1. stops every loop while the roost is off screen
-     2. gives the pointer-only "wake" a real, keyboard-operable button
-     3. hands over the name, ready to type under a drawing
-   No rAF loops, no canvas, no timers beyond one copy-confirmation reset.
-   ========================================================================== */
-(function () {
-  'use strict';
+   THE PROLOGUE — ruling the page.
 
-  var MP = window.MP;
-  if (!MP || typeof MP.ready !== 'function') return;
+   The horizontal rules are painted per paragraph by CSS, one to a line.
+   Only the browser knows where the first baseline actually falls once the
+   webfont has landed, so we measure it and hand the number back as
+   --pr-rule-ink. Writing then sits ON the line instead of near it.
 
-  MP.ready(function () {
-    var section = document.getElementById('dragons');
-    if (!section) return;
-
-    var cards = MP.$$('.dragons__card', section);
-    var live = MP.$('[data-dragons-live]', section);
-    var hasIO = typeof window.IntersectionObserver === 'function';
-
-    /* An identical string does not always get re-announced, and every card
-       now offers the same two words — so clear, then set on the next frame. */
-    function announce(msg) {
-      if (!live) return;
-      live.textContent = '';
-      window.requestAnimationFrame(function () { live.textContent = msg; });
-    }
-
-    /* -- 1 · nothing animates while nobody can see it --------------------- */
-    if (hasIO) {
-      new IntersectionObserver(function (entries) {
-        for (var i = 0; i < entries.length; i++) {
-          section.classList.toggle('is-paused', !entries[i].isIntersecting);
-        }
-      }, { rootMargin: '160px 0px' }).observe(section);
-    }
-
-    /* -- 2 · "wake it up" — the keyboard's version of hover ---------------- */
-    MP.$$('.dragons__wake', section).forEach(function (btn) {
-      var card = btn.closest ? btn.closest('.dragons__card') : null;
-      if (!card) return;
-      btn.addEventListener('click', function () {
-        var on = !card.classList.contains('is-awake');
-        card.classList.toggle('is-awake', on);
-        btn.setAttribute('aria-pressed', on ? 'true' : 'false');
-      });
-    });
-
-    /* -- 3 · a coarse pointer has no hover at all -------------------------
-       Wake whichever card is crossing the middle of the screen. The margin
-       (not a ratio) is what makes this work for a card taller than the
-       viewport, which a 320px phone reaches easily. */
-    var seenIO = null;
-
-    function bindSeen() {
-      if (seenIO || !hasIO || MP.fine.matches || MP.reduced.matches) return;
-      seenIO = new IntersectionObserver(function (entries) {
-        for (var i = 0; i < entries.length; i++) {
-          entries[i].target.classList.toggle('is-seen', entries[i].isIntersecting);
-        }
-      }, { rootMargin: '-38% 0px -38% 0px', threshold: 0 });
-      cards.forEach(function (c) { seenIO.observe(c); });
-    }
-
-    function unbindSeen() {
-      if (!seenIO) return;
-      seenIO.disconnect();
-      seenIO = null;
-      cards.forEach(function (c) { c.classList.remove('is-seen'); });
-    }
-
-    bindSeen();
-
-    /* Somebody can turn reduced motion on without reloading. */
-    if (typeof MP.reduced.addEventListener === 'function') {
-      MP.reduced.addEventListener('change', function () {
-        if (MP.reduced.matches) {
-          unbindSeen();
-          MP.$$('.dragons__wake', section).forEach(function (btn) {
-            btn.setAttribute('aria-pressed', 'false');
-          });
-          cards.forEach(function (c) { c.classList.remove('is-awake'); });
-        } else {
-          bindSeen();
-        }
-      });
-    }
-
-    /* -- 4 · copy the name ------------------------------------------------ */
-    function legacyCopy(text) {
-      return new Promise(function (resolve, reject) {
-        var active = document.activeElement;
-        var ta = document.createElement('textarea');
-        var ok = false;
-        ta.value = text;
-        ta.setAttribute('readonly', '');
-        ta.setAttribute('aria-hidden', 'true');
-        ta.tabIndex = -1;
-        ta.style.cssText = 'position:fixed;top:0;left:-9999px;opacity:0';
-        document.body.appendChild(ta);
-        try {
-          ta.select();
-          ok = document.execCommand('copy');
-        } catch (e) {
-          ok = false;
-        }
-        document.body.removeChild(ta);
-        if (active && typeof active.focus === 'function') {
-          try { active.focus({ preventScroll: true }); } catch (e2) { active.focus(); }
-        }
-        if (ok) resolve();
-        else reject(new Error('copy-unavailable'));
-      });
-    }
-
-    function copy(text) {
-      if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
-        return navigator.clipboard.writeText(text).catch(function () {
-          return legacyCopy(text);
-        });
-      }
-      return legacyCopy(text);
-    }
-
-    MP.$$('.dragons__copy', section).forEach(function (btn) {
-      var name = (btn.getAttribute('data-copy') || '').trim();
-      if (!name) return;
-      var timer = 0;
-      btn.addEventListener('click', function () {
-        copy(name).then(function () {
-          btn.classList.add('is-copied');
-          announce('Copied "' + name + '". Type it under your drawing.');
-          window.clearTimeout(timer);
-          timer = window.setTimeout(function () {
-            btn.classList.remove('is-copied');
-          }, 1800);
-        }, function () {
-          announce('Could not copy it. The name is "' + name + '".');
-        });
-      });
-    });
-
-    /* The runtime measures the strokes and binds the reveals. */
-    MP.enhance(section);
-  });
-})();
-
-/* ---------- kingdoms ---------- */
-/* ==========================================================================
-   THE MAP — marker disclosures, the scrolling parchment, and the little
-   army that keeps marching east.
+   The measurement is taken on a hidden paragraph of our own, never on the
+   text: nothing here mutates a paragraph a reader (or the narrator) may be
+   part way through. Everything else on this leaf is the shared runtime's.
    ========================================================================== */
 (function () {
   'use strict';
 
   function init() {
-    var root = document.getElementById('kingdoms');
+    var section = document.getElementById('prologue');
+    if (!section) return;
+    var body = section.querySelector('.prologue__body');
+    if (!body) return;
+
+    var MP = window.MP || {};
+    var debounce = typeof MP.debounce === 'function' ? MP.debounce : function (fn, ms) {
+      var t;
+      return function () { clearTimeout(t); t = setTimeout(fn, ms || 150); };
+    };
+
+    var ruler = null, mark = null, last = -1;
+
+    /* A paragraph identical to the written ones, hidden, carrying a
+       zero-sized inline-block — which sits exactly on the baseline. */
+    function ensureRuler() {
+      if (ruler && ruler.isConnected) return true;
+      ruler = document.createElement('p');
+      ruler.className = 'prologue__ruler';
+      ruler.setAttribute('aria-hidden', 'true');
+      ruler.appendChild(document.createTextNode('Hxpg'));
+      mark = document.createElement('span');
+      mark.className = 'prologue__ruler-mark';
+      ruler.insertBefore(mark, ruler.firstChild);
+      body.appendChild(ruler);
+      return true;
+    }
+
+    function measure() {
+      if (!ensureRuler()) return;
+      if (!ruler.getClientRects().length) return;      /* laid out at all? */
+
+      var cs = window.getComputedStyle(ruler);
+      var lead = parseFloat(cs.lineHeight);
+      if (!isFinite(lead) || lead <= 0) return;
+
+      var topY = ruler.getBoundingClientRect().top;
+      var baseY = mark.getBoundingClientRect().top;
+      if (!isFinite(topY) || !isFinite(baseY)) return;
+
+      var ink = Math.round(baseY - topY) + 1;          /* the rule under the baseline */
+      if (!isFinite(ink)) return;
+
+      var lo = Math.round(lead * 0.45);
+      var hi = Math.round(lead) - 1;
+      if (hi <= lo) return;
+      if (ink < lo) ink = lo;
+      else if (ink > hi) ink = hi;
+
+      if (ink === last) return;
+      last = ink;
+      section.style.setProperty('--pr-rule-ink', ink + 'px');
+    }
+
+    measure();
+    window.addEventListener('resize', debounce(measure, 180), { passive: true });
+    if (document.readyState !== 'complete') {
+      window.addEventListener('load', measure, { once: true });
+    }
+    if (document.fonts && document.fonts.ready && typeof document.fonts.ready.then === 'function') {
+      document.fonts.ready.then(measure).catch(function () {});
+    }
+  }
+
+  if (window.MP && typeof window.MP.ready === 'function') window.MP.ready(init);
+  else if (document.readyState !== 'loading') init();
+  else document.addEventListener('DOMContentLoaded', init);
+})();
+
+/* ---------- chronicle ---------- */
+/* ==========================================================================
+   THE CHRONICLE — the reader's marks, the running index, and the wide leaf.
+   Nothing here is required to read the chapters; with JS off the index is
+   six anchors and the map is a scrollable picture.
+   ========================================================================== */
+(function () {
+  'use strict';
+
+  var KEY = 'mp-chronicle-read';
+  var WORDS = ['None', 'One', 'Two', 'Three', 'Four', 'Five'];
+
+  function init() {
+    var root = document.getElementById('chronicle');
     if (!root) return;
 
     var MP = window.MP || {};
@@ -240,208 +174,303 @@
       };
     };
 
-    var frame    = root.querySelector('.kingdoms__frame');
-    var scroller = root.querySelector('.kingdoms__scroller');
-    var markers  = $$('.kingdoms__marker', root);
-    var castles  = $$('.kingdoms__castle', root);
+    var hasIO = 'IntersectionObserver' in window;
+    var links = $$('[data-chronicle-toc]', root);
+    var chapters = $$('.chronicle__chapter', root);
+    var feet = $$('.chronicle__foot', root);
+    var tally = root.querySelector('[data-chronicle-tally]');
+    var clearBtn = root.querySelector('[data-chronicle-clear]');
+    var footIO = null;
 
-    /* ============================================ 1. marker <-> note ====== */
-    if (frame && scroller && markers.length) {
-      var panels = markers.map(function (b) {
-        var id = b.getAttribute('aria-controls');
-        return id ? document.getElementById(id) : null;
-      });
+    /* ------------------------------------------------ the reader's marks -- */
+    var known = links.map(function (a) { return a.getAttribute('data-chronicle-toc'); });
+    var read = load();
 
-      var scrollTo = function (left) {
-        if (typeof scroller.scrollTo === 'function') {
-          try {
-            scroller.scrollTo({ left: left, behavior: reduced.matches ? 'auto' : 'smooth' });
-            return;
-          } catch (e) { /* older Safari: options object unsupported */ }
+    function load() {
+      var out = [];
+      try {
+        var raw = window.localStorage.getItem(KEY);
+        var list = raw ? JSON.parse(raw) : [];
+        if (Object.prototype.toString.call(list) === '[object Array]') {
+          list.forEach(function (id) {
+            if (known.indexOf(id) > -1 && out.indexOf(id) < 0) out.push(id);
+          });
         }
-        scroller.scrollLeft = left;
-      };
+      } catch (e) { /* no shelf to keep it on; the marks last the session */ }
+      return out;
+    }
+    function save() {
+      try { window.localStorage.setItem(KEY, JSON.stringify(read)); } catch (e) {}
+    }
 
-      var centre = function (btn) {
-        if (!btn) return;
-        if (scroller.scrollWidth - scroller.clientWidth < 8) return;
-        var r = btn.getBoundingClientRect();
-        var s = scroller.getBoundingClientRect();
-        var delta = (r.left + r.width / 2) - (s.left + s.width / 2);
-        if (!isFinite(delta) || Math.abs(delta) < 2) return;
-        scrollTo(scroller.scrollLeft + delta);
-      };
-
-      var open = function (index, scrollToIt) {
-        if (index < 0 || index >= markers.length) return;
-        var key = markers[index].getAttribute('data-k');
-        markers.forEach(function (b, i) {
-          var on = i === index;
-          b.setAttribute('aria-expanded', on ? 'true' : 'false');
-          if (panels[i]) panels[i].classList.toggle('is-open', on);
-        });
-        castles.forEach(function (c) {
-          c.classList.toggle('is-open', key !== null && c.getAttribute('data-k') === key);
-        });
-        if (scrollToIt) centre(markers[index]);
-      };
-
-      markers.forEach(function (btn, i) {
-        btn.addEventListener('click', function () { open(i, true); });
-        // Focus follows selection, but let the browser do its own scrolling on
-        // a plain Tab — only deliberate activation re-centres the map.
-        btn.addEventListener('focus', function () { open(i, false); });
-        btn.addEventListener('keydown', function (e) {
-          var n = -1;
-          // Left/Right and Home/End only: the map is horizontal, and Up/Down
-          // must stay free to scroll the page.
-          if (e.key === 'ArrowRight') n = (i + 1) % markers.length;
-          else if (e.key === 'ArrowLeft') n = (i - 1 + markers.length) % markers.length;
-          else if (e.key === 'Home') n = 0;
-          else if (e.key === 'End') n = markers.length - 1;
-          if (n < 0) return;
-          e.preventDefault();
-          markers[n].focus({ preventScroll: true });
-          open(n, true);
-        });
+    function paint() {
+      links.forEach(function (a) {
+        var id = a.getAttribute('data-chronicle-toc');
+        var done = read.indexOf(id) > -1;
+        a.classList.toggle('is-read', done);
+        var state = a.querySelector('.chronicle__toc-state');
+        if (state) state.textContent = done ? 'marked as read' : 'not yet marked';
       });
+      if (!tally) return;
+      var n = Math.min(read.length, 6);
+      tally.textContent = n === 0
+        ? 'None of the six leaves marked.'
+        : n === 6
+          ? 'All six leaves marked. The book is read.'
+          : WORDS[n] + ' of the six leaves marked.';
+    }
 
-      // Start on Greenhaven, with the other five folded away. aria-expanded is
-      // written here rather than in the markup, so with JS off the buttons
-      // never claim a state they cannot honour.
-      open(0, false);
+    function mark(id) {
+      if (!id || known.indexOf(id) < 0 || read.indexOf(id) > -1) return;
+      read.push(id);
+      save();
+      paint();
+    }
 
-      /* --------------------------------------- the map scrolls sideways -- */
-      var edges = rafThrottle(function () {
-        var max = scroller.scrollWidth - scroller.clientWidth;
-        frame.classList.toggle('can-scroll', max > 8);
-        frame.classList.toggle('at-start', scroller.scrollLeft <= 4);
-        frame.classList.toggle('at-end', scroller.scrollLeft >= max - 4);
+    paint();
+
+    /* ---- a leaf marks itself when the reader reaches the foot of it ------- */
+    if (hasIO && feet.length) {
+      footIO = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (!en.isIntersecting) return;
+          var chapter = en.target.closest ? en.target.closest('.chronicle__chapter') : null;
+          if (chapter) mark(chapter.id);
+          footIO.unobserve(en.target);
+        });
+      }, { rootMargin: '0px 0px -12% 0px', threshold: 0.9 });
+      feet.forEach(function (f) { footIO.observe(f); });
+    }
+
+    if (clearBtn) {
+      clearBtn.addEventListener('click', function () {
+        read = [];
+        save();
+        paint();
+        /* re-arm the feet, or the marks could never be made again */
+        if (footIO) feet.forEach(function (f) { footIO.observe(f); });
       });
-      scroller.addEventListener('scroll', edges, { passive: true });
-      window.addEventListener('resize', debounce(edges, 140));
-      edges();
-      // The handwriting face changes the stage's intrinsic width when it lands.
-      if (document.fonts && document.fonts.ready && document.fonts.ready.then) {
-        document.fonts.ready.then(edges, function () {});
-      }
     }
 
-    /* ============================================ 2. the marching column == */
-    var trail = root.querySelector('#kingdoms-march');
-    var units = $$('.kingdoms__unit', root);
-    var total = 0;
-    if (trail && typeof trail.getTotalLength === 'function') {
-      try { total = trail.getTotalLength(); } catch (e) { total = 0; }
-    }
-    if (!isFinite(total) || total <= 0) total = 0;
-
-    // No-ops unless there is a track and someone to walk it, so the pause
-    // wiring below never has to know whether the column exists.
-    var startMarch = function () {};
-    var stopMarch  = function () {};
-
-    if (total > 0 && units.length) {
-      var SPEED = 42;   // user units per second
-      var LEAD  = 9;    // how far ahead we sample to find the tangent
-      var FADE  = 70;   // fade-in/out zone either side of the loop seam
-      var num = function (el, attr, fallback) {
-        var v = parseFloat(el.getAttribute(attr));
-        return isFinite(v) ? v : fallback;
-      };
-      var column = units.map(function (u) {
-        return { el: u, off: num(u, 'data-off', 0), bob: num(u, 'data-bob', 2), ph: num(u, 'data-phase', 0) };
+    /* ---- which leaf is open in front of the reader ------------------------ */
+    function setCurrent(id) {
+      links.forEach(function (a) {
+        if (id && a.getAttribute('data-chronicle-toc') === id) a.setAttribute('aria-current', 'location');
+        else a.removeAttribute('aria-current');
       });
-
-      var place = function (walked, c, t) {
-        var d = ((walked + c.off) % total + total) % total;
-        var p, q;
-        try {
-          p = trail.getPointAtLength(d);
-          q = trail.getPointAtLength(Math.min(d + LEAD, total));
-        } catch (e) { return; }
-        if (!p || !q || !isFinite(p.x) || !isFinite(p.y)) return;
-        var a = Math.atan2(q.y - p.y, q.x - p.x) * 180 / Math.PI;
-        if (!isFinite(a)) a = 0;
-        var bob = Math.sin(t * 5.4 + c.ph) * c.bob;
-        if (!isFinite(bob)) bob = 0;
-        c.el.setAttribute('transform',
-          'translate(' + p.x.toFixed(1) + ' ' + (p.y + bob).toFixed(1) + ') rotate(' + a.toFixed(2) + ')');
-        // Fade across the wrap so nobody sees them teleport home.
-        var fade = Math.min(1, Math.min(d, total - d) / FADE);
-        c.el.style.opacity = (isFinite(fade) ? fade : 1).toFixed(3);
-      };
-
-      var id = 0, prev = 0, walked = 230, clock = 0;
-
-      var placeAll = function (t) {
-        for (var i = 0; i < column.length; i++) place(walked, column[i], t);
-      };
-
-      var step = function (ts) {
-        id = requestAnimationFrame(step);
-        if (!prev) prev = ts;
-        var dt = (ts - prev) / 1000;
-        prev = ts;
-        if (!isFinite(dt) || dt < 0) dt = 0;
-        if (dt > 0.05) dt = 0.05;          // a returning tab must not jump
-        if (document.hidden) return;
-        walked = (walked + dt * SPEED) % total;   // wrapped, so it never drifts
-        clock += dt;
-        if (clock > 1e5) clock = 0;
-        placeAll(clock);
-      };
-
-      startMarch = function () {
-        if (id || reduced.matches) return;
-        prev = 0;
-        id = requestAnimationFrame(step);
-      };
-      stopMarch = function () {
-        if (id) { cancelAnimationFrame(id); id = 0; }
-      };
-
-      // A still column still reads as an army on the march — this is also the
-      // whole of the reduced-motion state, and it is never a blank box.
-      placeAll(0);
-
-      var onReducedChange = function () {
-        if (reduced.matches) { stopMarch(); placeAll(0); }
-        else if (!root.classList.contains('is-paused')) startMarch();
-      };
-      if (reduced.addEventListener) reduced.addEventListener('change', onReducedChange);
-      else if (reduced.addListener) reduced.addListener(onReducedChange);
     }
 
-    /* ============================================ 3. nothing runs offscreen */
-    /* Deliberately outside the column block: the CSS loops (the creeping
-       track, wings, fire, the .alive wobble) must pause even on a browser
-       where getTotalLength gave us nothing. */
-    var setPaused = function (paused) {
-      root.classList.toggle('is-paused', !!paused);
-      if (paused) stopMarch(); else startMarch();
-    };
-
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (entries) {
-        for (var i = 0; i < entries.length; i++) setPaused(!entries[i].isIntersecting);
-      }, { rootMargin: '120px 0px' }).observe(root);
-    } else {
-      setPaused(false);
+    if (hasIO && chapters.length) {
+      var here = {};
+      var hereIO = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) { here[en.target.id] = en.isIntersecting; });
+        var open = null;
+        for (var i = 0; i < chapters.length; i++) {
+          if (here[chapters[i].id]) { open = chapters[i].id; break; }
+        }
+        setCurrent(open);
+      }, { rootMargin: '-42% 0px -42% 0px', threshold: 0 });
+      chapters.forEach(function (c) { hereIO.observe(c); });
     }
 
-    document.addEventListener('visibilitychange', function () {
-      if (document.hidden) stopMarch();
-      else if (!root.classList.contains('is-paused')) startMarch();
+    /* ---- the index sends the reader to the leaf, and the focus with it ---- */
+    var focusTimer = 0;
+    links.forEach(function (a) {
+      a.addEventListener('click', function () {
+        var id = a.getAttribute('data-chronicle-toc');
+        var target = document.getElementById(id);
+        if (!target) return;
+        setCurrent(id);
+        if (!hasIO) mark(id);
+        clearTimeout(focusTimer);
+        focusTimer = window.setTimeout(function () {
+          try { target.focus({ preventScroll: true }); } catch (e) { target.focus(); }
+        }, reduced.matches ? 0 : 640);
+      });
     });
 
-    /* Measure the strokes / arm the reveals if this section arrived late. */
-    if (MP.enhance) MP.enhance(root);
+    /* --------------------------------------------------- the wide leaf ----- */
+    var fig = root.querySelector('.chronicle__mapfig');
+    var scroller = root.querySelector('.chronicle__mapscroll');
+
+    if (fig && scroller) {
+      var sync = function () {
+        var over = scroller.scrollWidth - scroller.clientWidth > 8;
+        fig.classList.toggle('is-scrollable', over);
+        fig.classList.toggle(
+          'is-end',
+          scroller.scrollLeft + scroller.clientWidth >= scroller.scrollWidth - 8
+        );
+      };
+      var onScroll = rafThrottle(sync);
+
+      scroller.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', debounce(sync, 160));
+      sync();
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(sync);
+    }
   }
 
   if (window.MP && window.MP.ready) window.MP.ready(init);
   else if (document.readyState !== 'loading') init();
   else document.addEventListener('DOMContentLoaded', init);
+})();
+
+/* ---------- armoury ---------- */
+/* ==========================================================================
+   THE ARMOURY — the ruled index filters the plate.
+   Safe to load on a page that has no #armoury.
+   ========================================================================== */
+(function () {
+  'use strict';
+
+  var root = document.getElementById('armoury');
+  if (!root) return;
+
+  var qsa = function (s) { return Array.prototype.slice.call(root.querySelectorAll(s)); };
+
+  var tabs = qsa('.armoury__tab');
+  var figs = qsa('.armoury__fig');
+  var out  = root.querySelector('[data-armoury-count]');
+  if (!tabs.length || !figs.length) return;
+
+  var WORDS = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven',
+               'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen',
+               'fourteen', 'fifteen', 'sixteen'];
+  function word(n) { return WORDS[n] || String(n); }
+
+  var NAMES = {
+    edged: 'arms of the edge',
+    hafted: 'hafted arms',
+    missile: 'arms thrown or shot',
+    defensive: 'defensive arms'
+  };
+
+  var total = figs.length;
+
+  /* Count the plate rather than trust the numbers typed into it. */
+  var counts = { all: total };
+  figs.forEach(function (f) {
+    var k = f.getAttribute('data-kind') || 'other';
+    counts[k] = (counts[k] || 0) + 1;
+  });
+  tabs.forEach(function (t) {
+    var n = t.querySelector('.armoury__tab-n');
+    var k = t.getAttribute('data-filter') || 'all';
+    if (n) n.textContent = counts[k] || 0;
+  });
+
+  function setText(el, str) { if (el && el.textContent !== str) el.textContent = str; }
+
+  /* `source` is the button that asked for the change; if hiding a figure
+     would strand the keyboard focus, it is handed back to that button. */
+  function apply(kind, source) {
+    var shown = 0;
+    var stranded = false;
+    var active = document.activeElement;
+
+    figs.forEach(function (f) {
+      if (kind === 'all' || f.getAttribute('data-kind') === kind) {
+        f.removeAttribute('hidden');
+        shown++;
+        return;
+      }
+      if (active && f.contains(active)) stranded = true;
+      f.setAttribute('hidden', '');
+    });
+
+    tabs.forEach(function (t) {
+      t.setAttribute('aria-pressed',
+        (t.getAttribute('data-filter') || 'all') === kind ? 'true' : 'false');
+    });
+
+    if (stranded && source && typeof source.focus === 'function') source.focus();
+
+    setText(out, kind === 'all'
+      ? 'All ' + word(total) + ' figures of the plate.'
+      : word(shown) + ' of ' + word(total) + ' figures: ' + (NAMES[kind] || kind) + '.');
+  }
+
+  tabs.forEach(function (t) {
+    t.addEventListener('click', function () {
+      apply(t.getAttribute('data-filter') || 'all', t);
+    });
+  });
+
+  /* Matches the text already in the markup, so the live region stays quiet
+     until the reader actually filters something. */
+  apply('all');
+})();
+
+/* ---------- dragons ---------- */
+/* ==========================================================================
+   THE DRAGONS OF THE WAR — #dragons
+   The stir is CSS. A pointer gets it from .dragons__plate:hover; everyone
+   else gets it from the "stir the plate" button, which this file wires up.
+   Two small jobs and nothing else:
+     1. hold every plate still while the bestiary is off screen
+     2. run one gesture when the button is focused or pressed
+   No rAF loop, no canvas, no interval. The shared runtime already inked
+   the plates in with MP.enhance(document).
+   ========================================================================== */
+(function () {
+  'use strict';
+
+  var MP = window.MP;
+  if (!MP || typeof MP.ready !== 'function') return;
+
+  MP.ready(function () {
+    var section = document.getElementById('dragons');
+    if (!section) return;
+
+    var beasts = MP.$$('.dragons__beast', section);
+    if (!beasts.length) return;
+
+    /* -- 1 · nothing stirs while nobody is looking ----------------------- */
+    if (typeof window.IntersectionObserver === 'function') {
+      new IntersectionObserver(function (entries) {
+        var last = entries[entries.length - 1];
+        if (last) section.classList.toggle('is-paused', !last.isIntersecting);
+      }, { rootMargin: '160px 0px' }).observe(section);
+    }
+
+    /* -- 2 · one gesture, then the plate is a drawing again --------------
+       Removing the class and forcing a reflow before re-adding it is what
+       lets the reader ask twice in a row and see it twice. */
+    var STIR_MS = 2800;
+
+    function stir(beast) {
+      if (!beast || MP.reduced.matches) return;
+      if (beast.__stir) { window.clearTimeout(beast.__stir); beast.__stir = 0; }
+      beast.classList.remove('is-stirring');
+      void beast.offsetWidth;
+      beast.classList.add('is-stirring');
+      beast.__stir = window.setTimeout(function () {
+        beast.classList.remove('is-stirring');
+        beast.__stir = 0;
+      }, STIR_MS);
+    }
+
+    function settle(beast) {
+      if (!beast) return;
+      if (beast.__stir) { window.clearTimeout(beast.__stir); beast.__stir = 0; }
+      beast.classList.remove('is-stirring');
+    }
+
+    beasts.forEach(function (beast) {
+      var btn = MP.$('.dragons__stir', beast);
+      if (!btn) return;
+      btn.addEventListener('click', function () { stir(beast); });
+      btn.addEventListener('focus', function () { stir(beast); });
+    });
+
+    /* Reduced motion can be switched on without a reload. */
+    if (typeof MP.reduced.addEventListener === 'function') {
+      MP.reduced.addEventListener('change', function () {
+        if (MP.reduced.matches) beasts.forEach(settle);
+      });
+    }
+  });
 })();
 
 /* ---------- spellbook ---------- */
@@ -741,381 +770,6 @@
   if (MP.ready) MP.ready(start);
   else if (document.readyState !== 'loading') start();
   else document.addEventListener('DOMContentLoaded', start);
-})();
-
-/* ---------- studio ---------- */
-/* ==========================================================================
-   THE STUDIO — a scripted drawing session on a loop.
-   Pen outlines a half-dragon, one stroke goes wrong, undo eats it, bucket and
-   crayon colour it, mirror completes the other half, it gets named, saved to
-   the shelf and pulled back out three times. render(t) is a pure function of
-   time, so pausing off-screen is exact and reduced motion simply never starts.
-   ========================================================================== */
-(function () {
-  'use strict';
-
-  var MP = window.MP || {};
-  var $ = MP.$ || function (s, c) { return (c || document).querySelector(s); };
-  var $$ = MP.$$ || function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
-  var clamp = MP.clamp || function (v, a, b) { return Math.min(b, Math.max(a, v)); };
-  var reduced = MP.reduced || window.matchMedia('(prefers-reduced-motion: reduce)');
-
-  function num(v, fallback) { return (typeof v === 'number' && isFinite(v)) ? v : fallback; }
-  function smooth(p) { return p * p * (3 - 2 * p); }
-  function seg(t, a, b) { return b > a ? clamp((t - a) / (b - a), 0, 1) : (t >= b ? 1 : 0); }
-  function back(p) { var c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); }
-  function lerp(a, b, p) { return a + (b - a) * p; }
-
-  /* Only names the game documents; the drawing stays the same and the wish
-     changes, which is the whole point of "the name is the wish". */
-  var PAL = [
-    { name: 'fire dragon', body: 'var(--crayon-flame)', wing: 'var(--crayon-amber)' },
-    { name: 'knight',      body: 'var(--crayon-sky)',   wing: 'var(--crayon-deep)' },
-    { name: 'army',        body: 'var(--crayon-green)', wing: 'var(--crayon-grass)' }
-  ];
-
-  function boot() {
-    var root = document.getElementById('studio');
-    if (!root) return;
-    var win = $('[data-studio]', root);
-    var svg = $('[data-canvas]', root);
-    if (!win || !svg) return;
-
-    function measure(el, fallback) {
-      if (!el || typeof el.getTotalLength !== 'function') return fallback;
-      try {
-        var l = el.getTotalLength();
-        return (isFinite(l) && l > 0) ? Math.ceil(l) + 1 : fallback;
-      } catch (e) { return fallback; }
-    }
-
-    /* Whole-number dash lengths on purpose: a fractional dasharray leaves a
-       round-capped dot at the start of each sub-path in some engines. */
-    var lines = $$('[data-ln]', svg).map(function (el) {
-      return { el: el, len: measure(el, 300), p: 0, t0: 0, t1: 0 };
-    });
-    if (!lines.length) return;
-    var eyeLine = lines.filter(function (o) { return o.el.hasAttribute('data-eye'); })[0] || lines[0];
-
-    var dot     = $('[data-dot]', svg);
-    var fBody   = $('[data-fill="body"]', svg);
-    var fHorn   = $('[data-fill="horn"]', svg);
-    var fWing   = $('[data-fill="wing"]', svg);
-    var art     = $('[data-art]', svg);
-    var mirror  = $('[data-mirror]', svg);
-    var axis    = $('[data-axis]', svg);
-    var stray   = $('[data-stray]', svg);
-    var splash  = $('[data-splash]', svg);
-    var penCur  = $('[data-pen]', svg);
-    var crayCur = $('[data-crayon]', svg);
-    var bktCur  = $('[data-bucket]', svg);
-    var stamps  = $$('[data-stamp]', svg);
-    var capEl   = $('[data-cap]', root);
-    var nameEl  = $('[data-name]', root);
-    var pill    = $('[data-pill]', root);
-    var tools   = $$('[data-tool]', root);
-    var slots   = $$('[data-slot]', root);
-
-    if (!art || !mirror || !stray || !slots.length) return;
-
-    var strayLen = measure(stray, 300);
-
-    /* ---------------------------------------------------- the timeline -- */
-    var STAMP_XY = [[74, 150], [160, 150], [246, 150]];
-    var nStamps = Math.min(stamps.length, STAMP_XY.length);
-    var STAMP_STEP = 190;
-
-    var cursor = 420;
-    lines.forEach(function (o) {
-      o.t0 = cursor;
-      o.t1 = cursor + 110 + o.len * 2.9;
-      cursor = o.t1 + 55;
-    });
-    var PEN_END = cursor;
-    var STRAY0  = PEN_END + 180,  STRAY1 = STRAY0 + 620;
-    var UNDO0   = STRAY1 + 460,   UNDO1  = UNDO0 + 380;
-    var BKT0    = UNDO1 + 320,    BKT1   = BKT0 + 900;
-    var CRA0    = BKT1 - 60,      CRA1   = CRA0 + 820;
-    var MIR0    = CRA1 + 320,     MIR1   = MIR0 + 860;
-    var NAME0   = MIR1 + 60,      NAME1  = NAME0 + 820;
-    var SAVE0   = NAME1 + 320,    SAVE1  = SAVE0 + 900;
-    var STAMP0  = SAVE1 + 60;
-    var END     = STAMP0 + Math.max(nStamps - 1, 0) * STAMP_STEP + 1840;
-    var SAVED_AT = SAVE0 + 0.5 * (SAVE1 - SAVE0);
-
-    /* --------------------------------- write-once helpers (null + NaN safe) */
-    function xf(el, s) { if (el && el.__x !== s) { el.setAttribute('transform', s); el.__x = s; } }
-    function op(el, v) {
-      if (!el) return;
-      var s = clamp(num(v, 0), 0, 1).toFixed(3);
-      if (el.__o !== s) { el.style.opacity = s; el.__o = s; }
-    }
-    function dash(el, v) {
-      if (!el) return;
-      var s = num(v, 0).toFixed(1);
-      if (el.__d !== s) { el.style.strokeDashoffset = s; el.__d = s; }
-    }
-    function txt(el, s) { if (el && el.__t !== s) { el.textContent = s; el.__t = s; } }
-    function cls(el, name, on) { if (el && el.classList.contains(name) !== !!on) el.classList.toggle(name, !!on); }
-    function ptAt(el, l, len) {
-      if (!el || typeof el.getPointAtLength !== 'function') return null;
-      try {
-        var p = el.getPointAtLength(clamp(num(l, 0), 0, num(len, 0)));
-        return (p && isFinite(p.x) && isFinite(p.y)) ? p : null;
-      } catch (e) { return null; }
-    }
-
-    /* ------------------------------------------------------- the render -- */
-    var loopIdx = 0;
-
-    function render(t) {
-      /* 1 — the pen lays down the outline, one stroke at a time */
-      var active = null, done = null;
-      for (var i = 0; i < lines.length; i++) {
-        var o = lines[i];
-        var p = seg(t, o.t0, o.t1);
-        o.p = smooth(p);
-        dash(o.el, o.len * (1 - o.p));
-        if (p > 0 && p < 1) active = o;
-        if (p === 1) done = o;
-      }
-      op(dot, eyeLine.p === 1 ? 1 : 0);
-
-      /* 2 — the stroke that should not have happened, and the undo */
-      var sp = smooth(seg(t, STRAY0, STRAY1));
-      var gone = smooth(seg(t, UNDO0, UNDO1));
-      dash(stray, strayLen * (1 - sp));
-      op(stray, t >= STRAY0 ? 1 - gone : 0);
-      xf(stray, 'translate(194,70) scale(' + (1 - 0.45 * gone).toFixed(3) + ') translate(-194,-70)');
-
-      /* 3 — bucket floods the body, crayon shades the wing */
-      var bq = smooth(seg(t, BKT0 + 120, BKT0 + 620));
-      var hq = smooth(seg(t, BKT0 + 380, BKT0 + 820));
-      var wq = smooth(seg(t, CRA0 + 160, CRA1));
-      op(fBody, bq);
-      op(fHorn, hq);
-      op(fWing, wq * 0.86);
-      xf(fBody, 'translate(143,134) scale(' + lerp(0.72, 1, bq).toFixed(3) + ') translate(-143,-134)');
-      xf(fWing, 'translate(126,132) scale(' + lerp(0.82, 1, wq).toFixed(3) + ') translate(-126,-132)');
-
-      var sq = seg(t, BKT0, BKT0 + 620);
-      op(splash, (sq > 0 && sq < 1) ? (1 - sq) * 0.9 : 0);
-      xf(splash, 'translate(143,134) scale(' + lerp(0.2, 3.4, smooth(sq)).toFixed(3) + ') translate(-143,-134)');
-
-      /* 4 — the hands */
-      var penOn = t > lines[0].t0 - 240 && t < STRAY1 + 260;
-      op(penCur, penOn
-        ? (t < lines[0].t0 ? seg(t, lines[0].t0 - 240, lines[0].t0) : 1 - seg(t, STRAY1, STRAY1 + 260))
-        : 0);
-      if (penOn) {
-        var pt = null, lift = 0;
-        if (t >= STRAY0 && t <= STRAY1) pt = ptAt(stray, strayLen * sp, strayLen);
-        else if (active) pt = ptAt(active.el, active.len * active.p, active.len);
-        else if (done) { pt = ptAt(done.el, done.len, done.len); lift = 1; }
-        else { pt = ptAt(lines[0].el, 0, lines[0].len); lift = 1; }
-        if (pt) xf(penCur, 'translate(' + (pt.x + 0.6).toFixed(1) + ',' + (pt.y - lift * 4).toFixed(1) + ')');
-      }
-
-      var bktIn = smooth(seg(t, BKT0 - 340, BKT0 - 40));
-      var bktOut = smooth(seg(t, BKT0 + 560, BKT0 + 820));
-      op(bktCur, (t > BKT0 - 340 && t < BKT0 + 820) ? bktIn * (1 - bktOut) : 0);
-      xf(bktCur, 'translate(' + lerp(212, 147, bktIn).toFixed(1) + ',' + lerp(78, 130, bktIn).toFixed(1) + ')');
-
-      var cOn = t > CRA0 - 120 && t < CRA1 + 200;
-      var cq = seg(t, CRA0, CRA1);
-      op(crayCur, cOn
-        ? smooth(seg(t, CRA0 - 120, CRA0)) * (1 - smooth(seg(t, CRA1, CRA1 + 200)))
-        : 0);
-      if (cOn) {
-        xf(crayCur, 'translate(' +
-          (lerp(118, 68, cq) + Math.sin(cq * 21) * 7).toFixed(1) + ',' +
-          (lerp(128, 96, cq) + Math.cos(cq * 17) * 6).toFixed(1) + ')');
-      }
-
-      /* 5 — the mirror completes it */
-      var mq = smooth(seg(t, MIR0, MIR0 + 780));
-      op(mirror, mq);
-      xf(mirror, 'translate(' + (-18 * (1 - mq)).toFixed(2) + ',0)');
-      op(axis, Math.sin(Math.PI * seg(t, MIR0 - 340, MIR0 + 900)) * 0.85);
-
-      /* 6 — it breathes, then it is saved */
-      var rot = t > MIR1 ? Math.sin((t - MIR1) / 380) * 1.1 : 0;
-      var scale = 1, tx = 0, ty = 0, aOp = 1;
-      var q = seg(t, SAVE0, SAVE1);
-      if (q > 0) {
-        var pop = Math.sin(Math.PI * clamp(q / 0.24, 0, 1)) * 0.09;
-        var fly = smooth(clamp((q - 0.2) / 0.8, 0, 1));
-        scale = (1 + pop) * (1 - 0.86 * fly);
-        tx = -118 * fly; ty = 98 * fly;
-        rot *= (1 - fly);
-        aOp = 1 - smooth(clamp((q - 0.5) / 0.5, 0, 1));
-      }
-      op(art, aOp);
-      xf(art, 'translate(' + tx.toFixed(1) + ',' + ty.toFixed(1) + ') translate(160,118) rotate(' +
-        rot.toFixed(2) + ') scale(' + scale.toFixed(3) + ') translate(-160,-118)');
-
-      /* 7 — three copies come back out of the library */
-      var out = smooth(seg(t, END - 420, END));
-      for (var k = 0; k < nStamps; k++) {
-        var kq = seg(t, STAMP0 + k * STAMP_STEP, STAMP0 + k * STAMP_STEP + 340);
-        op(stamps[k], kq * (1 - out));
-        xf(stamps[k], 'translate(' + STAMP_XY[k][0] + ',' + STAMP_XY[k][1] + ') scale(' +
-          Math.max(0.001, 0.54 * back(kq) * (1 - 0.2 * out)).toFixed(3) + ')');
-      }
-
-      /* 8 — the chrome: tool, caption, name, save pill, shelf */
-      var tool = t < UNDO0 ? 'pen'
-        : t < UNDO1 + 160 ? 'undo'
-        : t < CRA0 ? 'bucket'
-        : t < CRA1 ? 'crayon'
-        : t < MIR1 ? 'mirror'
-        : 'pen';
-      for (var j = 0; j < tools.length; j++) {
-        cls(tools[j], 'is-on', tools[j].getAttribute('data-tool') === tool);
-      }
-
-      txt(capEl,
-        t < STRAY0 ? 'Pen. Outline it.'
-        : t < UNDO0 ? 'Hm. That was not the plan.'
-        : t < UNDO1 + 120 ? 'Undo. Nobody saw that.'
-        : t < CRA0 ? 'Bucket. Flood the colour in.'
-        : t < MIR0 ? 'Crayon. Scribble the rest.'
-        : t < NAME0 ? 'Mirror. Both sides at once.'
-        : t < SAVE0 ? 'Name it — the name is the wish.'
-        : t < STAMP0 ? 'Saved to your library.'
-        : 'Back out of the library, as often as you like.');
-
-      var full = PAL[loopIdx % PAL.length].name;
-      var n = Math.round(full.length * smooth(seg(t, NAME0, NAME1)));
-      txt(nameEl, full.slice(0, n));
-      cls(win, 'is-typing', t > NAME0 - 120 && t < SAVE0);
-      cls(pill, 'is-hot', t > SAVE0 - 260 && t < SAVE0 + 420);
-      cls(slots[loopIdx % slots.length], 'is-full', t >= SAVED_AT);
-    }
-
-    /* ------------------------------------------------------ loop control -- */
-    var t = 0, last = 0, rafId = 0, playing = false, visible = false;
-
-    function startLoop() {
-      var pal = PAL[loopIdx % PAL.length];
-      var slot = slots[loopIdx % slots.length];
-      svg.style.setProperty('--c-body', pal.body);
-      svg.style.setProperty('--c-wing', pal.wing);
-      if (loopIdx % slots.length === 0) {
-        slots.forEach(function (sl) { sl.classList.remove('is-full'); });
-      }
-      slot.style.setProperty('--c-body', pal.body);
-      slot.style.setProperty('--c-wing', pal.wing);
-    }
-
-    function frame(ts) {
-      if (!playing) return;
-      if (!last) last = ts;
-      var dt = Math.min(ts - last, 64);
-      last = ts;
-      t += dt;
-      if (t >= END) { t = 0; loopIdx++; startLoop(); }
-      render(t);
-      rafId = requestAnimationFrame(frame);
-    }
-
-    function play() {
-      if (playing || reduced.matches) return;
-      playing = true;
-      last = 0;
-      rafId = requestAnimationFrame(frame);
-    }
-    function pause() {
-      playing = false;
-      last = 0;
-      if (rafId) cancelAnimationFrame(rafId);
-      rafId = 0;
-    }
-
-    /* Clear every inline value the loop writes: back to the finished sheet
-       that the markup and CSS describe on their own. */
-    function restore() {
-      pause();
-      lines.forEach(function (o) {
-        o.el.style.strokeDasharray = '';
-        o.el.style.strokeDashoffset = '';
-        o.el.style.opacity = '';
-        o.el.removeAttribute('transform');
-        o.__d = null; o.el.__d = null; o.el.__o = null; o.el.__x = null;
-        o.p = 1;
-      });
-      stray.style.strokeDasharray = '';
-      stray.style.strokeDashoffset = '';
-      stray.__d = null;
-      [dot, fBody, fHorn, fWing, art, mirror, axis, stray, splash, penCur, crayCur, bktCur]
-        .concat(stamps).forEach(function (el) {
-          if (!el) return;
-          el.style.opacity = '';
-          el.removeAttribute('transform');
-          el.__o = null; el.__x = null;
-        });
-      svg.style.removeProperty('--c-body');
-      svg.style.removeProperty('--c-wing');
-      win.classList.remove('is-typing');
-      if (pill) pill.classList.remove('is-hot');
-      tools.forEach(function (el, i) { el.classList.toggle('is-on', i === 0); });
-      slots.forEach(function (sl, i) {
-        sl.classList.toggle('is-full', i === 0);
-        sl.style.removeProperty('--c-body');
-        sl.style.removeProperty('--c-wing');
-      });
-      if (slots[0]) {
-        slots[0].style.setProperty('--c-body', PAL[0].body);
-        slots[0].style.setProperty('--c-wing', PAL[0].wing);
-      }
-      txt(nameEl, PAL[0].name);
-      txt(capEl, 'Saved to your library.');
-    }
-
-    function begin() {
-      lines.forEach(function (o) { o.el.style.strokeDasharray = String(o.len); });
-      stray.style.strokeDasharray = String(strayLen);
-      loopIdx = 0;
-      t = 0;
-      startLoop();
-      render(0);
-      if (visible) play();
-    }
-
-    /* The loop only ever runs while the window is actually on screen. */
-    var io = null;
-    if ('IntersectionObserver' in window) {
-      io = new IntersectionObserver(function (entries) {
-        for (var i = 0; i < entries.length; i++) {
-          visible = entries[i].isIntersecting;
-        }
-        if (visible && !document.hidden) play(); else pause();
-      }, { threshold: 0.12 });
-      io.observe(win);
-    } else {
-      visible = true;
-    }
-
-    /* Under reduced motion nothing starts: the markup is already the finished
-       drawing, coloured, named, with a copy saved on the shelf. */
-    if (!reduced.matches) begin();
-
-    document.addEventListener('visibilitychange', function () {
-      if (document.hidden) pause();
-      else if (visible) play();
-    });
-
-    function onReduce() {
-      if (reduced.matches) restore();
-      else begin();
-    }
-    if (reduced.addEventListener) reduced.addEventListener('change', onReduce);
-    else if (reduced.addListener) reduced.addListener(onReduce);
-  }
-
-  if (MP.ready) MP.ready(boot);
-  else if (document.readyState !== 'loading') boot();
-  else document.addEventListener('DOMContentLoaded', boot);
 })();
 
 /* ---------- cta ---------- */

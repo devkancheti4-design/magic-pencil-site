@@ -1,0 +1,764 @@
+<section id="chronicle" class="section chronicle" aria-labelledby="chronicle-title">
+  <div class="shell shell--wide">
+
+    <div class="section-head" data-reveal>
+      <span class="eyebrow">The second book</span>
+      <h2 id="chronicle-title">The war of the <span class="underlined">six kingdoms</span></h2>
+      <p>What follows is the account of the taking back of the kingdoms, west to east, in the order they were taken. It was set down at Greenhaven from the mouths of men who were there, some years after, and where the leaf is burnt we have said so.</p>
+    </div>
+
+    <!-- ==================================================================
+         THE MAP — a strip of vellum, west to east
+         ================================================================== -->
+    <figure class="chronicle__mapfig" data-reveal>
+      <div class="chronicle__mapscroll" tabindex="0" role="region"
+           aria-label="Map of the six kingdoms, west to east. Wider than the page; scroll it sideways.">
+        <div class="chronicle__mapwrap" data-draw>
+          <svg class="chronicle__map" viewBox="0 0 1640 660"
+               role="img" aria-labelledby="chronicle-map-t chronicle-map-d">
+            <title id="chronicle-map-t">The six kingdoms of paper, drawn west to east</title>
+            <desc id="chronicle-map-d">A strip of vellum drawn in the manner of an old map. Greenhaven lies at the western end, hills hatched, a green keep among them. East of it: Dogear Downs, whose corners are turned down in folds; Creasemarch, split north to south by a fold-line; Smudgewood, where the forest thins away into smudge; Blotmire, drowned under a spill of ink; and at the eastern end the Roach Throne on its black hill. A compass rose sits in the southern sea, serpents in the blank water, and a line of chevrons marks the road the army took, west to east.</desc>
+
+            <defs>
+              <clipPath id="chronicle-landclip">
+                <path d="M40 150 C120 128 200 168 280 146 C360 124 430 160 510 142 C590 124 660 162 740 140 C820 118 900 158 980 138 C1060 118 1130 156 1210 136 C1290 116 1370 154 1450 134 C1520 117 1570 140 1600 132 L1600 544 C1570 536 1520 560 1450 542 C1370 520 1290 560 1210 538 C1130 516 1060 556 980 534 C900 512 820 552 740 530 C660 508 590 548 510 526 C430 504 360 544 280 520 C200 496 120 534 40 512 Z"/>
+              </clipPath>
+            </defs>
+
+            <!-- the leaf itself -->
+            <path class="chronicle__leaf" d="M8 8 L1632 8 L1632 652 L8 652 Z"/>
+            <path class="chronicle__seafill wash" d="M20 20 L1620 20 L1620 640 L20 640 Z"/>
+
+            <!-- the sea, ruled in the old way -->
+            <g class="chronicle__seaink wash" style="--wash-delay:900ms">
+              <path d="M44 44 q40 -10 80 0 q40 10 80 0 q40 -10 80 0 q40 10 80 0 q40 -10 80 0"/>
+              <path d="M44 72 q40 -10 80 0 q40 10 80 0 q40 -10 80 0 q40 10 80 0 q40 -10 80 0"/>
+              <path d="M60 100 q40 -10 80 0 q40 10 80 0 q40 -10 80 0 q40 10 80 0"/>
+              <path d="M1216 40 q40 -10 80 0 q40 10 80 0 q40 -10 80 0 q40 10 80 0"/>
+              <path d="M340 560 q40 -10 80 0 q40 10 80 0 q40 -10 80 0 q40 10 80 0 q40 -10 80 0 q40 10 80 0"/>
+              <path d="M360 596 q40 -10 80 0 q40 10 80 0 q40 -10 80 0"/>
+              <path d="M1340 566 q40 -10 80 0 q40 10 80 0 q40 -10 80 0"/>
+              <path d="M1340 598 q40 -10 80 0 q40 10 80 0 q40 -10 80 0"/>
+            </g>
+
+            <!-- ---------------------------------------------- the land ---- -->
+            <path class="chronicle__land wash" style="--wash-delay:520ms" d="M40 150 C120 128 200 168 280 146 C360 124 430 160 510 142 C590 124 660 162 740 140 C820 118 900 158 980 138 C1060 118 1130 156 1210 136 C1290 116 1370 154 1450 134 C1520 117 1570 140 1600 132 L1600 544 C1570 536 1520 560 1450 542 C1370 520 1290 560 1210 538 C1130 516 1060 556 980 534 C900 512 820 552 740 530 C660 508 590 548 510 526 C430 504 360 544 280 520 C200 496 120 534 40 512 Z"/>
+
+            <g clip-path="url(#chronicle-landclip)">
+              <path class="chronicle__tint chronicle__t1 wash" style="--wash-delay:640ms" d="M20 20 L302 20 L302 640 L20 640 Z"/>
+              <path class="chronicle__tint chronicle__t2 wash" style="--wash-delay:700ms" d="M300 20 L547 20 L547 640 L300 640 Z"/>
+              <path class="chronicle__tint chronicle__t3 wash" style="--wash-delay:760ms" d="M545 20 L802 20 L802 640 L545 640 Z"/>
+              <path class="chronicle__tint chronicle__t4 wash" style="--wash-delay:820ms" d="M800 20 L1057 20 L1057 640 L800 640 Z"/>
+              <path class="chronicle__tint chronicle__t5 wash" style="--wash-delay:880ms" d="M1055 20 L1312 20 L1312 640 L1055 640 Z"/>
+              <path class="chronicle__tint chronicle__t6 wash" style="--wash-delay:940ms" d="M1310 20 L1620 20 L1620 640 L1310 640 Z"/>
+            </g>
+
+            <!-- coastline: the first thing the pen does -->
+            <path class="stroke chronicle__coast" style="--draw-delay:0ms" d="M40 150 C120 128 200 168 280 146 C360 124 430 160 510 142 C590 124 660 162 740 140 C820 118 900 158 980 138 C1060 118 1130 156 1210 136 C1290 116 1370 154 1450 134 C1520 117 1570 140 1600 132"/>
+            <path class="stroke chronicle__coast" style="--draw-delay:160ms" d="M1600 544 C1570 536 1520 560 1450 542 C1370 520 1290 560 1210 538 C1130 516 1060 556 980 534 C900 512 820 552 740 530 C660 508 590 548 510 526 C430 504 360 544 280 520 C200 496 120 534 40 512"/>
+
+            <!-- ================= GREENHAVEN ================= -->
+            <g>
+              <path class="stroke stroke--thin" style="--draw-delay:980ms" d="M54 252 q14 -24 28 0 M88 252 q18 -32 36 0 M130 252 q12 -20 24 0 M160 252 q17 -30 34 0 M202 252 q12 -20 24 0 M232 252 q18 -30 36 0"/>
+              <path class="chronicle__hatch wash" style="--wash-delay:1100ms" d="M62 250 l6 -12 M72 250 l6 -14 M98 250 l8 -18 M110 250 l8 -20 M136 250 l5 -11 M170 250 l8 -16 M180 250 l7 -15 M208 250 l5 -10 M242 250 l8 -16 M252 250 l7 -14"/>
+              <path class="stroke stroke--thin" style="--draw-delay:1060ms" d="M70 300 L70 286 M62 286 q8 -20 16 0 Z M262 302 L262 288 M254 288 q8 -20 16 0 Z M108 300 L108 288 M100 288 q8 -18 16 0 Z"/>
+              <path class="chronicle__hatch wash" style="--wash-delay:1160ms" d="M40 330 l16 0 M66 334 l16 0 M96 330 l16 0 M220 332 l16 0 M248 336 l16 0 M40 352 l12 0 M244 356 l12 0"/>
+              <g transform="translate(160 322)">
+                <path class="stroke stroke--thin" style="--draw-delay:1140ms" d="M-28 0 L-28 -30 L-21 -30 L-21 -38 L-14 -38 L-14 -30 L-7 -30 L-7 -36 L7 -36 L7 -30 L14 -30 L14 -38 L21 -38 L21 -30 L28 -30 L28 0 Z"/>
+                <path class="stroke stroke--thin" style="--draw-delay:1220ms" d="M-7 0 L-7 -16 Q0 -24 7 -16 L7 0"/>
+                <path class="stroke stroke--thin" style="--draw-delay:1260ms" d="M21 -38 L21 -56 L40 -50 L21 -45"/>
+                <path class="chronicle__hatch wash" style="--wash-delay:1320ms" d="M-24 -3 L-18 -26 M-16 -3 L-11 -24 M12 -3 L17 -24 M20 -3 L25 -26"/>
+              </g>
+              <path class="chronicle__namebg wash" style="--wash-delay:1300ms" d="M56 352 L266 352 L266 382 L56 382 Z"/>
+              <text class="chronicle__place" x="161" y="375" text-anchor="middle">Greenhaven</text>
+              <text class="chronicle__mapnote" x="161" y="402" text-anchor="middle">never lost</text>
+            </g>
+
+            <!-- ================= DOGEAR DOWNS ================= -->
+            <g>
+              <path class="stroke stroke--thin" style="--draw-delay:1020ms" d="M330 232 L386 232 L330 186 Z M448 262 L506 262 L506 214 Z M356 296 L404 296 L356 262 Z"/>
+              <path class="chronicle__hatch wash" style="--wash-delay:1180ms" d="M340 228 l14 -12 M350 230 l20 -16 M362 230 l18 -14 M458 258 l16 -14 M470 258 l20 -18 M484 258 l18 -16 M364 292 l12 -10 M376 292 l14 -12"/>
+              <path class="stroke stroke--thin" style="--draw-delay:1080ms" d="M312 252 q16 -18 32 0 M400 240 q14 -16 28 0 M516 288 q16 -18 32 0"/>
+              <g transform="translate(424 322) rotate(-8)">
+                <path class="stroke stroke--thin" style="--draw-delay:1200ms" d="M-26 0 L-26 -28 L-19 -28 L-19 -36 L-12 -36 L-12 -28 L12 -28 L12 -36 L19 -36 L19 -28 L26 -28 L26 0 Z"/>
+                <path class="stroke stroke--thin" style="--draw-delay:1260ms" d="M-6 0 L-6 -15 Q0 -22 6 -15 L6 0"/>
+                <path class="stroke stroke--thin" style="--draw-delay:1300ms" d="M-19 -36 L-19 -52 L-36 -46 L-19 -41"/>
+                <path class="chronicle__hatch wash" style="--wash-delay:1360ms" d="M-22 -3 L-17 -24 M-14 -3 L-9 -22 M14 -3 L19 -24 M21 -3 L25 -22"/>
+              </g>
+              <path class="chronicle__namebg wash" style="--wash-delay:1340ms" d="M320 352 L532 352 L532 382 L320 382 Z"/>
+              <text class="chronicle__place" x="426" y="375" text-anchor="middle">Dogear Downs</text>
+              <text class="chronicle__mapnote" x="426" y="402" text-anchor="middle">first taken, nine days</text>
+            </g>
+
+            <!-- ================= CREASEMARCH ================= -->
+            <g>
+              <path class="stroke chronicle__crease" style="--draw-delay:1120ms" d="M668 142 C660 220 676 300 666 372 C658 440 670 480 667 528"/>
+              <path class="stroke stroke--thin chronicle__crease" style="--draw-delay:1220ms" d="M686 140 C678 218 694 298 684 370 C676 438 688 478 685 530"/>
+              <path class="chronicle__hatch wash" style="--wash-delay:1300ms" d="M650 200 l14 4 M646 240 l16 4 M650 286 l14 4 M644 330 l16 4 M648 380 l14 4 M644 424 l16 4 M650 470 l14 4 M690 210 l14 -4 M694 256 l14 -4 M690 302 l14 -4 M694 350 l14 -4 M690 398 l14 -4 M694 446 l14 -4 M690 492 l14 -4"/>
+              <g transform="translate(596 320)">
+                <path class="stroke stroke--thin" style="--draw-delay:1240ms" d="M-22 0 L-22 -26 L-16 -26 L-16 -34 L-9 -34 L-9 -26 L9 -26 L9 -34 L16 -34 L16 -26 L22 -26 L22 0 Z"/>
+                <path class="stroke stroke--thin" style="--draw-delay:1290ms" d="M-5 0 L-5 -14 Q0 -20 5 -14 L5 0"/>
+                <path class="chronicle__hatch wash" style="--wash-delay:1380ms" d="M-18 -3 L-13 -22 M-11 -3 L-6 -22 M12 -3 L17 -22"/>
+              </g>
+              <g transform="translate(730 316)">
+                <path class="stroke stroke--thin chronicle__foe" style="--draw-delay:1300ms" d="M-16 0 L-16 -40 L-9 -40 L-9 -46 L-2 -46 L-2 -40 L9 -40 L9 -46 L16 -46 L16 -40 L16 0 Z"/>
+                <path class="stroke stroke--thin chronicle__foe" style="--draw-delay:1350ms" d="M-5 -60 q6 12 10 14 M5 -60 q-6 12 -10 14 M0 -46 L0 -52"/>
+                <path class="chronicle__hatch wash" style="--wash-delay:1420ms" d="M-12 -4 L-6 -34 M-3 -4 L3 -34 M8 -4 L13 -34"/>
+              </g>
+              <path class="chronicle__namebg wash" style="--wash-delay:1380ms" d="M566 352 L770 352 L770 382 L566 382 Z"/>
+              <text class="chronicle__place" x="668" y="375" text-anchor="middle">Creasemarch</text>
+              <text class="chronicle__mapnote" x="668" y="402" text-anchor="middle">second, twenty-two days</text>
+            </g>
+
+            <!-- ================= SMUDGEWOOD ================= -->
+            <g>
+              <path class="stroke stroke--thin" style="--draw-delay:1160ms" d="M824 268 L824 250 M812 250 q12 -30 24 0 Z M856 274 L856 254 M844 254 q12 -32 24 0 Z"/>
+              <path class="chronicle__hatch wash" style="--wash-delay:1260ms" d="M816 246 l8 -12 M826 248 l8 -14 M848 250 l8 -12 M858 252 l8 -14"/>
+              <path class="stroke stroke--thin chronicle__fade-a" style="--draw-delay:1220ms" d="M892 272 L892 252 M880 252 q12 -30 24 0 Z M928 276 L928 256 M916 256 q12 -30 24 0 Z"/>
+              <path class="chronicle__ghost chronicle__fade-b wash" style="--wash-delay:1340ms" d="M962 278 L962 258 M950 258 q12 -30 24 0 Z M1000 276 L1000 256 M988 256 q12 -28 24 0 Z"/>
+              <path class="chronicle__ghost chronicle__fade-c wash" style="--wash-delay:1400ms" d="M1032 274 L1032 256 M1022 256 q10 -26 20 0 Z"/>
+              <path class="chronicle__smudge wash" style="--wash-delay:1300ms" d="M900 300 q54 -22 112 -8 q44 10 62 -4 q-8 26 -56 30 q-60 6 -118 -18 Z"/>
+              <path class="chronicle__hatch chronicle__fade-b wash" style="--wash-delay:1420ms" d="M912 322 l30 0 M958 318 l26 0 M996 326 l24 0 M930 340 l28 0 M980 344 l22 0 M1012 336 l20 0"/>
+              <g transform="translate(908 324)">
+                <path class="stroke stroke--thin" style="--draw-delay:1280ms" d="M-26 0 L-26 -28 L-19 -28 L-19 -36 L-12 -36 L-12 -28 L0 -28"/>
+                <path class="chronicle__ghost chronicle__fade-b wash" style="--wash-delay:1460ms" d="M0 -28 L12 -28 L12 -36 L19 -36 L19 -28 L26 -28 L26 0 L-26 0"/>
+                <path class="stroke stroke--thin" style="--draw-delay:1330ms" d="M-7 0 L-7 -15 Q0 -22 5 -16"/>
+                <path class="chronicle__hatch wash" style="--wash-delay:1480ms" d="M-22 -3 L-17 -24 M-14 -3 L-9 -22"/>
+              </g>
+              <path class="chronicle__namebg wash" style="--wash-delay:1420ms" d="M826 352 L1026 352 L1026 382 L826 382 Z"/>
+              <text class="chronicle__place" x="926" y="375" text-anchor="middle">Smudgewood</text>
+              <text class="chronicle__mapnote" x="926" y="402" text-anchor="middle">third, sixteen days</text>
+            </g>
+
+            <!-- ================= BLOTMIRE ================= -->
+            <g>
+              <path class="chronicle__blot wash" style="--wash-delay:1200ms" d="M1074 424 q10 -34 48 -40 q30 -5 46 -22 q22 -22 52 -12 q26 8 40 30 q18 28 44 26 q16 -1 18 14 q3 22 -20 32 q-30 12 -44 30 q-18 24 -52 20 q-30 -4 -52 6 q-28 12 -48 -6 q-18 -16 -22 -40 q-3 -18 -10 -38 Z"/>
+              <path class="chronicle__blot wash" style="--wash-delay:1280ms" d="M1276 504 q8 -12 16 0 q6 10 -2 16 q-10 6 -16 -4 q-4 -6 2 -12 Z M1090 486 q6 -10 13 0 q5 8 -2 13 q-8 5 -13 -3 q-3 -5 2 -10 Z M1240 372 q7 -10 14 0 q5 8 -2 12 q-8 5 -13 -2 Z"/>
+              <path class="chronicle__blot wash" style="--wash-delay:1320ms" d="M1140 470 q4 26 -2 40 q-8 -14 -6 -40 Z M1208 478 q4 22 -2 34 q-8 -12 -6 -34 Z"/>
+              <path class="stroke stroke--thin" style="--draw-delay:1360ms" d="M1084 400 l0 -18 M1092 402 l4 -20 M1100 400 l-2 -16 M1288 424 l0 -18 M1296 426 l4 -20"/>
+              <g transform="translate(1128 424)">
+                <path class="stroke stroke--thin" style="--draw-delay:1400ms" d="M-16 0 L-16 -46 L-9 -46 L-9 -54 L-2 -54 L-2 -46 L9 -46 L9 -54 L16 -54 L16 -46 L16 0"/>
+                <path class="chronicle__hatch wash" style="--wash-delay:1500ms" d="M-11 -6 L-6 -40 M-2 -6 L3 -40 M8 -6 L13 -40"/>
+              </g>
+              <g transform="translate(1182 296)">
+                <path class="stroke stroke--thin" style="--draw-delay:1340ms" d="M-26 0 L-26 -28 L-19 -28 L-19 -36 L-12 -36 L-12 -28 L12 -28 L12 -36 L19 -36 L19 -28 L26 -28 L26 0 Z"/>
+                <path class="stroke stroke--thin" style="--draw-delay:1390ms" d="M-6 0 L-6 -15 Q0 -22 6 -15 L6 0"/>
+                <path class="chronicle__hatch wash" style="--wash-delay:1500ms" d="M-22 -3 L-17 -24 M-14 -3 L-9 -22 M14 -3 L19 -24"/>
+              </g>
+              <path class="chronicle__namebg wash" style="--wash-delay:1460ms" d="M1106 310 L1262 310 L1262 340 L1106 340 Z"/>
+              <text class="chronicle__place" x="1184" y="333" text-anchor="middle">Blotmire</text>
+              <text class="chronicle__mapnote" x="1184" y="360" text-anchor="middle">fourth, forty days</text>
+            </g>
+
+            <!-- ================= THE ROACH THRONE ================= -->
+            <g>
+              <path class="chronicle__hill wash" style="--wash-delay:1240ms" d="M1348 336 q64 -96 124 -96 q62 0 128 96 Z"/>
+              <path class="chronicle__hatch wash" style="--wash-delay:1360ms" d="M1380 330 l14 -22 M1400 330 l16 -26 M1422 330 l16 -30 M1446 330 l14 -30 M1490 330 l16 28 M1514 330 l14 24 M1538 330 l14 22 M1562 330 l12 18"/>
+              <g transform="translate(1472 256)">
+                <path class="stroke stroke--thin chronicle__foe" style="--draw-delay:1420ms" d="M-24 0 L-24 -22 L-18 -22 L-18 -64 L-8 -74 L8 -74 L18 -64 L18 -22 L24 -22 L24 0 Z"/>
+                <path class="stroke stroke--thin chronicle__foe" style="--draw-delay:1480ms" d="M-8 -74 q-14 -20 -34 -26 M8 -74 q14 -20 34 -26"/>
+                <path class="stroke stroke--thin chronicle__foe" style="--draw-delay:1520ms" d="M-12 -22 L12 -22 L12 -46 L-12 -46 Z"/>
+                <path class="chronicle__hatch wash" style="--wash-delay:1580ms" d="M-20 -4 L-14 -20 M-6 -4 L0 -20 M8 -4 L14 -20 M-14 -28 L-6 -44 M-2 -28 L6 -44"/>
+              </g>
+              <path class="stroke stroke--thin chronicle__foe" style="--draw-delay:1540ms" d="M1560 372 q12 -12 24 0 q-2 14 -12 14 q-10 0 -12 -14 Z M1566 362 q-6 -12 -14 -16 M1578 362 q6 -12 14 -16 M1560 372 l-12 6 M1584 372 l12 6 M1562 380 l-12 8 M1582 380 l12 8"/>
+              <path class="chronicle__namebg wash" style="--wash-delay:1500ms" d="M1342 352 L1600 352 L1600 382 L1342 382 Z"/>
+              <text class="chronicle__place" x="1471" y="375" text-anchor="middle">The Roach Throne</text>
+              <text class="chronicle__mapnote" x="1471" y="402" text-anchor="middle">last, one morning</text>
+            </g>
+
+            <!-- ------------------------------- the borders, drawn last ---- -->
+            <g>
+              <path class="stroke stroke--thin chronicle__border" style="--draw-delay:420ms" d="M300 145 C292 220 308 300 298 372 C290 440 302 480 299 521"/>
+              <path class="stroke stroke--thin chronicle__border" style="--draw-delay:520ms" d="M545 141 C537 214 553 296 543 368 C536 436 548 478 545 527"/>
+              <path class="stroke stroke--thin chronicle__border" style="--draw-delay:620ms" d="M800 137 C792 210 808 292 798 364 C790 432 802 476 799 529"/>
+              <path class="stroke stroke--thin chronicle__border" style="--draw-delay:720ms" d="M1055 134 C1047 208 1063 290 1053 362 C1045 430 1057 474 1054 535"/>
+              <path class="stroke stroke--thin chronicle__border" style="--draw-delay:820ms" d="M1310 133 C1302 206 1318 288 1308 360 C1300 428 1312 472 1309 539"/>
+            </g>
+
+            <!-- ------------------------------------------- the road east --- -->
+            <path class="chronicle__road wash" style="--wash-delay:1600ms" d="M120 452 l10 8 l-10 8 M196 448 l10 8 l-10 8 M272 452 l10 8 l-10 8 M348 446 l10 8 l-10 8 M424 450 l10 8 l-10 8 M500 444 l10 8 l-10 8 M576 448 l10 8 l-10 8 M652 442 l10 8 l-10 8 M728 446 l10 8 l-10 8 M804 440 l10 8 l-10 8 M880 444 l10 8 l-10 8 M956 438 l10 8 l-10 8 M1032 442 l10 8 l-10 8 M1108 436 l10 8 l-10 8 M1184 440 l10 8 l-10 8 M1260 434 l10 8 l-10 8 M1336 438 l10 8 l-10 8 M1412 432 l10 8 l-10 8"/>
+            <text class="chronicle__road-label" x="742" y="492" text-anchor="middle">the road they went, and the order of it</text>
+
+            <!-- ------------------------------------------- the cartouche --- -->
+            <g>
+              <path class="chronicle__banner wash" style="--wash-delay:700ms" d="M664 38 L1120 38 L1120 104 L664 104 Z"/>
+              <path class="stroke stroke--thin" style="--draw-delay:900ms" d="M664 38 L1120 38 L1120 104 L664 104 Z"/>
+              <path class="stroke stroke--thin" style="--draw-delay:1000ms" d="M664 38 q-30 6 -30 33 q0 27 30 33 q-15 -15 -15 -33 q0 -18 15 -33 M1120 38 q30 6 30 33 q0 27 -30 33 q15 -15 15 -33 q0 -18 -15 -33"/>
+              <text class="chronicle__maptitle" x="892" y="74" text-anchor="middle">The Six Kingdoms of Paper</text>
+              <text class="chronicle__mapsub" x="892" y="96" text-anchor="middle">as the borders stood before the war</text>
+            </g>
+
+            <!-- -------------------------------------------- the compass --- -->
+            <g transform="translate(150 592)">
+              <path class="stroke stroke--thin" style="--draw-delay:1660ms" d="M0 -44 L11 -8 L44 0 L11 8 L0 44 L-11 8 L-44 0 L-11 -8 Z"/>
+              <path class="chronicle__rose wash" style="--wash-delay:1740ms" d="M0 -44 L11 -8 L0 0 Z M44 0 L11 8 L0 0 Z M0 44 L-11 8 L0 0 Z M-44 0 L-11 -8 L0 0 Z"/>
+              <path class="stroke chronicle__hatch" style="--draw-delay:1700ms" d="M22 -22 L6 -6 M22 22 L6 6 M-22 22 L-6 6 M-22 -22 L-6 -6"/>
+              <path class="chronicle__ring wash" style="--wash-delay:1780ms" d="M0 -30 a30 30 0 1 0 0 60 a30 30 0 1 0 0 -60 Z"/>
+              <text class="chronicle__compass-n" x="0" y="-50" text-anchor="middle">N</text>
+              <text class="chronicle__compass" x="54" y="6" text-anchor="middle">E</text>
+              <text class="chronicle__compass" x="0" y="62" text-anchor="middle">S</text>
+              <text class="chronicle__compass" x="-54" y="6" text-anchor="middle">W</text>
+            </g>
+
+            <!-- --------------------------------------- things in the sea --- -->
+            <g>
+              <path class="stroke stroke--thin" style="--draw-delay:1760ms" d="M1218 92 q22 -30 44 0 M1282 92 q22 -30 44 0 M1346 92 q22 -30 44 0"/>
+              <path class="stroke stroke--thin" style="--draw-delay:1820ms" d="M1410 92 q10 -34 40 -40 q28 -6 40 10 q-18 -2 -30 6 q8 2 12 10 q-16 6 -30 0"/>
+              <path class="stroke stroke--thin" style="--draw-delay:1880ms" d="M1490 62 q16 -2 24 6 q-10 8 -24 6 M1514 68 l20 -8 M1514 68 l20 6"/>
+              <path class="chronicle__eye wash" style="--wash-delay:1900ms" d="M1463 52 a3 3 0 1 0 6 0 a3 3 0 1 0 -6 0 Z"/>
+              <path class="chronicle__hatch wash" style="--wash-delay:1900ms" d="M1228 88 l6 -10 M1238 86 l6 -12 M1292 88 l6 -10 M1302 86 l6 -12 M1356 88 l6 -10 M1366 86 l6 -12"/>
+            </g>
+
+            <g>
+              <path class="stroke stroke--thin" style="--draw-delay:1800ms" d="M1044 618 q0 -38 36 -38 q36 0 36 38 Z"/>
+              <path class="stroke stroke--thin" style="--draw-delay:1860ms" d="M1044 612 q-30 6 -40 26 M1054 618 q-26 16 -26 32 M1106 618 q26 16 26 32 M1116 612 q30 6 40 26 M1080 618 q0 22 -14 32 M1080 618 q0 22 14 32"/>
+              <path class="chronicle__eye wash" style="--wash-delay:1920ms" d="M1062 596 a4 4 0 1 0 8 0 a4 4 0 1 0 -8 0 Z M1090 596 a4 4 0 1 0 8 0 a4 4 0 1 0 -8 0 Z"/>
+              <path class="chronicle__hatch wash" style="--wash-delay:1920ms" d="M1052 610 l8 -12 M1064 606 l8 -12 M1092 606 l8 -12 M1104 610 l8 -12"/>
+            </g>
+
+            <g>
+              <path class="stroke stroke--thin" style="--draw-delay:1840ms" d="M560 606 q26 -18 56 -2 q-26 20 -56 2 Z M616 604 l14 -8 l0 16 Z M572 596 q4 -14 14 -18 M586 578 q-8 -8 -2 -14"/>
+              <path class="chronicle__hatch wash" style="--wash-delay:1940ms" d="M576 604 l6 -6 M588 606 l6 -8 M600 604 l6 -6"/>
+            </g>
+
+            <g>
+              <path class="stroke stroke--thin" style="--draw-delay:1900ms" d="M272 88 L330 88 L320 104 L282 104 Z M300 88 L300 44 M300 48 q24 10 24 20 l-24 6 Z M300 48 q-22 10 -22 20 l22 6 Z"/>
+              <path class="chronicle__hatch wash" style="--wash-delay:1960ms" d="M286 100 l6 -8 M298 100 l6 -8 M310 100 l6 -8"/>
+            </g>
+
+            <!-- the burnt corner -->
+            <path class="chronicle__burn wash" style="--wash-delay:1700ms" d="M1512 640 q28 -30 68 -34 q34 -4 52 -20 l0 54 Z"/>
+            <text class="chronicle__burnnote" x="1462" y="622" text-anchor="end">here the leaf is burnt</text>
+
+            <!-- the ruled frame, last of all -->
+            <path class="stroke stroke--thin chronicle__frame" style="--draw-delay:260ms" d="M20 20 L1620 20 L1620 640 L20 640 Z"/>
+            <path class="chronicle__hatch wash" style="--wash-delay:800ms" d="M28 28 L1612 28 L1612 632 L28 632 Z"/>
+          </svg>
+        </div>
+      </div>
+
+      <p class="chronicle__hint" aria-hidden="true">
+        <span class="chronicle__hint-w">west</span>
+        <svg class="chronicle__hint-arrow" viewBox="0 0 64 12" aria-hidden="true"><path d="M2 6 L58 6 M50 1 L60 6 L50 11"/></svg>
+        <span class="chronicle__hint-w">east</span>
+        <span>the leaf is wider than the page &mdash; draw it sideways</span>
+      </p>
+
+      <figcaption class="chronicle__mapcap">
+        Copied from the older leaf, which is in two pieces. The borders are as they stood before the war.
+        The mire is drawn smaller than it was; the man who drew it had not been there.
+      </figcaption>
+    </figure>
+
+    <!-- ==================================================================
+         THE INDEX — a table of contents in the front of the book
+         ================================================================== -->
+    <nav class="chronicle__index" aria-labelledby="chronicle-index-title" data-reveal>
+      <h3 class="chronicle__index-title" id="chronicle-index-title">The contents of this book</h3>
+      <p class="chronicle__index-say">Six leaves, in the order they were taken. Each marks itself when you reach the foot of it.</p>
+
+      <ol class="chronicle__toc">
+        <li class="chronicle__toc-item">
+          <a class="chronicle__toc-link" href="#chapter-i" data-chronicle-toc="chapter-i">
+            <span class="chronicle__toc-num" aria-hidden="true">I</span>
+            <span class="chronicle__toc-name">Greenhaven<span class="chronicle__toc-gloss">held; where it began</span></span>
+            <span class="chronicle__toc-lead" aria-hidden="true"></span>
+            <span class="chronicle__toc-folio" aria-hidden="true">fol.&nbsp;iij</span>
+            <svg class="chronicle__toc-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5 L12 21.5 M5 8 L19 8 M7.5 14.5 L16.5 14.5"/></svg>
+            <span class="chronicle__toc-state sr-only">not yet marked</span>
+          </a>
+        </li>
+        <li class="chronicle__toc-item">
+          <a class="chronicle__toc-link" href="#chapter-ii" data-chronicle-toc="chapter-ii">
+            <span class="chronicle__toc-num" aria-hidden="true">II</span>
+            <span class="chronicle__toc-name">Dogear Downs<span class="chronicle__toc-gloss">the first taken</span></span>
+            <span class="chronicle__toc-lead" aria-hidden="true"></span>
+            <span class="chronicle__toc-folio" aria-hidden="true">fol.&nbsp;vij</span>
+            <svg class="chronicle__toc-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5 L12 21.5 M5 8 L19 8 M7.5 14.5 L16.5 14.5"/></svg>
+            <span class="chronicle__toc-state sr-only">not yet marked</span>
+          </a>
+        </li>
+        <li class="chronicle__toc-item">
+          <a class="chronicle__toc-link" href="#chapter-iii" data-chronicle-toc="chapter-iii">
+            <span class="chronicle__toc-num" aria-hidden="true">III</span>
+            <span class="chronicle__toc-name">Creasemarch<span class="chronicle__toc-gloss">the fold was the front</span></span>
+            <span class="chronicle__toc-lead" aria-hidden="true"></span>
+            <span class="chronicle__toc-folio" aria-hidden="true">fol.&nbsp;xj</span>
+            <svg class="chronicle__toc-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5 L12 21.5 M5 8 L19 8 M7.5 14.5 L16.5 14.5"/></svg>
+            <span class="chronicle__toc-state sr-only">not yet marked</span>
+          </a>
+        </li>
+        <li class="chronicle__toc-item">
+          <a class="chronicle__toc-link" href="#chapter-iv" data-chronicle-toc="chapter-iv">
+            <span class="chronicle__toc-num" aria-hidden="true">IV</span>
+            <span class="chronicle__toc-name">Smudgewood<span class="chronicle__toc-gloss">nothing holds its edge</span></span>
+            <span class="chronicle__toc-lead" aria-hidden="true"></span>
+            <span class="chronicle__toc-folio" aria-hidden="true">fol.&nbsp;xvj</span>
+            <svg class="chronicle__toc-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5 L12 21.5 M5 8 L19 8 M7.5 14.5 L16.5 14.5"/></svg>
+            <span class="chronicle__toc-state sr-only">not yet marked</span>
+          </a>
+        </li>
+        <li class="chronicle__toc-item">
+          <a class="chronicle__toc-link" href="#chapter-v" data-chronicle-toc="chapter-v">
+            <span class="chronicle__toc-num" aria-hidden="true">V</span>
+            <span class="chronicle__toc-name">Blotmire<span class="chronicle__toc-gloss">the worst ground of the war</span></span>
+            <span class="chronicle__toc-lead" aria-hidden="true"></span>
+            <span class="chronicle__toc-folio" aria-hidden="true">fol.&nbsp;xxij</span>
+            <svg class="chronicle__toc-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5 L12 21.5 M5 8 L19 8 M7.5 14.5 L16.5 14.5"/></svg>
+            <span class="chronicle__toc-state sr-only">not yet marked</span>
+          </a>
+        </li>
+        <li class="chronicle__toc-item">
+          <a class="chronicle__toc-link" href="#chapter-vi" data-chronicle-toc="chapter-vi">
+            <span class="chronicle__toc-num" aria-hidden="true">VI</span>
+            <span class="chronicle__toc-name">The Roach Throne<span class="chronicle__toc-gloss">where their pencil was broken</span></span>
+            <span class="chronicle__toc-lead" aria-hidden="true"></span>
+            <span class="chronicle__toc-folio" aria-hidden="true">fol.&nbsp;xxviij</span>
+            <svg class="chronicle__toc-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5 L12 21.5 M5 8 L19 8 M7.5 14.5 L16.5 14.5"/></svg>
+            <span class="chronicle__toc-state sr-only">not yet marked</span>
+          </a>
+        </li>
+      </ol>
+
+      <p class="chronicle__tally">
+        <span class="chronicle__tally-said" data-chronicle-tally aria-live="polite">None of the six leaves marked.</span>
+        <button class="chronicle__clear" type="button" data-chronicle-clear>Erase the marks</button>
+      </p>
+    </nav>
+
+    <!-- ==================================================================
+         THE SIX CHAPTERS
+         ================================================================== -->
+    <div class="chronicle__book">
+
+      <!-- ---------------------------------------------------- I. GREENHAVEN -->
+      <article class="chronicle__chapter" id="chapter-i" tabindex="-1" aria-labelledby="chapter-i-h">
+        <div class="chronicle__margin" aria-hidden="true">
+          <span class="chronicle__margin-folio">fol. iij</span>
+        </div>
+
+        <div class="chronicle__body">
+          <header class="chronicle__head" data-reveal>
+            <h3 id="chapter-i-h">
+              <span class="chronicle__numeral">I</span>
+              <span class="chronicle__kingdom">Greenhaven</span>
+            </h3>
+            <p class="chronicle__standing">Held from the first day to the last. Where the pencil was found.</p>
+          </header>
+
+          <div class="chronicle__cols">
+            <div class="chronicle__text" data-reveal>
+              <p class="chronicle__lead chronicle__lead--gold">Greenhaven was never taken, and so there is little to tell of it as a battlefield and a good deal to tell of it as a place. It was ruled country in the old sense: the fields laid out in straight lines, north to south, and a man knew his own furrow from his neighbour's by the way the line wobbled. The people of it were paper. They were thin by the end of winter, they burned easily, and they were &mdash; by every account that has come down to us &mdash; patient.</p>
+
+              <p>The pencil was found in the third furrow of the east field by Iries, who was nineteen and not otherwise remarkable. What it did was learned within the hour. Whatever is drawn and then named comes alive, and the name is the whole of the wish: he drew a line, wrote <em>wall</em> under it, and it stood up, and it was a wall. Before that month was out Greenhaven had hedges that mended themselves overnight, a plough-horse with six legs, because more legs run faster, and a <em>doctor</em> drawn over three evenings, coat and hands and the lines of the face, who walked house to house through the fever of that spring, put down eleven cases and lost none of them. He was the first thing Iries made slowly, and the village noticed that it mattered.</p>
+
+              <p>They also learned, by accident, the law that decided the whole war. A boy carried a drawn goose east over the line into Dogear Downs and it stopped being a goose. It did not die; it lay in the road and was paper, and the ink on it had not moved at all. A drawing lives only on ground its maker holds. Everything that follows in this book is men working around that one sentence.</p>
+            </div>
+
+            <figure class="chronicle__cut" data-draw data-reveal>
+              <svg class="chronicle__cut-svg" viewBox="0 0 340 260" role="img" aria-labelledby="chronicle-cut1-t">
+                <title id="chronicle-cut1-t">A woodcut: a ploughed field with the pencil standing upright in the third furrow and a kneeling figure reaching for it</title>
+                <path class="chronicle__sky wash" style="--wash-delay:500ms" d="M10 12 L330 12 L330 104 L10 104 Z"/>
+                <path class="chronicle__hatch wash" style="--wash-delay:700ms" d="M26 34 q14 -8 30 -2 q16 -7 28 2 M38 46 q16 -6 30 0 M252 28 q16 -8 30 -2 q14 -6 24 2 M264 40 q14 -6 26 0 M140 26 q14 -6 26 0"/>
+                <path class="chronicle__soil wash" style="--wash-delay:560ms" d="M10 104 L330 104 L330 250 L10 250 Z"/>
+                <path class="stroke" style="--draw-delay:0ms" d="M10 104 L330 104"/>
+                <path class="stroke stroke--thin" style="--draw-delay:180ms" d="M40 104 L40 82 L60 66 L80 82 L80 104 M54 104 L54 88 L66 88 L66 104 M60 66 L60 56"/>
+                <path class="chronicle__hatch wash" style="--wash-delay:760ms" d="M44 100 l8 -14 M70 100 l8 -14 M44 84 l10 -10"/>
+                <path class="stroke stroke--thin" style="--draw-delay:280ms" d="M96 104 q10 -12 20 0 q10 -12 20 0 q10 -12 20 0 q10 -12 20 0 q10 -12 20 0"/>
+                <path class="stroke stroke--thin" style="--draw-delay:340ms" d="M264 104 L264 80 M246 80 q-4 -22 18 -24 q22 2 18 24 q-18 7 -36 0 Z M304 104 L304 88 M292 88 q-2 -16 12 -17 q14 1 12 17 q-12 5 -24 0 Z"/>
+                <path class="chronicle__hatch wash" style="--wash-delay:800ms" d="M252 74 l8 -12 M264 76 l8 -14 M276 74 l6 -12 M296 84 l6 -10 M306 84 l6 -10"/>
+                <path class="stroke stroke--thin" style="--draw-delay:420ms" d="M0 256 L150 106 M58 256 L164 106 M118 256 L176 106 M182 256 L188 106 M246 256 L202 106 M306 256 L214 106"/>
+                <path class="chronicle__hatch wash" style="--wash-delay:820ms" d="M40 150 q60 10 120 0 M22 190 q80 14 160 0 M14 232 q90 16 180 0 M210 152 q40 8 80 0 M226 194 q46 10 92 0 M56 168 q6 -5 13 0 M32 212 q6 -5 13 0 M150 224 q6 -5 13 0 M250 176 q6 -5 13 0 M286 220 q6 -5 13 0"/>
+                <path class="chronicle__pencilbody wash" style="--wash-delay:880ms" d="M190 198 L190 136 L200 118 L210 136 L210 198 Z"/>
+                <path class="stroke" style="--draw-delay:620ms" d="M190 198 L190 136 L200 118 L210 136 L210 198 Z"/>
+                <path class="stroke stroke--thin" style="--draw-delay:760ms" d="M190 136 L210 136 M190 156 L210 156 M200 118 L200 130"/>
+                <path class="stroke stroke--thin" style="--draw-delay:860ms" d="M200 108 L200 96 M184 112 L176 103 M216 112 L224 103 M176 124 L164 120 M224 124 L236 120"/>
+                <path class="stroke" style="--draw-delay:940ms" d="M95 196 a9 9 0 1 1 18 0 a9 9 0 1 1 -18 0 M105 205 q-15 10 -13 28 q15 6 31 0 q2 -18 -10 -28 M120 216 q29 -9 53 -21 M93 233 q-17 4 -19 14 l36 0"/>
+                <path class="stroke stroke--thin" style="--draw-delay:1020ms" d="M92 192 q12 -11 26 0"/>
+                <path class="chronicle__hatch wash" style="--wash-delay:960ms" d="M100 214 l6 -12 M110 216 l6 -12 M96 230 l8 -10 M108 232 l8 -10"/>
+                <path class="stroke stroke--thin" style="--draw-delay:1060ms" d="M244 198 L244 174 L250 174 L250 168 L256 168 L256 174 L268 174 L268 168 L274 168 L274 174 L280 174 L280 198 Z"/>
+                <path class="chronicle__hatch wash" style="--wash-delay:1080ms" d="M248 194 l6 -16 M258 194 l6 -16 M268 194 l6 -16"/>
+              </svg>
+              <figcaption>The third furrow of the east field. The kneeling figure is a later addition; the older leaf has the pencil standing in the ground and nobody near it.</figcaption>
+            </figure>
+          </div>
+
+          <p class="chronicle__rubric"><span class="chronicle__pilcrow" aria-hidden="true">&#182;</span> Greenhaven never fell. It is the only leaf in this book with no roll of the dead at the foot of it.</p>
+
+          <aside class="chronicle__note"><span class="chronicle__note-mark" aria-hidden="true">Nota</span> The furrow is still shown to visitors. It is the wrong furrow.</aside>
+
+          <p class="chronicle__foot"><span>Greenhaven</span><span class="chronicle__foot-folio">fol. iij</span></p>
+        </div>
+      </article>
+
+      <!-- -------------------------------------------------- II. DOGEAR DOWNS -->
+      <article class="chronicle__chapter" id="chapter-ii" tabindex="-1" aria-labelledby="chapter-ii-h">
+        <div class="chronicle__margin" aria-hidden="true">
+          <span class="chronicle__margin-folio">fol. vij</span>
+        </div>
+
+        <div class="chronicle__body">
+          <header class="chronicle__head" data-reveal>
+            <h3 id="chapter-ii-h">
+              <span class="chronicle__numeral">II</span>
+              <span class="chronicle__kingdom">Dogear Downs</span>
+            </h3>
+            <p class="chronicle__standing">The first taken. Nine days, and the first crossing of a border.</p>
+          </header>
+
+          <div class="chronicle__cols">
+            <div class="chronicle__text" data-reveal>
+              <p class="chronicle__lead">Dogear Downs is folded country. It was always somewhat folded &mdash; the downs run in long soft creases and the corners of the fields lift in wet weather &mdash; but the roaches worked it. They went along the border turning the corners down, one after another, a hand's breadth at a time, and where a corner has been turned down the ground beneath it is not ground any more. It is the back of the page.</p>
+
+              <p>That made the border a trap rather than a line. A column crossing at any speed put its foot on a flap; the flap lifted; the column went over onto the reverse, where nothing is drawn and nothing grows. Four hundred of the drawn went that way in the first week. They had been made in Greenhaven and they had left it, so they were paper before they landed, and they did not get up. Nor could Iries simply draw a bridge: a bridge drawn in Greenhaven is alive in Greenhaven and stops dead at the line.</p>
+
+              <p>What he did instead was to draw a wall on his own ground &mdash; flat on its back, the longest thing he had made, sixty yards of it &mdash; and then push it over the border. The far half went dead as it crossed, exactly as the goose had, and dead paper lies flat and takes a man's weight. They crossed Dogear on a wall that had stopped being a wall. The archers never crossed at all; they stood in Greenhaven and shot, because an arrow is not alive. An arrow is only an arrow, and it goes where it is sent. The keep fell on the ninth day, and the moment it fell the ground was his, and the pencil worked there, and after that it was quick.</p>
+            </div>
+
+            <figure class="chronicle__cut" data-draw data-reveal>
+              <svg class="chronicle__cut-svg" viewBox="0 0 340 260" role="img" aria-labelledby="chronicle-cut2-t">
+                <title id="chronicle-cut2-t">A woodcut: a ruled plain whose corners have been folded down into flaps, a keep tilting into one of them</title>
+                <path class="chronicle__plain wash" style="--wash-delay:520ms" d="M34 86 L306 86 L332 244 L8 244 Z"/>
+                <path class="stroke" style="--draw-delay:0ms" d="M34 86 L306 86 L332 244 L8 244 Z"/>
+                <path class="chronicle__hatch wash" style="--wash-delay:700ms" d="M78 86 L56 244 M122 86 L110 244 M170 86 L170 244 M218 86 L230 244 M262 86 L288 244 M26 134 L314 134 M20 176 L322 176 M14 212 L328 212"/>
+                <path class="chronicle__flap wash" style="--wash-delay:620ms" d="M332 244 L236 244 L332 148 Z"/>
+                <path class="stroke" style="--draw-delay:240ms" d="M236 244 L332 148"/>
+                <path class="stroke stroke--thin" style="--draw-delay:360ms" d="M332 244 L236 244 M332 148 L332 244"/>
+                <path class="chronicle__hatch wash" style="--wash-delay:780ms" d="M252 240 l16 -16 M270 240 l22 -22 M288 240 l26 -26 M306 240 l24 -24 M246 232 l10 -10 M262 226 l14 -14 M280 222 l18 -18 M300 218 l20 -20"/>
+                <path class="chronicle__flap wash" style="--wash-delay:660ms" d="M306 86 L242 86 L306 130 Z"/>
+                <path class="stroke stroke--thin" style="--draw-delay:300ms" d="M242 86 L306 130 M306 86 L306 130 M242 86 L306 86"/>
+                <path class="chronicle__hatch wash" style="--wash-delay:820ms" d="M254 92 l16 12 M268 92 l18 13 M284 92 l16 11 M262 102 l12 9 M276 104 l14 10"/>
+                <path class="chronicle__flap wash" style="--wash-delay:700ms" d="M180 244 L118 244 L152 196 Z"/>
+                <path class="stroke stroke--thin" style="--draw-delay:400ms" d="M118 244 L152 196 L180 244"/>
+                <path class="chronicle__hatch wash" style="--wash-delay:860ms" d="M130 240 l14 -20 M144 240 l12 -18 M158 240 l10 -14 M170 240 l6 -8"/>
+                <g transform="translate(80 158) rotate(-13)">
+                  <path class="chronicle__keep wash" style="--wash-delay:740ms" d="M-28 0 L-28 -34 L-21 -34 L-21 -44 L-13 -44 L-13 -34 L13 -34 L13 -44 L21 -44 L21 -34 L28 -34 L28 0 Z"/>
+                  <path class="stroke" style="--draw-delay:460ms" d="M-28 0 L-28 -34 L-21 -34 L-21 -44 L-13 -44 L-13 -34 L13 -34 L13 -44 L21 -44 L21 -34 L28 -34 L28 0 Z"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:600ms" d="M-8 0 L-8 -17 Q0 -26 8 -17 L8 0 M21 -44 L21 -64 L42 -56 L21 -50"/>
+                  <path class="chronicle__hatch wash" style="--wash-delay:900ms" d="M-24 -4 L-18 -28 M-16 -4 L-10 -28 M15 -4 L21 -28 M23 -4 L27 -26"/>
+                </g>
+                <path class="stroke stroke--thin" style="--draw-delay:660ms" d="M150 206 l0 -9 M146 203 l8 0 M150 206 l-3 6 M150 206 l3 6 M172 200 l0 -9 M168 197 l8 0 M172 200 l-3 6 M172 200 l3 6 M194 194 l0 -9 M190 191 l8 0 M194 194 l-3 6 M194 194 l3 6 M216 188 l0 -9 M212 185 l8 0 M216 188 l-3 6 M216 188 l3 6"/>
+                <path class="stroke stroke--thin" style="--draw-delay:760ms" d="M264 206 a7 7 0 1 1 14 0 a7 7 0 1 1 -14 0 M272 213 l-9 19 M267 220 l-15 -5 M276 219 l11 9 M263 232 l-11 9 M263 232 l4 14"/>
+                <path class="chronicle__hatch wash" style="--wash-delay:940ms" d="M24 232 q18 -6 34 2 M22 224 q20 -8 38 0 M40 196 q16 -6 30 2"/>
+              </svg>
+              <figcaption>The turned corners, and the column walking east between them. The figure going over the lip of the far flap is a carter, named in the roll as Abel Hask.</figcaption>
+            </figure>
+          </div>
+
+          <p class="chronicle__rubric"><span class="chronicle__pilcrow" aria-hidden="true">&#182;</span> Nine days. Four hundred and eleven of the drawn. Of the paper-born, eleven, of whom four were carters.</p>
+
+          <aside class="chronicle__note"><span class="chronicle__note-mark" aria-hidden="true">Nota</span> Here the first hand ends and a smaller hand begins.</aside>
+
+          <p class="chronicle__foot"><span>Dogear Downs</span><span class="chronicle__foot-folio">fol. vij</span></p>
+        </div>
+      </article>
+
+      <!-- --------------------------------------------------- III. CREASEMARCH -->
+      <article class="chronicle__chapter" id="chapter-iii" tabindex="-1" aria-labelledby="chapter-iii-h">
+        <div class="chronicle__margin" aria-hidden="true">
+          <span class="chronicle__margin-folio">fol. xj</span>
+        </div>
+
+        <div class="chronicle__body">
+          <header class="chronicle__head" data-reveal>
+            <h3 id="chapter-iii-h">
+              <span class="chronicle__numeral">III</span>
+              <span class="chronicle__kingdom">Creasemarch</span>
+            </h3>
+            <p class="chronicle__standing">Fought along a fold-line, north to south. Twenty-two days.</p>
+          </header>
+
+          <div class="chronicle__cols">
+            <div class="chronicle__text" data-reveal>
+              <p class="chronicle__lead">Creasemarch has a fold through the middle of it, north to south, old and deep, and the war there was fought along that fold and nowhere else. A crease does one particular thing to a drawn creature: it bends it. Anything with a closed loop in its shape &mdash; a shield, a ring of mail, a barrel, a good helmet &mdash; cracks when it is carried over a crease, since a closed loop is armour precisely because it will not give, and a fold asks it to give. Our heaviest companies could not cross. Our lightest could, and our lightest died.</p>
+
+              <p>The western half of the kingdom came to us in four days and after that we stopped. The roaches knew the crease better than we did and had built on both lips: towers on their side, towers on ours before we took them, each with a scribble beneath it that the scouts read as <em>tower</em> and nothing further. They did not need to hold the middle of that kingdom. The middle held itself.</p>
+
+              <p>So Iries drew a dragon. He spent a night and most of the following day on it, which was unlike him; the shape decides the strength, detail makes a masterpiece, and he put four hours into one wing alone. The camp record says he did not speak while he drew. The men called her the Long Wing; written under her, in the pencil's own hand, was <em>dragon</em>, and nothing else. She never crossed the crease once. She did not have to. She went up over our own lip and breathed across it, and fire, like an arrow, is not alive and does not care whose ground it falls on. The far towers burned from the lip inward for six days. On the twenty-second Iries put a <em>bomb</em> into the fold itself &mdash; spiked all over, because spikes are damage &mdash; and let the fold carry it south the way a fold carries anything laid in it. The trench that had been the front became the thing that broke the front.</p>
+            </div>
+
+            <figure class="chronicle__cut" data-draw data-reveal>
+              <svg class="chronicle__cut-svg" viewBox="0 0 340 260" role="img" aria-labelledby="chronicle-cut3-t">
+                <title id="chronicle-cut3-t">A woodcut: the fold-line trench running down the page, spears on the near lip, roach towers on the far one, and the Long Wing stooping with fire across it</title>
+                <path class="chronicle__turf wash" style="--wash-delay:520ms" d="M10 180 L140 170 L118 254 L10 254 Z M174 172 L330 184 L330 254 L206 254 Z"/>
+                <path class="chronicle__creaseface wash" style="--wash-delay:600ms" d="M140 170 L174 172 L206 254 L118 254 Z"/>
+                <path class="stroke" style="--draw-delay:0ms" d="M140 170 L118 254 M174 172 L206 254"/>
+                <path class="stroke stroke--thin" style="--draw-delay:240ms" d="M157 176 q-3 34 -6 50 q-3 16 -2 28"/>
+                <path class="chronicle__hatch wash" style="--wash-delay:720ms" d="M136 190 l11 5 M133 212 l11 5 M130 234 l11 5 M177 192 l11 -4 M184 214 l11 -4 M191 236 l11 -4"/>
+                <path class="stroke" style="--draw-delay:160ms" d="M10 180 L140 170 M174 172 L330 184"/>
+                <path class="chronicle__hatch wash" style="--wash-delay:760ms" d="M20 192 l16 -3 M46 190 l16 -3 M72 188 l16 -3 M98 186 l16 -3 M28 212 l20 -3 M78 208 l20 -3 M220 198 l18 2 M258 202 l18 2 M296 206 l18 2 M228 224 l20 2 M288 228 l20 2"/>
+                <path class="stroke stroke--thin" style="--draw-delay:320ms" d="M24 179 l6 -22 M40 178 l6 -22 M56 177 l6 -22 M72 176 l6 -22 M88 175 l6 -22 M104 174 l6 -22"/>
+                <path class="chronicle__hatch wash" style="--wash-delay:820ms" d="M20 180 q6 -9 12 0 M36 179 q6 -9 12 0 M52 178 q6 -9 12 0 M68 177 q6 -9 12 0 M84 176 q6 -9 12 0 M100 175 q6 -9 12 0"/>
+
+                <g transform="translate(248 178)">
+                  <path class="chronicle__foe-fill wash" style="--wash-delay:680ms" d="M-16 0 L-16 -40 L-10 -40 L-10 -47 L-4 -47 L-4 -40 L4 -40 L4 -47 L10 -47 L10 -40 L16 -40 L16 0 Z"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:420ms" d="M-16 0 L-16 -40 L-10 -40 L-10 -47 L-4 -47 L-4 -40 L4 -40 L4 -47 L10 -47 L10 -40 L16 -40 L16 0 Z"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:520ms" d="M-6 -60 q6 10 8 12 M6 -60 q-6 10 -8 12 M-5 -28 L5 -28 L5 -17 L-5 -17 Z"/>
+                  <path class="chronicle__hatch wash" style="--wash-delay:880ms" d="M-12 -4 L-8 -34 M-2 -4 L2 -34 M8 -4 L12 -34"/>
+                </g>
+                <g transform="translate(302 183)">
+                  <path class="stroke stroke--thin" style="--draw-delay:480ms" d="M-12 0 L-12 -30 L-7 -30 L-7 -36 L-2 -36 L-2 -30 L7 -30 L7 -36 L12 -36 L12 -30 L12 0 Z"/>
+                  <path class="chronicle__hatch wash" style="--wash-delay:920ms" d="M-8 -4 L-4 -26 M1 -4 L5 -26"/>
+                </g>
+
+                <g>
+                  <path class="chronicle__wingfill wash" style="--wash-delay:600ms" d="M124 56 L80 20 L58 4 Q48 20 54 32 Q64 46 78 52 Q102 58 118 62 Z"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:480ms" d="M124 56 L80 20 L58 4 Q48 20 54 32 Q64 46 78 52 Q102 58 118 62 Z M80 20 L54 32 M80 20 L78 52"/>
+
+                  <path class="chronicle__bodyfill wash" style="--wash-delay:700ms" d="M76 92 q-4 -22 20 -30 q26 -10 50 2 q22 10 18 28 q-4 18 -30 22 q-32 5 -50 -6 q-10 -6 -8 -16 Z"/>
+                  <path class="stroke" style="--draw-delay:560ms" d="M76 92 q-4 -22 20 -30 q26 -10 50 2 q22 10 18 28 q-4 18 -30 22 q-32 5 -50 -6 q-10 -6 -8 -16 Z"/>
+
+                  <path class="stroke" style="--draw-delay:640ms" d="M158 74 q26 -2 38 14 q8 11 8 22 M162 96 q20 4 28 18"/>
+                  <path class="stroke" style="--draw-delay:720ms" d="M196 106 q10 -8 18 0 q4 10 -2 16 q-12 4 -18 -4 q-4 -6 2 -12 Z M204 110 q16 -2 26 8 q4 4 -2 6 l-16 2 M206 124 q14 4 24 2 q-6 8 -18 8 q-8 0 -10 -6"/>
+                  <path class="chronicle__eye wash" style="--wash-delay:860ms" d="M202.6 110 a2.4 2.4 0 1 0 4.8 0 a2.4 2.4 0 1 0 -4.8 0 Z"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:780ms" d="M198 102 l-10 -12 M206 100 l-3 -14 M214 120 l2 5 M220 120 l1 5 M226 120 l1 4"/>
+
+                  <path class="chronicle__wingfill wash" style="--wash-delay:660ms" d="M110 62 L44 30 L16 14 Q0 28 10 44 Q6 62 22 74 Q30 90 52 92 Q72 96 96 86 Z"/>
+                  <path class="stroke" style="--draw-delay:520ms" d="M110 62 L44 30 L16 14 Q0 28 10 44 Q6 62 22 74 Q30 90 52 92 Q72 96 96 86 Z"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:700ms" d="M44 30 L10 44 M44 30 L22 74 M44 30 L52 92"/>
+
+                  <path class="stroke" style="--draw-delay:820ms" d="M78 98 q-24 14 -32 32 q-4 9 -12 12 M88 106 q-20 14 -26 30 q-4 9 -10 12 M34 142 l-12 -4 M34 142 l-1 12"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:860ms" d="M62 114 l-7 -4 M52 126 l-8 -3 M142 112 q2 14 -6 20 M134 134 l-8 4 M134 134 l0 7 M134 134 l7 5 M98 114 q-4 12 -12 16 M84 132 l-8 3 M84 132 l1 7"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:900ms" d="M88 62 l3 -10 M104 56 l2 -11 M120 54 l2 -11 M136 56 l3 -10 M150 62 l4 -9"/>
+                  <path class="chronicle__hatch wash" style="--wash-delay:940ms" d="M92 78 l8 -7 M104 74 l8 -7 M118 72 l8 -7 M132 74 l8 -7 M88 98 l7 -7 M100 104 l7 -7 M112 106 l7 -7 M124 104 l7 -7 M136 100 l7 -7"/>
+
+                  <path class="chronicle__fire wash" style="--wash-delay:1000ms" d="M228 118 L262 130 L250 138 L288 152 L274 158 L308 176 L294 180 L328 198 L286 190 L258 172 L236 152 L224 134 Z"/>
+                  <path class="chronicle__fire-core wash" style="--wash-delay:1080ms" d="M232 124 L256 136 L248 142 L278 156 L268 160 L298 178 L268 170 L244 152 L230 136 Z"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:1020ms" d="M244 132 q16 8 26 18 M240 144 q16 6 26 16 M266 154 q14 8 22 18"/>
+                </g>
+              </svg>
+              <figcaption>The Long Wing over the fold on the sixteenth day. The towers on the far lip are drawn as the scouts reported them, which is to say too neatly.</figcaption>
+            </figure>
+          </div>
+
+          <p class="chronicle__rubric"><span class="chronicle__pilcrow" aria-hidden="true">&#182;</span> Twenty-two days. Two hundred and six of the drawn. Of the paper-born, thirty. The crease is still there; it is the road now.</p>
+
+          <aside class="chronicle__note"><span class="chronicle__note-mark" aria-hidden="true">Nota</span> Of the Long Wing there is more in the fourth book, and most of it is wrong.</aside>
+
+          <p class="chronicle__foot"><span>Creasemarch</span><span class="chronicle__foot-folio">fol. xj</span></p>
+        </div>
+      </article>
+
+      <!-- ---------------------------------------------------- IV. SMUDGEWOOD -->
+      <article class="chronicle__chapter" id="chapter-iv" tabindex="-1" aria-labelledby="chapter-iv-h">
+        <div class="chronicle__margin" aria-hidden="true">
+          <span class="chronicle__margin-folio">fol. xvj</span>
+        </div>
+
+        <div class="chronicle__body">
+          <header class="chronicle__head" data-reveal>
+            <h3 id="chapter-iv-h">
+              <span class="chronicle__numeral">IV</span>
+              <span class="chronicle__kingdom">Smudgewood</span>
+            </h3>
+            <p class="chronicle__standing">Where nothing holds its edge. Sixteen days, and no roll that can be read.</p>
+          </header>
+
+          <div class="chronicle__cols">
+            <div class="chronicle__text" data-reveal>
+              <p class="chronicle__lead">In Smudgewood nothing holds its edge. A line drawn there is soft within the hour and gone by the second day, and since the shape decides the strength, a thing that loses its shape loses what it was for. The roaches did not fight us at all for the first eight days. They waited. Every masterpiece we had walked in from Creasemarch came apart by itself: the good armour blurred until the closed loops opened, the spears went round at the point, and the Long Wing was grounded, because a wing gone soft will not hold air.</p>
+
+              <p>Iries changed what the army drew. Nothing fine. Blunt, thick, stupid shapes, drawn fast and drawn again. The pencil never left his hand &mdash; there was only ever the one, and one man to hold it &mdash; but a shape already named can be kept in shape by any hand with charcoal, and the redrawing companies walked the line all day going back over the outlines of their own men. A man who had been gone over twice by noon counted himself lucky. And Iries had found the thing that saved the campaign, which is that a smudge keeps its name. An archer with no face is still an archer. A wall that has gone to fog is still, in law and in fact, a wall. So he stopped drawing one good wall and drew nine hundred bad ones, one behind another, and let the wood eat them at its own pace.</p>
+
+              <p>The roaches answered with erasers. They drew them with a great many legs, because more legs is faster, and sent them at our lines in the dark; where an eraser had been there was nothing at all &mdash; no body, no mark, no name to put in the roll. Iries beat them with cake. He drew one the size of a barn on the last yard of wood we held, named it, and left the line in front of it open. Cake calls a roach the way nothing else in the world does. They came past their own erasers to get at it. The erasers stopped where they stood and did not move again; an eraser with nothing behind it does not know where to go.</p>
+            </div>
+
+            <figure class="chronicle__cut" data-draw data-reveal>
+              <svg class="chronicle__cut-svg" viewBox="0 0 340 260" role="img" aria-labelledby="chronicle-cut4-t">
+                <title id="chronicle-cut4-t">A woodcut: a stand of trees cut sharply at the left and thinning away to nothing at the right, with a half-erased deer among them</title>
+                <path class="chronicle__mist wash" style="--wash-delay:560ms" d="M150 62 q24 -20 58 -20 q30 0 48 -6 q26 -8 46 8 q16 12 8 26 q-10 18 -40 20 q-34 2 -62 8 q-30 6 -50 -8 q-16 -12 -8 -28 Z"/>
+                <path class="chronicle__hatch chronicle__fade-b wash" style="--wash-delay:1080ms" d="M172 54 l30 0 M198 72 l32 0 M164 84 l26 0 M236 62 l30 0 M226 90 l28 0 M262 78 l24 0 M196 100 l26 0"/>
+
+                <!-- the wood, fully cut at the west and gone by the east -->
+                <path class="chronicle__treefill wash" style="--wash-delay:600ms" d="M18 178 L42 122 L66 178 Z M22 158 L42 104 L62 158 Z M26 140 L42 92 L58 140 Z"/>
+                <path class="stroke" style="--draw-delay:0ms" d="M42 214 L42 150 M18 178 L42 122 L66 178 Z M22 158 L42 104 L62 158 Z M26 140 L42 92 L58 140 Z"/>
+                <path class="chronicle__hatch wash" style="--wash-delay:760ms" d="M26 172 l10 -22 M38 174 l10 -24 M50 172 l8 -20 M30 152 l9 -20 M42 154 l9 -22 M52 150 l7 -16 M32 134 l8 -18 M42 136 l8 -20"/>
+
+                <path class="chronicle__treefill chronicle__fade-a wash" style="--wash-delay:660ms" d="M76 182 L98 132 L120 182 Z M80 164 L98 116 L116 164 Z M84 148 L98 106 L112 148 Z"/>
+                <path class="stroke stroke--thin" style="--draw-delay:160ms" d="M98 214 L98 158 M76 182 L98 132 L120 182 Z M80 164 L98 116 L116 164 Z M84 148 L98 106 L112 148 Z"/>
+                <path class="chronicle__hatch chronicle__fade-a wash" style="--wash-delay:820ms" d="M84 176 l9 -20 M96 178 l9 -22 M108 176 l7 -18 M88 158 l8 -18 M98 160 l8 -20"/>
+
+                <path class="stroke stroke--thin chronicle__fade-b" style="--draw-delay:300ms" d="M150 214 L150 166 M130 188 L150 142 L170 188 Z M134 170 L150 128 L166 170 Z M138 156 L150 120 L162 156 Z"/>
+
+                <path class="chronicle__ghost chronicle__fade-b wash" style="--wash-delay:880ms" d="M204 214 L204 172 M186 192 L204 150 L222 192 Z M190 176 L204 138 L218 176 Z M194 162 L204 130 L214 162 Z"/>
+                <path class="chronicle__ghost chronicle__fade-c wash" style="--wash-delay:940ms" d="M258 214 L258 180 M244 196 L258 162 L272 196 Z M247 182 L258 152 L269 182 Z"/>
+                <path class="chronicle__ghost chronicle__fade-d wash" style="--wash-delay:1000ms" d="M306 214 L306 190 M296 202 L306 178 L316 202 Z"/>
+
+                <!-- the floor of the wood, which also goes -->
+                <path class="stroke" style="--draw-delay:220ms" d="M10 216 q38 6 76 2 q28 -4 60 4"/>
+                <path class="chronicle__ghost wash" style="--wash-delay:1040ms" d="M146 222 q44 8 88 -2 q44 -10 92 4"/>
+
+                <!-- the deer: gone over twice, and still going -->
+                <path class="stroke" style="--draw-delay:420ms" d="M170 182 q12 -1 20 2 q10 3 10 10 q0 10 -12 12 q-8 1 -18 1 M190 194 q10 -8 14 -20 q2 -8 8 -8 q7 0 6 8 q-2 12 -8 20 M212 176 q9 -2 11 4 q-6 5 -13 3 M208 172 l-9 -5 M214 162 l-3 -13 M214 162 l9 -10 M211 153 l-9 -4 M223 152 l9 -6 M186 208 l3 14 M195 207 l1 15"/>
+                <path class="chronicle__ghost chronicle__fade-b wash" style="--wash-delay:900ms" d="M170 182 q-24 -2 -38 3 q-10 3 -8 12 q2 9 16 10 q14 1 30 0 M134 208 l-3 14 M144 208 l-1 15 M124 188 l-8 -7"/>
+
+                <!-- eraser crumbs -->
+                <path class="chronicle__crumb wash" style="--wash-delay:1060ms" d="M236 232 l8 3 l-4 7 l-7 -4 Z M264 226 l7 4 l-5 6 l-6 -5 Z M290 238 l8 3 l-5 6 l-6 -4 Z M310 222 l6 4 l-5 5 l-5 -4 Z M214 244 l7 4 l-5 5 l-6 -4 Z M248 250 l6 3 l-4 6 l-6 -4 Z"/>
+              </svg>
+              <figcaption>The wood as the redrawing companies found it. The deer at the centre was gone over twice and still went; the copyist has left it half done on purpose.</figcaption>
+            </figure>
+          </div>
+
+          <p class="chronicle__rubric"><span class="chronicle__pilcrow" aria-hidden="true">&#182;</span> Sixteen days. The roll of the dead for Smudgewood cannot be read. It was written in Smudgewood.</p>
+
+          <aside class="chronicle__note"><span class="chronicle__note-mark" aria-hidden="true">Nota</span> The redrawing companies took no oath and are in no roll. They are said to have been mostly women, and mostly from Dogear.</aside>
+
+          <p class="chronicle__foot"><span>Smudgewood</span><span class="chronicle__foot-folio">fol. xvj</span></p>
+        </div>
+      </article>
+
+      <!-- ------------------------------------------------------- V. BLOTMIRE -->
+      <article class="chronicle__chapter" id="chapter-v" tabindex="-1" aria-labelledby="chapter-v-h">
+        <div class="chronicle__margin" aria-hidden="true">
+          <span class="chronicle__margin-folio">fol. xxij</span>
+        </div>
+
+        <div class="chronicle__body">
+          <header class="chronicle__head" data-reveal>
+            <h3 id="chapter-v-h">
+              <span class="chronicle__numeral">V</span>
+              <span class="chronicle__kingdom">Blotmire</span>
+            </h3>
+            <p class="chronicle__standing">Drowned in spilled ink. Forty days. The worst ground of the war.</p>
+          </header>
+
+          <div class="chronicle__cols">
+            <div class="chronicle__text" data-reveal>
+              <p class="chronicle__lead">Blotmire was not a mire. It was a kingdom with a river in it and two decent towns, and the roaches drew ink across it and wrote <em>ink</em> underneath, and the ink came alive; and living ink does not stay where it is poured. It took the river first, then the low fields, then Ferrel and then Coyle, at about the pace of a man walking. By the time our column came up out of Smudgewood the whole kingdom was one blot forty miles across, and it was still going west.</p>
+
+              <p>Out of it they drew a dragon. This is the only dragon in the war that the roaches made, and it was not a fine drawing: one stroke for each wing, no scales, no eye, nothing done twice. It did not need to be fine. It was enormous, and bigger is tougher, and a thing made of ink has no edge on it to break. Iries would not send the Long Wing over the mire and she did not ask to go; a drawing out over ground its maker does not hold is a drawing falling. She worked from the Smudgewood side instead, burning the ink in strips along the border, west to east, and the drake thinned as its own ground thinned. On the fourteenth day it drew her out. She went after it across the line, four hundred yards over open ink, and stopped in the air. The two of them came down together into what was left. The mire closed over. Neither came up again.</p>
+
+              <p>She had burned two hundred yards of the near shore dry, and that was where the crossing began. The rest of Blotmire was taken on the dead. Past the burnt shore nothing could be drawn, because we did not hold the mire; nothing drawn in Smudgewood stayed alive past the border. But dead paper floats. They laid their own stopped drawings down on the ink, rank after rank, walked over them, and lifted them again behind. Blotmire was crossed on things that had been alive that morning. The men who did it did not care to talk about it afterwards, and the scribes of Greenhaven have not asked them twice.</p>
+            </div>
+
+            <figure class="chronicle__cut" data-draw data-reveal>
+              <svg class="chronicle__cut-svg" viewBox="0 0 340 260" role="img" aria-labelledby="chronicle-cut5-t">
+                <title id="chronicle-cut5-t">A woodcut: a lake of living ink with a drowned tower in it, the roaches' blot-drake rising out of the ink on two plain wings</title>
+                <path class="chronicle__mist wash" style="--wash-delay:520ms" d="M10 10 L330 10 L330 120 L10 120 Z"/>
+                <path class="chronicle__hatch wash" style="--wash-delay:820ms" d="M24 28 L96 28 M40 42 L110 42 M250 24 L318 24 M262 38 L316 38 M18 56 L70 56"/>
+                <path class="chronicle__wingfill--ink wash" style="--wash-delay:600ms" d="M170 132 q-52 -76 -140 -68 q58 4 90 44 q-44 -10 -74 6 q56 -6 104 28 Z"/>
+                <path class="chronicle__wingfill--ink wash" style="--wash-delay:640ms" d="M170 132 q52 -76 140 -68 q-58 4 -90 44 q44 -10 74 6 q-56 -6 -104 28 Z"/>
+                <path class="chronicle__wingfill--ink wash" style="--wash-delay:680ms" d="M160 138 q-10 -48 20 -72 q15 -12 33 -10 q10 1 6 8 q-9 10 -23 16 q-15 8 -21 26 q-7 18 -5 32 Z"/>
+                <path class="chronicle__drip wash" style="--wash-delay:900ms" d="M86 120 q5 16 0 24 q-7 -8 -4 -24 Z M132 138 q4 13 0 20 q-6 -7 -3 -20 Z M212 136 q4 13 0 20 q-6 -7 -3 -20 Z M262 120 q5 15 0 22 q-7 -7 -4 -22 Z"/>
+                <path class="chronicle__hatch wash" style="--wash-delay:1020ms" d="M46 172 l3 -9 M94 166 l3 -9 M152 162 l3 -9 M216 158 l3 -9 M272 170 l3 -9 M312 178 l3 -9"/>
+                <path class="chronicle__blot wash" style="--wash-delay:560ms" d="M10 176 q42 -22 88 -12 q34 8 66 -4 q44 -16 84 2 q34 14 62 8 q18 -4 20 8 L330 252 L10 252 Z"/>
+                <path class="chronicle__blot wash" style="--wash-delay:740ms" d="M44 160 q8 -12 16 0 q6 10 -2 15 q-10 5 -16 -4 Z M286 158 q7 -11 14 0 q5 9 -2 13 q-9 5 -14 -3 Z M196 150 q6 -10 12 0 q4 8 -2 11 q-8 4 -12 -3 Z"/>
+                <path class="stroke stroke--thin" style="--draw-delay:360ms" d="M46 168 L42 142 M54 170 l6 -26 M62 166 l-2 -22 M270 172 l-2 -24 M278 174 l6 -26 M286 170 l-2 -20"/>
+                <g transform="translate(128 180)">
+                  <path class="chronicle__tower wash" style="--wash-delay:700ms" d="M-20 24 L-20 -52 L-12 -52 L-12 -62 L-4 -62 L-4 -52 L4 -52 L4 -62 L12 -62 L12 -52 L20 -52 L20 24 Z"/>
+                  <path class="stroke" style="--draw-delay:180ms" d="M-20 20 L-20 -52 L-12 -52 L-12 -62 L-4 -62 L-4 -52 L4 -52 L4 -62 L12 -62 L12 -52 L20 -52 L20 20"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:300ms" d="M-8 -30 L-8 -42 L8 -42 L8 -30 Z"/>
+                  <path class="chronicle__hatch wash" style="--wash-delay:860ms" d="M-16 10 L-9 -46 M-4 10 L3 -46 M9 10 L15 -46"/>
+                </g>
+                <path class="chronicle__raft wash" style="--wash-delay:960ms" d="M36 214 L96 206 L100 222 L40 230 Z M126 230 L184 224 L188 240 L130 246 Z M212 212 L272 206 L276 222 L216 228 Z"/>
+                <path class="stroke stroke--thin" style="--draw-delay:520ms" d="M36 214 L96 206 L100 222 L40 230 Z M126 230 L184 224 L188 240 L130 246 Z M212 212 L272 206 L276 222 L216 228 Z"/>
+                <path class="chronicle__hatch wash" style="--wash-delay:1000ms" d="M48 214 l4 12 M62 212 l4 12 M76 210 l4 12 M140 230 l4 12 M156 228 l4 12 M224 214 l4 12 M240 212 l4 12"/>
+                <path class="stroke stroke--thin" style="--draw-delay:600ms" d="M60 204 q6 -14 2 -22 M68 202 q8 -16 4 -24 M152 220 q6 -14 2 -22 M236 202 q6 -14 2 -22"/>
+              </svg>
+              <figcaption>The drake coming up on the eleventh day. The copyist has drawn it exactly as it was drawn: two strokes, and no eye anywhere on it.</figcaption>
+            </figure>
+          </div>
+
+          <p class="chronicle__rubric"><span class="chronicle__pilcrow" aria-hidden="true">&#182;</span> Forty days. One thousand nine hundred of the drawn, and the Long Wing. Of the paper-born, ninety-four, and the whole of the town of Ferrel, which was not counted.</p>
+
+          <aside class="chronicle__note"><span class="chronicle__note-mark" aria-hidden="true">Nota</span> Ink lifted from the mire still will not write. It only spreads.</aside>
+
+          <p class="chronicle__foot"><span>Blotmire</span><span class="chronicle__foot-folio">fol. xxij</span></p>
+        </div>
+      </article>
+
+      <!-- ------------------------------------------------ VI. THE ROACH THRONE -->
+      <article class="chronicle__chapter" id="chapter-vi" tabindex="-1" aria-labelledby="chapter-vi-h">
+        <div class="chronicle__margin" aria-hidden="true">
+          <span class="chronicle__margin-folio">fol. xxviij</span>
+        </div>
+
+        <div class="chronicle__body">
+          <header class="chronicle__head" data-reveal>
+            <h3 id="chapter-vi-h">
+              <span class="chronicle__numeral">VI</span>
+              <span class="chronicle__kingdom">The Roach Throne</span>
+            </h3>
+            <p class="chronicle__standing">The last. One morning, and the breaking of their pencil.</p>
+          </header>
+
+          <div class="chronicle__cols">
+            <div class="chronicle__text" data-reveal>
+              <p class="chronicle__lead">The Roach Throne is a room, not a country: a hall of chewed paper standing on a hill of chewed paper, where everything had been eaten once and spat out again into a shape. They had held it since the beginning, which meant they could draw inside it as freely as we drew in Greenhaven, and they had had years to do it. There were doors that were mouths. There were a hundred towers in a yard that would not properly have held ten. Iries could not put a single mark on any of it, because he held not one foot of that ground, and until he held a foot of it he had no army there at all.</p>
+
+              <p>So the last battle of the war was fought over a yard of bare dirt inside their own gate, and he won it with the oldest thing in this book. He drew a <em>cake</em> in Blotmire, on ground he held, close up against the line &mdash; a large one, and finely done, because this once the detail mattered. When they came out for it the gate stood open and the yard behind them was empty. Twelve men walked in and stood on it. That was enough; it was ground held. Everything he had drawn and left standing along the Blotmire line came alive as it came onto that held ground, all of it at once, and the rest took until noon.</p>
+
+              <p>Their pencil was lying on the arm of the throne. It was shorter than ours and it had been chewed at the end. He did not draw anything to break it &mdash; there is no word that undoes a pencil, and if there is one, nobody has found it since. He broke it on his knee, in front of the ones still standing, and the hall went quiet, and then a great deal of what was in that hall stopped being anything at all. That was the end of the war. It was the ninth month, and it had rained in the night.</p>
+            </div>
+
+            <figure class="chronicle__cut" data-draw data-reveal>
+              <svg class="chronicle__cut-svg" viewBox="0 0 340 260" role="img" aria-labelledby="chronicle-cut6-t">
+                <title id="chronicle-cut6-t">A woodcut: a throne built of chewed paper strips under a vault, with the roaches' pencil lying broken in two pieces on the step</title>
+                <path class="chronicle__vault wash" style="--wash-delay:520ms" d="M22 250 L22 96 q68 -76 148 -76 q80 0 148 76 L318 250 Z"/>
+                <path class="stroke stroke--thin" style="--draw-delay:0ms" d="M22 250 L22 96 q68 -76 148 -76 q80 0 148 76 L318 250"/>
+                <path class="stroke stroke--thin" style="--draw-delay:160ms" d="M52 250 L52 110 q50 -58 118 -58 q68 0 118 58 L288 250"/>
+                <path class="chronicle__hatch wash" style="--wash-delay:720ms" d="M30 122 L44 122 M30 152 L44 152 M30 182 L44 182 M30 212 L44 212 M296 122 L310 122 M296 152 L310 152 M296 182 L310 182 M296 212 L310 212 M74 78 l10 -10 M104 58 l8 -10 M140 44 l6 -10 M196 44 l6 10 M232 58 l8 10 M262 78 l10 10"/>
+
+                <!-- the back of it, in chewed layers -->
+                <path class="chronicle__chew wash" style="--wash-delay:600ms" d="M132 196 L132 66 q10 -12 21 -4 q11 8 19 -2 q8 -10 19 -2 q10 8 17 0 L208 196 Z"/>
+                <path class="stroke" style="--draw-delay:260ms" d="M132 196 L132 66 q10 -12 21 -4 q11 8 19 -2 q8 -10 19 -2 q10 8 17 0 L208 196"/>
+                <path class="stroke stroke--thin" style="--draw-delay:400ms" d="M132 92 q19 8 38 0 q19 -8 38 0 M132 118 q18 -8 36 0 q20 8 40 0 M132 144 q19 8 38 0 q19 -8 38 0 M132 170 q18 -8 36 0 q20 8 40 0"/>
+                <path class="chronicle__hatch wash" style="--wash-delay:820ms" d="M138 112 l7 -14 M152 110 l7 -14 M166 114 l7 -14 M180 110 l7 -14 M194 114 l7 -14 M138 164 l7 -14 M166 166 l7 -14 M194 164 l7 -14 M152 138 l7 -14 M180 140 l7 -14"/>
+
+                <!-- the arms -->
+                <path class="chronicle__chew wash" style="--wash-delay:640ms" d="M104 196 L104 174 L132 174 L132 196 Z M208 196 L208 174 L236 174 L236 196 Z"/>
+                <path class="stroke" style="--draw-delay:320ms" d="M104 196 L104 174 L132 174 M236 196 L236 174 L208 174"/>
+
+                <!-- the seat -->
+                <path class="chronicle__chew wash" style="--wash-delay:680ms" d="M104 196 L236 196 L236 216 L104 216 Z"/>
+                <path class="stroke" style="--draw-delay:360ms" d="M104 216 L236 216 L236 196 L104 196 Z"/>
+
+                <!-- the crown of it -->
+                <path class="stroke" style="--draw-delay:460ms" d="M150 62 q-16 -30 -44 -42 M190 62 q16 -30 44 -42"/>
+                <path class="stroke stroke--thin" style="--draw-delay:540ms" d="M106 20 l-10 -6 M234 20 l10 -6"/>
+
+                <!-- the steps -->
+                <path class="chronicle__chew wash" style="--wash-delay:720ms" d="M86 216 L254 216 L254 234 L86 234 Z M68 234 L272 234 L272 252 L68 252 Z"/>
+                <path class="stroke" style="--draw-delay:600ms" d="M86 216 L86 234 L68 234 L68 252 M254 216 L254 234 L272 234 L272 252 M86 234 L254 234"/>
+                <path class="chronicle__hatch wash" style="--wash-delay:880ms" d="M96 232 l6 -12 M120 232 l6 -12 M220 232 l6 -12 M244 232 l6 -12 M80 250 l6 -12 M108 250 l6 -12 M232 250 l6 -12 M258 250 l6 -12"/>
+
+                <!-- their pencil, in two pieces, where he left it -->
+                <g transform="translate(146 226) rotate(-6)">
+                  <path class="chronicle__pencilbody wash" style="--wash-delay:900ms" d="M-44 0 L-44 -11 L-6 -11 L4 -6 L-6 0 Z"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:700ms" d="M-44 0 L-44 -11 L-6 -11 L4 -6 L-6 0 Z M-6 -11 L-6 0"/>
+                  <path class="chronicle__hatch wash" style="--wash-delay:960ms" d="M-38 -2 L-38 -9 M-30 -2 L-30 -9 M-22 -2 L-22 -9"/>
+                </g>
+                <g transform="translate(214 228) rotate(9)">
+                  <path class="chronicle__pencilbody wash" style="--wash-delay:920ms" d="M-18 0 L-8 -6 L-4 -11 L34 -11 L34 0 Z"/>
+                  <path class="stroke stroke--thin" style="--draw-delay:760ms" d="M-18 0 L-8 -6 L-4 -11 L34 -11 L34 0 Z M34 -11 q6 6 0 11"/>
+                  <path class="chronicle__hatch wash" style="--wash-delay:980ms" d="M2 -2 L2 -9 M10 -2 L10 -9 M18 -2 L18 -9"/>
+                </g>
+                <path class="stroke stroke--thin" style="--draw-delay:820ms" d="M176 218 l-5 -9 M184 216 l0 -11 M192 218 l6 -9"/>
+
+                <!-- one of them, left on the floor -->
+                <g transform="translate(292 200)">
+                  <path class="stroke stroke--thin chronicle__foe" style="--draw-delay:880ms" d="M-13 -2 q0 -13 13 -13 q13 0 13 13 q0 13 -13 13 q-13 0 -13 -13 Z M-6 -15 q6 -7 12 0 q-6 4 -12 0 Z M-4 -20 q-8 -8 -15 -10 M4 -20 q8 -8 15 -10 M-13 -6 l-11 -6 M-13 0 l-12 3 M-12 6 l-10 8 M13 -6 l11 -6 M13 0 l12 3 M12 6 l10 8 M0 -13 L0 10"/>
+                  <path class="chronicle__hatch wash" style="--wash-delay:1020ms" d="M-8 4 l6 -10 M4 4 l6 -10"/>
+                </g>
+              </svg>
+              <figcaption>The hall as it was left. The throne is drawn a third of its true height; the copyist has said so in the margin of the older leaf.</figcaption>
+            </figure>
+          </div>
+
+          <p class="chronicle__rubric"><span class="chronicle__pilcrow" aria-hidden="true">&#182;</span> One morning. One cake. One pencil, broken by hand, there being no word for it.</p>
+
+          <aside class="chronicle__note"><span class="chronicle__note-mark" aria-hidden="true">Nota</span> The two halves are kept apart, in two houses, by agreement of both.</aside>
+
+          <p class="chronicle__foot"><span>The Roach Throne</span><span class="chronicle__foot-folio">fol. xxviij</span></p>
+        </div>
+      </article>
+
+    </div>
+
+    <p class="chronicle__colophon" data-reveal>
+      Here ends the account of the six kingdoms. What was done afterwards, with the pencil that was not broken,
+      is set down in the book that follows.
+    </p>
+
+  </div>
+</section>

@@ -1,6 +1,8 @@
 /* ==========================================================================
-   HERO — re-frames the landscape on small screens and parks every loop when
-   the section scrolls away. All the motion itself is CSS.
+   HERO — the cover of the book.
+   One job: re-frame the woodcut so it still reads on a narrow leaf.
+   Every line of the drawing is drawn by the shared runtime; the rest of the
+   cover is CSS. Nothing here loops, so nothing here needs pausing.
    Safe to load when the hero is absent from the page.
    ========================================================================== */
 (function () {
@@ -9,49 +11,41 @@
   function boot() {
     var root = document.getElementById('hero');
     if (!root || !root.classList.contains('hero')) return;
+    if (!window.matchMedia) return;
 
-    var MPx = window.MP || {};
-    var mq = window.matchMedia ? function (q) { return window.matchMedia(q); } : null;
-    var reduced = MPx.reduced || (mq ? mq('(prefers-reduced-motion: reduce)') : { matches: false });
+    /* The plate is cut from one 1200 x 1200 block. A wide leaf shows the
+       whole scene; a narrow one crops in on Iries and the pencil. The runtime
+       measures paths in user units, so re-framing after measureStrokes is
+       harmless, and every crop scales the block DOWN — never up — so the
+       dash lengths stay long enough to cover each path. */
+    var plate = root.querySelector('[data-vb]');
+    if (!plate) return;
 
-    /* -- the scene re-composes itself rather than shrinking to a smear ---- */
-    /* Only the two max-width queries need listeners: crossing 620px or 1000px
-       flips one of them, so every transition is covered exactly once. */
-    var svgs = Array.prototype.slice.call(root.querySelectorAll('[data-vb]'));
-    if (svgs.length && mq) {
-      var WIDE = '0 0 1600 900';
-      var VIEWS = [
-        { m: mq('(max-width: 619px)'), vb: '700 0 900 900' },
-        { m: mq('(max-width: 999px)'), vb: '380 0 1220 900' }
-      ];
-      var applied = null;
-      var frame = function () {
-        var vb = WIDE, i;
-        for (i = 0; i < VIEWS.length; i++) {
-          if (VIEWS[i].m.matches) { vb = VIEWS[i].vb; break; }
-        }
-        if (vb === applied) return;          /* don't touch the DOM for nothing */
-        applied = vb;
-        for (i = 0; i < svgs.length; i++) svgs[i].setAttribute('viewBox', vb);
-      };
-      for (var j = 0; j < VIEWS.length; j++) {
-        var mql = VIEWS[j].m;
-        if (mql.addEventListener) mql.addEventListener('change', frame);
-        else if (mql.addListener) mql.addListener(frame);
+    var WIDE = '0 20 1200 1010';
+    var VIEWS = [
+      { m: window.matchMedia('(max-width: 619px)'), vb: '372 150 604 1040' },
+      { m: window.matchMedia('(max-width: 999px)'), vb: '150 40 1000 1080' }
+    ];
+
+    var applied = null;
+    function frame() {
+      var vb = WIDE, i;
+      for (i = 0; i < VIEWS.length; i++) {
+        if (VIEWS[i].m.matches) { vb = VIEWS[i].vb; break; }
       }
-      frame();
+      if (vb === applied) return;          /* do not touch the DOM for nothing */
+      applied = vb;
+      plate.setAttribute('viewBox', vb);
     }
 
-    /* -- nothing loops once the hero is off-screen ------------------------ */
-    if (!reduced.matches && 'IntersectionObserver' in window) {
-      new IntersectionObserver(function (entries) {
-        var visible = false, i;
-        for (i = 0; i < entries.length; i++) {
-          if (entries[i].isIntersecting) visible = true;
-        }
-        root.classList.toggle('is-paused', !visible);
-      }, { threshold: 0 }).observe(root);
+    /* Crossing 620px or 1000px flips exactly one query, so listening to both
+       covers every transition once. */
+    for (var j = 0; j < VIEWS.length; j++) {
+      var q = VIEWS[j].m;
+      if (q.addEventListener) q.addEventListener('change', frame);
+      else if (q.addListener) q.addListener(frame);
     }
+    frame();
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);

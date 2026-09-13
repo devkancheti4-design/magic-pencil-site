@@ -1,0 +1,179 @@
+/* ==========================================================================
+   THE READER — the narration bar, and the lit word
+   ========================================================================== */
+
+.reader {
+  position: fixed; left: 0; right: 0; bottom: 0;
+  z-index: var(--z-nav);
+  display: flex; align-items: center; gap: var(--s-3);
+  flex-wrap: wrap;
+  padding: 10px clamp(12px, 3vw, 24px);
+  background: color-mix(in srgb, var(--paper-0) 94%, transparent);
+  border-top: 2px solid var(--ink-900);
+  box-shadow: 0 -6px 24px -12px rgba(52, 38, 20, .5);
+  backdrop-filter: blur(8px);
+}
+@supports not (backdrop-filter: blur(1px)) { .reader { background: var(--paper-0); } }
+
+.reader__label {
+  font-family: var(--font-scribe);
+  font-size: var(--t-xs); letter-spacing: .08em;
+  color: var(--text-muted); white-space: nowrap;
+}
+.reader__where {
+  font-family: var(--font-scribe);
+  font-size: var(--t-xs); color: var(--text-strong);
+  white-space: nowrap; margin-right: auto;
+}
+
+.reader__btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+  min-height: 44px; padding: 9px 18px;
+  font-family: var(--font-hand); font-size: var(--t-xs); font-weight: 600;
+  letter-spacing: .08em;
+  color: var(--ink-900); background: var(--paper-2);
+  border: 2px solid var(--ink-900); border-radius: var(--r-sm);
+  transition: background-color var(--d-fast) var(--e-out), transform var(--d-fast) var(--e-out);
+}
+.reader__btn:hover { background: var(--crayon-sun); }
+.reader__btn:active { transform: translateY(1px); }
+.reader__btn--icon { min-width: 44px; padding: 9px 12px; }
+.reader__btn[aria-pressed="true"] { background: var(--crayon-flame); color: var(--paper-0); }
+
+.reader__set { display: inline-flex; align-items: center; gap: 7px; }
+.reader__set label {
+  font-family: var(--font-scribe); font-size: var(--t-xs);
+  color: var(--text-muted); white-space: nowrap;
+}
+.reader__set select {
+  max-width: 150px; min-height: 40px; padding: 6px 8px;
+  font-family: var(--font-body); font-size: var(--t-xs);
+  color: var(--text-strong); background: var(--paper-1);
+  border: 2px solid var(--line-strong); border-radius: var(--r-sm);
+}
+.reader__set input[type="range"] { width: 88px; accent-color: var(--crayon-flame); min-height: 40px; }
+.reader__set output { font-family: var(--font-scribe); font-size: var(--t-xs); color: var(--text-strong); min-width: 2.6em; }
+
+@media (max-width: 720px) {
+  .reader__set--voice { display: none; }   /* the picker is the first thing to go */
+  .reader__label { display: none; }
+}
+@media (max-width: 460px) {
+  .reader__set--rate { display: none; }
+  .reader { gap: var(--s-2); padding: 8px 10px; }
+}
+
+/* the page must not end underneath the bar */
+body.has-reader { padding-bottom: 96px; }
+
+/* ---------------------------------------------------- the spoken word --- */
+/* The passage being read is lifted off the page; the word being said now is
+   marked the way a reader's finger marks it. */
+[data-narrate].is-speaking {
+  position: relative;
+  background: color-mix(in srgb, var(--crayon-sun) 12%, transparent);
+  box-shadow: -14px 0 0 color-mix(in srgb, var(--crayon-flame) 70%, transparent);
+  transition: background-color var(--d-base) var(--e-out);
+}
+.w { transition: color var(--d-fast) linear; }
+.w.is-now {
+  color: var(--crayon-flame);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+:root[data-theme="night"] .w.is-now { color: var(--crayon-sun); }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-narrate].is-speaking, .w { transition: none; }
+}
+
+/* ==========================================================================
+   THE LIVING PAGE — what the cues look like
+   ========================================================================== */
+
+/* the effect canvas sits over the page and is never in the way */
+.fx {
+  position: fixed; inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: var(--z-overlay);
+  mix-blend-mode: multiply;
+}
+:root[data-theme="night"] .fx { mix-blend-mode: screen; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="day"]) .fx { mix-blend-mode: screen; } }
+
+/* the chapter being read is lifted; the rest of the book recedes */
+section.is-live { position: relative; }
+section.is-live::before {
+  content: ""; position: absolute; inset: -8px -14px;
+  border-left: 3px solid var(--crayon-flame);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--crayon-sun) 9%, transparent), transparent 38%);
+  pointer-events: none;
+  animation: live-in var(--d-slow) var(--e-out) both;
+}
+@keyframes live-in { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: none; } }
+
+/* --- the page reacts ---------------------------------------------------- */
+
+/* struck: the whole sheet takes a blow */
+@keyframes struck {
+  0%   { transform: translate3d(0,0,0) rotate(0); }
+  15%  { transform: translate3d(-6px,3px,0) rotate(-.22deg); }
+  32%  { transform: translate3d(5px,-2px,0) rotate(.18deg); }
+  54%  { transform: translate3d(-3px,2px,0) rotate(-.1deg); }
+  76%  { transform: translate3d(2px,-1px,0) rotate(.05deg); }
+  100% { transform: translate3d(0,0,0) rotate(0); }
+}
+:root.is-struck body > main { animation: struck 600ms var(--e-inout) both; }
+
+/* scorched: the vellum browns at the edges while the fire is spoken of */
+:root.is-scorched body::after {
+  content: ""; position: fixed; inset: 0; pointer-events: none;
+  z-index: calc(var(--z-overlay) - 1);
+  background: radial-gradient(120% 90% at 50% 100%, rgba(178,67,31,.16), transparent 62%);
+  animation: scorch 2.2s var(--e-out) both;
+}
+@keyframes scorch { 0% { opacity: 0; } 22% { opacity: 1; } 100% { opacity: 0; } }
+
+/* folded: a crease runs across the page */
+:root.is-folded body > main {
+  animation: folded 1.4s var(--e-inout) both;
+}
+@keyframes folded {
+  0%, 100% { filter: none; }
+  40% { filter: drop-shadow(0 14px 0 rgba(52,38,20,.06)) contrast(1.04); }
+}
+
+/* smudged: everything loses its edge for a moment */
+:root.is-smudged body > main { animation: smudged 1.6s var(--e-inout) both; }
+@keyframes smudged {
+  0%, 100% { filter: none; }
+  45% { filter: blur(1.1px) sepia(.12); }
+}
+
+/* noted: a quiet flicker of the rubric, for the smaller words */
+:root.is-noted body > main { animation: noted 900ms var(--e-out) both; }
+@keyframes noted { 0%,100% { filter: none; } 50% { filter: saturate(1.12) brightness(1.02); } }
+
+/* --- the reader touches it ---------------------------------------------- */
+[data-draw], figure svg { transition: transform var(--d-base) var(--e-out); }
+.is-leaning {
+  transform: perspective(900px) rotateY(var(--lean-x, 0deg)) rotateX(var(--lean-y, 0deg));
+}
+[data-draw]:focus-visible, figure:focus-visible {
+  outline: 3px dashed var(--crayon-flame);
+  outline-offset: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx { display: none; }
+  section.is-live::before { animation: none; }
+  :root.is-struck body > main,
+  :root.is-folded body > main,
+  :root.is-smudged body > main,
+  :root.is-noted body > main { animation: none; }
+  :root.is-scorched body::after { display: none; }
+  .is-leaning { transform: none; }
+}
