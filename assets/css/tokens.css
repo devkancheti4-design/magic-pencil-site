@@ -1,43 +1,42 @@
 /* ==========================================================================
-   THE CHRONICLE OF PAPER — design tokens
-   The ancient paper people. Vellum, iron-gall ink, rubric vermilion and
-   gold leaf. Every variable NAME is unchanged from the storybook theme on
-   purpose: the whole site re-skins from this one file.
+   THE PAPER KINGDOM — design tokens
+   A children's film. Bright paper, thick friendly lines, warm colour.
+   Big type, high contrast, nothing small and nothing fussy.
    ========================================================================== */
 
 :root {
-  /* ---- Vellum: the skin it is all written on ---- */
-  --paper-0:  #f7eeda;   /* a fresh leaf, unwritten      */
-  --paper-1:  #efe2c6;   /* the page                     */
-  --paper-2:  #e3d2ae;   /* shaded, thumbed              */
-  --paper-3:  #d2bc91;   /* the gutter, the old crease   */
-  --paper-4:  #b89d71;   /* scorched edge, worm-track    */
+  /* ---- Paper ---- */
+  --paper-0:  #fffdf6;
+  --paper-1:  #fdf4e3;
+  --paper-2:  #f6e7cb;
+  --paper-3:  #e9d4ad;
+  --paper-4:  #d4b988;
 
-  /* ---- Iron-gall ink, as it fades over centuries ---- */
-  --ink-900: #241a10;    /* freshly cut quill            */
-  --ink-700: #3d2e1d;    /* the body of the hand         */
-  --ink-500: #6a5539;    /* faded, a later scribe        */
-  --ink-300: #95815d;    /* rubbed, barely there         */
-  --ink-100: #c2ad86;    /* ruling lines, silverpoint    */
+  /* ---- Pencil line ---- */
+  --ink-900: #2e2a26;
+  --ink-700: #4a423a;
+  --ink-500: #7a6e62;
+  --ink-300: #a89c8c;
+  --ink-100: #d5c9b6;
 
-  /* ---- The illuminator's pigments ---- */
-  --crayon-green:  #4e7a56;   /* verdigris          */
-  --crayon-grass:  #7d9c66;   /* terre verte        */
-  --crayon-sky:    #6c86a8;   /* faded indigo       */
-  --crayon-deep:   #2f4a72;   /* lapis lazuli       */
-  --crayon-sun:    #c9992f;   /* gold leaf          */
-  --crayon-amber:  #b5762a;   /* ochre              */
-  --crayon-flame:  #b2431f;   /* vermilion, the rubric */
-  --crayon-ember:  #8e2b1a;   /* burnt madder       */
-  --crayon-berry:  #8c3157;   /* madder lake        */
-  --crayon-royal:  #5b3b7a;   /* tyrian purple      */
-  --crayon-slate:  #55534a;   /* lamp black         */
+  /* ---- The crayon box: bright, warm, unmistakable ---- */
+  --crayon-green:  #43a047;
+  --crayon-grass:  #8bc34a;
+  --crayon-sky:    #4fa3e3;
+  --crayon-deep:   #1e6fb8;
+  --crayon-sun:    #ffc63d;
+  --crayon-amber:  #ff9f1c;
+  --crayon-flame:  #ff6b35;
+  --crayon-ember:  #e8402a;
+  --crayon-berry:  #e0518a;
+  --crayon-royal:  #8e5bd0;
+  --crayon-slate:  #5b6670;
 
-  /* Dragonfire, in the illuminator's palette */
-  --fire-core:  #f2d98a;
-  --fire-mid:   var(--crayon-sun);
+  /* Dragonfire */
+  --fire-core:  #fff3b0;
+  --fire-mid:   var(--crayon-amber);
   --fire-edge:  var(--crayon-flame);
-  --fire-smoke: rgba(142, 43, 26, 0.18);
+  --fire-smoke: rgba(232, 64, 42, 0.20);
 
   /* ---- Semantic ---- */
   --bg:          var(--paper-1);
@@ -48,71 +47,72 @@
   --text-muted:  var(--ink-500);
   --line:        var(--ink-100);
   --line-strong: var(--ink-300);
-  --accent:      var(--crayon-flame);   /* the rubric rules the page */
+  --accent:      var(--crayon-flame);
   --accent-warm: var(--crayon-sun);
 
   /* ---- Washes ---- */
-  --wash-sky:   linear-gradient(180deg, #cbd6dd 0%, #e2dcc8 58%, var(--paper-1) 100%);
+  --wash-sky:   linear-gradient(180deg, #bfe3fa 0%, #e6f3fc 58%, var(--paper-1) 100%);
   --wash-fire:  linear-gradient(180deg, var(--fire-core), var(--fire-mid) 45%, var(--fire-edge));
   --wash-grass: linear-gradient(180deg, var(--crayon-grass), var(--crayon-green));
 
-  /* ---- Radii: a manuscript is cut and folded, not rounded ---- */
-  --r-sm: 2px;
-  --r-md: 4px;
-  --r-lg: 6px;
-  --r-xl: 10px;
-  --r-hand:   3px 10px 4px 9px / 9px 4px 10px 3px;
-  --r-hand-2: 9px 3px 10px 4px / 4px 9px 3px 10px;
+  /* ---- Radii: soft and friendly ---- */
+  --r-sm: 10px;
+  --r-md: 16px;
+  --r-lg: 24px;
+  --r-xl: 34px;
+  --r-hand:   18px 28px 20px 26px / 26px 20px 28px 18px;
+  --r-hand-2: 26px 18px 28px 20px / 18px 26px 20px 28px;
   --r-pill: 999px;
 
-  /* ---- Elevation: a leaf lying on a leaf ---- */
-  --sh-1: 0 1px 1px rgba(52, 38, 20, .14);
-  --sh-2: 0 2px 0 rgba(52, 38, 20, .10), 0 5px 14px -6px rgba(52, 38, 20, .30);
-  --sh-3: 0 4px 0 rgba(52, 38, 20, .09), 0 14px 30px -12px rgba(52, 38, 20, .38);
-  --sh-4: 0 8px 0 rgba(52, 38, 20, .08), 0 28px 56px -18px rgba(52, 38, 20, .44);
-  --sh-ink: 0 1px 0 var(--ink-900);
+  /* ---- Elevation ---- */
+  --sh-1: 0 2px 0 rgba(46, 42, 38, .12);
+  --sh-2: 0 4px 0 rgba(46, 42, 38, .12), 0 8px 20px -8px rgba(46, 42, 38, .30);
+  --sh-3: 0 6px 0 rgba(46, 42, 38, .12), 0 18px 38px -14px rgba(46, 42, 38, .34);
+  --sh-4: 0 10px 0 rgba(46, 42, 38, .10), 0 34px 64px -20px rgba(46, 42, 38, .40);
+  --sh-ink: 0 3px 0 var(--ink-900);
 
-  /* ---- Type: carved capitals, an old-style body, a scribe's small caps ---- */
-  --font-hand:  "Cinzel", "Trajan Pro", Georgia, serif;
-  --font-body:  "EB Garamond", Georgia, "Times New Roman", serif;
-  --font-scribe:"IM Fell English SC", "EB Garamond", Georgia, serif;
+  /* ---- Type: rounded, friendly, big ---- */
+  --font-hand:  "Baloo 2", "Comic Sans MS", system-ui, sans-serif;
+  --font-body:  "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-scribe: var(--font-hand);
   --font-mono:  ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  --t-xs:   clamp(0.75rem, 0.73rem + 0.10vw, 0.8125rem);
-  --t-sm:   clamp(0.875rem, 0.85rem + 0.12vw, 1rem);
-  --t-base: clamp(1.0625rem, 1.02rem + 0.2vw, 1.1875rem);
-  --t-md:   clamp(1.1875rem, 1.1rem + 0.36vw, 1.4375rem);
-  --t-lg:   clamp(1.375rem, 1.2rem + 0.8vw, 2rem);
-  --t-xl:   clamp(1.75rem, 1.4rem + 1.6vw, 2.875rem);
-  --t-2xl:  clamp(2.125rem, 1.5rem + 2.9vw, 4rem);
-  --t-3xl:  clamp(2.75rem, 1.7rem + 5vw, 6rem);
-  --t-hero: clamp(3rem, 1.3rem + 7.6vw, 7.5rem);
+  /* Big. Children are not reading fine print. */
+  --t-xs:   clamp(0.875rem, 0.85rem + 0.1vw, 1rem);
+  --t-sm:   clamp(1rem, 0.96rem + 0.16vw, 1.125rem);
+  --t-base: clamp(1.125rem, 1.05rem + 0.3vw, 1.375rem);
+  --t-md:   clamp(1.375rem, 1.2rem + 0.7vw, 1.875rem);
+  --t-lg:   clamp(1.75rem, 1.4rem + 1.5vw, 2.75rem);
+  --t-xl:   clamp(2.25rem, 1.6rem + 2.8vw, 4rem);
+  --t-2xl:  clamp(2.75rem, 1.8rem + 4.4vw, 5.5rem);
+  --t-3xl:  clamp(3.25rem, 1.9rem + 6.4vw, 7rem);
+  --t-hero: clamp(3.5rem, 1.6rem + 9vw, 9rem);
 
-  --lh-tight: 1.02;
-  --lh-snug:  1.2;
-  --lh-body:  1.72;
-  --tr-tight: 0.01em;    /* carved caps want air, not tightening */
-  --tr-wide:  0.22em;
+  --lh-tight: 1.0;
+  --lh-snug:  1.14;
+  --lh-body:  1.6;
+  --tr-tight: -0.02em;
+  --tr-wide:  0.1em;
 
   /* ---- Space ---- */
   --s-1: 4px;  --s-2: 8px;  --s-3: 12px; --s-4: 16px;
   --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 64px;
   --s-9: 96px; --s-10: 128px;
-  --section-y: clamp(72px, 9vw, 168px);
-  --gutter:    clamp(18px, 4.5vw, 48px);
-  --maxw:      1140px;
-  --nav-h:     68px;
+  --section-y: clamp(56px, 7vw, 120px);
+  --gutter:    clamp(16px, 4vw, 40px);
+  --maxw:      1200px;
+  --nav-h:     64px;
 
-  /* ---- Motion: a page turns, it does not bounce ---- */
+  /* ---- Motion: bouncy, like a cartoon ---- */
   --e-out:    cubic-bezier(0.22, 1, 0.36, 1);
   --e-inout:  cubic-bezier(0.65, 0, 0.35, 1);
-  --e-bounce: cubic-bezier(0.34, 1.32, 0.64, 1);
-  --e-wobble: cubic-bezier(0.5, -0.2, 0.4, 1.2);
-  --d-fast:  180ms;
-  --d-base:  340ms;
-  --d-slow:  700ms;
-  --d-draw:  1700ms;
-  --d-flap:  1000ms;
+  --e-bounce: cubic-bezier(0.34, 1.7, 0.5, 1);
+  --e-wobble: cubic-bezier(0.5, -0.4, 0.4, 1.4);
+  --d-fast:  160ms;
+  --d-base:  300ms;
+  --d-slow:  620ms;
+  --d-draw:  1400ms;
+  --d-flap:  900ms;
 
   /* ---- Layers ---- */
   --z-sky: 0;
@@ -126,27 +126,22 @@
   color-scheme: light;
 }
 
-/* --------------------------------------------------------------------------
-   Read by candle. The vellum darkens, the ink turns to chalk and the gold
-   is the only thing that still catches light.
-   -------------------------------------------------------------------------- */
+/* Night: the same bright world, seen after bedtime. Still friendly, never grim. */
 :root[data-theme="night"] {
-  --paper-0: #2a2318;
-  --paper-1: #201a12;
-  --paper-2: #191410;
-  --paper-3: #120f0b;
-  --paper-4: #0d0b08;
+  --paper-0: #2b2f3a;
+  --paper-1: #232733;
+  --paper-2: #1c202a;
+  --paper-3: #161922;
+  --paper-4: #10131a;
 
-  --ink-900: #f2e6cd;
-  --ink-700: #ddcdac;
-  --ink-500: #a8977a;
-  --ink-300: #7d6e56;
-  --ink-100: #4a4034;
+  --ink-900: #fdf4e3;
+  --ink-700: #e4dccd;
+  --ink-500: #aba39a;
+  --ink-300: #7d766c;
+  --ink-100: #454c5a;
 
-  --crayon-green: #6f9c72;
-  --crayon-sky:   #7e97b8;
-  --crayon-sun:   #e0b654;
-  --crayon-flame: #cf5c33;
+  --crayon-sky: #6fb6ee;
+  --crayon-sun: #ffd257;
 
   --bg:          var(--paper-1);
   --bg-deep:     var(--paper-2);
@@ -157,33 +152,32 @@
   --line:        var(--ink-100);
   --line-strong: var(--ink-300);
 
-  --wash-sky: linear-gradient(180deg, #1b2029 0%, #211c15 60%, var(--paper-1) 100%);
+  --wash-sky: linear-gradient(180deg, #1d2740 0%, #232a38 60%, var(--paper-1) 100%);
 
-  --sh-1: 0 1px 2px rgba(0,0,0,.5);
-  --sh-2: 0 2px 0 rgba(0,0,0,.45), 0 5px 14px -6px rgba(0,0,0,.7);
-  --sh-3: 0 4px 0 rgba(0,0,0,.45), 0 14px 30px -12px rgba(0,0,0,.75);
-  --sh-4: 0 8px 0 rgba(0,0,0,.45), 0 28px 56px -18px rgba(0,0,0,.8);
-  --sh-ink: 0 1px 0 var(--ink-900);
+  --sh-1: 0 2px 0 rgba(0,0,0,.45);
+  --sh-2: 0 4px 0 rgba(0,0,0,.45), 0 8px 20px -8px rgba(0,0,0,.7);
+  --sh-3: 0 6px 0 rgba(0,0,0,.45), 0 18px 38px -14px rgba(0,0,0,.75);
+  --sh-4: 0 10px 0 rgba(0,0,0,.4), 0 34px 64px -20px rgba(0,0,0,.8);
+  --sh-ink: 0 3px 0 var(--ink-900);
 
   color-scheme: dark;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="day"]):not([data-theme="night"]) {
-    --paper-0: #2a2318; --paper-1: #201a12; --paper-2: #191410;
-    --paper-3: #120f0b; --paper-4: #0d0b08;
-    --ink-900: #f2e6cd; --ink-700: #ddcdac; --ink-500: #a8977a;
-    --ink-300: #7d6e56; --ink-100: #4a4034;
-    --crayon-green: #6f9c72; --crayon-sky: #7e97b8;
-    --crayon-sun: #e0b654; --crayon-flame: #cf5c33;
+    --paper-0: #2b2f3a; --paper-1: #232733; --paper-2: #1c202a;
+    --paper-3: #161922; --paper-4: #10131a;
+    --ink-900: #fdf4e3; --ink-700: #e4dccd; --ink-500: #aba39a;
+    --ink-300: #7d766c; --ink-100: #454c5a;
+    --crayon-sky: #6fb6ee; --crayon-sun: #ffd257;
     --bg: var(--paper-1); --bg-deep: var(--paper-2); --surface: var(--paper-0);
     --text: var(--ink-700); --text-strong: var(--ink-900); --text-muted: var(--ink-500);
     --line: var(--ink-100); --line-strong: var(--ink-300);
-    --wash-sky: linear-gradient(180deg, #1b2029 0%, #211c15 60%, var(--paper-1) 100%);
-    --sh-1: 0 1px 2px rgba(0,0,0,.5);
-    --sh-2: 0 2px 0 rgba(0,0,0,.45), 0 5px 14px -6px rgba(0,0,0,.7);
-    --sh-3: 0 4px 0 rgba(0,0,0,.45), 0 14px 30px -12px rgba(0,0,0,.75);
-    --sh-4: 0 8px 0 rgba(0,0,0,.45), 0 28px 56px -18px rgba(0,0,0,.8);
+    --wash-sky: linear-gradient(180deg, #1d2740 0%, #232a38 60%, var(--paper-1) 100%);
+    --sh-1: 0 2px 0 rgba(0,0,0,.45);
+    --sh-2: 0 4px 0 rgba(0,0,0,.45), 0 8px 20px -8px rgba(0,0,0,.7);
+    --sh-3: 0 6px 0 rgba(0,0,0,.45), 0 18px 38px -14px rgba(0,0,0,.75);
+    --sh-4: 0 10px 0 rgba(0,0,0,.4), 0 34px 64px -20px rgba(0,0,0,.8);
     color-scheme: dark;
   }
 }

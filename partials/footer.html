@@ -1,82 +1,8 @@
-<footer class="footer">
-  <div class="shell">
-    <div class="footer__grid">
-      <div class="footer__brandcol">
-        <a class="nav__brand" href="#hero" aria-label="Magic Pencil: Kingdoms of Paper — top of page">
-          <svg class="nav__mark" viewBox="0 0 40 40" aria-hidden="true">
-            <path d="M6 33 C10 30 14 31 18 33 C22 35 27 34 34 31" fill="none" stroke="var(--crayon-green)" stroke-width="3.5" stroke-linecap="round"/>
-            <g transform="rotate(34 20 18)">
-              <path d="M20 3 L26 8.5 L15 30 L12 31.5 L12.5 28 Z" fill="var(--crayon-sun)" stroke="var(--ink-900)" stroke-width="2.2" stroke-linejoin="round"/>
-              <path d="M20 3 L26 8.5 L23.5 12.5 L17.5 7 Z" fill="var(--crayon-flame)" stroke="var(--ink-900)" stroke-width="2.2" stroke-linejoin="round"/>
-            </g>
-          </svg>
-          <span class="nav__brand-text">
-            The Chronicle
-            <small>of Paper</small>
-          </span>
-        </a>
-        <p>Set down long after, from the accounts of those who were there. The pencil is still on the desk.</p>
-      </div>
-
-      <div>
-        <h3>The Chapters</h3>
-        <ul class="footer__links">
-          <li><a href="#prologue">The Prologue</a></li>
-          <li><a href="#chronicle">The War for the Six</a></li>
-          <li><a href="#armoury">The Armoury</a></li>
-          <li><a href="#dragons">The Bestiary</a></li>
-          <li><a href="#spellbook">The Naming of Things</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h3>Play</h3>
-        <ul class="footer__links">
-          <li><a href="https://devkancheti4-design.github.io/magic-pencil-kingdoms/" target="_blank" rel="noopener">Open the game</a></li>
-          <li><a href="#play">Pick up the pencil</a></li>
-        </ul>
-      </div>
-    </div>
-
-    <p class="footer__wordmark" aria-hidden="true">The Chronicle</p>
-
-    <div class="footer__bar">
-      <p>© <span data-year>2026</span> The Chronicle of Paper. The game runs in your browser.</p>
-      <nav aria-label="Elsewhere">
-        <a href="https://devkancheti4-design.github.io/magic-pencil-kingdoms/" target="_blank" rel="noopener">Play the game</a>
-      </nav>
-    </div>
-  </div>
-</footer>
 
 
-<div class="reader" id="reader" role="group" aria-label="Read the chronicle aloud">
-  <span class="reader__label">The Reader</span>
-  <span class="reader__where" id="reader-where">1 of 1</span>
 
-  <button class="reader__btn reader__btn--icon" id="reader-prev" type="button" aria-label="Previous passage">&#8592;</button>
-  <button class="reader__btn" id="reader-play" type="button" aria-pressed="false">Read aloud</button>
-  <button class="reader__btn reader__btn--icon" id="reader-next" type="button" aria-label="Next passage">&#8594;</button>
-  <button class="reader__btn reader__btn--icon" id="reader-stop" type="button" aria-label="Stop reading">&#9632;</button>
 
-  <span class="reader__set reader__set--voice">
-    <label for="reader-voice">Voice</label>
-    <select id="reader-voice"></select>
-  </span>
-  <span class="reader__set reader__set--rate">
-    <label for="reader-rate">Pace</label>
-    <input type="range" id="reader-rate" min="0.6" max="1.6" step="0.1" value="1">
-    <output id="reader-rate-out">1.0&#215;</output>
-  </span>
-
-  <p class="sr-only" id="reader-live" aria-live="polite"></p>
-</div>
-
-<button class="to-top" type="button" aria-label="Back to top">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
-</button>
 
 <script src="assets/js/site.js" defer></script>
-<script src="assets/js/narrator.js" defer></script>
-<script src="assets/js/living.js" defer></script>
-<script src="assets/js/sections.js" defer></script>
+<script src="assets/js/rig.js" defer></script>
+<script src="assets/js/movie.js" defer></script>

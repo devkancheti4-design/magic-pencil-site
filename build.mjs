@@ -16,7 +16,7 @@ const P = (...p) => join(ROOT, ...p);
 const read = (p) => (existsSync(p) ? readFileSync(p, 'utf8') : '');
 
 /* Order is the page order AND the cascade order. */
-const ORDER = ['hero', 'prologue', 'chronicle', 'armoury', 'dragons', 'spellbook', 'cta'];
+const ORDER = ['film'];
 
 const section = (name) => {
   const p = P('partials', 'sections', `${name}.html`);

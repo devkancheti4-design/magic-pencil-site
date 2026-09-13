@@ -1,0 +1,22 @@
+<section id="film-page" class="film">
+  <!-- the picture fills everything; the words sit on top of it -->
+  <canvas id="film" class="film__canvas" role="img"
+          aria-label="An animated story about a kingdom made of paper"></canvas>
+
+  <div class="film__over">
+    <h1 class="film__title" id="film-title">The Paper Kingdom</h1>
+    <p class="film__caption" id="film-caption" aria-live="polite"></p>
+  </div>
+
+  <button class="film__big" id="film-big" type="button" aria-label="Play the story">
+    <svg viewBox="0 0 100 100" aria-hidden="true"><path d="M36 24 L78 50 L36 76 Z"/></svg>
+  </button>
+
+  <div class="film__controls" role="group" aria-label="Story controls">
+    <button class="film__btn film__btn--go" id="film-play" type="button" aria-pressed="false">Play</button>
+    <button class="film__btn" id="film-replay" type="button">Start again</button>
+    <button class="film__btn" id="film-captions" type="button" aria-pressed="true">Words on</button>
+    <div class="film__bar" id="film-bar" aria-hidden="true"><i></i></div>
+    <span class="film__scene" id="film-scene">1 / 10</span>
+  </div>
+</section>
